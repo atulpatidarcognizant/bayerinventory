@@ -248,19 +248,55 @@
                         <span class="section-subtitle">Distributor Operations</span>
                         <h2>Inventory Upload Portal</h2>
                     </div>
-                    <div class="batch-upload-option">
-                        <i data-lucide="sparkles" class="ai-spark-icon"></i>
-                        AI will auto-classify files on drop
-                    </div>
+                    <button class="primary-btn" id="btn-initiate-upload"><i data-lucide="upload"></i> Upload New Inventory</button>
                 </div>
                 
-                <div class="upload-area" id="drop-zone">
+                <!-- Initial State: Recent Uploads -->
+                <div class="dashboard-card" id="upload-history">
+                    <h3>Recent Uploads</h3>
+                    <table class="data-table minimal">
+                        <thead>
+                            <tr>
+                                <th>File Name</th>
+                                <th>Distributor</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Inventory_Q3_LATAM.xlsx</td>
+                                <td>AgriSupplies Inc.</td>
+                                <td>Today, 09:12 AM</td>
+                                <td><span class="badge badge-high">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>stock_report_EU.csv</td>
+                                <td>EuroAgri GmbH</td>
+                                <td>Yesterday</td>
+                                <td><span class="badge badge-high">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>Weekly_US_Cornbelt.xlsx</td>
+                                <td>Midwest AgCo</td>
+                                <td>Jul 14, 2026</td>
+                                <td><span class="badge badge-med">Pending Review</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- State 2: Drag and Drop Zone (Hidden Initially) -->
+                <div class="upload-area hidden" id="drop-zone" style="margin-top: 24px;">
                     <i data-lucide="upload-cloud" class="upload-icon"></i>
                     <h2>Drag & Drop your Excel/CSV file here</h2>
                     <p>or click to browse files</p>
                     <button class="primary-btn" id="btn-upload">Select File</button>
+                    <button class="secondary-btn mt-2" id="btn-cancel-upload" style="margin-left: 8px;">Cancel</button>
                 </div>
-                <div class="dashboard-card upload-pipeline hidden" id="upload-pipeline">
+                
+                <!-- State 3: AI Pipeline (Hidden Initially) -->
+                <div class="dashboard-card upload-pipeline hidden" id="upload-pipeline" style="margin-top: 24px;">
                     <h3>AI Processing Pipeline</h3>
                     <div class="pipeline-steps">
                         <div class="step active"><i data-lucide="file-spreadsheet"></i> Upload</div>

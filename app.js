@@ -64,17 +64,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Upload Pipeline Simulation ---
+    const btnInitiateUpload = document.getElementById('btn-initiate-upload');
     const btnUpload = document.getElementById('btn-upload');
+    const btnCancelUpload = document.getElementById('btn-cancel-upload');
     const dropZone = document.getElementById('drop-zone');
     const uploadPipeline = document.getElementById('upload-pipeline');
+    const uploadHistory = document.getElementById('upload-history');
 
-    if (btnUpload && dropZone && uploadPipeline) {
+    if (btnInitiateUpload && btnUpload && dropZone && uploadPipeline) {
+        // Step 1 -> Step 2
+        btnInitiateUpload.addEventListener('click', () => {
+            uploadHistory.classList.add('hidden');
+            dropZone.classList.remove('hidden');
+            uploadPipeline.classList.add('hidden');
+        });
+
+        // Cancel Upload
+        btnCancelUpload.addEventListener('click', () => {
+            dropZone.classList.add('hidden');
+            uploadHistory.classList.remove('hidden');
+        });
+
+        // Step 2 -> Step 3
         const triggerUpload = () => {
             dropZone.classList.add('hidden');
             uploadPipeline.classList.remove('hidden');
             
             const steps = uploadPipeline.querySelectorAll('.step');
             let currentStep = 0;
+            
+            // Reset steps just in case
+            steps.forEach(s => s.classList.remove('active'));
+            if(steps.length > 0) steps[0].classList.add('active');
             
             const interval = setInterval(() => {
                 if (currentStep < steps.length - 1) {
@@ -84,9 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     clearInterval(interval);
                     showToast('AI Pipeline complete. 420 products mapped successfully.');
+                    // Reset UI back to history state after successful upload
                     setTimeout(() => {
+                        uploadPipeline.classList.add('hidden');
+                        uploadHistory.classList.remove('hidden');
                         document.querySelector('[data-target="matching"]').click();
-                    }, 1000);
+                    }, 1500);
                 }
             }, 800);
         };
