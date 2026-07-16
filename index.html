@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bayer AI Inventory Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Top Global Header -->
+    <header class="global-header">
+        <div class="header-left">
+            <div class="logo-container">
+                <img src="Bayer-Logo.wine.png" alt="Bayer Logo" class="bayer-logo-img">
+                <div class="logo-text">
+                    <span class="brand-title">Bayer</span>
+                    <span class="brand-subtitle">AI Inventory Portal</span>
+                </div>
+            </div>
+            <div class="header-badge">Enterprise Edition</div>
+        </div>
+
+        <div class="header-center">
+            <div class="search-bar-container">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" placeholder="Search inventory, distributors, or AI insights..." id="global-search">
+                <span class="search-shortcut">⌘K</span>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <div class="role-selector">
+                <button class="role-btn active" id="btn-role-regional">
+                    <i data-lucide="users"></i>
+                    Regional Leadership
+                </button>
+                <button class="role-btn" id="btn-role-kam">
+                    <i data-lucide="shield"></i>
+                    KAM View
+                </button>
+            </div>
+            <div class="icon-notification-container">
+                <div class="icon-btn">
+                    <i data-lucide="bell"></i>
+                    <span class="notification-badge">5</span>
+                </div>
+            </div>
+            <div class="user-profile-menu">
+                <div class="profile-avatar" id="profile-avatar">AP</div>
+                <div class="profile-info">
+                    <span class="profile-name" id="profile-name">Atul Patidar</span>
+                    <span class="profile-role" id="profile-role">Regional Lead</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar-nav">
+            <div class="sidebar-section-label">INVENTORY STAGES</div>
+            <ul class="nav-menu">
+                <li class="nav-item active" data-target="dashboard">
+                    <i data-lucide="layout-dashboard" class="nav-icon"></i>
+                    Dashboard Overview
+                </li>
+                <li class="nav-item" data-target="upload">
+                    <i data-lucide="upload-cloud" class="nav-icon"></i>
+                    Distributor Uploads
+                </li>
+                <li class="nav-item" data-target="matching">
+                    <i data-lucide="git-merge" class="nav-icon"></i>
+                    AI Product Matching
+                    <span class="nav-badge pending">8</span>
+                </li>
+                <li class="nav-item" data-target="review">
+                    <i data-lucide="check-square" class="nav-icon"></i>
+                    KAM Review
+                </li>
+                <li class="nav-item" data-target="workflow">
+                    <i data-lucide="git-commit" class="nav-icon"></i>
+                    Confirmation Workflow
+                </li>
+            </ul>
+
+            <div class="sidebar-section-label">ANALYTICS</div>
+            <ul class="nav-menu">
+                <li class="nav-item" data-target="inventory">
+                    <i data-lucide="bar-chart-2" class="nav-icon"></i>
+                    Inventory Visibility
+                </li>
+                <li class="nav-item" data-target="leadership">
+                    <i data-lucide="briefcase" class="nav-icon"></i>
+                    Regional Leadership
+                </li>
+                <li class="nav-item" data-target="learning">
+                    <i data-lucide="brain-circuit" class="nav-icon"></i>
+                    AI Learning Center
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <div class="footer-card">
+                    <div class="footer-card-header">
+                        <span class="status-pulse green"></span>
+                        <span class="footer-card-title">Portal Sync Active</span>
+                    </div>
+                    <p class="footer-card-text">Changes are autosaved securely to Bayer ERP.</p>
+                </div>
+                <div class="footer-version">v2.4.1-Prod • ERP API v10</div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Screen 1: Landing Dashboard -->
+            <section id="dashboard" class="screen active">
+                <div class="dashboard-hero">
+                    <div class="hero-left">
+                        <span class="hero-tag">Executive Overview</span>
+                        <h1>AI Inventory Intelligence</h1>
+                        <p class="hero-desc">Monitor regional performance, mapping accuracy, and AI-driven inventory coverage across all active distributors.</p>
+                    </div>
+                    <div class="hero-right">
+                        <div class="ai-readiness-card">
+                            <div class="card-header">
+                                <h3 class="card-title flex-align">
+                                    <i data-lucide="brain" class="ai-spark-icon"></i>
+                                    AI Confidence Score
+                                </h3>
+                                <span class="badge badge-high">96% High</span>
+                            </div>
+                            <p class="card-desc">Overall harmonization accuracy across the last 14 uploads.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon"><i data-lucide="users"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Active Distributors</span>
+                            <span class="kpi-value">124</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon"><i data-lucide="package"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Inventory Coverage</span>
+                            <span class="kpi-value">91%</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon"><i data-lucide="target"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Mapping Accuracy</span>
+                            <span class="kpi-value green">98.2%</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card highlight">
+                        <div class="kpi-icon"><i data-lucide="alert-triangle"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Products at Risk</span>
+                            <span class="kpi-value red">12</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-widgets">
+                    <div class="dashboard-card widget">
+                        <div class="heatmap-header">
+                            <h3>Regional Inventory Heatmap</h3>
+                            <div class="heatmap-filters">
+                                <select id="heatmap-country">
+                                    <option value="all">Global</option>
+                                    <option value="us">United States</option>
+                                    <option value="br">Brazil</option>
+                                    <option value="de">Germany</option>
+                                    <option value="in">India</option>
+                                </select>
+                                <select id="heatmap-product">
+                                    <option value="all">All Products</option>
+                                    <option value="roundup">Roundup WeatherMAX</option>
+                                    <option value="decis">Decis Expert</option>
+                                    <option value="luna">Luna Experience</option>
+                                    <option value="sivanto">Sivanto Prime</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="heatmap-container">
+                            <svg viewBox="0 0 800 400" class="heatmap-svg" id="heatmap-svg">
+                                <!-- Abstract map representation -->
+                                <path d="M100,50 Q150,20 200,60 T300,40 T400,80 T500,30 T600,70 T700,50 L750,150 L650,250 L550,300 L450,280 L350,350 L250,300 L150,250 L50,150 Z" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="2"/>
+                                
+                                <!-- Heat spots & Markers managed by JS -->
+                                <g id="heatmap-layer"></g>
+                            </svg>
+                        </div>
+                        <div class="heatmap-legend mt-2 flex-align">
+                            <span class="legend-dot high"></span> High Stock
+                            <span class="legend-dot med ml-2"></span> Medium Stock
+                            <span class="legend-dot low ml-2"></span> Low/Critical
+                        </div>
+                    </div>
+                    <div class="dashboard-card widget">
+                        <h3>AI Recommendations (Today)</h3>
+                        <div class="recommendation-list">
+                            <div class="rec-item">
+                                <i data-lucide="alert-triangle" class="text-yellow"></i>
+                                <div class="rec-content">
+                                    <strong>Low Stock: Roundup PowerMAX</strong>
+                                    <span>Distributor X projecting shortage in 8 days. Suggest transfer from Distributor Y.</span>
+                                </div>
+                                <button class="secondary-btn btn-sm" onclick="showToast('Reviewing transfer details...')">Review</button>
+                            </div>
+                            <div class="rec-item">
+                                <i data-lucide="check-circle" class="text-green"></i>
+                                <div class="rec-content">
+                                    <strong>New Upload: AgriSupplies Inc.</strong>
+                                    <span>AI mapped 450 products automatically with 99% confidence.</span>
+                                </div>
+                                <button class="primary-btn btn-sm" onclick="showToast('Upload automatically approved based on high confidence.')">Approve</button>
+                            </div>
+                            <div class="rec-item">
+                                <i data-lucide="brain" class="text-blue"></i>
+                                <div class="rec-content">
+                                    <strong>Mapping Anomaly: Velum Prime</strong>
+                                    <span>Unexpected pack size (1L instead of 5L) detected for Distributor Z. Review required.</span>
+                                </div>
+                                <button class="secondary-btn btn-sm" onclick="showToast('Navigating to KAM Review...')">Review</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screen 2: Distributor Upload Portal -->
+            <section id="upload" class="screen">
+                <div class="section-title-bar">
+                    <div>
+                        <span class="section-subtitle">Distributor Operations</span>
+                        <h2>Inventory Upload Portal</h2>
+                    </div>
+                    <div class="batch-upload-option">
+                        <i data-lucide="sparkles" class="ai-spark-icon"></i>
+                        AI will auto-classify files on drop
+                    </div>
+                </div>
+                
+                <div class="upload-area" id="drop-zone">
+                    <i data-lucide="upload-cloud" class="upload-icon"></i>
+                    <h2>Drag & Drop your Excel/CSV file here</h2>
+                    <p>or click to browse files</p>
+                    <button class="primary-btn" id="btn-upload">Select File</button>
+                </div>
+                <div class="dashboard-card upload-pipeline hidden" id="upload-pipeline">
+                    <h3>AI Processing Pipeline</h3>
+                    <div class="pipeline-steps">
+                        <div class="step active"><i data-lucide="file-spreadsheet"></i> Upload</div>
+                        <div class="step"><i data-lucide="search"></i> Validation</div>
+                        <div class="step"><i data-lucide="refresh-cw"></i> Normalization</div>
+                        <div class="step"><i data-lucide="cpu"></i> AI Matching</div>
+                        <div class="step"><i data-lucide="eye"></i> Review Ready</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screen 3: AI Product Matching -->
+            <section id="matching" class="screen">
+                <div class="section-title-bar">
+                    <div>
+                        <span class="section-subtitle">Review</span>
+                        <h2>AI Product Matching</h2>
+                    </div>
+                    <div class="header-actions">
+                        <button class="primary-btn" onclick="showToast('Accepted 420 mappings with >95% confidence.')"><i data-lucide="check-double"></i> Accept All > 95%</button>
+                    </div>
+                </div>
+                <div class="dashboard-card table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Distributor SKU</th>
+                                <th>Description</th>
+                                <th>AI Suggested Bayer Product</th>
+                                <th>Confidence</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>RND-001</td>
+                                <td>Roundup WeatherMAX 10L</td>
+                                <td>Roundup WeatherMAX® Herbicide</td>
+                                <td><span class="badge badge-high">98% High</span></td>
+                                <td class="actions">
+                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>DECIS-X-1</td>
+                                <td>Decis Expert Insect 5L</td>
+                                <td>Decis® Expert Insecticide</td>
+                                <td><span class="badge badge-high">96% High</span></td>
+                                <td class="actions">
+                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>LUNA-EXP-2</td>
+                                <td>Luna Exp Fungicide 1L</td>
+                                <td>Luna® Experience Fungicide</td>
+                                <td><span class="badge badge-high">95% High</span></td>
+                                <td class="actions">
+                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>SIV-PRIME</td>
+                                <td>Sivanto Prime (Pack 12x1L)</td>
+                                <td>Sivanto® Prime Insecticide</td>
+                                <td><span class="badge badge-high">92% High</span></td>
+                                <td class="actions">
+                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>MOV-150-OD</td>
+                                <td>Movento 150 OD 5L</td>
+                                <td>Movento® Insecticide</td>
+                                <td><span class="badge badge-med">82% Medium</span></td>
+                                <td class="actions">
+                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>VELUM-PR</td>
+                                <td>Velum Prime Nem 2.5L</td>
+                                <td>Velum® Prime Nematicide</td>
+                                <td><span class="badge badge-med">78% Medium</span></td>
+                                <td class="actions">
+                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>NATIV-22</td>
+                                <td>Nat Fungicide 2.5G</td>
+                                <td>Nativo® Fungicide</td>
+                                <td><span class="badge badge-med">75% Medium</span></td>
+                                <td class="actions">
+                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>UNK-99</td>
+                                <td>Generic Crop Saver (No Brand)</td>
+                                <td>No Bayer Equivalent</td>
+                                <td><span class="badge badge-low">12% Low</span></td>
+                                <td class="actions">
+                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Screen 4: KAM Review Workspace -->
+            <section id="review" class="screen">
+                <div class="section-title-bar">
+                    <div>
+                        <span class="section-subtitle">Workspace</span>
+                        <h2>KAM Review Workspace</h2>
+                    </div>
+                </div>
+                <div class="workspace-layout">
+                    <div class="dashboard-card workspace-list">
+                        <h3>Pending Reviews</h3>
+                        <div class="list-item active" onclick="this.classList.add('active')">
+                            <strong>Nativo Fungicide</strong>
+                            <span>Confidence: 75%</span>
+                        </div>
+                        <div class="list-item">
+                            <strong>Movento 150 OD</strong>
+                            <span>Confidence: 82%</span>
+                        </div>
+                        <div class="list-item">
+                            <strong>Velum Prime Nem</strong>
+                            <span>Confidence: 78%</span>
+                        </div>
+                        <div class="list-item">
+                            <strong>Sivanto Prime</strong>
+                            <span>Confidence: 68%</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card workspace-detail">
+                        <h2>Mapping: Nat Fungicide 2.5G</h2>
+                        <div class="mapping-comparison">
+                            <div class="comparison-card">
+                                <span>Distributor Data</span>
+                                <strong>Nat Fungicide 2.5G</strong>
+                                <p>SKU: NATIV-22</p>
+                            </div>
+                            <i data-lucide="arrow-right" class="arrow"></i>
+                            <div class="comparison-card bayer">
+                                <span>Bayer AI Suggestion</span>
+                                <strong>Nativo® Fungicide</strong>
+                                <p>SKU: BAY-NAT-002</p>
+                            </div>
+                        </div>
+                        <div class="ai-reasoning">
+                            <h4><i data-lucide="brain"></i> AI Reasoning</h4>
+                            <p>Matched because product name is 80% similar and active ingredients mentioned in historical orders match Trifloxystrobin and Tebuconazole.</p>
+                            <p class="risk">Risk: Pack size (2.5G) does not perfectly match standard Bayer SKU. Recommend manual KAM approval.</p>
+                        </div>
+                        <div class="form-actions" style="display:flex;gap:12px;margin-top:auto;">
+                            <button class="primary-btn" onclick="showToast('Mapping Confirmed! Triggering ERP Sync.')">Approve Mapping</button>
+                            <button class="secondary-btn" onclick="showToast('Mapping Rejected. Removed from pipeline.')">Reject</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screen 5: Workflow Timeline -->
+            <section id="workflow" class="screen">
+                <div class="section-title-bar">
+                    <div>
+                        <span class="section-subtitle">Tracking</span>
+                        <h2>Distributor Confirmation Workflow</h2>
+                    </div>
+                </div>
+                <div class="dashboard-card workflow-timeline-card">
+                    <div class="timeline-header">
+                        <h3>Mapping Approval Status: <span class="text-blue">AgriSupplies Inc. (Upload #1442)</span></h3>
+                        <span class="badge badge-med">In Progress</span>
+                    </div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step completed">
+                            <div class="workflow-icon"><i data-lucide="cpu"></i></div>
+                            <div class="workflow-content">
+                                <h4>AI Harmonization</h4>
+                                <p>450 products mapped automatically with >95% confidence.</p>
+                                <span class="workflow-time">Today, 09:12 AM</span>
+                            </div>
+                        </div>
+                        <div class="workflow-connector completed"></div>
+                        
+                        <div class="workflow-step completed">
+                            <div class="workflow-icon"><i data-lucide="user-check"></i></div>
+                            <div class="workflow-content">
+                                <h4>KAM Approval</h4>
+                                <p>12 low-confidence products manually reviewed and approved.</p>
+                                <span class="workflow-time">Today, 11:45 AM</span>
+                            </div>
+                        </div>
+                        <div class="workflow-connector completed"></div>
+                        
+                        <div class="workflow-step active">
+                            <div class="workflow-icon"><i data-lucide="mail"></i></div>
+                            <div class="workflow-content">
+                                <h4>Distributor Confirmation</h4>
+                                <p>Pending confirmation from distributor via email link. Awaiting response.</p>
+                                <button class="secondary-btn btn-sm mt-2" onclick="showToast('Reminder email sent to distributor.')">Resend Email</button>
+                            </div>
+                        </div>
+                        <div class="workflow-connector"></div>
+                        
+                        <div class="workflow-step">
+                            <div class="workflow-icon"><i data-lucide="database"></i></div>
+                            <div class="workflow-content">
+                                <h4>Final Mapping & ERP Sync</h4>
+                                <p>Inventory will be visible in regional dashboards once confirmed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Screen 6: Inventory Visibility -->
+            <section id="inventory" class="screen">
+                <div class="section-title-bar">
+                    <div>
+                        <span class="section-subtitle">Analytics</span>
+                        <h2>Inventory Visibility</h2>
+                    </div>
+                    <button class="secondary-btn"><i data-lucide="download"></i> Export Report</button>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="dashboard-card widget" style="grid-column: span 2;">
+                        <h3>Inventory by Category (Millions L/Kg)</h3>
+                        <div class="css-chart-bar-container">
+                            <div class="chart-row"><span class="label">Herbicides</span><div class="bar-track"><div class="bar-fill blue" style="width: 85%"></div></div><span class="val">4.2M</span></div>
+                            <div class="chart-row"><span class="label">Fungicides</span><div class="bar-track"><div class="bar-fill green" style="width: 60%"></div></div><span class="val">2.8M</span></div>
+                            <div class="chart-row"><span class="label">Insecticides</span><div class="bar-track"><div class="bar-fill yellow" style="width: 45%"></div></div><span class="val">1.9M</span></div>
+                            <div class="chart-row"><span class="label">Seeds</span><div class="bar-track"><div class="bar-fill blue" style="width: 30%"></div></div><span class="val">1.2M</span></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card widget" style="grid-column: span 2;">
+                        <h3>Top Overstock Alerts</h3>
+                        <table class="data-table minimal">
+                            <tr><td>Distributor Alpha</td><td>Luna Experience</td><td><span class="text-yellow">+40%</span></td></tr>
+                            <tr><td>AgriCorp South</td><td>Movento 150</td><td><span class="text-yellow">+28%</span></td></tr>
+                            <tr><td>EuroAgri GmbH</td><td>Decis Expert</td><td><span class="text-yellow">+22%</span></td></tr>
+                        </table>
+                        <button class="text-link mt-2" onclick="showToast('Opening transfer wizard')">Initiate Stock Transfer →</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screen 7: Regional Leadership -->
+            <section id="leadership" class="screen">
+                <div class="section-title-bar">
+                    <div>
+                        <span class="section-subtitle">Executive</span>
+                        <h2>Regional Leadership Dashboard</h2>
+                    </div>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon"><i data-lucide="trending-up"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Visibility Increase</span>
+                            <span class="kpi-value green">+49%</span>
+                            <span style="font-size:11px;color:var(--text-secondary)">Since AI launch</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon"><i data-lucide="shield-check"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Risk Mitigation</span>
+                            <span class="kpi-value">$2.4M</span>
+                            <span style="font-size:11px;color:var(--text-secondary)">Value of prevented stockouts</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card widget" style="grid-column: span 4;">
+                        <h3>Executive AI Summary</h3>
+                        <div class="ai-reasoning" style="background:#F0FDF4; border-color:var(--status-green);">
+                            <h4><i data-lucide="sparkles"></i> AI Generated Insight</h4>
+                            <p>"Overall inventory visibility increased from 42% to 91% after the deployment of the Master Data Harmonization AI. We project a 15% reduction in emergency logistics costs over the next quarter by leveraging cross-distributor transfers."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screen 8: AI Learning Center -->
+            <section id="learning" class="screen">
+                <div class="section-title-bar">
+                    <div>
+                        <span class="section-subtitle">System</span>
+                        <h2>AI Learning Center</h2>
+                    </div>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card widget" style="grid-column: span 2;">
+                        <h3>Continuous Feedback Loop</h3>
+                        <div class="feedback-pipeline">
+                            <div class="fb-step"><i data-lucide="user"></i><br>Human Validation</div>
+                            <i data-lucide="arrow-right" class="arrow"></i>
+                            <div class="fb-step active"><i data-lucide="database"></i><br>Training Data Update</div>
+                            <i data-lucide="arrow-right" class="arrow"></i>
+                            <div class="fb-step"><i data-lucide="brain-circuit"></i><br>Improved Model</div>
+                        </div>
+                        <p style="text-align:center;margin-top:16px;color:var(--text-secondary);font-size:13px;">The AI model learns from every KAM approval/rejection.</p>
+                    </div>
+                    <div class="dashboard-card widget">
+                        <h3>Model Performance (v2.4.1)</h3>
+                        <div class="kpi-details mb-2">
+                            <span class="kpi-label">Accepted Suggestions</span>
+                            <span class="kpi-value green">14,204</span>
+                        </div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Rejected Suggestions</span>
+                            <span class="kpi-value text-yellow">312</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Conversational AI Copilot matching Onboarding Reference -->
+        <aside class="copilot-panel">
+            <div class="copilot-header">
+                <div class="copilot-header-title">
+                    <span class="copilot-glow-dot"></span>
+                    <h4>AI Inventory Copilot</h4>
+                </div>
+                <button class="copilot-close-btn" onclick="document.querySelector('.copilot-panel').style.display='none'"><i data-lucide="x"></i></button>
+            </div>
+            
+            <div class="copilot-chat-history" id="chat-history">
+                <div class="message-meta">Bayer Copilot AI • Today</div>
+                <div class="chat-bubble ai-bubble">
+                    Hello! I am your AI Inventory Copilot. I noticed 3 new distributor uploads today and 12 products that need manual KAM review. How can I help you today?
+                </div>
+            </div>
+            
+            <div class="copilot-suggestions">
+                <button class="suggestion-chip" onclick="sendPrompt('Run harmonization pipeline')">Run harmonization pipeline</button>
+                <button class="suggestion-chip" onclick="sendPrompt('Show inventory risks')">Show inventory risks</button>
+                <button class="suggestion-chip" onclick="sendPrompt('Review anomalous mappings')">Review anomalous mappings</button>
+            </div>
+            
+            <div class="copilot-input-area">
+                <input type="text" placeholder="Ask Copilot a question..." id="chat-input" onkeydown="if(event.key==='Enter') sendPrompt(this.value)">
+                <button class="copilot-send-btn" onclick="sendPrompt(document.getElementById('chat-input').value)"><i data-lucide="send"></i></button>
+            </div>
+        </aside>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
