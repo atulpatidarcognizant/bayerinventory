@@ -184,10 +184,21 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             const aiBubble = document.createElement('div');
             aiBubble.className = 'chat-bubble ai-bubble';
-            if (text.includes('harmonization')) {
-                aiBubble.textContent = 'Harmonization pipeline initiated. I am processing 3 pending uploads from Distributor X and Y... I will notify you when the mappings are ready for KAM review.';
-            } else if (text.includes('risks')) {
-                aiBubble.textContent = 'There are currently 12 products at risk of low inventory. The most critical is Roundup PowerMAX for AgriSupplies Inc. Do you want me to draft a stock transfer request?';
+            if (text.toLowerCase().includes('overdue')) {
+                aiBubble.textContent = 'Navigating to the Dashboard. 18 distributors have not uploaded inventory in the last 7 days.';
+                if (window.openAnalytics) {
+                    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                    document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
+                    document.querySelector('.nav-item[data-target="dashboard"]').classList.add('active');
+                    document.getElementById('dashboard').classList.add('active');
+                    if (window.filterDistributorTable) window.filterDistributorTable('overdue');
+                }
+            } else if (text.toLowerCase().includes('overstock') || text.toLowerCase().includes('transfers')) {
+                aiBubble.textContent = 'Distributor Alpha has excess Luna Experience inventory that could support Distributor Omega. Opening Analytics view...';
+                if (window.openAnalytics) window.openAnalytics('overstock');
+            } else if (text.toLowerCase().includes('stock-out') || text.toLowerCase().includes('risks')) {
+                aiBubble.textContent = 'Three distributors are projected to stock out within the next week. Navigating to Understock Analytics view...';
+                if (window.openAnalytics) window.openAnalytics('understock');
             } else {
                 aiBubble.textContent = 'I have analyzed that request. Navigating you to the relevant insights now...';
             }
@@ -335,5 +346,58 @@ window.switchMatchingTab = function(tabId) {
     // Re-initialize lucide icons for the newly visible section
     if (window.lucide) {
         window.lucide.createIcons();
+    }
+};
+
+// --- P2 Synchronization Logic ---
+window.openAnalytics = function(viewType) {
+    // Navigate to the inventory screen
+    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+    document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
+    
+    const inventoryNav = document.querySelector('.nav-item[data-target="inventory"]');
+    if (inventoryNav) inventoryNav.classList.add('active');
+    
+    document.getElementById('inventory').classList.add('active');
+
+    // Toggle the correct view based on the card clicked
+    const overstockView = document.getElementById('analytics-overstock');
+    const understockView = document.getElementById('analytics-understock');
+    
+    if (viewType === 'overstock') {
+        if(overstockView) overstockView.classList.remove('hidden');
+        if(understockView) understockView.classList.add('hidden');
+    } else if (viewType === 'understock' || viewType === 'critical') {
+        if(overstockView) overstockView.classList.add('hidden');
+        if(understockView) understockView.classList.remove('hidden');
+    }
+    
+    if (window.lucide) window.lucide.createIcons();
+};
+
+window.filterDistributorTable = function(filterType) {
+    const table = document.getElementById('distributor-coverage-table');
+    if (!table) return;
+    
+    const rows = table.querySelectorAll('tbody tr');
+    let hiddenCount = 0;
+    
+    rows.forEach(row => {
+        // Simple logic for the prototype: if filterType is overdue, hide 'Healthy' rows
+        if (filterType === 'overdue') {
+            const statusCell = row.querySelector('td:nth-child(3)').textContent;
+            if (statusCell.includes('Healthy')) {
+                row.style.display = 'none';
+                hiddenCount++;
+            } else {
+                row.style.display = '';
+            }
+        }
+    });
+    
+    if (hiddenCount > 0) {
+        if (typeof window.showToast === 'function') {
+            window.showToast(`Filtered table to show overdue distributors.`);
+        }
     }
 };

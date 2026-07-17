@@ -244,10 +244,30 @@
                     </div>
                 </div>
                 
-                <div class="dashboard-widgets" style="margin-top: 24px; grid-template-columns: 1fr;">
+                <div class="dashboard-widgets" style="margin-top: 24px; grid-template-columns: 2fr 1fr;">
                     <div class="dashboard-card widget">
                         <h3>Inventory Coverage</h3>
-                        <table class="data-table" style="margin-top: 16px;">
+                        
+                        <div class="kpi-row" style="display: flex; gap: 16px; margin-bottom: 24px; margin-top: 16px;">
+                            <div class="mini-kpi" style="flex: 1; background: #F8FAFC; padding: 12px; border-radius: 6px; border: 1px solid #E2E8F0;">
+                                <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; font-weight: 600;">Total Active</div>
+                                <div style="font-size: 20px; font-weight: 700; font-family: 'Outfit', sans-serif;">124</div>
+                            </div>
+                            <div class="mini-kpi" style="flex: 1; background: #F8FAFC; padding: 12px; border-radius: 6px; border: 1px solid #E2E8F0;">
+                                <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; font-weight: 600;">Uploaded Today</div>
+                                <div style="font-size: 20px; font-weight: 700; font-family: 'Outfit', sans-serif; color: var(--status-green);">42</div>
+                            </div>
+                            <div class="mini-kpi" style="flex: 1; background: #F8FAFC; padding: 12px; border-radius: 6px; border: 1px solid #E2E8F0;">
+                                <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; font-weight: 600;">Last 7 Days</div>
+                                <div style="font-size: 20px; font-weight: 700; font-family: 'Outfit', sans-serif;">64</div>
+                            </div>
+                            <div class="mini-kpi" onclick="filterDistributorTable('overdue')" style="flex: 1; background: #FFFBEB; padding: 12px; border-radius: 6px; border: 1px solid #FCD34D; cursor: pointer;">
+                                <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; font-weight: 600;">Overdue (>7)</div>
+                                <div style="font-size: 20px; font-weight: 700; font-family: 'Outfit', sans-serif; color: #D97706;">18</div>
+                            </div>
+                        </div>
+
+                        <table class="data-table" id="distributor-coverage-table">
                             <thead>
                                 <tr>
                                     <th>Distributor</th>
@@ -283,6 +303,54 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="dashboard-card widget ai-reasoning" style="margin-top: 0; background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%); border: 1px solid #BAE6FD;">
+                        <h4 style="display:flex; align-items:center; gap:8px; color:var(--primary-blue);"><i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Coverage Insight</h4>
+                        <p style="margin-top:12px; font-size:14px; color:var(--text-dark);"><strong>18 distributors</strong> have not uploaded inventory in the last 7 days.</p>
+                        <p class="text-sm text-secondary mt-2">Updating these partners would increase your regional inventory visibility from <strong>74% to 91%</strong>.</p>
+                        <button class="primary-btn btn-sm mt-4" style="width: 100%; justify-content: center;" onclick="filterDistributorTable('overdue')">View Overdue Partners</button>
+                    </div>
+                </div>
+
+                <!-- Feature 2: Inventory Health -->
+                <div class="section-title-bar" style="margin-top: 32px; padding-bottom: 0;">
+                    <div>
+                        <h2>Inventory Health</h2>
+                    </div>
+                </div>
+                
+                <div class="dashboard-grid" style="margin-top: 16px; grid-template-columns: repeat(4, 1fr);">
+                    <div class="dashboard-card kpi-card cursor-pointer" onclick="openAnalytics('healthy')" style="border-top: 4px solid var(--status-green);">
+                        <div class="kpi-icon"><i data-lucide="check-circle" style="color:var(--status-green);"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Healthy Inventory</span>
+                            <span class="kpi-value">84</span>
+                            <span class="kpi-trend text-green"><i data-lucide="arrow-up-right"></i> 12 Products</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card cursor-pointer" onclick="openAnalytics('overstock')" style="border-top: 4px solid var(--primary-blue);">
+                        <div class="kpi-icon"><i data-lucide="package-plus" style="color:var(--primary-blue);"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Overstock</span>
+                            <span class="kpi-value">12</span>
+                            <span class="kpi-trend text-blue"><i data-lucide="arrow-right"></i> 4 Distributors</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card cursor-pointer" onclick="openAnalytics('understock')" style="border-top: 4px solid #D97706;">
+                        <div class="kpi-icon"><i data-lucide="package-minus" style="color:#D97706;"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Understock</span>
+                            <span class="kpi-value">22</span>
+                            <span class="kpi-trend text-yellow"><i data-lucide="arrow-up-right"></i> 8 Distributors</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card cursor-pointer" onclick="openAnalytics('critical')" style="border-top: 4px solid var(--status-red);">
+                        <div class="kpi-icon"><i data-lucide="alert-triangle" style="color:var(--status-red);"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Critical Stock-outs</span>
+                            <span class="kpi-value">3</span>
+                            <span class="kpi-trend text-red"><i data-lucide="arrow-up-right"></i> Action Req</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -663,24 +731,53 @@
                     <button class="secondary-btn"><i data-lucide="download"></i> Export Report</button>
                 </div>
                 
-                <div class="dashboard-grid">
+                <!-- Overstock Scenario -->
+                <div id="analytics-overstock" class="dashboard-grid">
                     <div class="dashboard-card widget" style="grid-column: span 2;">
-                        <h3>Inventory by Category (Millions L/Kg)</h3>
-                        <div class="css-chart-bar-container">
-                            <div class="chart-row"><span class="label">Herbicides</span><div class="bar-track"><div class="bar-fill blue" style="width: 85%"></div></div><span class="val">4.2M</span></div>
-                            <div class="chart-row"><span class="label">Fungicides</span><div class="bar-track"><div class="bar-fill green" style="width: 60%"></div></div><span class="val">2.8M</span></div>
-                            <div class="chart-row"><span class="label">Insecticides</span><div class="bar-track"><div class="bar-fill yellow" style="width: 45%"></div></div><span class="val">1.9M</span></div>
-                            <div class="chart-row"><span class="label">Seeds</span><div class="bar-track"><div class="bar-fill blue" style="width: 30%"></div></div><span class="val">1.2M</span></div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                            <h3>Top Overstocked Products</h3>
+                            <span class="badge badge-high" style="background:#DBEAFE; color:var(--primary-blue);"><i data-lucide="package-plus" style="width:12px;height:12px;margin-right:4px;"></i> Overstock Focus</span>
+                        </div>
+                        <table class="data-table minimal mt-2">
+                            <tr><th>Distributor</th><th>Product</th><th>Excess Vol.</th><th>Action</th></tr>
+                            <tr><td>Distributor Alpha</td><td>Luna Experience</td><td><span class="text-blue">+40%</span></td><td><button class="secondary-btn btn-sm text-blue" onclick="showToast('Drafting transfer')">Transfer</button></td></tr>
+                            <tr><td>AgriCorp South</td><td>Movento 150</td><td><span class="text-blue">+28%</span></td><td><button class="secondary-btn btn-sm text-blue" onclick="showToast('Drafting transfer')">Transfer</button></td></tr>
+                            <tr><td>EuroAgri GmbH</td><td>Decis Expert</td><td><span class="text-blue">+22%</span></td><td><button class="secondary-btn btn-sm text-blue" onclick="showToast('Promo recommended')">Promo</button></td></tr>
+                        </table>
+                    </div>
+                    <div class="dashboard-card widget ai-reasoning" style="grid-column: span 2; margin-top: 0; background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%); border: 1px solid #BAE6FD;">
+                        <h4 style="display:flex; align-items:center; gap:8px; color:var(--primary-blue);"><i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Recommended Action</h4>
+                        <p style="margin-top:12px; font-size:14px; color:var(--text-dark);"><strong>Distributor Alpha</strong> has a significant excess of Luna Experience. Meanwhile, <strong>Distributor Omega</strong> is reporting a potential shortage.</p>
+                        <p class="text-sm text-secondary mt-2">Working capital impact: <strong>$1.2M locked</strong> in slow-moving inventory.</p>
+                        <div style="display: flex; gap: 8px; margin-top: 16px;">
+                            <button class="primary-btn btn-sm" style="flex:1; justify-content: center;" onclick="showToast('Transfer workflow initiated.')">Initiate Stock Transfer</button>
+                            <button class="secondary-btn btn-sm" style="flex:1; justify-content: center;" onclick="showToast('Promo workflow initiated.')">Increase Promo Activity</button>
                         </div>
                     </div>
+                </div>
+
+                <!-- Understock Scenario -->
+                <div id="analytics-understock" class="dashboard-grid hidden">
                     <div class="dashboard-card widget" style="grid-column: span 2;">
-                        <h3>Top Overstock Alerts</h3>
-                        <table class="data-table minimal">
-                            <tr><td>Distributor Alpha</td><td>Luna Experience</td><td><span class="text-yellow">+40%</span></td></tr>
-                            <tr><td>AgriCorp South</td><td>Movento 150</td><td><span class="text-yellow">+28%</span></td></tr>
-                            <tr><td>EuroAgri GmbH</td><td>Decis Expert</td><td><span class="text-yellow">+22%</span></td></tr>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                            <h3>Approaching Stock-out</h3>
+                            <span class="badge badge-high" style="background:#FEF3C7; color:#D97706;"><i data-lucide="package-minus" style="width:12px;height:12px;margin-right:4px;"></i> Understock Focus</span>
+                        </div>
+                        <table class="data-table minimal mt-2">
+                            <tr><th>Distributor</th><th>Product</th><th>Est. Stock-out</th><th>Priority</th></tr>
+                            <tr><td>Distributor Omega</td><td>Luna Experience</td><td><span class="text-red">3 Days</span></td><td><span class="badge badge-high">High</span></td></tr>
+                            <tr><td>FarmSupplies Inc</td><td>Roundup PowerMAX</td><td><span class="text-yellow">5 Days</span></td><td><span class="badge badge-med">Med</span></td></tr>
+                            <tr><td>GreenFields Ltd</td><td>Prosaro Pro</td><td><span class="text-yellow">8 Days</span></td><td><span class="badge badge-low">Low</span></td></tr>
                         </table>
-                        <button class="text-link mt-2" onclick="showToast('Opening transfer wizard')">Initiate Stock Transfer →</button>
+                    </div>
+                    <div class="dashboard-card widget ai-reasoning" style="grid-column: span 2; margin-top: 0; background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 1px solid #FDE68A;">
+                        <h4 style="display:flex; align-items:center; gap:8px; color:#D97706;"><i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Recommended Action</h4>
+                        <p style="margin-top:12px; font-size:14px; color:var(--text-dark);"><strong>Distributor Omega</strong> will run out of Luna Experience in 3 days during peak season.</p>
+                        <p class="text-sm text-secondary mt-2">Recommended: Expedite replenishment or fulfill via stock transfer from <strong>Distributor Alpha</strong>.</p>
+                        <div style="display: flex; gap: 8px; margin-top: 16px;">
+                            <button class="primary-btn btn-sm" style="flex:1; justify-content: center; background: #D97706; border-color: #D97706;" onclick="showToast('Expedite workflow initiated.')">Expedite Replenishment</button>
+                            <button class="secondary-btn btn-sm" style="flex:1; justify-content: center;" onclick="showToast('Notifying KAM.')">Notify KAM</button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -834,14 +931,14 @@
             <div class="copilot-chat-history" id="chat-history">
                 <div class="message-meta">Bayer Copilot AI • Today</div>
                 <div class="chat-bubble ai-bubble">
-                    Hello! I am your AI Inventory Copilot. I noticed 3 new distributor uploads today and 12 products that need manual KAM review. How can I help you today?
+                    Hello! I've analyzed your region's operations. <strong>18 distributors</strong> have not uploaded inventory in the last 7 days, and <strong>Three distributors</strong> are projected to stock out within the next week. How can I assist you today?
                 </div>
             </div>
             
             <div class="copilot-suggestions">
-                <button class="suggestion-chip" onclick="sendPrompt('Run harmonization pipeline')">Run harmonization pipeline</button>
-                <button class="suggestion-chip" onclick="sendPrompt('Show inventory risks')">Show inventory risks</button>
-                <button class="suggestion-chip" onclick="sendPrompt('Review anomalous mappings')">Review anomalous mappings</button>
+                <button class="suggestion-chip" onclick="sendPrompt('Show overdue distributors')">Show overdue distributors</button>
+                <button class="suggestion-chip" onclick="sendPrompt('Find overstock transfers')">Find overstock transfers</button>
+                <button class="suggestion-chip" onclick="sendPrompt('View stock-out risks')">View stock-out risks</button>
             </div>
             
             <div class="copilot-input-area">
