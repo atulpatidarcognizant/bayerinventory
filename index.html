@@ -80,6 +80,10 @@
                     AI Product Matching
                     <span class="nav-badge pending">8</span>
                 </li>
+                <li class="nav-item" data-target="distributor-review">
+                    <i data-lucide="user-check" class="nav-icon"></i>
+                    Distributor Review
+                </li>
                 <li class="nav-item" data-target="review">
                     <i data-lucide="check-square" class="nav-icon"></i>
                     KAM Review
@@ -239,6 +243,48 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="dashboard-widgets" style="margin-top: 24px; grid-template-columns: 1fr;">
+                    <div class="dashboard-card widget">
+                        <h3>Inventory Coverage</h3>
+                        <table class="data-table" style="margin-top: 16px;">
+                            <thead>
+                                <tr>
+                                    <th>Distributor</th>
+                                    <th>Last Upload</th>
+                                    <th>Status</th>
+                                    <th style="text-align:right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-medium">ABC Corp</td>
+                                    <td class="text-secondary text-sm">Today</td>
+                                    <td><span class="badge badge-high">Healthy</span></td>
+                                    <td style="text-align:right"><span class="text-secondary text-sm">-</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">XYZ Logistics</td>
+                                    <td class="text-secondary text-sm">5 Days Ago</td>
+                                    <td><span class="badge badge-high">Healthy</span></td>
+                                    <td style="text-align:right"><span class="text-secondary text-sm">-</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">DEF Supplies</td>
+                                    <td class="text-secondary text-sm">11 Days Ago</td>
+                                    <td><span class="badge badge-med">Attention</span></td>
+                                    <td style="text-align:right"><button class="secondary-btn btn-sm text-blue" onclick="openRequestModal('DEF Supplies')">Request Update</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">GHI Distributors</td>
+                                    <td class="text-secondary text-sm">Never</td>
+                                    <td><span class="badge badge-low">Missing</span></td>
+                                    <td style="text-align:right"><button class="secondary-btn btn-sm text-blue" onclick="openRequestModal('GHI Distributors')">Request Update</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </section>
 
             <!-- Screen 2: Distributor Upload Portal -->
@@ -283,6 +329,13 @@
                         <button class="primary-btn" onclick="showToast('Accepted 420 mappings with >95% confidence.')"><i data-lucide="check-double"></i> Accept All > 95%</button>
                     </div>
                 </div>
+                
+                <div class="workflow-tabs">
+                    <button class="workflow-tab active" onclick="switchMatchingTab('new')">New AI Suggestions <span class="tab-badge">8</span></button>
+                    <button class="workflow-tab" onclick="switchMatchingTab('awaiting')">Awaiting Distributor Confirmation <span class="tab-badge">2</span></button>
+                    <button class="workflow-tab" onclick="switchMatchingTab('completed')">Completed <span class="tab-badge">14</span></button>
+                </div>
+                
                 <div class="dashboard-card table-container">
                     <table class="data-table">
                         <thead>
@@ -295,7 +348,7 @@
                                 <th style="text-align: right;">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody-new">
                             <tr>
                                 <td class="font-medium">RND-001</td>
                                 <td class="text-secondary text-sm">Roundup WeatherMAX 10L</td>
@@ -445,6 +498,42 @@
                                         <button class="btn btn-icon text-green" onclick="approveMapping(this)" style="display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600;"><i data-lucide="check" style="width:14px;height:14px;"></i> Approve</button>
                                         <button class="btn btn-icon text-blue" onclick="openProductModal(this)" style="display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600;"><i data-lucide="search" style="width:14px;height:14px;"></i> Alternate</button>
                                         <button class="btn btn-icon text-red" onclick="markNoEquivalent(this)" style="display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600;"><i data-lucide="slash" style="width:14px;height:14px;"></i> No Match</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody id="tbody-awaiting" class="hidden">
+                            <tr>
+                                <td class="font-medium">DECIS-X-1</td>
+                                <td class="text-secondary text-sm">Decis Expert Insect 5L</td>
+                                <td class="bayer-match-cell font-medium">
+                                    <span class="match-name">Decis® Expert Insecticide</span>
+                                </td>
+                                <td><span class="badge badge-high">96% High</span></td>
+                                <td class="ai-reason-cell">
+                                    <span class="text-xs text-secondary">Strong brand correlation. Standard pack size.</span>
+                                </td>
+                                <td class="actions">
+                                    <div style="display: flex; gap: 8px; justify-content: flex-end;">
+                                        <span class="badge badge-med flex-align"><i data-lucide="clock" style="width:14px;height:14px;"></i> Awaiting Distributor</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody id="tbody-completed" class="hidden">
+                            <tr>
+                                <td class="font-medium">LUNA-EXP-2</td>
+                                <td class="text-secondary text-sm">Luna Exp Fungicide 1L</td>
+                                <td class="bayer-match-cell font-medium">
+                                    <span class="match-name">Luna® Experience Fungicide</span>
+                                </td>
+                                <td><span class="badge badge-high">95% High</span></td>
+                                <td class="ai-reason-cell">
+                                    <span class="text-xs text-secondary">High token similarity. Category matches.</span>
+                                </td>
+                                <td class="actions">
+                                    <div style="display: flex; gap: 8px; justify-content: flex-end;">
+                                        <span class="badge badge-high flex-align"><i data-lucide="check-circle" style="width:14px;height:14px;"></i> Completed</span>
                                     </div>
                                 </td>
                             </tr>
@@ -664,6 +753,72 @@
                     </div>
                 </div>
             </section>
+            
+            <!-- Screen 6: Distributor Review -->
+            <section id="distributor-review" class="screen">
+                <div class="section-title-bar">
+                    <div>
+                        <span class="section-subtitle">Distributor Action</span>
+                        <h2>Distributor Review</h2>
+                    </div>
+                    <div class="header-actions">
+                        <button class="primary-btn" onclick="showToast('Accepted 2 mappings.')"><i data-lucide="check-double"></i> Accept All</button>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Distributor SKU</th>
+                                <th>Product Description</th>
+                                <th>Proposed Bayer Product</th>
+                                <th>Confidence</th>
+                                <th>KAM Comments</th>
+                                <th style="text-align: right;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-medium">DECIS-X-1</td>
+                                <td class="text-secondary text-sm">Decis Expert Insect 5L</td>
+                                <td class="bayer-match-cell font-medium">
+                                    <span class="match-name">Decis® Expert Insecticide</span>
+                                </td>
+                                <td><span class="badge badge-high flex-align" style="width:fit-content;"><i data-lucide="check-circle" style="width:12px;height:12px;"></i> KAM Reviewed</span></td>
+                                <td class="ai-reason-cell">
+                                    <span class="text-sm font-medium" style="color: #1E293B;">"Please confirm this standard mapping."</span>
+                                </td>
+                                <td class="actions">
+                                    <div style="display: flex; gap: 8px; justify-content: flex-end;">
+                                        <button class="btn btn-icon text-green" onclick="showToast('Mapping Approved')" style="display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600;"><i data-lucide="check" style="width:14px;height:14px;"></i> Approve</button>
+                                        <button class="btn btn-icon text-red" onclick="showToast('Mapping Rejected')" style="display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600;"><i data-lucide="x" style="width:14px;height:14px;"></i> Reject</button>
+                                        <button class="btn btn-icon text-blue" onclick="showToast('Opening comment dialog...')" style="display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600;"><i data-lucide="message-square" style="width:14px;height:14px;"></i> Comment</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium">UNK-99</td>
+                                <td class="text-secondary text-sm">Generic Crop Saver</td>
+                                <td class="bayer-match-cell font-medium">
+                                    <span class="match-name text-secondary">No Bayer Equivalent</span>
+                                </td>
+                                <td><span class="badge badge-high flex-align" style="width:fit-content;"><i data-lucide="check-circle" style="width:12px;height:12px;"></i> KAM Reviewed</span></td>
+                                <td class="ai-reason-cell">
+                                    <span class="text-sm font-medium" style="color: #1E293B;">"Marked as no equivalent. Does not match our catalog."</span>
+                                </td>
+                                <td class="actions">
+                                    <div style="display: flex; gap: 8px; justify-content: flex-end;">
+                                        <button class="btn btn-icon text-green" onclick="showToast('Mapping Approved')" style="display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600;"><i data-lucide="check" style="width:14px;height:14px;"></i> Approve</button>
+                                        <button class="btn btn-icon text-red" onclick="showToast('Mapping Rejected')" style="display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600;"><i data-lucide="x" style="width:14px;height:14px;"></i> Reject</button>
+                                        <button class="btn btn-icon text-blue" onclick="showToast('Opening comment dialog...')" style="display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600;"><i data-lucide="message-square" style="width:14px;height:14px;"></i> Comment</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </main>
         
         <!-- Conversational AI Copilot matching Onboarding Reference -->
@@ -751,5 +906,38 @@
     </div>
     
     <script src="app.js"></script>
+    <!-- Inventory Request Modal -->
+    <div id="request-modal" class="modal-overlay hidden">
+        <div class="modal-content dashboard-card" style="width: 500px; padding: 24px;">
+            <div class="modal-header flex-align" style="justify-content: space-between; margin-bottom: 24px;">
+                <h3 style="font-size: 18px;">Request Inventory Update</h3>
+                <button class="btn-icon" onclick="document.getElementById('request-modal').classList.add('hidden')"><i data-lucide="x"></i></button>
+            </div>
+            
+            <div style="display:flex; flex-direction:column; gap:16px;">
+                <div>
+                    <label style="font-size:12px; font-weight:600; color:var(--text-secondary);">Distributor</label>
+                    <div id="request-distributor-name" style="font-weight:500; font-size:14px; margin-top:4px;">DEF Supplies</div>
+                </div>
+                <div>
+                    <label style="font-size:12px; font-weight:600; color:var(--text-secondary);">Contact Email</label>
+                    <input type="text" value="operations@distributor.com" class="form-input" style="width:100%; padding:8px 12px; border:1px solid #CBD5E1; border-radius:4px; margin-top:4px; font-family: inherit; font-size: 13px;" readonly>
+                </div>
+                <div>
+                    <label style="font-size:12px; font-weight:600; color:var(--text-secondary);">Optional Message</label>
+                    <textarea class="form-input" style="width:100%; padding:8px 12px; border:1px solid #CBD5E1; border-radius:4px; margin-top:4px; min-height:80px; font-family: inherit; font-size: 13px;">Please upload your latest inventory so we can proceed with AI mapping and harmonization.</textarea>
+                </div>
+                <div>
+                    <label style="font-size:12px; font-weight:600; color:var(--text-secondary);">Due Date</label>
+                    <input type="date" class="form-input" style="width:100%; padding:8px 12px; border:1px solid #CBD5E1; border-radius:4px; margin-top:4px; font-family: inherit; font-size: 13px;">
+                </div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:32px;">
+                <button class="secondary-btn" onclick="sendInventoryRequest('Portal Notification')">Send Portal Notification</button>
+                <button class="primary-btn" onclick="sendInventoryRequest('Email')"><i data-lucide="mail" style="width:16px;height:16px;"></i> Send Email</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

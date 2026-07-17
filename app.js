@@ -302,3 +302,38 @@ document.addEventListener('DOMContentLoaded', () => {
         renderHeatmap(); // Initial render
     }
 });
+
+// --- Inventory Request Modal Logic ---
+window.openRequestModal = function(distributorName) {
+    document.getElementById('request-distributor-name').textContent = distributorName;
+    document.getElementById('request-modal').classList.remove('hidden');
+};
+
+window.sendInventoryRequest = function(type) {
+    document.getElementById('request-modal').classList.add('hidden');
+    // Using the existing showToast function from app.js
+    if (typeof window.showToast === 'function') {
+        window.showToast(`Inventory Request Sent via ${type}`);
+    } else {
+        alert(`Inventory Request Sent via ${type}`);
+    }
+};
+
+// --- Workflow Tabs Logic ---
+window.switchMatchingTab = function(tabId) {
+    // Update tab styling
+    document.querySelectorAll('.workflow-tab').forEach(tab => tab.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+
+    // Update table body
+    document.getElementById('tbody-new').classList.add('hidden');
+    document.getElementById('tbody-awaiting').classList.add('hidden');
+    document.getElementById('tbody-completed').classList.add('hidden');
+    
+    document.getElementById('tbody-' + tabId).classList.remove('hidden');
+    
+    // Re-initialize lucide icons for the newly visible section
+    if (window.lucide) {
+        window.lucide.createIcons();
+    }
+};
