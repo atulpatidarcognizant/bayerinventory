@@ -289,147 +289,147 @@
                             <tr>
                                 <th>Distributor SKU</th>
                                 <th>Product Description</th>
-                                <th>AI Suggested Bayer Product</th>
-                                <th>Confidence Score</th>
+                                <th>Bayer Product (Suggested)</th>
+                                <th>Confidence</th>
                                 <th>AI Reasoning</th>
-                                <th>KAM Actions</th>
+                                <th style="text-align: right;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>RND-001</strong></td>
-                                <td><span class="text-sm text-secondary">Roundup WeatherMAX 10L</span></td>
-                                <td class="bayer-match-cell">
-                                    <span class="match-name font-medium">Roundup WeatherMAX® Herbicide</span>
+                                <td class="font-medium">RND-001</td>
+                                <td class="text-secondary text-sm">Roundup WeatherMAX 10L</td>
+                                <td class="bayer-match-cell font-medium">
+                                    <span class="match-name">Roundup WeatherMAX® Herbicide</span>
                                 </td>
                                 <td><span class="badge badge-high">98% High</span></td>
-                                <td class="ai-reason-cell" style="max-width: 200px;">
-                                    <p class="text-xs text-secondary">Exact name match. Pack size harmonized to standard.</p>
-                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">AI recommendation overridden by KAM.</span></div>
+                                <td class="ai-reason-cell">
+                                    <span class="text-xs text-secondary">Exact name match. Pack size harmonized.</span>
+                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">Overridden by KAM</span></div>
                                 </td>
-                                <td class="actions complex-actions" style="display:flex;gap:4px;flex-wrap:wrap;max-width:140px;">
-                                    <button class="secondary-btn btn-sm text-green w-100" onclick="approveMapping(this)"><i data-lucide="check" style="width:14px;"></i> Approve</button>
-                                    <button class="secondary-btn btn-sm text-blue w-100" onclick="openProductModal(this)"><i data-lucide="search" style="width:14px;"></i> Alternate</button>
-                                    <button class="secondary-btn btn-sm text-red w-100" onclick="markNoEquivalent(this)"><i data-lucide="slash" style="width:14px;"></i> No Match</button>
+                                <td class="actions" style="text-align: right;">
+                                    <button class="btn btn-icon text-green tooltip" data-tip="Approve Mapping" onclick="approveMapping(this)"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-blue tooltip" data-tip="Select Alternate Bayer Product" onclick="openProductModal(this)"><i data-lucide="search"></i></button>
+                                    <button class="btn btn-icon text-red tooltip" data-tip="Mark No Equivalent" onclick="markNoEquivalent(this)"><i data-lucide="slash"></i></button>
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>DECIS-X-1</strong></td>
-                                <td><span class="text-sm text-secondary">Decis Expert Insect 5L</span></td>
-                                <td class="bayer-match-cell">
-                                    <span class="match-name font-medium">Decis® Expert Insecticide</span>
+                                <td class="font-medium">DECIS-X-1</td>
+                                <td class="text-secondary text-sm">Decis Expert Insect 5L</td>
+                                <td class="bayer-match-cell font-medium">
+                                    <span class="match-name">Decis® Expert Insecticide</span>
                                 </td>
                                 <td><span class="badge badge-high">96% High</span></td>
-                                <td class="ai-reason-cell" style="max-width: 200px;">
-                                    <p class="text-xs text-secondary">Strong brand correlation. Standard pack size.</p>
-                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">AI recommendation overridden by KAM.</span></div>
+                                <td class="ai-reason-cell">
+                                    <span class="text-xs text-secondary">Strong brand correlation. Standard pack size.</span>
+                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">Overridden by KAM</span></div>
                                 </td>
-                                <td class="actions complex-actions" style="display:flex;gap:4px;flex-wrap:wrap;max-width:140px;">
-                                    <button class="secondary-btn btn-sm text-green w-100" onclick="approveMapping(this)"><i data-lucide="check" style="width:14px;"></i> Approve</button>
-                                    <button class="secondary-btn btn-sm text-blue w-100" onclick="openProductModal(this)"><i data-lucide="search" style="width:14px;"></i> Alternate</button>
-                                    <button class="secondary-btn btn-sm text-red w-100" onclick="markNoEquivalent(this)"><i data-lucide="slash" style="width:14px;"></i> No Match</button>
+                                <td class="actions" style="text-align: right;">
+                                    <button class="btn btn-icon text-green tooltip" data-tip="Approve Mapping" onclick="approveMapping(this)"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-blue tooltip" data-tip="Select Alternate Bayer Product" onclick="openProductModal(this)"><i data-lucide="search"></i></button>
+                                    <button class="btn btn-icon text-red tooltip" data-tip="Mark No Equivalent" onclick="markNoEquivalent(this)"><i data-lucide="slash"></i></button>
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>LUNA-EXP-2</strong></td>
-                                <td><span class="text-sm text-secondary">Luna Exp Fungicide 1L</span></td>
-                                <td class="bayer-match-cell">
-                                    <span class="match-name font-medium">Luna® Experience Fungicide</span>
+                                <td class="font-medium">LUNA-EXP-2</td>
+                                <td class="text-secondary text-sm">Luna Exp Fungicide 1L</td>
+                                <td class="bayer-match-cell font-medium">
+                                    <span class="match-name">Luna® Experience Fungicide</span>
                                 </td>
                                 <td><span class="badge badge-high">95% High</span></td>
-                                <td class="ai-reason-cell" style="max-width: 200px;">
-                                    <p class="text-xs text-secondary">High token similarity. Category matches fungicide.</p>
-                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">AI recommendation overridden by KAM.</span></div>
+                                <td class="ai-reason-cell">
+                                    <span class="text-xs text-secondary">High token similarity. Category matches.</span>
+                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">Overridden by KAM</span></div>
                                 </td>
-                                <td class="actions complex-actions" style="display:flex;gap:4px;flex-wrap:wrap;max-width:140px;">
-                                    <button class="secondary-btn btn-sm text-green w-100" onclick="approveMapping(this)"><i data-lucide="check" style="width:14px;"></i> Approve</button>
-                                    <button class="secondary-btn btn-sm text-blue w-100" onclick="openProductModal(this)"><i data-lucide="search" style="width:14px;"></i> Alternate</button>
-                                    <button class="secondary-btn btn-sm text-red w-100" onclick="markNoEquivalent(this)"><i data-lucide="slash" style="width:14px;"></i> No Match</button>
+                                <td class="actions" style="text-align: right;">
+                                    <button class="btn btn-icon text-green tooltip" data-tip="Approve Mapping" onclick="approveMapping(this)"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-blue tooltip" data-tip="Select Alternate Bayer Product" onclick="openProductModal(this)"><i data-lucide="search"></i></button>
+                                    <button class="btn btn-icon text-red tooltip" data-tip="Mark No Equivalent" onclick="markNoEquivalent(this)"><i data-lucide="slash"></i></button>
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>SIV-PRIME</strong></td>
-                                <td><span class="text-sm text-secondary">Sivanto Prime (Pack 12x1L)</span></td>
-                                <td class="bayer-match-cell">
-                                    <span class="match-name font-medium">Sivanto® Prime Insecticide</span>
+                                <td class="font-medium">SIV-PRIME</td>
+                                <td class="text-secondary text-sm">Sivanto Prime (Pack 12x1L)</td>
+                                <td class="bayer-match-cell font-medium">
+                                    <span class="match-name">Sivanto® Prime Insecticide</span>
                                 </td>
                                 <td><span class="badge badge-high">92% High</span></td>
-                                <td class="ai-reason-cell" style="max-width: 200px;">
-                                    <p class="text-xs text-secondary">Pack size anomaly normalized by AI parser.</p>
-                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">AI recommendation overridden by KAM.</span></div>
+                                <td class="ai-reason-cell">
+                                    <span class="text-xs text-secondary">Pack size anomaly normalized by AI.</span>
+                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">Overridden by KAM</span></div>
                                 </td>
-                                <td class="actions complex-actions" style="display:flex;gap:4px;flex-wrap:wrap;max-width:140px;">
-                                    <button class="secondary-btn btn-sm text-green w-100" onclick="approveMapping(this)"><i data-lucide="check" style="width:14px;"></i> Approve</button>
-                                    <button class="secondary-btn btn-sm text-blue w-100" onclick="openProductModal(this)"><i data-lucide="search" style="width:14px;"></i> Alternate</button>
-                                    <button class="secondary-btn btn-sm text-red w-100" onclick="markNoEquivalent(this)"><i data-lucide="slash" style="width:14px;"></i> No Match</button>
+                                <td class="actions" style="text-align: right;">
+                                    <button class="btn btn-icon text-green tooltip" data-tip="Approve Mapping" onclick="approveMapping(this)"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-blue tooltip" data-tip="Select Alternate Bayer Product" onclick="openProductModal(this)"><i data-lucide="search"></i></button>
+                                    <button class="btn btn-icon text-red tooltip" data-tip="Mark No Equivalent" onclick="markNoEquivalent(this)"><i data-lucide="slash"></i></button>
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>MOV-150-OD</strong></td>
-                                <td><span class="text-sm text-secondary">Movento 150 OD 5L</span></td>
-                                <td class="bayer-match-cell">
-                                    <span class="match-name font-medium">Movento® Insecticide</span>
+                                <td class="font-medium">MOV-150-OD</td>
+                                <td class="text-secondary text-sm">Movento 150 OD 5L</td>
+                                <td class="bayer-match-cell font-medium">
+                                    <span class="match-name">Movento® Insecticide</span>
                                 </td>
                                 <td><span class="badge badge-med">82% Medium</span></td>
-                                <td class="ai-reason-cell" style="max-width: 200px;">
-                                    <p class="text-xs text-secondary">Formulation variants detected. Review recommended.</p>
-                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">AI recommendation overridden by KAM.</span></div>
+                                <td class="ai-reason-cell">
+                                    <span class="text-xs text-secondary">Formulation variants detected. Review.</span>
+                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">Overridden by KAM</span></div>
                                 </td>
-                                <td class="actions complex-actions" style="display:flex;gap:4px;flex-wrap:wrap;max-width:140px;">
-                                    <button class="secondary-btn btn-sm text-green w-100" onclick="approveMapping(this)"><i data-lucide="check" style="width:14px;"></i> Approve</button>
-                                    <button class="secondary-btn btn-sm text-blue w-100" onclick="openProductModal(this)"><i data-lucide="search" style="width:14px;"></i> Alternate</button>
-                                    <button class="secondary-btn btn-sm text-red w-100" onclick="markNoEquivalent(this)"><i data-lucide="slash" style="width:14px;"></i> No Match</button>
+                                <td class="actions" style="text-align: right;">
+                                    <button class="btn btn-icon text-green tooltip" data-tip="Approve Mapping" onclick="approveMapping(this)"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-blue tooltip" data-tip="Select Alternate Bayer Product" onclick="openProductModal(this)"><i data-lucide="search"></i></button>
+                                    <button class="btn btn-icon text-red tooltip" data-tip="Mark No Equivalent" onclick="markNoEquivalent(this)"><i data-lucide="slash"></i></button>
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>VELUM-PR</strong></td>
-                                <td><span class="text-sm text-secondary">Velum Prime Nem 2.5L</span></td>
-                                <td class="bayer-match-cell">
-                                    <span class="match-name font-medium">Velum® Prime Nematicide</span>
+                                <td class="font-medium">VELUM-PR</td>
+                                <td class="text-secondary text-sm">Velum Prime Nem 2.5L</td>
+                                <td class="bayer-match-cell font-medium">
+                                    <span class="match-name">Velum® Prime Nematicide</span>
                                 </td>
                                 <td><span class="badge badge-med">78% Medium</span></td>
-                                <td class="ai-reason-cell" style="max-width: 200px;">
-                                    <p class="text-xs text-secondary">Non-standard pack size format detected.</p>
-                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">AI recommendation overridden by KAM.</span></div>
+                                <td class="ai-reason-cell">
+                                    <span class="text-xs text-secondary">Non-standard pack size format detected.</span>
+                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">Overridden by KAM</span></div>
                                 </td>
-                                <td class="actions complex-actions" style="display:flex;gap:4px;flex-wrap:wrap;max-width:140px;">
-                                    <button class="secondary-btn btn-sm text-green w-100" onclick="approveMapping(this)"><i data-lucide="check" style="width:14px;"></i> Approve</button>
-                                    <button class="secondary-btn btn-sm text-blue w-100" onclick="openProductModal(this)"><i data-lucide="search" style="width:14px;"></i> Alternate</button>
-                                    <button class="secondary-btn btn-sm text-red w-100" onclick="markNoEquivalent(this)"><i data-lucide="slash" style="width:14px;"></i> No Match</button>
+                                <td class="actions" style="text-align: right;">
+                                    <button class="btn btn-icon text-green tooltip" data-tip="Approve Mapping" onclick="approveMapping(this)"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-blue tooltip" data-tip="Select Alternate Bayer Product" onclick="openProductModal(this)"><i data-lucide="search"></i></button>
+                                    <button class="btn btn-icon text-red tooltip" data-tip="Mark No Equivalent" onclick="markNoEquivalent(this)"><i data-lucide="slash"></i></button>
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>NATIV-22</strong></td>
-                                <td><span class="text-sm text-secondary">Nat Fungicide 2.5G</span></td>
-                                <td class="bayer-match-cell">
-                                    <span class="match-name font-medium">Nativo® Fungicide</span>
+                                <td class="font-medium">NATIV-22</td>
+                                <td class="text-secondary text-sm">Nat Fungicide 2.5G</td>
+                                <td class="bayer-match-cell font-medium">
+                                    <span class="match-name">Nativo® Fungicide</span>
                                 </td>
                                 <td><span class="badge badge-med">75% Medium</span></td>
-                                <td class="ai-reason-cell" style="max-width: 200px;">
-                                    <p class="text-xs text-secondary">Fuzzy match on abbreviated product name.</p>
-                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">AI recommendation overridden by KAM.</span></div>
+                                <td class="ai-reason-cell">
+                                    <span class="text-xs text-secondary">Fuzzy match on abbreviated product name.</span>
+                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">Overridden by KAM</span></div>
                                 </td>
-                                <td class="actions complex-actions" style="display:flex;gap:4px;flex-wrap:wrap;max-width:140px;">
-                                    <button class="secondary-btn btn-sm text-green w-100" onclick="approveMapping(this)"><i data-lucide="check" style="width:14px;"></i> Approve</button>
-                                    <button class="secondary-btn btn-sm text-blue w-100" onclick="openProductModal(this)"><i data-lucide="search" style="width:14px;"></i> Alternate</button>
-                                    <button class="secondary-btn btn-sm text-red w-100" onclick="markNoEquivalent(this)"><i data-lucide="slash" style="width:14px;"></i> No Match</button>
+                                <td class="actions" style="text-align: right;">
+                                    <button class="btn btn-icon text-green tooltip" data-tip="Approve Mapping" onclick="approveMapping(this)"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-blue tooltip" data-tip="Select Alternate Bayer Product" onclick="openProductModal(this)"><i data-lucide="search"></i></button>
+                                    <button class="btn btn-icon text-red tooltip" data-tip="Mark No Equivalent" onclick="markNoEquivalent(this)"><i data-lucide="slash"></i></button>
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>UNK-99</strong></td>
-                                <td><span class="text-sm text-secondary">Generic Crop Saver</span></td>
-                                <td class="bayer-match-cell">
-                                    <span class="match-name font-medium text-secondary">No Bayer Equivalent</span>
+                                <td class="font-medium">UNK-99</td>
+                                <td class="text-secondary text-sm">Generic Crop Saver</td>
+                                <td class="bayer-match-cell font-medium">
+                                    <span class="match-name text-secondary">No Bayer Equivalent</span>
                                 </td>
                                 <td><span class="badge badge-low">12% Low</span></td>
-                                <td class="ai-reason-cell" style="max-width: 200px;">
-                                    <p class="text-xs text-secondary">No matching active ingredients found in database.</p>
-                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">AI recommendation overridden by KAM.</span></div>
+                                <td class="ai-reason-cell">
+                                    <span class="text-xs text-secondary">No matching active ingredients found.</span>
+                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">Overridden by KAM</span></div>
                                 </td>
-                                <td class="actions complex-actions" style="display:flex;gap:4px;flex-wrap:wrap;max-width:140px;">
-                                    <button class="secondary-btn btn-sm text-green w-100" onclick="approveMapping(this)"><i data-lucide="check" style="width:14px;"></i> Approve</button>
-                                    <button class="secondary-btn btn-sm text-blue w-100" onclick="openProductModal(this)"><i data-lucide="search" style="width:14px;"></i> Alternate</button>
-                                    <button class="secondary-btn btn-sm text-red w-100" onclick="markNoEquivalent(this)"><i data-lucide="slash" style="width:14px;"></i> No Match</button>
+                                <td class="actions" style="text-align: right;">
+                                    <button class="btn btn-icon text-green tooltip" data-tip="Approve Mapping" onclick="approveMapping(this)"><i data-lucide="check"></i></button>
+                                    <button class="btn btn-icon text-blue tooltip" data-tip="Select Alternate Bayer Product" onclick="openProductModal(this)"><i data-lucide="search"></i></button>
+                                    <button class="btn btn-icon text-red tooltip" data-tip="Mark No Equivalent" onclick="markNoEquivalent(this)"><i data-lucide="slash"></i></button>
                                 </td>
                             </tr>
                         </tbody>
