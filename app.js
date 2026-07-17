@@ -93,10 +93,72 @@ document.addEventListener('DOMContentLoaded', () => {
 
         btnUpload.addEventListener('click', triggerUpload);
         
-        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
-        dropZone.addEventListener('dragleave', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); });
-        dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); triggerUpload(); });
+        // dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        // dropZone.addEventListener('dragleave', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); });
+        // dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); triggerUpload(); });
     }
+
+    // --- AI Product Matching Interactions ---
+    let currentRowContext = null;
+
+    window.approveMapping = function(btn) {
+        const row = btn.closest('tr');
+        const reasonCell = row.querySelector('.ai-reason-cell');
+        // If it wasn't manually overridden, we just mark it approved
+        if(!reasonCell.querySelector('.badge').textContent.includes('KAM Approved')) {
+            showToast('Mapping saved. Future uploads from this distributor will automatically use this Bayer product.');
+            const actionsCell = row.querySelector('.actions');
+            actionsCell.innerHTML = '<span class="text-sm text-green flex-align"><i data-lucide="check" class="mr-1"></i> Approved</span>';
+            lucide.createIcons();
+        }
+    };
+
+    window.markNoEquivalent = function(btn) {
+        const row = btn.closest('tr');
+        row.querySelector('.match-name').textContent = 'No Bayer Equivalent';
+        row.querySelector('.match-name').classList.add('text-secondary');
+        showToast('Mapping marked as No Equivalent.');
+        const actionsCell = row.querySelector('.actions');
+        actionsCell.innerHTML = '<span class="text-sm text-red flex-align"><i data-lucide="slash" class="mr-1"></i> No Equivalent</span>';
+        lucide.createIcons();
+    };
+
+    window.openProductModal = function(btn) {
+        currentRowContext = btn.closest('tr');
+        document.getElementById('product-search-modal').classList.remove('hidden');
+    };
+
+    window.confirmProductSelection = function(productName) {
+        if(currentRowContext) {
+            // Update the suggested product name
+            currentRowContext.querySelector('.match-name').innerHTML = `<strong>${productName}</strong>`;
+            
+            // Update the confidence badge to "KAM Approved" and add "Manual Selection by KAM"
+            const reasonCell = currentRowContext.querySelector('.ai-reason-cell');
+            const badge = reasonCell.querySelector('.badge');
+            badge.className = 'badge badge-med mb-1';
+            badge.innerHTML = '<i data-lucide="user" class="inline-icon"></i> KAM Approved';
+            
+            const manualNote = document.createElement('div');
+            manualNote.className = 'text-xs text-blue mt-1 font-medium';
+            manualNote.textContent = 'Manual Selection by KAM';
+            reasonCell.insertBefore(manualNote, reasonCell.children[1]);
+
+            // Show override note
+            const overrideNote = reasonCell.querySelector('.override-note');
+            if(overrideNote) overrideNote.classList.remove('hidden');
+
+            // Show success toast
+            showToast('Mapping saved. Future uploads from this distributor will automatically use this Bayer product.');
+            
+            // Update actions to show approved status
+            const actionsCell = currentRowContext.querySelector('.actions');
+            actionsCell.innerHTML = '<span class="text-sm text-green flex-align"><i data-lucide="check" class="mr-1"></i> Confirmed</span>';
+            
+            document.getElementById('product-search-modal').classList.add('hidden');
+            lucide.createIcons();
+        }
+    };
 
     // --- AI Copilot Chat Logic ---
     window.sendPrompt = function(text) {

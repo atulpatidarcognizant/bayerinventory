@@ -287,92 +287,68 @@
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>Distributor SKU</th>
-                                <th>Description</th>
+                                <th>Distributor Data</th>
                                 <th>AI Suggested Bayer Product</th>
-                                <th>Confidence</th>
-                                <th>Actions</th>
+                                <th>Confidence & Reasoning</th>
+                                <th>KAM Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>RND-001</td>
-                                <td>Roundup WeatherMAX 10L</td>
-                                <td>Roundup WeatherMAX® Herbicide</td>
-                                <td><span class="badge badge-high">98% High</span></td>
+                                <td>
+                                    <strong>RND-001</strong><br>
+                                    <span class="text-sm text-secondary">Roundup WeatherMAX 10L</span>
+                                </td>
+                                <td class="bayer-match-cell">
+                                    <span class="match-name">Roundup WeatherMAX® Herbicide</span>
+                                </td>
+                                <td class="ai-reason-cell">
+                                    <span class="badge badge-high mb-1">98% High</span>
+                                    <p class="text-xs text-secondary mt-1">Exact name match. Pack size harmonized to standard.</p>
+                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">AI recommendation overridden by KAM.</span></div>
+                                </td>
                                 <td class="actions">
-                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
-                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
+                                    <button class="btn btn-icon text-green tooltip" data-tip="Approve Mapping" onclick="approveMapping(this)"><i data-lucide="check-circle"></i></button>
+                                    <button class="btn btn-icon text-blue tooltip" data-tip="Select Different Bayer Product" onclick="openProductModal(this)"><i data-lucide="search"></i></button>
+                                    <button class="btn btn-icon text-red tooltip" data-tip="Mark No Equivalent" onclick="markNoEquivalent(this)"><i data-lucide="slash"></i></button>
                                 </td>
                             </tr>
                             <tr>
-                                <td>DECIS-X-1</td>
-                                <td>Decis Expert Insect 5L</td>
-                                <td>Decis® Expert Insecticide</td>
-                                <td><span class="badge badge-high">96% High</span></td>
+                                <td>
+                                    <strong>DECIS-X-1</strong><br>
+                                    <span class="text-sm text-secondary">Decis Expert Insect 5L</span>
+                                </td>
+                                <td class="bayer-match-cell">
+                                    <span class="match-name">Decis® Expert Insecticide</span>
+                                </td>
+                                <td class="ai-reason-cell">
+                                    <span class="badge badge-high mb-1">96% High</span>
+                                    <p class="text-xs text-secondary mt-1">Strong brand correlation. Standard pack size.</p>
+                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">AI recommendation overridden by KAM.</span></div>
+                                </td>
                                 <td class="actions">
-                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
-                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
+                                    <button class="btn btn-icon text-green tooltip" data-tip="Approve Mapping" onclick="approveMapping(this)"><i data-lucide="check-circle"></i></button>
+                                    <button class="btn btn-icon text-blue tooltip" data-tip="Select Different Bayer Product" onclick="openProductModal(this)"><i data-lucide="search"></i></button>
+                                    <button class="btn btn-icon text-red tooltip" data-tip="Mark No Equivalent" onclick="markNoEquivalent(this)"><i data-lucide="slash"></i></button>
                                 </td>
                             </tr>
                             <tr>
-                                <td>LUNA-EXP-2</td>
-                                <td>Luna Exp Fungicide 1L</td>
-                                <td>Luna® Experience Fungicide</td>
-                                <td><span class="badge badge-high">95% High</span></td>
-                                <td class="actions">
-                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
-                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
+                                <td>
+                                    <strong>MOV-150-OD</strong><br>
+                                    <span class="text-sm text-secondary">Movento 150 OD 5L</span>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>SIV-PRIME</td>
-                                <td>Sivanto Prime (Pack 12x1L)</td>
-                                <td>Sivanto® Prime Insecticide</td>
-                                <td><span class="badge badge-high">92% High</span></td>
-                                <td class="actions">
-                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
-                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
+                                <td class="bayer-match-cell">
+                                    <span class="match-name">Movento® Insecticide</span>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>MOV-150-OD</td>
-                                <td>Movento 150 OD 5L</td>
-                                <td>Movento® Insecticide</td>
-                                <td><span class="badge badge-med">82% Medium</span></td>
-                                <td class="actions">
-                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
-                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
+                                <td class="ai-reason-cell">
+                                    <span class="badge badge-med mb-1">82% Medium</span>
+                                    <p class="text-xs text-secondary mt-1">Formulation variants detected. Review recommended.</p>
+                                    <div class="override-note hidden mt-1"><span class="text-xs text-yellow">AI recommendation overridden by KAM.</span></div>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>VELUM-PR</td>
-                                <td>Velum Prime Nem 2.5L</td>
-                                <td>Velum® Prime Nematicide</td>
-                                <td><span class="badge badge-med">78% Medium</span></td>
                                 <td class="actions">
-                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
-                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>NATIV-22</td>
-                                <td>Nat Fungicide 2.5G</td>
-                                <td>Nativo® Fungicide</td>
-                                <td><span class="badge badge-med">75% Medium</span></td>
-                                <td class="actions">
-                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
-                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>UNK-99</td>
-                                <td>Generic Crop Saver (No Brand)</td>
-                                <td>No Bayer Equivalent</td>
-                                <td><span class="badge badge-low">12% Low</span></td>
-                                <td class="actions">
-                                    <button class="btn btn-icon text-green" onclick="showToast('Mapping approved')"><i data-lucide="check"></i></button>
-                                    <button class="btn btn-icon text-red" onclick="showToast('Mapping rejected')"><i data-lucide="x"></i></button>
+                                    <button class="btn btn-icon text-green tooltip" data-tip="Approve Mapping" onclick="approveMapping(this)"><i data-lucide="check-circle"></i></button>
+                                    <button class="btn btn-icon text-blue tooltip" data-tip="Select Different Bayer Product" onclick="openProductModal(this)"><i data-lucide="search"></i></button>
+                                    <button class="btn btn-icon text-red tooltip" data-tip="Mark No Equivalent" onclick="markNoEquivalent(this)"><i data-lucide="slash"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -621,6 +597,60 @@
                 <button class="copilot-send-btn" onclick="sendPrompt(document.getElementById('chat-input').value)"><i data-lucide="send"></i></button>
             </div>
         </aside>
+    </div>
+    
+    <!-- Bayer Product Search Modal -->
+    <div id="product-search-modal" class="modal-overlay hidden">
+        <div class="modal-content dashboard-card">
+            <div class="flex-align space-between mb-4 border-bottom pb-2">
+                <h3>Select Alternate Bayer Product</h3>
+                <button class="btn btn-icon" onclick="document.getElementById('product-search-modal').classList.add('hidden')"><i data-lucide="x"></i></button>
+            </div>
+            <div class="search-bar-container w-100 mb-4" style="border:1px solid #CBD5E1;">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" placeholder="Search by Name, SKU, Brand, or Category..." id="modal-search" style="width:100%;">
+            </div>
+            <div class="table-container" style="max-height:300px;overflow-y:auto;">
+                <table class="data-table minimal" id="modal-product-table">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>SKU ID</th>
+                            <th>Brand</th>
+                            <th>Pack Size</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nativo® Fungicide</td>
+                            <td>BAY-NAT-002</td>
+                            <td>Nativo</td>
+                            <td>5G</td>
+                            <td>Fungicide</td>
+                            <td><button class="primary-btn btn-sm" onclick="confirmProductSelection('Nativo® Fungicide (BAY-NAT-002)')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>Flint® Extra</td>
+                            <td>BAY-FLI-100</td>
+                            <td>Flint</td>
+                            <td>10L</td>
+                            <td>Fungicide</td>
+                            <td><button class="primary-btn btn-sm" onclick="confirmProductSelection('Flint® Extra (BAY-FLI-100)')">Select</button></td>
+                        </tr>
+                        <tr>
+                            <td>Movento® Energy</td>
+                            <td>BAY-MOV-EN</td>
+                            <td>Movento</td>
+                            <td>5L</td>
+                            <td>Insecticide</td>
+                            <td><button class="primary-btn btn-sm" onclick="confirmProductSelection('Movento® Energy (BAY-MOV-EN)')">Select</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     
     <script src="app.js"></script>
