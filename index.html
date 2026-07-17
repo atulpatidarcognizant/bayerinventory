@@ -440,10 +440,12 @@
                                     <span class="text-xs text-secondary">No matching active ingredients found.</span>
                                     <div class="override-note hidden mt-1"><span class="text-xs text-yellow">Overridden by KAM</span></div>
                                 </td>
-                                <td class="actions" style="text-align: right;">
-                                    <button class="btn btn-icon text-green tooltip" data-tip="Approve Mapping" onclick="approveMapping(this)"><i data-lucide="check"></i></button>
-                                    <button class="btn btn-icon text-blue tooltip" data-tip="Select Alternate Bayer Product" onclick="openProductModal(this)"><i data-lucide="search"></i></button>
-                                    <button class="btn btn-icon text-red tooltip" data-tip="Mark No Equivalent" onclick="markNoEquivalent(this)"><i data-lucide="slash"></i></button>
+                                <td class="actions">
+                                    <div style="display: flex; gap: 8px; justify-content: flex-end;">
+                                        <button class="btn btn-icon text-green" onclick="approveMapping(this)" style="display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600;"><i data-lucide="check" style="width:14px;height:14px;"></i> Approve</button>
+                                        <button class="btn btn-icon text-blue" onclick="openProductModal(this)" style="display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600;"><i data-lucide="search" style="width:14px;height:14px;"></i> Alternate</button>
+                                        <button class="btn btn-icon text-red" onclick="markNoEquivalent(this)" style="display:flex; align-items:center; gap:4px; font-size:12px; font-weight:600;"><i data-lucide="slash" style="width:14px;height:14px;"></i> No Match</button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
