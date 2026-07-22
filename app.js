@@ -32,9 +32,43 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = item.getAttribute('data-target');
             document.getElementById(targetId).classList.add('active');
             
+            // Hide Copilot Panel on Workflow and Inventory screens
+            const copilotPanel = document.querySelector('.copilot-panel');
+            if (copilotPanel) {
+                if (targetId === 'workflow' || targetId === 'inventory') {
+                    copilotPanel.style.display = 'none';
+                } else {
+                    copilotPanel.style.display = 'flex';
+                }
+            }
+            
+            lucide.createIcons();
             lucide.createIcons();
         });
     });
+
+    // --- Helper to switch screens programmatically ---
+    window.switchScreen = function(targetId) {
+        navItems.forEach(nav => nav.classList.remove('active'));
+        screens.forEach(screen => screen.classList.remove('active'));
+        
+        const targetNav = document.querySelector(`.nav-item[data-target="${targetId}"]`);
+        if (targetNav) targetNav.classList.add('active');
+        
+        const targetScreen = document.getElementById(targetId);
+        if (targetScreen) targetScreen.classList.add('active');
+        
+        const copilotPanel = document.querySelector('.copilot-panel');
+        if (copilotPanel) {
+            if (targetId === 'workflow' || targetId === 'inventory') {
+                copilotPanel.style.display = 'none';
+            } else {
+                copilotPanel.style.display = 'flex';
+            }
+        }
+        lucide.createIcons();
+        window.scrollTo(0,0);
+    };
 
     // --- Role Toggling Logic ---
     const btnRegional = document.getElementById('btn-role-regional');
@@ -56,10 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
         btnKAM.addEventListener('click', () => {
             btnKAM.classList.add('active');
             btnRegional.classList.remove('active');
-            profileAvatar.textContent = 'KAM';
+            profileAvatar.textContent = 'AM';
             profileName.textContent = 'Key Account Manager';
             profileRole.textContent = 'Bayer Crop Science';
-            showToast('Switched to KAM Review view.');
+            showToast('Switched to Account Manager Review view.');
         });
     }
 
@@ -83,10 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     steps[currentStep].classList.add('active');
                 } else {
                     clearInterval(interval);
-                    showToast('AI Pipeline complete. 420 products mapped successfully.');
+                    showToast('AI Pipeline complete.');
                     setTimeout(() => {
-                        document.querySelector('[data-target="matching"]').click();
-                    }, 1000);
+                        document.getElementById('processing-results').classList.remove('hidden');
+                    }, 500);
                 }
             }, 800);
         };
@@ -105,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const row = btn.closest('tr');
         const reasonCell = row.querySelector('.ai-reason-cell');
         // If it wasn't manually overridden, we just mark it approved
-        if(!reasonCell.querySelector('.badge').textContent.includes('KAM Approved')) {
+        if(!reasonCell.querySelector('.badge').textContent.includes('Account Manager Approved')) {
             showToast('Mapping saved. Future uploads from this distributor will automatically use this Bayer product.');
             const actionsCell = row.querySelector('.actions');
             actionsCell.innerHTML = '<span class="text-sm text-green flex-align"><i data-lucide="check" class="mr-1"></i> Approved</span>';
@@ -133,15 +167,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // Update the suggested product name
             currentRowContext.querySelector('.match-name').innerHTML = `<strong>${productName}</strong>`;
             
-            // Update the confidence badge to "KAM Approved" and add "Manual Selection by KAM"
+            // Update the confidence badge to "Account Manager Approved" and add "Manual Selection by Account Manager"
             const reasonCell = currentRowContext.querySelector('.ai-reason-cell');
             const badge = reasonCell.querySelector('.badge');
             badge.className = 'badge badge-med mb-1';
-            badge.innerHTML = '<i data-lucide="user" class="inline-icon"></i> KAM Approved';
+            badge.innerHTML = '<i data-lucide="user" class="inline-icon"></i> Account Manager Approved';
             
             const manualNote = document.createElement('div');
             manualNote.className = 'text-xs text-blue mt-1 font-medium';
-            manualNote.textContent = 'Manual Selection by KAM';
+            manualNote.textContent = 'Manual Selection by Account Manager';
             reasonCell.insertBefore(manualNote, reasonCell.children[1]);
 
             // Show override note
@@ -240,8 +274,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderHeatmap = () => {
         if (!heatmapLayer) return;
-        const country = heatmapCountry.value;
-        const product = heatmapProduct.value;
+        // Use default 'all' region and 'all' product
+        const country = heatmapCountry ? heatmapCountry.value : 'all';
+        const product = heatmapProduct ? heatmapProduct.value : 'all';
         
         heatmapLayer.innerHTML = ''; // Clear previous
         
@@ -307,11 +342,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    if(heatmapCountry && heatmapProduct) {
+    if (heatmapCountry) {
         heatmapCountry.addEventListener('change', renderHeatmap);
-        heatmapProduct.addEventListener('change', renderHeatmap);
-        renderHeatmap(); // Initial render
     }
+    if (heatmapProduct) {
+        heatmapProduct.addEventListener('change', renderHeatmap);
+    }
+    // Always render initially
+    renderHeatmap();
 });
 
 // --- Inventory Request Modal Logic ---
@@ -353,6 +391,10 @@ window.switchMatchingTab = function(tabId) {
 window.openAnalytics = function(viewType) {
     // Navigate to the inventory screen
     document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+    
+    // Ensure insights tab is active
+    if(window.switchInventoryTab) window.switchInventoryTab('insights');
+
     document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
     
     const inventoryNav = document.querySelector('.nav-item[data-target="inventory"]');
@@ -399,5 +441,30 @@ window.filterDistributorTable = function(filterType) {
         if (typeof window.showToast === 'function') {
             window.showToast(`Filtered table to show overdue distributors.`);
         }
+    }
+};
+
+
+window.switchInventoryTab = function(tabId) {
+    // hide all tabs
+    document.querySelectorAll('.inv-tab-content').forEach(tab => tab.classList.add('hidden'));
+    document.querySelectorAll('.workflow-tab').forEach(tab => tab.classList.remove('active'));
+    
+    // show selected tab
+    const targetTabContent = document.getElementById('inv-tab-' + tabId);
+    if (targetTabContent) {
+        targetTabContent.classList.remove('hidden');
+    }
+    
+    // set active class on clicked tab button
+    const tabs = document.querySelectorAll('.workflow-tabs .workflow-tab');
+    for (const t of tabs) {
+        if (t.textContent.toLowerCase().includes(tabId)) {
+            t.classList.add('active');
+        }
+    }
+    
+    if (window.lucide) {
+        window.lucide.createIcons();
     }
 };
