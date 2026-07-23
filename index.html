@@ -74,11 +74,11 @@
 
             <div class="sidebar-section-label">ORDERING & FULFILLMENT</div>
             <ul class="nav-menu">
-                <li class="nav-item" data-target="ai-recommendations">
+                <li class="nav-item distributor-only" data-target="ai-recommendations">
                     <i data-lucide="zap" class="nav-icon"></i>
                     AI Recommendations & Schemes
                 </li>
-                <li class="nav-item" data-target="order-placement">
+                <li class="nav-item distributor-only" data-target="order-placement">
                     <i data-lucide="shopping-cart" class="nav-icon"></i>
                     Order Placement
                 </li>
@@ -92,26 +92,17 @@
                 </li>
             </ul>
 
-            <div class="sidebar-section-label">PARTNER ACTIONS</div>
-            <ul class="nav-menu">
+            <div class="sidebar-section-label kam-only">DISTRIBUTOR MANAGEMENT</div>
+            <ul class="nav-menu kam-only">
                 <li class="nav-item" data-target="upload">
                     <i data-lucide="upload-cloud" class="nav-icon"></i>
                     Distributor Uploads
                 </li>
-                <li class="nav-item" data-target="distributor-review">
-                    <i data-lucide="user-check" class="nav-icon"></i>
-                    Distributor Review
-                </li>
-            </ul>
-
-            <div class="sidebar-section-label">ACCOUNT MANAGER ACTIONS</div>
-            <ul class="nav-menu">
                 <li class="nav-item active" data-target="matching">
                     <i data-lucide="git-merge" class="nav-icon"></i>
                     AI Product Matching
                     <span class="nav-badge pending">8</span>
                 </li>
-
                 <li class="nav-item" data-target="workflow">
                     <i data-lucide="git-commit" class="nav-icon"></i>
                     Confirmation Workflow
@@ -120,19 +111,29 @@
 
             <div class="sidebar-section-label">INVENTORY</div>
             <ul class="nav-menu">
-                <li class="nav-item" data-target="inventory">
+                <li class="nav-item distributor-only" data-target="upload">
+                    <i data-lucide="upload-cloud" class="nav-icon"></i>
+                    Inventory Upload
+                </li>
+                <li class="nav-item distributor-only" data-target="matching">
+                    <i data-lucide="git-merge" class="nav-icon"></i>
+                    AI Product Matching
+                    <span class="nav-badge pending">8</span>
+                </li>
+                <li class="nav-item kam-only" data-target="inventory">
                     <i data-lucide="bar-chart-2" class="nav-icon"></i>
                     Inventory Visibility
                 </li>
             </ul>
 
-            <div class="sidebar-section-label">INTEGRATIONS & ANALYTICS</div>
+            <div class="sidebar-section-label kam-only">INTEGRATIONS & ANALYTICS</div>
+            <div class="sidebar-section-label distributor-only">INTEGRATIONS</div>
             <ul class="nav-menu">
                 <li class="nav-item" data-target="erp-integration">
                     <i data-lucide="server" class="nav-icon"></i>
                     ERP Integration
                 </li>
-                <li class="nav-item" data-target="learning">
+                <li class="nav-item kam-only" data-target="learning">
                     <i data-lucide="brain-circuit" class="nav-icon"></i>
                     AI Learning Center
                 </li>
