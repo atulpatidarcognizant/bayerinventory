@@ -2105,7 +2105,7 @@
                 <div id="om-queue-view">
                     
                     <!-- 1. Approval Queue Summary KPIs -->
-                    <div class="dashboard-grid" style="grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 24px;">
+                    <div class="dashboard-grid" style="grid-template-columns: repeat(5, 1fr); gap: 24px; margin-bottom: 24px;">
                         <div class="dashboard-card kpi-card">
                             <div class="kpi-icon"><i data-lucide="inbox"></i></div>
                             <div class="kpi-details">
@@ -2125,6 +2125,13 @@
                             <div class="kpi-details">
                                 <span class="kpi-label">Critical Orders</span>
                                 <span class="kpi-value text-red">3</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon" style="background:#E0E7FF; color:#4F46E5;"><i data-lucide="users"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Distributors Awaiting Review</span>
+                                <span class="kpi-value" style="color:#4338CA;">8</span>
                             </div>
                         </div>
                         <div class="dashboard-card kpi-card">
@@ -2152,6 +2159,13 @@
                     </div>
 
                     <!-- 3. Enhanced Distributor Cards -->
+                    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:16px;">
+                        <div>
+                            <h3 style="margin:0 0 4px 0; font-size:18px;">Top Distributors Requiring Approval</h3>
+                            <p style="margin:0; font-size:14px; color:var(--text-secondary);">Showing the 3 highest-priority distributors out of 8 awaiting review.</p>
+                        </div>
+                        <button class="secondary-btn btn-sm">View All Distributors (8)</button>
+                    </div>
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 24px;">
                         <!-- Distributor Card 1 -->
                         <div class="dashboard-card widget cursor-pointer" onclick="openOrderDrillDown('ABC Seeds', 5)" style="transition: transform 0.2s, box-shadow 0.2s; padding: 20px;">
