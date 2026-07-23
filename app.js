@@ -71,30 +71,37 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- Role Toggling Logic ---
-    const btnRegional = document.getElementById('btn-role-regional');
-    const btnKAM = document.getElementById('btn-role-kam');
+    const btnAccountManager = document.getElementById('btn-role-account-manager');
+    const btnDistributor = document.getElementById('btn-role-distributor');
     const profileAvatar = document.getElementById('profile-avatar');
     const profileName = document.getElementById('profile-name');
     const profileRole = document.getElementById('profile-role');
 
-    if(btnRegional && btnKAM) {
-        btnRegional.addEventListener('click', () => {
-            btnRegional.classList.add('active');
-            btnKAM.classList.remove('active');
-            profileAvatar.textContent = 'AP';
-            profileName.textContent = 'Atul Patidar';
-            profileRole.textContent = 'Regional Lead';
-            showToast('Switched to Regional Leadership view.');
+    if (btnAccountManager && btnDistributor) {
+        btnAccountManager.addEventListener('click', () => {
+            btnAccountManager.classList.add('active');
+            btnDistributor.classList.remove('active');
+            document.body.setAttribute('data-persona', 'account-manager');
+            profileAvatar.textContent = 'AM';
+            profileName.textContent = 'Sarah Jenkins';
+            profileRole.textContent = 'Account Manager';
+            if(window.showToast) window.showToast('Switched to Account Manager View.');
+            if(window.lucide) window.lucide.createIcons();
         });
         
-        btnKAM.addEventListener('click', () => {
-            btnKAM.classList.add('active');
-            btnRegional.classList.remove('active');
-            profileAvatar.textContent = 'AM';
-            profileName.textContent = 'Key Account Manager';
-            profileRole.textContent = 'Bayer Crop Science';
-            showToast('Switched to Account Manager Review view.');
+        btnDistributor.addEventListener('click', () => {
+            btnDistributor.classList.add('active');
+            btnAccountManager.classList.remove('active');
+            document.body.setAttribute('data-persona', 'distributor');
+            profileAvatar.textContent = 'DV';
+            profileName.textContent = 'Demo Distributor';
+            profileRole.textContent = 'Distributor Partner';
+            if(window.showToast) window.showToast('Switched to Distributor View.');
+            if(window.lucide) window.lucide.createIcons();
         });
+        
+        // Initialize default persona
+        document.body.setAttribute('data-persona', 'distributor');
     }
 
     // --- Upload Pipeline Simulation ---
