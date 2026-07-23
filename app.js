@@ -248,6 +248,113 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     };
 
+    // --- Territory Map Logic (Account Manager View) ---
+    const territoryLayer = document.getElementById('territory-layer');
+    const distributorTable = document.getElementById('distributor-table');
+
+    const distributorData = [
+        { id: 'abc', name: 'ABC Seeds', cx: 200, cy: 120, status: 'high' },
+        { id: 'greencrop', name: 'GreenCrop Distribution', cx: 350, cy: 180, status: 'high' },
+        { id: 'farmpro', name: 'FarmPro Solutions', cx: 500, cy: 100, status: 'med' },
+        { id: 'agromax', name: 'AgroMax Partners', cx: 620, cy: 160, status: 'low' },
+        { id: 'valleycrop', name: 'Valley Crop Services', cx: 280, cy: 260, status: 'high' },
+        { id: 'midwest', name: 'Midwest Ag Supply', cx: 480, cy: 280, status: 'med' }
+    ];
+
+    const renderTerritoryMap = () => {
+        if (!territoryLayer) return;
+        territoryLayer.innerHTML = '';
+
+        const colors = {
+            'high': 'rgba(16, 185, 129, 0.5)',
+            'med': 'rgba(245, 158, 11, 0.5)',
+            'low': 'rgba(239, 68, 68, 0.5)'
+        };
+        const strokeColors = {
+            'high': '#10B981',
+            'med': '#F59E0B',
+            'low': '#EF4444'
+        };
+
+        distributorData.forEach(dist => {
+            // Heat spot
+            const spot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            spot.setAttribute('cx', dist.cx);
+            spot.setAttribute('cy', dist.cy);
+            spot.setAttribute('r', dist.status === 'low' ? 35 : (dist.status === 'high' ? 45 : 30));
+            spot.setAttribute('fill', colors[dist.status]);
+            spot.setAttribute('filter', 'blur(10px)');
+            spot.setAttribute('id', `spot-${dist.id}`);
+            spot.style.transition = 'all 0.3s ease';
+            territoryLayer.appendChild(spot);
+
+            // Marker Group
+            const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            g.setAttribute('transform', `translate(${dist.cx}, ${dist.cy})`);
+            
+            const marker = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            marker.setAttribute('cx', 0);
+            marker.setAttribute('cy', 0);
+            marker.setAttribute('r', 6);
+            marker.setAttribute('fill', strokeColors[dist.status]);
+            marker.setAttribute('stroke', 'white');
+            marker.setAttribute('stroke-width', 2);
+            marker.setAttribute('id', `marker-${dist.id}`);
+            marker.style.transition = 'all 0.3s ease';
+            g.appendChild(marker);
+
+            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            text.setAttribute('x', 12);
+            text.setAttribute('y', 4);
+            text.setAttribute('font-size', '13');
+            text.setAttribute('font-weight', '600');
+            text.setAttribute('fill', '#1E293B');
+            text.textContent = dist.name;
+            g.appendChild(text);
+
+            territoryLayer.appendChild(g);
+        });
+    };
+
+    if (territoryLayer) {
+        renderTerritoryMap();
+
+        // Wire up hover events from table to map
+        if (distributorTable) {
+            const rows = distributorTable.querySelectorAll('tbody tr[data-dist-id]');
+            rows.forEach(row => {
+                row.addEventListener('mouseenter', () => {
+                    const id = row.getAttribute('data-dist-id');
+                    row.style.background = '#F1F5F9';
+                    
+                    // Highlight marker
+                    const marker = document.getElementById(`marker-${id}`);
+                    const spot = document.getElementById(`spot-${id}`);
+                    if (marker) marker.setAttribute('r', 8);
+                    if (spot) {
+                        const currentR = parseInt(spot.getAttribute('r'));
+                        spot.setAttribute('r', currentR + 10);
+                        spot.style.opacity = '0.8';
+                    }
+                });
+                row.addEventListener('mouseleave', () => {
+                    const id = row.getAttribute('data-dist-id');
+                    row.style.background = 'transparent';
+                    
+                    // Reset marker
+                    const marker = document.getElementById(`marker-${id}`);
+                    const spot = document.getElementById(`spot-${id}`);
+                    if (marker) marker.setAttribute('r', 6);
+                    if (spot) {
+                        const dist = distributorData.find(d => d.id === id);
+                        const originalR = dist.status === 'low' ? 35 : (dist.status === 'high' ? 45 : 30);
+                        spot.setAttribute('r', originalR);
+                        spot.style.opacity = '1';
+                    }
+                });
+            });
+        }
+    }
 
 });
 
