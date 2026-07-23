@@ -165,7 +165,23 @@
 
                 <div class="dashboard-grid" style="margin-bottom: 24px;">
                     <div class="dashboard-card kpi-card">
-                        <div class="kpi-icon"><i data-lucide="package-check"></i></div>
+                        <div class="kpi-icon"><i data-lucide="file-text"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Pending Distributor Orders</span>
+                            <span class="kpi-value">42</span>
+                            <span style="font-size:11px;color:var(--text-secondary)">Across Assigned Distributors</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card highlight" style="border-top-color: #D97706;">
+                        <div class="kpi-icon"><i data-lucide="clipboard-check" style="color:#D97706;"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Orders Requiring Approval</span>
+                            <span class="kpi-value" style="color:#D97706;">8</span>
+                            <span class="kpi-trend" style="color:#D97706;">Awaiting Approval</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon"><i data-lucide="package"></i></div>
                         <div class="kpi-details">
                             <span class="kpi-label">Inventory Coverage</span>
                             <span class="kpi-value">91%</span>
@@ -175,25 +191,9 @@
                     <div class="dashboard-card kpi-card highlight" style="border-top-color: var(--status-red);">
                         <div class="kpi-icon"><i data-lucide="alert-triangle" style="color:var(--status-red);"></i></div>
                         <div class="kpi-details">
-                            <span class="kpi-label">Products Requiring Attention</span>
+                            <span class="kpi-label">Inventory Reconciliation Issues</span>
                             <span class="kpi-value red">12</span>
                             <span class="kpi-trend text-red">4 Critical</span>
-                        </div>
-                    </div>
-                    <div class="dashboard-card kpi-card">
-                        <div class="kpi-icon"><i data-lucide="brain"></i></div>
-                        <div class="kpi-details">
-                            <span class="kpi-label">AI Harmonization Accuracy</span>
-                            <span class="kpi-value green">98.2%</span>
-                            <span style="font-size:11px;color:var(--text-secondary)">Automatically Harmonized</span>
-                        </div>
-                    </div>
-                    <div class="dashboard-card kpi-card">
-                        <div class="kpi-icon"><i data-lucide="inbox"></i></div>
-                        <div class="kpi-details">
-                            <span class="kpi-label">Pending Actions</span>
-                            <span class="kpi-value" style="color: #D97706;">8</span>
-                            <span style="font-size:11px;color:var(--text-secondary)">Open Actions</span>
                         </div>
                     </div>
                 </div>
@@ -206,44 +206,6 @@
                         <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="switchScreen('inventory'); setTimeout(()=>window.switchInventoryTab('health'),50);"><i data-lucide="alert-circle" style="color:var(--status-red);"></i> Resolve 3 critical stock risks</button>
                         <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="showToast('Navigating to Uploads')"><i data-lucide="upload-cloud" style="color:#D97706;"></i> Request updates from 18 distributors</button>
                         <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="showToast('Navigating to Workflow')"><i data-lucide="check-square" style="color:var(--status-green);"></i> Approve 1 replenishment recommendation</button>
-                    </div>
-                </div>
-
-                <!-- 3. AI Action Center -->
-                <div class="section-title-bar" style="padding-bottom: 0;">
-                    <div>
-                        <h2>AI Action Center</h2>
-                    </div>
-                    <button class="text-link text-blue flex-align font-medium" style="font-size:14px;" onclick="showToast('Navigating to Recommendations...')">View All Recommendations <i data-lucide="arrow-right" style="width:16px;height:16px;"></i></button>
-                </div>
-                
-                <div class="dashboard-grid" style="grid-template-columns: repeat(3, 1fr); margin-top:16px; margin-bottom: 32px;">
-                    <!-- Requires Approval -->
-                    <div class="dashboard-card widget" style="border-top: 4px solid #D97706;">
-                        <h4 style="margin:0 0 16px 0; display:flex; justify-content:space-between; align-items:center;">Requires Approval <span class="badge badge-med">1</span></h4>
-                        <div style="background:#F8FAFC; padding:16px; border-radius:6px; border:1px solid #E2E8F0;">
-                            <strong class="block mb-1 text-dark">Replenish Roundup PowerMAX</strong>
-                            <p class="text-sm text-secondary mb-3">Distributor X projecting shortage. Suggest transfer from Distributor Y to prevent missed sales.</p>
-                            <button class="primary-btn btn-sm" style="width:100%; justify-content:center;" onclick="showToast('Reviewing transfer')">Review Transfer</button>
-                        </div>
-                    </div>
-                    <!-- Inventory Risks -->
-                    <div class="dashboard-card widget" style="border-top: 4px solid var(--status-red);">
-                        <h4 style="margin:0 0 16px 0; display:flex; justify-content:space-between; align-items:center;">Inventory Risks <span class="badge badge-low">3</span></h4>
-                        <div style="background:#F8FAFC; padding:16px; border-radius:6px; border:1px solid #E2E8F0;">
-                            <strong class="block mb-1 text-dark">Nativo Fungicide Stockout</strong>
-                            <p class="text-sm text-secondary mb-3">Projected stockout in 3 days for Ontario region. Expedite transfer recommended.</p>
-                            <button class="primary-btn btn-sm" style="width:100%; justify-content:center; background:var(--status-red); border-color:var(--status-red);" onclick="switchScreen('inventory'); setTimeout(()=>window.switchInventoryTab('health'),50);">View Critical Exceptions</button>
-                        </div>
-                    </div>
-                    <!-- Commercial Opportunities -->
-                    <div class="dashboard-card widget" style="border-top: 4px solid var(--status-green);">
-                        <h4 style="margin:0 0 16px 0; display:flex; justify-content:space-between; align-items:center;">Commercial Opportunities <span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green);">2</span></h4>
-                        <div style="background:#F8FAFC; padding:16px; border-radius:6px; border:1px solid #E2E8F0;">
-                            <strong class="block mb-1 text-dark">Promote Sivanto Prime</strong>
-                            <p class="text-sm text-secondary mb-3">Excess inventory detected. Launch bundle discount to clear 52 units and avoid spoilage.</p>
-                            <button class="secondary-btn btn-sm text-blue" style="width:100%; justify-content:center;" onclick="showToast('Creating promotion')">Launch Promotion</button>
-                        </div>
                     </div>
                 </div>
 
