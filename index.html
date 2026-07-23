@@ -215,6 +215,14 @@
                     <div class="dashboard-card widget">
                         <div class="heatmap-header" style="display:flex; justify-content:space-between; align-items:center;">
                             <h3>My Distributors</h3>
+                            <select id="territory-region" class="filter-select" style="padding:4px 8px; font-size:13px;">
+                                <option value="gta">Greater Toronto Area (GTA)</option>
+                                <option value="ottawa">Ottawa Region</option>
+                                <option value="sw">Southwestern Ontario</option>
+                                <option value="central">Central Ontario</option>
+                                <option value="eastern">Eastern Ontario</option>
+                                <option value="northern">Northern Ontario</option>
+                            </select>
                         </div>
                         <div style="display:flex; gap:24px; margin-top:16px;">
                             <div class="heatmap-container" style="flex:1; height:280px; min-height:unset; background: #F8FAFC; border-radius:8px; border:1px solid #E2E8F0; display:flex; align-items:center; justify-content:center; overflow:hidden;">
@@ -234,43 +242,8 @@
                                             <th style="padding: 8px 12px;">Inventory Health</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr data-dist-id="abc" style="cursor:pointer; transition: background 0.2s;">
-                                            <td class="font-medium text-dark" style="padding: 8px 12px;">ABC Seeds</td>
-                                            <td style="padding: 8px 12px;"><span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green); padding:2px 6px;">Healthy</span></td>
-                                            <td style="padding: 8px 12px;">5</td>
-                                            <td style="padding: 8px 12px;" class="text-green font-medium">Healthy</td>
-                                        </tr>
-                                        <tr data-dist-id="greencrop" style="cursor:pointer; transition: background 0.2s;">
-                                            <td class="font-medium text-dark" style="padding: 8px 12px;">GreenCrop Distribution</td>
-                                            <td style="padding: 8px 12px;"><span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green); padding:2px 6px;">Healthy</span></td>
-                                            <td style="padding: 8px 12px;">2</td>
-                                            <td style="padding: 8px 12px;" class="text-green font-medium">Healthy</td>
-                                        </tr>
-                                        <tr data-dist-id="farmpro" style="cursor:pointer; transition: background 0.2s;">
-                                            <td class="font-medium text-dark" style="padding: 8px 12px;">FarmPro Solutions</td>
-                                            <td style="padding: 8px 12px;"><span class="badge badge-med" style="padding:2px 6px;">Warning</span></td>
-                                            <td style="padding: 8px 12px;">3</td>
-                                            <td style="padding: 8px 12px;" class="text-yellow font-medium">Warning</td>
-                                        </tr>
-                                        <tr data-dist-id="agromax" style="cursor:pointer; transition: background 0.2s;">
-                                            <td class="font-medium text-dark" style="padding: 8px 12px;">AgroMax Partners</td>
-                                            <td style="padding: 8px 12px;"><span class="badge badge-low" style="padding:2px 6px;">Critical</span></td>
-                                            <td style="padding: 8px 12px;">7</td>
-                                            <td style="padding: 8px 12px;" class="text-red font-medium">Critical</td>
-                                        </tr>
-                                        <tr data-dist-id="valleycrop" style="cursor:pointer; transition: background 0.2s;">
-                                            <td class="font-medium text-dark" style="padding: 8px 12px;">Valley Crop Services</td>
-                                            <td style="padding: 8px 12px;"><span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green); padding:2px 6px;">Healthy</span></td>
-                                            <td style="padding: 8px 12px;">1</td>
-                                            <td style="padding: 8px 12px;" class="text-green font-medium">Healthy</td>
-                                        </tr>
-                                        <tr data-dist-id="midwest" style="cursor:pointer; transition: background 0.2s;">
-                                            <td class="font-medium text-dark" style="padding: 8px 12px;">Midwest Ag Supply</td>
-                                            <td style="padding: 8px 12px;"><span class="badge badge-med" style="padding:2px 6px;">Warning</span></td>
-                                            <td style="padding: 8px 12px;">4</td>
-                                            <td style="padding: 8px 12px;" class="text-yellow font-medium">Warning</td>
-                                        </tr>
+                                    <tbody id="distributor-tbody">
+                                        <!-- Dynamically populated via app.js based on selected territory -->
                                     </tbody>
                                 </table>
                             </div>
@@ -284,28 +257,28 @@
                             <div class="dashboard-card kpi-card cursor-pointer" onclick="switchScreen('inventory'); setTimeout(()=>window.switchInventoryTab('health'),50);" style="border-left: 4px solid var(--status-green); padding:12px; margin:0; display:flex; justify-content:space-between; align-items:center;">
                                 <div class="kpi-details" style="gap:2px;">
                                     <span class="kpi-label">Healthy</span>
-                                    <span class="kpi-value font-bold text-green" style="font-size:18px;">89%</span>
+                                    <span class="kpi-value font-bold text-green" style="font-size:18px;" id="health-kpi-healthy">89%</span>
                                 </div>
                                 <i data-lucide="chevron-right" class="text-secondary"></i>
                             </div>
                             <div class="dashboard-card kpi-card cursor-pointer" onclick="switchScreen('inventory'); setTimeout(()=>window.switchInventoryTab('health'),50);" style="border-left: 4px solid #F59E0B; padding:12px; margin:0; display:flex; justify-content:space-between; align-items:center;">
                                 <div class="kpi-details" style="gap:2px;">
                                     <span class="kpi-label">Overstock</span>
-                                    <span class="kpi-value font-bold" style="font-size:18px; color:#F59E0B;">3%</span>
+                                    <span class="kpi-value font-bold" style="font-size:18px; color:#F59E0B;" id="health-kpi-overstock">3%</span>
                                 </div>
                                 <i data-lucide="chevron-right" class="text-secondary"></i>
                             </div>
                             <div class="dashboard-card kpi-card cursor-pointer" onclick="switchScreen('inventory'); setTimeout(()=>window.switchInventoryTab('health'),50);" style="border-left: 4px solid var(--status-yellow); padding:12px; margin:0; display:flex; justify-content:space-between; align-items:center;">
                                 <div class="kpi-details" style="gap:2px;">
                                     <span class="kpi-label">Warning (Understock)</span>
-                                    <span class="kpi-value font-bold text-yellow" style="font-size:18px;">7%</span>
+                                    <span class="kpi-value font-bold text-yellow" style="font-size:18px;" id="health-kpi-warning">7%</span>
                                 </div>
                                 <i data-lucide="chevron-right" class="text-secondary"></i>
                             </div>
                             <div class="dashboard-card kpi-card cursor-pointer" onclick="switchScreen('inventory'); setTimeout(()=>window.switchInventoryTab('health'),50);" style="border-left: 4px solid var(--status-red); padding:12px; margin:0; display:flex; justify-content:space-between; align-items:center;">
                                 <div class="kpi-details" style="gap:2px;">
                                     <span class="kpi-label">Critical Stockouts</span>
-                                    <span class="kpi-value font-bold text-red" style="font-size:18px;">1%</span>
+                                    <span class="kpi-value font-bold text-red" style="font-size:18px;" id="health-kpi-critical">1%</span>
                                 </div>
                                 <i data-lucide="chevron-right" class="text-secondary"></i>
                             </div>

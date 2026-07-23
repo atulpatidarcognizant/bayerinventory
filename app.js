@@ -250,21 +250,105 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Territory Map Logic (Account Manager View) ---
     const territoryLayer = document.getElementById('territory-layer');
-    const distributorTable = document.getElementById('distributor-table');
+    const distributorTbody = document.getElementById('distributor-tbody');
+    const territoryRegionSelect = document.getElementById('territory-region');
+    const territoryMapSvg = document.getElementById('territory-map-svg');
 
-    const distributorData = [
-        { id: 'abc', name: 'ABC Seeds', cx: 200, cy: 120, status: 'high' },
-        { id: 'greencrop', name: 'GreenCrop Distribution', cx: 350, cy: 180, status: 'high' },
-        { id: 'farmpro', name: 'FarmPro Solutions', cx: 500, cy: 100, status: 'med' },
-        { id: 'agromax', name: 'AgroMax Partners', cx: 620, cy: 160, status: 'low' },
-        { id: 'valleycrop', name: 'Valley Crop Services', cx: 280, cy: 260, status: 'high' },
-        { id: 'midwest', name: 'Midwest Ag Supply', cx: 480, cy: 280, status: 'med' }
-    ];
+    // Abstract paths representing the general shape of the regions
+    const paths = {
+        'gta': 'M100,50 Q150,20 200,60 T300,40 T400,80 T500,30 T600,70 T700,50 L750,150 L650,250 L550,300 L450,280 L350,350 L250,300 L150,250 L50,150 Z',
+        'ottawa': 'M150,50 L700,100 L650,350 L100,300 Z',
+        'sw': 'M50,100 Q150,50 300,150 T600,100 T750,250 L700,350 L400,300 L200,350 Z',
+        'central': 'M100,100 L400,50 L700,100 L750,300 L400,350 L50,250 Z',
+        'eastern': 'M300,50 L700,150 L650,300 L100,350 L150,150 Z',
+        'northern': 'M50,50 L750,50 L700,350 L100,350 Z'
+    };
 
-    const renderTerritoryMap = () => {
-        if (!territoryLayer) return;
+    const territoryData = {
+        'gta': {
+            path: paths.gta,
+            health: { healthy: '89%', overstock: '3%', warning: '7%', critical: '1%' },
+            distributors: [
+                { id: 'abc', name: 'ABC Seeds (Toronto)', cx: 200, cy: 120, status: 'high', orders: 5 },
+                { id: 'greencrop', name: 'GreenCrop (Mississauga)', cx: 350, cy: 180, status: 'high', orders: 2 },
+                { id: 'farmpro', name: 'FarmPro (Brampton)', cx: 500, cy: 100, status: 'med', orders: 3 },
+                { id: 'agromax', name: 'AgroMax (Vaughan)', cx: 620, cy: 160, status: 'low', orders: 7 },
+                { id: 'valleycrop', name: 'Valley Crop (Markham)', cx: 280, cy: 260, status: 'high', orders: 1 },
+                { id: 'midwest', name: 'Midwest Ag (Burlington)', cx: 480, cy: 280, status: 'med', orders: 4 }
+            ]
+        },
+        'ottawa': {
+            path: paths.ottawa,
+            health: { healthy: '92%', overstock: '2%', warning: '5%', critical: '1%' },
+            distributors: [
+                { id: 'ott1', name: 'Capital Ag (Ottawa)', cx: 250, cy: 150, status: 'high', orders: 4 },
+                { id: 'ott2', name: 'Valley Seeds (Kanata)', cx: 400, cy: 120, status: 'high', orders: 2 },
+                { id: 'ott3', name: 'Eastern Crop (Orleans)', cx: 550, cy: 200, status: 'med', orders: 5 },
+                { id: 'ott4', name: 'River Farms (Cornwall)', cx: 300, cy: 250, status: 'high', orders: 1 },
+                { id: 'ott5', name: 'Seaway Ag (Brockville)', cx: 500, cy: 280, status: 'low', orders: 8 }
+            ]
+        },
+        'sw': {
+            path: paths.sw,
+            health: { healthy: '78%', overstock: '5%', warning: '12%', critical: '5%' },
+            distributors: [
+                { id: 'sw1', name: 'Forest City (London)', cx: 200, cy: 180, status: 'med', orders: 6 },
+                { id: 'sw2', name: 'Border Ag (Windsor)', cx: 100, cy: 280, status: 'low', orders: 9 },
+                { id: 'sw3', name: 'Dairy Capital (Woodstock)', cx: 350, cy: 150, status: 'high', orders: 2 },
+                { id: 'sw4', name: 'Bluewater (Sarnia)', cx: 150, cy: 100, status: 'med', orders: 4 },
+                { id: 'sw5', name: 'Kent Seeds (Chatham)', cx: 250, cy: 250, status: 'high', orders: 1 },
+                { id: 'sw6', name: 'Lake Erie Ag (St. Thomas)', cx: 450, cy: 220, status: 'high', orders: 3 }
+            ]
+        },
+        'central': {
+            path: paths.central,
+            health: { healthy: '95%', overstock: '1%', warning: '4%', critical: '0%' },
+            distributors: [
+                { id: 'cen1', name: 'Simcoe Ag (Barrie)', cx: 300, cy: 150, status: 'high', orders: 2 },
+                { id: 'cen2', name: 'Muskoka Farms (Bracebridge)', cx: 450, cy: 100, status: 'high', orders: 1 },
+                { id: 'cen3', name: 'Kawartha Seeds (Peterborough)', cx: 550, cy: 250, status: 'med', orders: 3 },
+                { id: 'cen4', name: 'Georgian Bay (Owen Sound)', cx: 200, cy: 200, status: 'high', orders: 4 },
+                { id: 'cen5', name: 'Bruce Peninsula (Wiarton)', cx: 350, cy: 280, status: 'high', orders: 1 }
+            ]
+        },
+        'eastern': {
+            path: paths.eastern,
+            health: { healthy: '85%', overstock: '4%', warning: '9%', critical: '2%' },
+            distributors: [
+                { id: 'eas1', name: 'Limestone Ag (Kingston)', cx: 250, cy: 280, status: 'med', orders: 5 },
+                { id: 'eas2', name: 'Quinte Crop (Belleville)', cx: 400, cy: 220, status: 'high', orders: 3 },
+                { id: 'eas3', name: 'Prince Edward (Picton)', cx: 550, cy: 300, status: 'low', orders: 6 },
+                { id: 'eas4', name: 'Trent Valley (Trenton)', cx: 300, cy: 150, status: 'high', orders: 2 },
+                { id: 'eas5', name: 'Shield Farms (Bancroft)', cx: 500, cy: 100, status: 'med', orders: 4 }
+            ]
+        },
+        'northern': {
+            path: paths.northern,
+            health: { healthy: '80%', overstock: '5%', warning: '10%', critical: '5%' },
+            distributors: [
+                { id: 'nor1', name: 'Nickel Belt (Sudbury)', cx: 200, cy: 250, status: 'med', orders: 4 },
+                { id: 'nor2', name: 'Gateway Ag (North Bay)', cx: 400, cy: 200, status: 'high', orders: 2 },
+                { id: 'nor3', name: 'Algoma Crop (Sault Ste. Marie)', cx: 150, cy: 150, status: 'high', orders: 1 },
+                { id: 'nor4', name: 'Clay Belt (Timmins)', cx: 350, cy: 100, status: 'low', orders: 5 },
+                { id: 'nor5', name: 'Lakehead Seeds (Thunder Bay)', cx: 600, cy: 180, status: 'med', orders: 3 }
+            ]
+        }
+    };
+
+    const renderTerritoryMap = (regionId) => {
+        if (!territoryLayer || !distributorTbody) return;
+        
+        const region = territoryData[regionId];
+        if (!region) return;
+
+        // 1. Update Map Shape
+        const pathEl = territoryMapSvg.querySelector('path');
+        if (pathEl) {
+            pathEl.setAttribute('d', region.path);
+        }
+
+        // 2. Render Map Markers
         territoryLayer.innerHTML = '';
-
         const colors = {
             'high': 'rgba(16, 185, 129, 0.5)',
             'med': 'rgba(245, 158, 11, 0.5)',
@@ -276,19 +360,30 @@ document.addEventListener('DOMContentLoaded', () => {
             'low': '#EF4444'
         };
 
-        distributorData.forEach(dist => {
+        region.distributors.forEach(dist => {
+            // Group to handle mouse events on the map itself
+            const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            group.setAttribute('id', `map-group-${dist.id}`);
+            group.style.cursor = 'pointer';
+
+            // SVG native tooltip
+            const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+            title.textContent = `${dist.name} - Open Orders: ${dist.orders}`;
+            group.appendChild(title);
+
             // Heat spot
             const spot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
             spot.setAttribute('cx', dist.cx);
             spot.setAttribute('cy', dist.cy);
-            spot.setAttribute('r', dist.status === 'low' ? 35 : (dist.status === 'high' ? 45 : 30));
+            const baseRadius = dist.status === 'low' ? 35 : (dist.status === 'high' ? 45 : 30);
+            spot.setAttribute('r', baseRadius);
             spot.setAttribute('fill', colors[dist.status]);
             spot.setAttribute('filter', 'blur(10px)');
             spot.setAttribute('id', `spot-${dist.id}`);
             spot.style.transition = 'all 0.3s ease';
-            territoryLayer.appendChild(spot);
+            group.appendChild(spot);
 
-            // Marker Group
+            // Marker translation group
             const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
             g.setAttribute('transform', `translate(${dist.cx}, ${dist.cy})`);
             
@@ -309,51 +404,98 @@ document.addEventListener('DOMContentLoaded', () => {
             text.setAttribute('font-size', '13');
             text.setAttribute('font-weight', '600');
             text.setAttribute('fill', '#1E293B');
-            text.textContent = dist.name;
+            text.textContent = dist.name.split(' (')[0]; // Keep map label clean
             g.appendChild(text);
 
-            territoryLayer.appendChild(g);
+            group.appendChild(g);
+            territoryLayer.appendChild(group);
+
+            // Add hover effect from Map -> Table
+            group.addEventListener('mouseenter', () => {
+                const tr = document.querySelector(`tr[data-dist-id="${dist.id}"]`);
+                if (tr) tr.style.background = '#F1F5F9';
+                marker.setAttribute('r', 8);
+                spot.setAttribute('r', baseRadius + 10);
+                spot.style.opacity = '0.8';
+            });
+            group.addEventListener('mouseleave', () => {
+                const tr = document.querySelector(`tr[data-dist-id="${dist.id}"]`);
+                if (tr) tr.style.background = 'transparent';
+                marker.setAttribute('r', 6);
+                spot.setAttribute('r', baseRadius);
+                spot.style.opacity = '1';
+            });
         });
+
+        // 3. Render Table
+        distributorTbody.innerHTML = '';
+        const badgeColors = {
+            'high': '<span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green); padding:2px 6px;">Healthy</span>',
+            'med': '<span class="badge badge-med" style="padding:2px 6px;">Warning</span>',
+            'low': '<span class="badge badge-low" style="padding:2px 6px;">Critical</span>'
+        };
+        const textColors = {
+            'high': '<span class="text-green font-medium">Healthy</span>',
+            'med': '<span class="text-yellow font-medium">Warning</span>',
+            'low': '<span class="text-red font-medium">Critical</span>'
+        };
+
+        region.distributors.forEach(dist => {
+            const tr = document.createElement('tr');
+            tr.setAttribute('data-dist-id', dist.id);
+            tr.style.cursor = 'pointer';
+            tr.style.transition = 'background 0.2s';
+            tr.innerHTML = `
+                <td class="font-medium text-dark" style="padding: 8px 12px;">${dist.name}</td>
+                <td style="padding: 8px 12px;">${badgeColors[dist.status]}</td>
+                <td style="padding: 8px 12px;">${dist.orders}</td>
+                <td style="padding: 8px 12px;">${textColors[dist.status]}</td>
+            `;
+            
+            // Add hover effect from Table -> Map
+            tr.addEventListener('mouseenter', () => {
+                tr.style.background = '#F1F5F9';
+                const marker = document.getElementById(`marker-${dist.id}`);
+                const spot = document.getElementById(`spot-${dist.id}`);
+                const baseRadius = dist.status === 'low' ? 35 : (dist.status === 'high' ? 45 : 30);
+                if (marker) marker.setAttribute('r', 8);
+                if (spot) {
+                    spot.setAttribute('r', baseRadius + 10);
+                    spot.style.opacity = '0.8';
+                }
+            });
+            tr.addEventListener('mouseleave', () => {
+                tr.style.background = 'transparent';
+                const marker = document.getElementById(`marker-${dist.id}`);
+                const spot = document.getElementById(`spot-${dist.id}`);
+                const baseRadius = dist.status === 'low' ? 35 : (dist.status === 'high' ? 45 : 30);
+                if (marker) marker.setAttribute('r', 6);
+                if (spot) {
+                    spot.setAttribute('r', baseRadius);
+                    spot.style.opacity = '1';
+                }
+            });
+            distributorTbody.appendChild(tr);
+        });
+
+        // 4. Update Network Health Panel
+        const hHealthy = document.getElementById('health-kpi-healthy');
+        const hOverstock = document.getElementById('health-kpi-overstock');
+        const hWarning = document.getElementById('health-kpi-warning');
+        const hCritical = document.getElementById('health-kpi-critical');
+
+        if (hHealthy) hHealthy.textContent = region.health.healthy;
+        if (hOverstock) hOverstock.textContent = region.health.overstock;
+        if (hWarning) hWarning.textContent = region.health.warning;
+        if (hCritical) hCritical.textContent = region.health.critical;
     };
 
-    if (territoryLayer) {
-        renderTerritoryMap();
-
-        // Wire up hover events from table to map
-        if (distributorTable) {
-            const rows = distributorTable.querySelectorAll('tbody tr[data-dist-id]');
-            rows.forEach(row => {
-                row.addEventListener('mouseenter', () => {
-                    const id = row.getAttribute('data-dist-id');
-                    row.style.background = '#F1F5F9';
-                    
-                    // Highlight marker
-                    const marker = document.getElementById(`marker-${id}`);
-                    const spot = document.getElementById(`spot-${id}`);
-                    if (marker) marker.setAttribute('r', 8);
-                    if (spot) {
-                        const currentR = parseInt(spot.getAttribute('r'));
-                        spot.setAttribute('r', currentR + 10);
-                        spot.style.opacity = '0.8';
-                    }
-                });
-                row.addEventListener('mouseleave', () => {
-                    const id = row.getAttribute('data-dist-id');
-                    row.style.background = 'transparent';
-                    
-                    // Reset marker
-                    const marker = document.getElementById(`marker-${id}`);
-                    const spot = document.getElementById(`spot-${id}`);
-                    if (marker) marker.setAttribute('r', 6);
-                    if (spot) {
-                        const dist = distributorData.find(d => d.id === id);
-                        const originalR = dist.status === 'low' ? 35 : (dist.status === 'high' ? 45 : 30);
-                        spot.setAttribute('r', originalR);
-                        spot.style.opacity = '1';
-                    }
-                });
-            });
-        }
+    if (territoryRegionSelect) {
+        territoryRegionSelect.addEventListener('change', (e) => {
+            renderTerritoryMap(e.target.value);
+        });
+        // Initial render
+        renderTerritoryMap(territoryRegionSelect.value);
     }
 
 });
