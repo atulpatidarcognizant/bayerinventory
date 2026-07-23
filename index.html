@@ -2095,166 +2095,209 @@
                 <div class="section-title-bar" style="margin-bottom: 24px;">
                     <div>
                         <span class="section-subtitle">Ordering & Fulfillment</span>
-                        <h2>Exception Management & Substitutions</h2>
+                        <h2>Order Approval & Exception Management</h2>
                     </div>
-                    <button class="text-link text-blue">View All Orders <i data-lucide="chevron-right" style="width:14px;height:14px;"></i></button>
                 </div>
 
-                <!-- Compact Order Header -->
-                <div style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px;">
-                    <div style="display:flex; gap: 24px; align-items:center;">
-                        <div><span class="text-xs text-secondary block">Order ID</span><span class="font-medium">#9942-B</span></div>
-                        <div><span class="text-xs text-secondary block">Distributor</span><span class="font-medium">Distributor Alpha</span></div>
-                        <div><span class="text-xs text-secondary block">Status</span><span class="badge badge-med" style="margin-top:2px;">Pending Approval</span></div>
-                        <div><span class="text-xs text-secondary block">Total Value</span><span class="font-medium">$127,500</span></div>
-                    </div>
-                    <div class="text-sm text-secondary">Last Updated: 10 mins ago</div>
-                </div>
-
-                <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; gap: 24px;">
-                    <!-- Left Column: Exception & Resolutions -->
-                    <div style="display: flex; flex-direction: column; gap: 24px;">
-                        
-                        <!-- Exception Alert -->
-                        <div class="dashboard-card widget" style="background: #FEF2F2; border: 1px solid #FECACA; border-left: 4px solid var(--status-red); padding: 16px;">
-                            <h4 style="margin:0 0 8px 0; color: var(--status-red); display:flex; align-items:center; gap:8px;">
-                                <i data-lucide="alert-triangle" style="width:18px;height:18px;"></i> Inventory Exception Detected
-                            </h4>
-                            <p style="margin:0 0 12px 0; font-size:15px; color:var(--text-dark); line-height:1.5;">
-                                <strong>Luna Experience (2,000 L)</strong> cannot be fulfilled from Toronto DC due to a recent allocation freeze.
-                            </p>
-                            <div style="display:flex; align-items:center; gap:6px; color:var(--primary-blue); font-size:14px; font-weight:500;">
-                                <i data-lucide="sparkles" style="width:14px;height:14px;"></i> AI has identified two recommended resolution options below.
-                            </div>
-                        </div>
-
-                        <!-- AI Resolution Options Panel -->
-                        <div class="dashboard-card widget" style="padding: 24px;">
-                            <h3 style="margin:0 0 16px 0; display:flex; align-items:center; gap:8px;">
-                                <i data-lucide="split-square-horizontal" style="color:var(--secondary-text);"></i> AI Resolution Options
-                            </h3>
-                            
-                            <!-- Comparison Summary -->
-                            <div style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; margin-bottom: 24px; font-size: 14px; color: var(--text-dark);">
-                                <strong>Trade-off Summary:</strong> You can split fulfillment across DCs (delays order by 2 days) OR substitute the product to keep the original schedule and gain +$240 margin.
-                            </div>
-
-                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                                <!-- Option 1: Split Fulfillment -->
-                                <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; display:flex; flex-direction:column; justify-content:space-between;">
-                                    <div>
-                                        <h4 style="margin:0 0 12px 0;">Option 1: Split Fulfillment</h4>
-                                        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom: 16px;">
-                                            <div style="display:flex; align-items:center; gap:8px;">
-                                                <i data-lucide="clock" style="width:14px;height:14px;color:var(--secondary-text);"></i>
-                                                <span class="text-sm">ETA: <strong>+2 Days Delay</strong></span>
-                                            </div>
-                                            <div style="display:flex; align-items:center; gap:8px;">
-                                                <i data-lucide="dollar-sign" style="width:14px;height:14px;color:var(--secondary-text);"></i>
-                                                <span class="text-sm">Margin: <strong>No Change</strong></span>
-                                            </div>
-                                            <div style="display:flex; align-items:center; gap:8px;">
-                                                <i data-lucide="package" style="width:14px;height:14px;color:var(--secondary-text);"></i>
-                                                <span class="text-sm">Availability: <strong>Split (Toronto & Montreal)</strong></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="secondary-btn" style="width:100%; justify-content:center;" onclick="showToast('Option 1 Selected')">Choose Split Fulfillment</button>
-                                </div>
-
-                                <!-- Option 2: Substitution (AI Recommended) -->
-                                <div style="border: 2px solid var(--primary-blue); border-radius: 8px; padding: 16px; background: #F0F9FF; display:flex; flex-direction:column; justify-content:space-between; position:relative;">
-                                    <div style="position:absolute; top:-10px; right:12px; background:var(--primary-blue); color:white; font-size:11px; font-weight:bold; padding:2px 8px; border-radius:12px; display:flex; align-items:center; gap:4px;">
-                                        <i data-lucide="sparkles" style="width:10px;height:10px;"></i> AI Recommended
-                                    </div>
-                                    <div>
-                                        <h4 style="margin:0 0 12px 0; color:var(--primary-blue);">Option 2: Substitute Product</h4>
-                                        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom: 16px;">
-                                            <div style="display:flex; align-items:center; gap:8px;">
-                                                <i data-lucide="clock" style="width:14px;height:14px;color:var(--status-green);"></i>
-                                                <span class="text-sm">ETA: <strong style="color:var(--status-green);">On Time (Original Schedule)</strong></span>
-                                            </div>
-                                            <div style="display:flex; align-items:center; gap:8px;">
-                                                <i data-lucide="trending-up" style="width:14px;height:14px;color:var(--status-green);"></i>
-                                                <span class="text-sm">Margin: <strong style="color:var(--status-green);">+$240 (Promo Applied)</strong></span>
-                                            </div>
-                                            <div style="display:flex; align-items:center; gap:8px;">
-                                                <i data-lucide="package" style="width:14px;height:14px;color:var(--text-dark);"></i>
-                                                <span class="text-sm">Product: <strong>Luna Tranquility (Toronto DC)</strong></span>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- AI Reasoning Bullets -->
-                                        <ul style="margin:0 0 16px 0; padding-left:16px; font-size:13px; color:var(--text-dark);">
-                                            <li style="margin-bottom:4px;">Alternative inventory available immediately.</li>
-                                            <li style="margin-bottom:4px;">Commercial promotion remains applicable.</li>
-                                        </ul>
-                                    </div>
-                                    <button class="primary-btn" style="width:100%; justify-content:center;" onclick="showToast('Substitute Accepted')">Accept AI Recommendation</button>
-                                </div>
-                            </div>
-                            
-                            <!-- Outcome Preview -->
-                            <div style="margin-top: 24px; border-top: 1px solid var(--border-color); padding-top: 16px;">
-                                <h5 style="margin:0 0 8px 0; color:var(--secondary-text);">Outcome Preview (If Recommendation Accepted)</h5>
-                                <div style="display:flex; gap:16px; font-size:13px; color:var(--text-dark);">
-                                    <span style="display:flex; align-items:center; gap:4px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Delivery schedule maintained</span>
-                                    <span style="display:flex; align-items:center; gap:4px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Margin impact applied</span>
-                                    <span style="display:flex; align-items:center; gap:4px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Order history updated automatically</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                <div class="dashboard-card widget" style="margin-top: 24px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px;">
-                        <h3>Recent Order Modifications (Audit Timeline)</h3>
-                        <button class="text-link text-blue">View Full History <i data-lucide="chevron-right" style="width:14px;height:14px;"></i></button>
-                    </div>
+                <!-- Level 1: Distributor Approval Queue -->
+                <div id="om-queue-view">
+                    <p style="color:var(--text-secondary); margin-bottom: 24px; font-size: 15px;">Review distributor orders requiring manual approval due to validation exceptions or unusual ordering patterns.</p>
                     
-                    <div style="position: relative; padding-left: 24px; margin-left: 8px;">
-                        <div style="position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--border-color);"></div>
-                        
-                        <!-- Timeline Item 1 (Approved) -->
-                        <div style="position: relative; margin-bottom: 24px;">
-                            <div style="position: absolute; left: -24px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--status-green); border: 2px solid white; box-shadow: 0 0 0 1px var(--status-green);"></div>
-                            <div style="display:flex; justify-content:space-between; align-items:start;">
-                                <div>
-                                    <h4 style="margin:0 0 4px 0; font-size:14px; color: var(--text-dark);">Change Delivery Date (Friday &rarr; Monday)</h4>
-                                    <p class="text-sm text-secondary" style="margin:0;">Requested by <strong>Distributor Alpha</strong></p>
-                                    <div style="margin-top: 8px; background: #F8FAFC; border-left: 2px solid var(--status-green); padding: 8px 12px; border-radius: 0 4px 4px 0;">
-                                        <span class="text-xs text-secondary block" style="margin-bottom:2px;">AI Assessment</span>
-                                        <span class="text-sm text-dark">"Allowed. Avoids weekend allocation freeze."</span>
-                                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+                        <!-- Distributor Card 1 -->
+                        <div class="dashboard-card widget cursor-pointer" onclick="openOrderDrillDown('ABC Seeds', 5)" style="transition: transform 0.2s, box-shadow 0.2s; padding: 20px;">
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 16px;">
+                                <h3 style="margin:0; font-size: 16px;">ABC Seeds</h3>
+                                <span class="badge badge-med">Normal Priority</span>
+                            </div>
+                            <div style="display:flex; flex-direction:column; gap:8px;">
+                                <div style="display:flex; justify-content:space-between; font-size: 14px;">
+                                    <span style="color:var(--text-secondary);">Orders Pending</span>
+                                    <span class="font-bold">5</span>
                                 </div>
-                                <div style="text-align:right;">
-                                    <span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green);">Approved</span>
-                                    <span class="text-xs text-secondary block mt-1">Today, 09:42 AM</span>
+                                <div style="display:flex; justify-content:space-between; font-size: 14px;">
+                                    <span style="color:var(--status-red);">Validation Exceptions</span>
+                                    <span class="font-bold text-red">1</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Timeline Item 2 (Rejected) -->
-                        <div style="position: relative; margin-bottom: 8px;">
-                            <div style="position: absolute; left: -24px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--status-red); border: 2px solid white; box-shadow: 0 0 0 1px var(--status-red);"></div>
-                            <div style="display:flex; justify-content:space-between; align-items:start;">
-                                <div>
-                                    <h4 style="margin:0 0 4px 0; font-size:14px; color: var(--text-dark);">Increase Quantity (+500 L Prosaro)</h4>
-                                    <p class="text-sm text-secondary" style="margin:0;">Requested by <strong>Distributor Alpha</strong></p>
-                                    <div style="margin-top: 8px; background: #FEF2F2; border-left: 2px solid var(--status-red); padding: 8px 12px; border-radius: 0 4px 4px 0;">
-                                        <span class="text-xs text-secondary block" style="margin-bottom:2px;">AI Assessment</span>
-                                        <span class="text-sm text-dark">"Blocked. Exceeds current ATP at DC-Regina."</span>
-                                    </div>
+                        <!-- Distributor Card 2 -->
+                        <div class="dashboard-card widget cursor-pointer" onclick="openOrderDrillDown('GreenCrop Distribution', 3)" style="transition: transform 0.2s, box-shadow 0.2s; padding: 20px; border-left: 4px solid var(--status-red);">
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 16px;">
+                                <h3 style="margin:0; font-size: 16px;">GreenCrop Distribution</h3>
+                                <span class="badge badge-low">Critical Priority</span>
+                            </div>
+                            <div style="display:flex; flex-direction:column; gap:8px;">
+                                <div style="display:flex; justify-content:space-between; font-size: 14px;">
+                                    <span style="color:var(--text-secondary);">Orders Pending</span>
+                                    <span class="font-bold">3</span>
                                 </div>
-                                <div style="text-align:right;">
-                                    <span class="badge badge-low">Rejected</span>
-                                    <span class="text-xs text-secondary block mt-1">Yesterday, 14:15 PM</span>
+                                <div style="display:flex; justify-content:space-between; font-size: 14px;">
+                                    <span style="color:var(--status-red);">Validation Exceptions</span>
+                                    <span class="font-bold text-red">2</span>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- Distributor Card 3 -->
+                        <div class="dashboard-card widget cursor-pointer" onclick="openOrderDrillDown('FarmPro Solutions', 2)" style="transition: transform 0.2s, box-shadow 0.2s; padding: 20px;">
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 16px;">
+                                <h3 style="margin:0; font-size: 16px;">FarmPro Solutions</h3>
+                                <span class="badge" style="background:#E0F2FE; color:var(--primary-blue);">High Priority</span>
+                            </div>
+                            <div style="display:flex; flex-direction:column; gap:8px;">
+                                <div style="display:flex; justify-content:space-between; font-size: 14px;">
+                                    <span style="color:var(--text-secondary);">Orders Pending</span>
+                                    <span class="font-bold">2</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; font-size: 14px;">
+                                    <span style="color:var(--status-red);">Validation Exceptions</span>
+                                    <span class="font-bold text-red">1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Level 2: Distributor Drill-Down Workspace -->
+                <div id="om-drilldown-view" style="display: none;">
+                    <div style="margin-bottom: 24px;">
+                        <button class="secondary-btn btn-sm" onclick="closeOrderDrillDown()" style="display:flex; align-items:center; gap:8px; border:none; background:transparent; padding:0; color:var(--primary-blue); cursor:pointer;">
+                            <i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Back to Distributor Queue
+                        </button>
+                    </div>
+
+                    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:24px;">
+                        <div>
+                            <h3 style="font-size: 20px; margin:0 0 4px 0;" id="drilldown-distributor-name">FarmPro Solutions</h3>
+                            <p style="margin:0; color:var(--text-secondary); font-size:14px;">Reviewing <span id="drilldown-order-count">2</span> pending orders.</p>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap: 24px;">
+                        
+                        <!-- Left Panel: Pending Orders List -->
+                        <div class="dashboard-card widget" style="padding:0; overflow:hidden;">
+                            <table class="data-table" style="margin:0;">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Total Value</th>
+                                        <th>Validation Reason</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background:#F0F4F8; border-left:3px solid var(--primary-blue); cursor:pointer;">
+                                        <td>
+                                            <span class="font-medium" style="color:var(--primary-blue);">#4091-C</span><br>
+                                            <span style="font-size:11px; color:var(--text-secondary);">Oct 12, 2026</span>
+                                        </td>
+                                        <td class="font-medium">$84,200</td>
+                                        <td><span class="badge badge-med">Pricing Exception</span></td>
+                                    </tr>
+                                    <tr style="cursor:pointer;">
+                                        <td>
+                                            <span class="font-medium">#4102-A</span><br>
+                                            <span style="font-size:11px; color:var(--text-secondary);">Oct 13, 2026</span>
+                                        </td>
+                                        <td class="font-medium">$12,000</td>
+                                        <td><span class="badge" style="background:#E2E8F0; color:var(--text-dark);">Pending Review</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Right Panel: Action Workspace -->
+                        <div style="display:flex; flex-direction:column; gap:24px;">
+                            
+                            <!-- Exception Alert -->
+                            <div class="dashboard-card widget" style="background: #FFFBEB; border: 1px solid #FCD34D; border-left: 4px solid #F59E0B; padding: 16px;">
+                                <h4 style="margin:0 0 8px 0; color: #B45309; display:flex; align-items:center; gap:8px;">
+                                    <i data-lucide="alert-circle" style="width:18px;height:18px;"></i> Validation Exception Detected
+                                </h4>
+                                <p style="margin:0 0 12px 0; font-size:14px; color:var(--text-dark); line-height:1.5;">
+                                    <strong>Order #4091-C</strong> contains items requested at a discount tier that exceeds the distributor's current contractual volume threshold.
+                                </p>
+                                <div style="display:flex; align-items:center; gap:6px; color:var(--primary-blue); font-size:13px; font-weight:500;">
+                                    <i data-lucide="sparkles" style="width:14px;height:14px;"></i> AI recommends reviewing the pricing history before approval.
+                                </div>
+                            </div>
+
+                            <!-- AI Approval Recommendations -->
+                            <div class="dashboard-card widget" style="padding: 24px;">
+                                <h3 style="margin:0 0 16px 0; display:flex; align-items:center; gap:8px;">
+                                    <i data-lucide="check-square" style="color:var(--secondary-text);"></i> Approval Actions
+                                </h3>
+                                
+                                <div style="display:flex; flex-direction:column; gap:12px;">
+                                    <div style="border: 2px solid var(--primary-blue); border-radius: 8px; padding: 16px; background: #F0F9FF; display:flex; justify-content:space-between; align-items:center; position:relative;">
+                                        <div style="position:absolute; top:-10px; right:12px; background:var(--primary-blue); color:white; font-size:11px; font-weight:bold; padding:2px 8px; border-radius:12px; display:flex; align-items:center; gap:4px;">
+                                            <i data-lucide="sparkles" style="width:10px;height:10px;"></i> AI Recommended
+                                        </div>
+                                        <div>
+                                            <h4 style="margin:0 0 4px 0; color:var(--primary-blue); font-size:15px;">Approve with Exception</h4>
+                                            <p style="margin:0; font-size:13px; color:var(--text-secondary);">Distributor is 2% away from volume tier; approve to maintain relationship.</p>
+                                        </div>
+                                        <button class="primary-btn" onclick="showToast('Order Approved')">Approve</button>
+                                    </div>
+                                    
+                                    <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; display:flex; justify-content:space-between; align-items:center;">
+                                        <div>
+                                            <h4 style="margin:0 0 4px 0; font-size:15px;">Request Clarification</h4>
+                                            <p style="margin:0; font-size:13px; color:var(--text-secondary);">Send a note back requesting justification for the discount.</p>
+                                        </div>
+                                        <button class="secondary-btn btn-sm">Request Info</button>
+                                    </div>
+
+                                    <div style="border: 1px solid #FECACA; border-radius: 8px; padding: 16px; display:flex; justify-content:space-between; align-items:center; background:#FEF2F2;">
+                                        <div>
+                                            <h4 style="margin:0 0 4px 0; font-size:15px; color:var(--status-red);">Reject Order</h4>
+                                            <p style="margin:0; font-size:13px; color:var(--text-secondary);">Reject and require resubmission at standard pricing tier.</p>
+                                        </div>
+                                        <button class="secondary-btn btn-sm" style="color:var(--status-red); border-color:#FECACA;">Reject</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Approval Timeline -->
+                            <div class="dashboard-card widget" style="padding: 24px;">
+                                <h3 style="margin:0 0 24px 0;">Approval Timeline</h3>
+                                <div class="workflow-steps" style="margin:0;">
+                                    <div class="workflow-step completed">
+                                        <div class="workflow-icon"><i data-lucide="check"></i></div>
+                                        <div class="workflow-content">
+                                            <h4>Order Submitted</h4>
+                                            <p>Submitted via Portal.</p>
+                                            <span class="workflow-time">Oct 12, 10:45 AM</span>
+                                        </div>
+                                    </div>
+                                    <div class="workflow-connector completed"></div>
+                                    <div class="workflow-step completed">
+                                        <div class="workflow-icon" style="background:var(--status-yellow-bg); color:#B45309;"><i data-lucide="alert-triangle"></i></div>
+                                        <div class="workflow-content">
+                                            <h4>Validation Triggered</h4>
+                                            <p>Flagged for Pricing Exception by ERP.</p>
+                                            <span class="workflow-time">Oct 12, 10:46 AM</span>
+                                        </div>
+                                    </div>
+                                    <div class="workflow-connector"></div>
+                                    <div class="workflow-step active">
+                                        <div class="workflow-icon"><i data-lucide="user"></i></div>
+                                        <div class="workflow-content">
+                                            <h4>Account Manager Review</h4>
+                                            <p>Awaiting your decision.</p>
+                                            <span class="workflow-time">Pending</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </section>
+
 
             <!-- Screen 12: Order Tracking -->
             <section id="order-tracking" class="screen">

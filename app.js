@@ -616,3 +616,29 @@ window.switchInventoryTab = function(tabId) {
         window.lucide.createIcons();
     }
 };
+
+// --- Order Approval & Exception Management Logic ---
+window.openOrderDrillDown = function(distributorName, orderCount) {
+    const queueView = document.getElementById('om-queue-view');
+    const drilldownView = document.getElementById('om-drilldown-view');
+    const nameEl = document.getElementById('drilldown-distributor-name');
+    const countEl = document.getElementById('drilldown-order-count');
+
+    if (nameEl) nameEl.textContent = distributorName;
+    if (countEl) countEl.textContent = orderCount;
+
+    if (queueView && drilldownView) {
+        queueView.style.display = 'none';
+        drilldownView.style.display = 'block';
+    }
+};
+
+window.closeOrderDrillDown = function() {
+    const queueView = document.getElementById('om-queue-view');
+    const drilldownView = document.getElementById('om-drilldown-view');
+
+    if (queueView && drilldownView) {
+        drilldownView.style.display = 'none';
+        queueView.style.display = 'block';
+    }
+};
