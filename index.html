@@ -214,39 +214,98 @@
                     <!-- Heatmap -->
                     <div class="dashboard-card widget">
                         <div class="heatmap-header" style="display:flex; justify-content:space-between; align-items:center;">
-                            <h3>Regional Inventory Overview</h3>
-                            <select id="heatmap-country" class="filter-select" style="padding:4px 8px; font-size:13px;">
-                                <option value="all">Global</option>
-                                <option value="us">North America</option>
-                                <option value="de">Europe</option>
-                                <option value="br">LATAM</option>
-                                <option value="in">APAC</option>
-                            </select>
+                            <h3>My Distributors</h3>
                         </div>
                         <div style="display:flex; gap:24px; margin-top:16px;">
-                            <div class="heatmap-container" style="flex:2; height:220px; min-height:unset;">
-                                <svg viewBox="0 0 800 400" class="heatmap-svg" id="heatmap-svg">
-                                    <path d="M100,50 Q150,20 200,60 T300,40 T400,80 T500,30 T600,70 T700,50 L750,150 L650,250 L550,300 L450,280 L350,350 L250,300 L150,250 L50,150 Z" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="2"/>
-                                    <g id="heatmap-layer"></g>
+                            <div class="heatmap-container" style="flex:1; height:240px; min-height:unset; background: #F8FAFC; border-radius:8px; border:1px solid #E2E8F0; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                                <svg viewBox="0 0 400 300" style="width:100%; height:100%;">
+                                    <!-- Spoke lines -->
+                                    <line x1="200" y1="150" x2="100" y2="80" stroke="#CBD5E1" stroke-width="2" />
+                                    <line x1="200" y1="150" x2="300" y2="80" stroke="#CBD5E1" stroke-width="2" />
+                                    <line x1="200" y1="150" x2="60" y2="170" stroke="#CBD5E1" stroke-width="2" />
+                                    <line x1="200" y1="150" x2="340" y2="170" stroke="#CBD5E1" stroke-width="2" />
+                                    <line x1="200" y1="150" x2="130" y2="240" stroke="#CBD5E1" stroke-width="2" />
+                                    <line x1="200" y1="150" x2="270" y2="240" stroke="#CBD5E1" stroke-width="2" />
+                                    
+                                    <!-- Center Hub (Bayer) -->
+                                    <circle cx="200" cy="150" r="24" fill="#003A70" />
+                                    <text x="200" y="154" fill="white" font-size="12" font-weight="bold" text-anchor="middle">Bayer</text>
+
+                                    <!-- Distributor Nodes -->
+                                    <!-- 1. ABC Seeds (Healthy) -->
+                                    <circle cx="100" cy="80" r="14" fill="#10B981" stroke="white" stroke-width="2" />
+                                    <text x="100" y="55" fill="#1E293B" font-size="11" font-weight="600" text-anchor="middle">ABC</text>
+                                    
+                                    <!-- 2. GreenCrop (Healthy) -->
+                                    <circle cx="300" cy="80" r="14" fill="#10B981" stroke="white" stroke-width="2" />
+                                    <text x="300" y="55" fill="#1E293B" font-size="11" font-weight="600" text-anchor="middle">GreenCrop</text>
+
+                                    <!-- 3. FarmPro (Warning) -->
+                                    <circle cx="60" cy="170" r="14" fill="#F59E0B" stroke="white" stroke-width="2" />
+                                    <text x="60" y="198" fill="#1E293B" font-size="11" font-weight="600" text-anchor="middle">FarmPro</text>
+
+                                    <!-- 4. AgroMax (Critical) -->
+                                    <circle cx="340" cy="170" r="14" fill="#EF4444" stroke="white" stroke-width="2" />
+                                    <text x="340" y="198" fill="#1E293B" font-size="11" font-weight="600" text-anchor="middle">AgroMax</text>
+
+                                    <!-- 5. Valley Crop (Healthy) -->
+                                    <circle cx="130" cy="240" r="14" fill="#10B981" stroke="white" stroke-width="2" />
+                                    <text x="130" y="268" fill="#1E293B" font-size="11" font-weight="600" text-anchor="middle">Valley Crop</text>
+
+                                    <!-- 6. Midwest Ag (Warning) -->
+                                    <circle cx="270" cy="240" r="14" fill="#F59E0B" stroke="white" stroke-width="2" />
+                                    <text x="270" y="268" fill="#1E293B" font-size="11" font-weight="600" text-anchor="middle">Midwest Ag</text>
                                 </svg>
                             </div>
-                            <div style="flex:1; display:flex; flex-direction:column; gap:12px; justify-content:center;">
-                                <div style="display:flex; justify-content:space-between; font-size:13px; align-items:center; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
-                                    <div><strong class="block">North America</strong><span class="text-secondary" style="font-size:11px;">36 Distributors</span></div>
-                                    <div style="text-align:right;"><span class="block font-medium">92%</span><span class="badge badge-high flex-align" style="padding:2px 6px; background:#DCFCE7; color:var(--status-green);">Healthy</span></div>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size:13px; align-items:center; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
-                                    <div><strong class="block">Europe</strong><span class="text-secondary" style="font-size:11px;">28 Distributors</span></div>
-                                    <div style="text-align:right;"><span class="block font-medium">91%</span><span class="badge badge-high flex-align" style="padding:2px 6px; background:#DCFCE7; color:var(--status-green);">Healthy</span></div>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size:13px; align-items:center; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
-                                    <div><strong class="block">LATAM</strong><span class="text-secondary" style="font-size:11px;">14 Distributors</span></div>
-                                    <div style="text-align:right;"><span class="block font-medium">76%</span><span class="badge badge-med flex-align" style="padding:2px 6px;">Warning</span></div>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size:13px; align-items:center;">
-                                    <div><strong class="block">APAC</strong><span class="text-secondary" style="font-size:11px;">9 Distributors</span></div>
-                                    <div style="text-align:right;"><span class="block font-medium">63%</span><span class="badge badge-low flex-align" style="padding:2px 6px;">Critical</span></div>
-                                </div>
+                            <div style="flex:1.5; display:flex; flex-direction:column; justify-content:center;">
+                                <table class="data-table minimal" style="font-size:12px; margin:0; border:1px solid #E2E8F0;">
+                                    <thead>
+                                        <tr>
+                                            <th style="padding: 8px 12px;">Distributor</th>
+                                            <th style="padding: 8px 12px;">Status</th>
+                                            <th style="padding: 8px 12px;">Open Orders</th>
+                                            <th style="padding: 8px 12px;">Inventory Health</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="font-medium text-dark" style="padding: 8px 12px;">ABC Seeds</td>
+                                            <td style="padding: 8px 12px;"><span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green); padding:2px 6px;">Healthy</span></td>
+                                            <td style="padding: 8px 12px;">5</td>
+                                            <td style="padding: 8px 12px;" class="text-green font-medium">Healthy</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-medium text-dark" style="padding: 8px 12px;">GreenCrop Distribution</td>
+                                            <td style="padding: 8px 12px;"><span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green); padding:2px 6px;">Healthy</span></td>
+                                            <td style="padding: 8px 12px;">2</td>
+                                            <td style="padding: 8px 12px;" class="text-green font-medium">Healthy</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-medium text-dark" style="padding: 8px 12px;">FarmPro Solutions</td>
+                                            <td style="padding: 8px 12px;"><span class="badge badge-med" style="padding:2px 6px;">Warning</span></td>
+                                            <td style="padding: 8px 12px;">3</td>
+                                            <td style="padding: 8px 12px;" class="text-yellow font-medium">Warning</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-medium text-dark" style="padding: 8px 12px;">AgroMax Partners</td>
+                                            <td style="padding: 8px 12px;"><span class="badge badge-low" style="padding:2px 6px;">Critical</span></td>
+                                            <td style="padding: 8px 12px;">7</td>
+                                            <td style="padding: 8px 12px;" class="text-red font-medium">Critical</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-medium text-dark" style="padding: 8px 12px;">Valley Crop Services</td>
+                                            <td style="padding: 8px 12px;"><span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green); padding:2px 6px;">Healthy</span></td>
+                                            <td style="padding: 8px 12px;">1</td>
+                                            <td style="padding: 8px 12px;" class="text-green font-medium">Healthy</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-medium text-dark" style="padding: 8px 12px;">Midwest Ag Supply</td>
+                                            <td style="padding: 8px 12px;"><span class="badge badge-med" style="padding:2px 6px;">Warning</span></td>
+                                            <td style="padding: 8px 12px;">4</td>
+                                            <td style="padding: 8px 12px;" class="text-yellow font-medium">Warning</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
