@@ -642,3 +642,27 @@ window.closeOrderDrillDown = function() {
         queueView.style.display = 'block';
     }
 };
+
+// --- Order Tracking Drilldown Logic ---
+window.openTrackingDrillDown = function(distributorName) {
+    const queueView = document.getElementById('ot-queue-view');
+    const drilldownView = document.getElementById('ot-drilldown-view');
+    const nameEl = document.getElementById('drilldown-tracking-distributor');
+
+    if (nameEl) nameEl.textContent = distributorName;
+
+    if (queueView && drilldownView) {
+        queueView.style.display = 'none';
+        drilldownView.style.display = 'block';
+    }
+};
+
+window.closeTrackingDrillDown = function() {
+    const queueView = document.getElementById('ot-queue-view');
+    const drilldownView = document.getElementById('ot-drilldown-view');
+
+    if (queueView && drilldownView) {
+        drilldownView.style.display = 'none';
+        queueView.style.display = 'block';
+    }
+};

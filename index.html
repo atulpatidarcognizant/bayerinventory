@@ -2411,99 +2411,243 @@
 
 
             <!-- Screen 12: Order Tracking -->
+            <!-- Screen 12: Order Tracking -->
             <section id="order-tracking" class="screen">
-                <div class="section-title-bar">
+                <div class="section-title-bar" style="margin-bottom: 24px;">
                     <div>
                         <span class="section-subtitle">Ordering & Fulfillment</span>
-                        <h2>Order Tracking & ETA</h2>
+                        <h2>Distributor Order Tracking</h2>
                     </div>
                 </div>
 
-                <div class="dashboard-grid" style="margin-top: 16px; grid-template-columns: 2fr 1fr;">
-                    <div class="dashboard-card widget">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px;">
-                            <h3>Order #9942-B Shipment Milestones</h3>
-                            <span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green);">In Transit</span>
+                <!-- Level 1: Distributor Tracking Dashboard -->
+                <div id="ot-queue-view">
+                    
+                    <!-- Shipment Summary KPIs -->
+                    <div class="dashboard-grid" style="grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 24px;">
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon" style="background:#E0F2FE; color:#0284C7;"><i data-lucide="truck"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Orders In Transit</span>
+                                <span class="kpi-value" style="color:#0369A1;">24</span>
+                            </div>
                         </div>
-                        
-                        <div class="ai-reasoning" style="margin-bottom: 24px; background: #FEF2F2; border: 1px solid #FECACA; padding: 12px; border-radius: 6px;">
-                            <h5 style="margin:0 0 4px 0; color: var(--status-red); display:flex; align-items:center; gap:6px;">
-                                <i data-lucide="alert-triangle" style="width:14px;height:14px;"></i> Delay Alert
-                            </h5>
-                            <p class="text-sm text-dark" style="margin:0;">Traffic congestion on Route 401 may delay ETA by ~15 mins. AI ETA is actively compensating.</p>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon" style="background:#FEE2E2; color:#DC2626;"><i data-lucide="alert-triangle"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Delayed Orders</span>
+                                <span class="kpi-value text-red">6</span>
+                            </div>
                         </div>
-
-                        <!-- Shipment Timeline -->
-                        <div style="position: relative; padding-left: 32px;">
-                            <div style="position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: #E2E8F0;"></div>
-                            
-                            <!-- Completed Step -->
-                            <div style="position: relative; margin-bottom: 24px;">
-                                <div style="position: absolute; left: -32px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--status-green); border: 2px solid white; box-shadow: 0 0 0 1px var(--status-green);"></div>
-                                <h4 style="margin:0 0 4px 0; color: var(--text-dark);">Order Placed</h4>
-                                <p class="text-sm text-secondary" style="margin:0;">Order submitted via Partner Portal.</p>
-                                <span class="text-xs text-secondary mt-1 block">Oct 12, 09:42 AM</span>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon" style="background:#DCFCE7; color:#10B981;"><i data-lucide="check-circle"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Delivered Today</span>
+                                <span class="kpi-value">18</span>
                             </div>
-
-                            <!-- Completed Step -->
-                            <div style="position: relative; margin-bottom: 24px;">
-                                <div style="position: absolute; left: -32px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--status-green); border: 2px solid white; box-shadow: 0 0 0 1px var(--status-green);"></div>
-                                <h4 style="margin:0 0 4px 0; color: var(--text-dark);">Warehouse Processing</h4>
-                                <p class="text-sm text-secondary" style="margin:0;">Pick and pack completed at DC-Montreal.</p>
-                                <span class="text-xs text-secondary mt-1 block">Oct 13, 14:15 PM</span>
-                            </div>
-
-                            <!-- Active Step -->
-                            <div style="position: relative; margin-bottom: 24px;">
-                                <div style="position: absolute; left: -32px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: white; border: 4px solid var(--primary-blue); box-shadow: 0 0 0 1px var(--primary-blue);"></div>
-                                <h4 style="margin:0 0 4px 0; color: var(--primary-blue);">In Transit</h4>
-                                <p class="text-sm text-dark font-medium" style="margin:0;">Out for delivery. Live ETA: 3h 15m.</p>
-                                <span class="text-xs text-secondary mt-1 block">Oct 14, 08:30 AM</span>
-                            </div>
-
-                            <!-- Future Step -->
-                            <div style="position: relative;">
-                                <div style="position: absolute; left: -32px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: white; border: 2px solid #E2E8F0;"></div>
-                                <h4 style="margin:0 0 4px 0; color: var(--text-secondary);">Delivered & Receipt</h4>
-                                <p class="text-sm text-secondary" style="margin:0;">Pending warehouse receipt confirmation.</p>
+                        </div>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon" style="background:#E0E7FF; color:#4F46E5;"><i data-lucide="activity"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">On-Time Delivery</span>
+                                <span class="kpi-value" style="color:#4338CA;">94%</span>
                             </div>
                         </div>
                     </div>
 
-                    <div style="display: flex; flex-direction: column; gap: 16px;">
-                        <div class="dashboard-card widget">
-                            <h3>Live ETA & Confidence</h3>
-                            <div style="font-size: 32px; font-weight: 700; color: var(--status-green); margin: 12px 0; font-family: 'Outfit', sans-serif;">Today, 2:00 PM</div>
-                            <span class="badge badge-high">94% Confidence</span>
-                            <p class="text-sm mt-4 text-secondary">Weather and traffic conditions are clear. Driver is currently 140km away from your facility.</p>
-                        </div>
+                    <!-- AI Shipment Insights -->
+                    <div class="dashboard-card widget" style="background:#F0F9FF; border:1px solid var(--primary-blue); margin-bottom:24px;">
+                        <h3 style="margin:0 0 16px 0; color:var(--primary-blue); display:flex; align-items:center; gap:8px;">
+                            <i data-lucide="sparkles" style="width:18px;height:18px;"></i> AI Shipment Insights
+                        </h3>
+                        <ul style="margin:0; padding-left:20px; font-size:14px; color:var(--text-dark); display:flex; flex-direction:column; gap:12px;">
+                            <li><strong style="color:var(--status-red);">GreenCrop Distribution</strong> has 3 delayed shipments due to weather disruptions.</li>
+                            <li><strong>ABC Seeds</strong> has all shipments tracking on schedule for tomorrow's delivery.</li>
+                            <li><strong style="color:#D97706;">FarmPro Solutions</strong> has one shipment at risk of missing its SLA due to carrier delay.</li>
+                            <li><strong>94% of overall portfolio shipments</strong> are expected to arrive on time this week.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Distributor Shipment Summaries -->
+                    <h3 style="margin:0 0 16px 0; font-size:18px;">Distributor Shipment Summaries</h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
                         
-                        <div class="dashboard-card widget">
-                            <h3>Notification Preferences</h3>
-                            <div style="display:flex; flex-direction:column; gap:12px; margin-top:16px;">
-                                <label style="display:flex; align-items:center; gap:8px; font-size:14px; cursor:pointer;">
-                                    <input type="checkbox" checked> Push Notifications (App)
-                                </label>
-                                <label style="display:flex; align-items:center; gap:8px; font-size:14px; cursor:pointer;">
-                                    <input type="checkbox" checked> Receive Milestone SMS
-                                </label>
-                                <label style="display:flex; align-items:center; gap:8px; font-size:14px; cursor:pointer;">
-                                    <input type="checkbox" checked> Alert on Delay > 1Hr
-                                </label>
+                        <!-- Distributor 1: GreenCrop (Requires Attention) -->
+                        <div class="dashboard-card widget cursor-pointer" onclick="openTrackingDrillDown('GreenCrop Distribution')" style="border-left: 4px solid var(--status-red); transition: transform 0.2s, box-shadow 0.2s; padding:20px;">
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+                                <h3 style="margin:0; font-size:16px;">GreenCrop Distribution</h3>
+                                <span class="badge badge-low">Requires Attention</span>
                             </div>
+                            <div style="display:flex; flex-direction:column; gap:8px;">
+                                <div style="display:flex; justify-content:space-between; font-size:14px;">
+                                    <span style="color:var(--text-secondary);">Orders In Transit</span>
+                                    <span class="font-bold">4</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; font-size:14px;">
+                                    <span style="color:var(--text-secondary);">Delivered Today</span>
+                                    <span class="font-bold">1</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; font-size:14px; border-top:1px solid var(--border-color); padding-top:8px; margin-top:8px;">
+                                    <span style="color:var(--status-red); font-weight:500;">Delayed Orders</span>
+                                    <span class="font-bold text-red">3</span>
+                                </div>
+                            </div>
+                            <button class="secondary-btn btn-sm mt-4" style="width:100%; justify-content:center;">View Details</button>
                         </div>
 
-                        <div class="dashboard-card widget">
-                            <h3>Order History & Confirmation</h3>
-                            <p class="text-sm text-secondary">Review past completed orders or confirm delivery receipt for recent drop-offs.</p>
-                            <button class="primary-btn btn-sm mt-3" style="width:100%; justify-content:center;">Provide Delivery Confirmation</button>
-                            <button class="secondary-btn btn-sm mt-2" style="width:100%; justify-content:center;">View Past Orders</button>
+                        <!-- Distributor 2: ABC Seeds (Healthy) -->
+                        <div class="dashboard-card widget cursor-pointer" onclick="openTrackingDrillDown('ABC Seeds')" style="border-left: 4px solid var(--status-green); transition: transform 0.2s, box-shadow 0.2s; padding:20px;">
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+                                <h3 style="margin:0; font-size:16px;">ABC Seeds</h3>
+                                <span class="badge badge-high">On Track</span>
+                            </div>
+                            <div style="display:flex; flex-direction:column; gap:8px;">
+                                <div style="display:flex; justify-content:space-between; font-size:14px;">
+                                    <span style="color:var(--text-secondary);">Orders In Transit</span>
+                                    <span class="font-bold">3</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; font-size:14px;">
+                                    <span style="color:var(--text-secondary);">Delivered Today</span>
+                                    <span class="font-bold">1</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; font-size:14px; border-top:1px solid var(--border-color); padding-top:8px; margin-top:8px;">
+                                    <span style="color:var(--text-secondary);">Delayed Orders</span>
+                                    <span class="font-bold">0</span>
+                                </div>
+                            </div>
+                            <button class="secondary-btn btn-sm mt-4" style="width:100%; justify-content:center;">View Details</button>
                         </div>
+
+                        <!-- Distributor 3: FarmPro Solutions (Warning) -->
+                        <div class="dashboard-card widget cursor-pointer" onclick="openTrackingDrillDown('FarmPro Solutions')" style="border-left: 4px solid #F59E0B; transition: transform 0.2s, box-shadow 0.2s; padding:20px;">
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+                                <h3 style="margin:0; font-size:16px;">FarmPro Solutions</h3>
+                                <span class="badge badge-med">At Risk</span>
+                            </div>
+                            <div style="display:flex; flex-direction:column; gap:8px;">
+                                <div style="display:flex; justify-content:space-between; font-size:14px;">
+                                    <span style="color:var(--text-secondary);">Orders In Transit</span>
+                                    <span class="font-bold">2</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; font-size:14px;">
+                                    <span style="color:var(--text-secondary);">Delivered Today</span>
+                                    <span class="font-bold">2</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; font-size:14px; border-top:1px solid var(--border-color); padding-top:8px; margin-top:8px;">
+                                    <span style="color:#B45309; font-weight:500;">Delayed Orders</span>
+                                    <span class="font-bold" style="color:#B45309;">1</span>
+                                </div>
+                            </div>
+                            <button class="secondary-btn btn-sm mt-4" style="width:100%; justify-content:center;">View Details</button>
+                        </div>
+
+                        <!-- Distributor 4: Northern Agri-Supply (Healthy) -->
+                        <div class="dashboard-card widget cursor-pointer" onclick="openTrackingDrillDown('Northern Agri-Supply')" style="border-left: 4px solid var(--status-green); transition: transform 0.2s, box-shadow 0.2s; padding:20px;">
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+                                <h3 style="margin:0; font-size:16px;">Northern Agri-Supply</h3>
+                                <span class="badge badge-high">Healthy</span>
+                            </div>
+                            <div style="display:flex; flex-direction:column; gap:8px;">
+                                <div style="display:flex; justify-content:space-between; font-size:14px;">
+                                    <span style="color:var(--text-secondary);">Orders In Transit</span>
+                                    <span class="font-bold">5</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; font-size:14px;">
+                                    <span style="color:var(--text-secondary);">Delivered Today</span>
+                                    <span class="font-bold">4</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; font-size:14px; border-top:1px solid var(--border-color); padding-top:8px; margin-top:8px;">
+                                    <span style="color:var(--text-secondary);">Delayed Orders</span>
+                                    <span class="font-bold">0</span>
+                                </div>
+                            </div>
+                            <button class="secondary-btn btn-sm mt-4" style="width:100%; justify-content:center;">View Details</button>
+                        </div>
+
+                        <!-- Distributor 5: Prairie Partners (Healthy) -->
+                        <div class="dashboard-card widget cursor-pointer" onclick="openTrackingDrillDown('Prairie Partners')" style="border-left: 4px solid var(--status-green); transition: transform 0.2s, box-shadow 0.2s; padding:20px;">
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+                                <h3 style="margin:0; font-size:16px;">Prairie Partners</h3>
+                                <span class="badge badge-high">Healthy</span>
+                            </div>
+                            <div style="display:flex; flex-direction:column; gap:8px;">
+                                <div style="display:flex; justify-content:space-between; font-size:14px;">
+                                    <span style="color:var(--text-secondary);">Orders In Transit</span>
+                                    <span class="font-bold">1</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; font-size:14px;">
+                                    <span style="color:var(--text-secondary);">Delivered Today</span>
+                                    <span class="font-bold">0</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; font-size:14px; border-top:1px solid var(--border-color); padding-top:8px; margin-top:8px;">
+                                    <span style="color:var(--text-secondary);">Delayed Orders</span>
+                                    <span class="font-bold">0</span>
+                                </div>
+                            </div>
+                            <button class="secondary-btn btn-sm mt-4" style="width:100%; justify-content:center;">View Details</button>
+                        </div>
+
                     </div>
                 </div>
+
+                <!-- Level 2: Distributor Drill-Down Workspace -->
+                <div id="ot-drilldown-view" style="display: none;">
+                    <div style="margin-bottom: 24px;">
+                        <button class="secondary-btn btn-sm" onclick="closeTrackingDrillDown()" style="display:flex; align-items:center; gap:8px; border:none; background:transparent; padding:0; color:var(--primary-blue); cursor:pointer;">
+                            <i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Back to Distributor List
+                        </button>
+                    </div>
+
+                    <div style="margin-bottom:24px;">
+                        <h3 style="font-size: 20px; margin:0 0 4px 0;" id="drilldown-tracking-distributor">GreenCrop Distribution</h3>
+                        <p style="margin:0; color:var(--text-secondary); font-size:14px;">Active Shipments & Deliveries</p>
+                    </div>
+
+                    <div class="dashboard-card widget" style="padding:0; overflow:hidden;">
+                        <table class="data-table" style="margin:0; width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Current Status</th>
+                                    <th>Estimated Delivery</th>
+                                    <th>Delay Reason</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ot-drilldown-table-body">
+                                <!-- Dynamic rows based on the distributor clicked. We'll populate some hardcoded rows representing GreenCrop's data as default -->
+                                <tr>
+                                    <td class="font-medium">#GC-4992-A</td>
+                                    <td><span class="badge badge-low">Delayed</span></td>
+                                    <td class="font-medium">Tomorrow, 11:30 AM</td>
+                                    <td style="color:var(--status-red);"><i data-lucide="cloud-lightning" style="width:14px;height:14px; vertical-align:-2px;"></i> Weather disruption</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">#GC-4995-B</td>
+                                    <td><span class="badge badge-low">Delayed</span></td>
+                                    <td class="font-medium">Jul 25, 4:15 PM</td>
+                                    <td style="color:var(--status-red);"><i data-lucide="cloud-lightning" style="width:14px;height:14px; vertical-align:-2px;"></i> Weather disruption</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">#GC-5001-C</td>
+                                    <td><span class="badge badge-low">Delayed</span></td>
+                                    <td class="font-medium">Jul 26, 9:00 AM</td>
+                                    <td style="color:var(--status-red);"><i data-lucide="alert-triangle" style="width:14px;height:14px; vertical-align:-2px;"></i> Traffic congestion</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">#GC-5008-D</td>
+                                    <td><span class="badge" style="background:#E0F2FE; color:#0284C7;">Out for Delivery</span></td>
+                                    <td class="font-medium">Today, 2:00 PM</td>
+                                    <td style="color:var(--text-secondary);">—</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </section>
 
-            <!-- Screen 13: ERP Integration -->
+
             <section id="erp-integration" class="screen">
                 <div class="section-title-bar">
                     <div>
