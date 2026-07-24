@@ -1706,40 +1706,187 @@
 
 
             <!-- Screen 8: AI Learning Center -->
+            <!-- Screen 8: AI Learning Center -->
             <section id="learning" class="screen">
-                <div class="section-title-bar">
+                <div class="section-title-bar" style="margin-bottom: 24px;">
                     <div>
                         <span class="section-subtitle">System</span>
                         <h2>AI Learning Center</h2>
                     </div>
                 </div>
-                <div class="dashboard-grid">
-                    <div class="dashboard-card widget" style="grid-column: span 2;">
-                        <h3>Continuous Feedback Loop</h3>
-                        <div class="feedback-pipeline">
-                            <div class="fb-step"><i data-lucide="user"></i><br>Human Validation</div>
-                            <i data-lucide="arrow-right" class="arrow"></i>
-                            <div class="fb-step active"><i data-lucide="database"></i><br>Training Data Update</div>
-                            <i data-lucide="arrow-right" class="arrow"></i>
-                            <div class="fb-step"><i data-lucide="brain-circuit"></i><br>Improved Model</div>
-                        </div>
-                        <p style="text-align:center;margin-top:16px;color:var(--text-secondary);font-size:13px;">The AI model learns from every Account Manager approval/rejection.</p>
+
+                <!-- 1. Main Workflow -->
+                <div class="dashboard-card widget" style="margin-bottom: 24px;">
+                    <h3 style="margin:0 0 16px 0; font-size:16px;">How Your Decisions Improve AI</h3>
+                    <div class="feedback-pipeline" style="display:flex; justify-content:space-between; align-items:center; background:#F8FAFC; padding:24px; border-radius:8px; border:1px solid var(--border-color);">
+                        <div class="fb-step" style="text-align:center; flex:1;"><div style="background:#E0F2FE; color:#0284C7; width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 12px auto;"><i data-lucide="sparkles"></i></div><div style="font-weight:600; font-size:14px; color:var(--text-dark);">AI Suggestion<br>Generated</div></div>
+                        <i data-lucide="arrow-right" class="arrow" style="color:#CBD5E1;"></i>
+                        <div class="fb-step" style="text-align:center; flex:1;"><div style="background:#DCFCE7; color:#16A34A; width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 12px auto;"><i data-lucide="user-check"></i></div><div style="font-weight:600; font-size:14px; color:var(--text-dark);">Account Manager<br>Reviews</div></div>
+                        <i data-lucide="arrow-right" class="arrow" style="color:#CBD5E1;"></i>
+                        <div class="fb-step" style="text-align:center; flex:1;"><div style="background:#FEF3C7; color:#D97706; width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 12px auto;"><i data-lucide="inbox"></i></div><div style="font-weight:600; font-size:14px; color:var(--text-dark);">Feedback<br>Captured</div></div>
+                        <i data-lucide="arrow-right" class="arrow" style="color:#CBD5E1;"></i>
+                        <div class="fb-step" style="text-align:center; flex:1;"><div style="background:#F3E8FF; color:#9333EA; width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 12px auto;"><i data-lucide="settings"></i></div><div style="font-weight:600; font-size:14px; color:var(--text-dark);">Model<br>Updated</div></div>
+                        <i data-lucide="arrow-right" class="arrow" style="color:#CBD5E1;"></i>
+                        <div class="fb-step" style="text-align:center; flex:1;"><div style="background:#E0E7FF; color:#4F46E5; width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 12px auto;"><i data-lucide="trending-up"></i></div><div style="font-weight:600; font-size:14px; color:var(--text-dark);">Better Future<br>Recommendations</div></div>
                     </div>
-                    <div class="dashboard-card widget">
-                        <h3>Model Performance (v2.4.1)</h3>
-                        <div class="kpi-details mb-2">
-                            <span class="kpi-label">Accepted Suggestions</span>
-                            <span class="kpi-value green">14,204</span>
-                        </div>
+                    <p style="text-align:center; margin:16px 0 0 0; color:var(--text-secondary); font-size:14px;">Every approval, rejection, and manual correction helps improve future recommendations across all distributors.</p>
+                </div>
+
+                <!-- 2. Executive Performance Cards -->
+                <div class="dashboard-grid" style="grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 24px;">
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon" style="background:#DCFCE7; color:#10B981;"><i data-lucide="check-circle"></i></div>
                         <div class="kpi-details">
-                            <span class="kpi-label">Rejected Suggestions</span>
-                            <span class="kpi-value text-yellow">312</span>
+                            <span class="kpi-label">Suggestions Accepted</span>
+                            <span class="kpi-value" style="color:#059669;">14,204</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon" style="background:#FEF3C7; color:#D97706;"><i data-lucide="edit-3"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Suggestions Corrected</span>
+                            <span class="kpi-value" style="color:#B45309;">312</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon" style="background:#E0E7FF; color:#4F46E5;"><i data-lucide="target"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Current AI Accuracy</span>
+                            <span class="kpi-value" style="color:#4338CA;">98.2%</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon" style="background:#E0F2FE; color:#0284C7;"><i data-lucide="bar-chart-2"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Average AI Confidence</span>
+                            <span class="kpi-value" style="color:#0369A1;">96%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+                    <div style="display: flex; flex-direction: column; gap: 24px;">
+                        <!-- 4. Recently Learned -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin:0 0 16px 0; font-size:16px;">Recently Learned</h3>
+                            <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:16px;">
+                                <li style="display:flex; align-items:flex-start; gap:12px; padding:16px; background:#F8FAFC; border:1px solid var(--border-color); border-radius:8px;">
+                                    <i data-lucide="check-circle" style="color:#10B981; margin-top:2px;"></i>
+                                    <div>
+                                        <div style="font-weight:600; color:var(--text-dark); margin-bottom:4px;">ABC Seeds SKU "RND-001" now maps automatically with 99% confidence.</div>
+                                        <div style="font-size:13px; color:var(--text-secondary);">Learned from 3 previous manual approvals by Account Managers.</div>
+                                    </div>
+                                </li>
+                                <li style="display:flex; align-items:flex-start; gap:12px; padding:16px; background:#F8FAFC; border:1px solid var(--border-color); border-radius:8px;">
+                                    <i data-lucide="file-spreadsheet" style="color:#4F46E5; margin-top:2px;"></i>
+                                    <div>
+                                        <div style="font-weight:600; color:var(--text-dark); margin-bottom:4px;">FarmPro inventory template is now recognized automatically.</div>
+                                        <div style="font-size:13px; color:var(--text-secondary);">Standardized field mapping applied to all future FarmPro uploads.</div>
+                                    </div>
+                                </li>
+                                <li style="display:flex; align-items:flex-start; gap:12px; padding:16px; background:#F8FAFC; border:1px solid var(--border-color); border-radius:8px;">
+                                    <i data-lucide="alert-triangle" style="color:#D97706; margin-top:2px;"></i>
+                                    <div>
+                                        <div style="font-weight:600; color:var(--text-dark); margin-bottom:4px;">Ontario pricing exception detection has been enhanced.</div>
+                                        <div style="font-size:13px; color:var(--text-secondary);">System now automatically flags tier-volume mismatches before approval.</div>
+                                    </div>
+                                </li>
+                                <li style="display:flex; align-items:flex-start; gap:12px; padding:16px; background:#F8FAFC; border:1px solid var(--border-color); border-radius:8px;">
+                                    <i data-lucide="layers" style="color:#0284C7; margin-top:2px;"></i>
+                                    <div>
+                                        <div style="font-weight:600; color:var(--text-dark); margin-bottom:4px;">GreenCrop distributor catalog harmonization completed.</div>
+                                        <div style="font-size:13px; color:var(--text-secondary);">Over 400 products successfully mapped to the canonical Bayer catalog.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 24px;">
+                        <!-- 3. AI Business Impact -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin:0 0 16px 0; font-size:16px;">AI Business Impact</h3>
+                            <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px;">
+                                <li style="display:flex; justify-content:space-between; align-items:center; padding-bottom:12px; border-bottom:1px solid var(--border-color);">
+                                    <span style="font-size:14px; color:var(--text-dark);">Manual reviews reduced</span>
+                                    <span class="badge badge-high flex-align" style="background:#DCFCE7; color:#16A34A;"><i data-lucide="arrow-down" style="width:12px;height:12px;"></i> 18%</span>
+                                </li>
+                                <li style="display:flex; justify-content:space-between; align-items:center; padding-bottom:12px; border-bottom:1px solid var(--border-color);">
+                                    <span style="font-size:14px; color:var(--text-dark);">Auto-approved recommendations</span>
+                                    <span class="badge badge-high flex-align" style="background:#DCFCE7; color:#16A34A;"><i data-lucide="arrow-up" style="width:12px;height:12px;"></i> 24%</span>
+                                </li>
+                                <li style="display:flex; justify-content:space-between; align-items:center; padding-bottom:12px; border-bottom:1px solid var(--border-color);">
+                                    <span style="font-size:14px; color:var(--text-dark);">Average review time</span>
+                                    <span class="badge badge-high flex-align" style="background:#DCFCE7; color:#16A34A;"><i data-lucide="arrow-down" style="width:12px;height:12px;"></i> 12 mins</span>
+                                </li>
+                                <li style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-size:14px; color:var(--text-dark);">First-pass mapping accuracy</span>
+                                    <span class="badge badge-high flex-align" style="background:#DCFCE7; color:#16A34A;"><i data-lucide="arrow-up" style="width:12px;height:12px;"></i> 98.2%</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- 6. Learning Contribution -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin:0 0 16px 0; font-size:16px;">Your Contribution</h3>
+                            <div style="display:flex; flex-direction:column; gap:16px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-size:14px; color:var(--text-secondary);">Suggestions Reviewed</span>
+                                    <span style="font-weight:600; color:var(--text-dark);">4,281</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-size:14px; color:var(--text-secondary);">Suggestions Corrected</span>
+                                    <span style="font-weight:600; color:var(--text-dark);">142</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-size:14px; color:var(--text-secondary);">Auto-learning Contributions</span>
+                                    <span style="font-weight:600; color:var(--text-dark);">38</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-size:14px; color:var(--text-secondary);">Distributors Improved</span>
+                                    <span style="font-weight:600; color:var(--text-dark);">12</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. Recent Learning Timeline -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin:0 0 16px 0; font-size:16px;">Learning Timeline</h3>
+                            <div class="timeline" style="margin-left: 8px;">
+                                <div class="timeline-step">
+                                    <div class="step-indicator complete"></div>
+                                    <div class="step-content">
+                                        <h4 style="margin:0; font-size:14px;">SKU matching model updated</h4>
+                                        <p style="margin:4px 0 0 0; font-size:13px; color:var(--text-secondary);">Yesterday</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-step">
+                                    <div class="step-indicator complete"></div>
+                                    <div class="step-content">
+                                        <h4 style="margin:0; font-size:14px;">Pricing exception detection improved</h4>
+                                        <p style="margin:4px 0 0 0; font-size:13px; color:var(--text-secondary);">2 Days Ago</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-step">
+                                    <div class="step-indicator complete"></div>
+                                    <div class="step-content">
+                                        <h4 style="margin:0; font-size:14px;">Ontario inventory templates added</h4>
+                                        <p style="margin:4px 0 0 0; font-size:13px; color:var(--text-secondary);">Last Week</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-step">
+                                    <div class="step-indicator complete"></div>
+                                    <div class="step-content">
+                                        <h4 style="margin:0; font-size:14px;">New Bayer fungicide catalog learned</h4>
+                                        <p style="margin:4px 0 0 0; font-size:13px; color:var(--text-secondary);">Last Month</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
-            
-            <!-- Screen 6: Distributor Review -->
+
             <section id="distributor-review" class="screen">
                 <div class="section-title-bar">
                     <div>
