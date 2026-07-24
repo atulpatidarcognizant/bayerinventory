@@ -387,113 +387,189 @@
             </section>
 
             <!-- Screen 2: Distributor Upload Portal -->
+            <!-- Screen 2: Distributor Upload Portal (AM View) -->
             <section id="upload" class="screen">
-                <div class="section-title-bar" style="margin-bottom: 8px;">
+                <div class="section-title-bar" style="margin-bottom: 24px;">
                     <div>
                         <span class="section-subtitle">Distributor Operations</span>
-                        <h2>Inventory Upload Portal</h2>
+                        <h2>Distributor Uploads</h2>
                     </div>
                 </div>
-                <p style="color:var(--secondary-text); font-size:15px; margin:0 0 24px 0; max-width:800px;">
-                    Upload your latest inventory file. AI will automatically validate, standardize, map distributor products to Bayer products, and prepare the inventory for review.
-                </p>
-                
-                <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px;">
-                    
-                    <!-- Upload Area -->
-                    <div style="display:flex; flex-direction:column; gap:16px;">
-                        <div class="upload-area" id="drop-zone" style="padding: 40px 20px; min-height: 220px; display:flex; flex-direction:column; justify-content:center;">
-                            <i data-lucide="upload-cloud" class="upload-icon" style="margin-bottom: 12px; width:48px; height:48px;"></i>
-                            <h2 style="margin-bottom: 8px; font-size:18px;">Drag & Drop your inventory file here</h2>
-                            <p style="margin-bottom: 16px;">or click to browse files</p>
-                            <button class="primary-btn" id="btn-upload" style="margin:0 auto;">Select File</button>
-                        </div>
-                        
-                        <div style="display:flex; justify-content:space-between; align-items:center; padding: 0 8px;">
-                            <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:var(--secondary-text);">
-                                <i data-lucide="file-spreadsheet" style="width:14px;height:14px;"></i> Accepted formats: <strong>.xlsx, .csv</strong>
-                            </div>
-                            <button class="text-link text-blue" style="font-size:13px;" onclick="showToast('Downloading Template...')"><i data-lucide="download" style="width:14px;height:14px;"></i> Download Bayer Inventory Template</button>
+
+                <!-- 1. Executive Summary Cards -->
+                <div class="dashboard-grid" style="grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 24px;">
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon" style="background:#E0E7FF; color:#4F46E5;"><i data-lucide="users"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Distributors Assigned</span>
+                            <span class="kpi-value" style="color:#4338CA;">18</span>
                         </div>
                     </div>
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon" style="background:#DCFCE7; color:#10B981;"><i data-lucide="upload-cloud"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Uploaded Today</span>
+                            <span class="kpi-value">12</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon" style="background:#FEF3C7; color:#D97706;"><i data-lucide="clock"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Overdue Uploads</span>
+                            <span class="kpi-value" style="color:#B45309;">4</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon" style="background:#FEE2E2; color:#DC2626;"><i data-lucide="x-circle"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Failed Uploads</span>
+                            <span class="kpi-value text-red">2</span>
+                        </div>
+                    </div>
+                </div>
 
-                    <!-- Side Panel: AI Capabilities & Recent Upload -->
-                    <div style="display:flex; flex-direction:column; gap:24px;">
-                        <!-- AI Capabilities -->
-                        <div class="dashboard-card widget ai-reasoning" style="background: #F0F9FF; border: 1px solid #BAE6FD; padding: 20px;">
-                            <h4 style="margin:0 0 12px 0; color:var(--primary-blue); display:flex; align-items:center; gap:8px;">
-                                <i data-lucide="sparkles" style="width:16px;height:16px;"></i> Automated AI Processing
-                            </h4>
-                            <ul style="margin:0; padding:0; list-style:none; font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:10px;">
-                                <li style="display:flex; align-items:start; gap:8px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Detects file structure automatically</li>
-                                <li style="display:flex; align-items:start; gap:8px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Validates inventory data for errors</li>
-                                <li style="display:flex; align-items:start; gap:8px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Standardizes product information</li>
-                                <li style="display:flex; align-items:start; gap:8px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Maps Distributor SKUs to Bayer products</li>
-                                <li style="display:flex; align-items:start; gap:8px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Identifies exceptions requiring review</li>
+                <!-- 2. AI Upload Insights -->
+                <div class="dashboard-card widget" style="background:#F0F9FF; border:1px solid var(--primary-blue); margin-bottom:24px;">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                        <div>
+                            <h3 style="margin:0 0 16px 0; color:var(--primary-blue); display:flex; align-items:center; gap:8px;">
+                                <i data-lucide="sparkles" style="width:18px;height:18px;"></i> AI Upload Insights
+                            </h3>
+                            <ul style="margin:0; padding-left:20px; font-size:14px; color:var(--text-dark); display:flex; flex-direction:column; gap:12px;">
+                                <li><strong style="color:#B45309;">4 distributors</strong> have not submitted inventory within the expected reporting window.</li>
+                                <li><strong style="color:var(--status-red);">2 distributors</strong> experienced file validation failures during the latest upload.</li>
+                                <li><strong>Inventory visibility</strong> will improve by 15% once overdue uploads are received.</li>
+                                <li><strong style="color:#D97706;">AgroMax Partners</strong> has uploaded multiple file versions today requiring review.</li>
                             </ul>
                         </div>
-                        
-                        <!-- Recent Upload -->
-                        <div class="dashboard-card widget" style="padding: 16px;">
-                            <h4 style="margin:0 0 12px 0; font-size:14px; color:var(--secondary-text);">Last Upload</h4>
-                            <div style="display:flex; flex-direction:column; gap:4px;">
-                                <div style="display:flex; justify-content:space-between; align-items:center;">
-                                    <span class="font-medium text-sm">inventory_sep23.xlsx</span>
-                                    <span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green);">Processed</span>
+                        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:16px;">
+                            <span style="font-size:13px; color:var(--primary-blue); font-weight:500; background:#E0F2FE; padding:4px 12px; border-radius:12px;">Est. review time: 8 mins</span>
+                            <button class="primary-btn btn-sm">Review Upload Queue</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+                    <!-- 3. Distributor Upload Queue -->
+                    <div class="dashboard-card widget" style="padding:0; overflow:hidden;">
+                        <div style="padding: 20px 24px; border-bottom: 1px solid var(--border-color);">
+                            <h3 style="margin:0; font-size: 16px;">Distributor Upload Queue</h3>
+                        </div>
+                        <table class="data-table" style="margin:0; width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>Distributor</th>
+                                    <th>Last Upload</th>
+                                    <th>Upload Status</th>
+                                    <th>Records</th>
+                                    <th>Validation</th>
+                                    <th style="text-align:right;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-medium">ABC Seeds</td>
+                                    <td class="text-secondary text-sm">Today 10:42 AM</td>
+                                    <td><span class="badge badge-high">Processed</span></td>
+                                    <td>342</td>
+                                    <td><span class="text-green font-medium" style="display:flex; align-items:center; gap:4px;"><i data-lucide="check" style="width:14px;height:14px;"></i> Passed</span></td>
+                                    <td style="text-align:right;"><button class="secondary-btn btn-sm">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">GreenCrop Distribution</td>
+                                    <td class="text-secondary text-sm">8 days ago</td>
+                                    <td><span class="badge badge-med">Overdue</span></td>
+                                    <td class="text-secondary">—</td>
+                                    <td class="text-secondary">—</td>
+                                    <td style="text-align:right;"><button class="secondary-btn btn-sm" style="color:#B45309; border-color:#FDE68A;">Send Reminder</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">FarmPro Solutions</td>
+                                    <td class="text-secondary text-sm">Today 12:15 PM</td>
+                                    <td><span class="badge" style="background:#E0F2FE; color:#0284C7;">Processing</span></td>
+                                    <td>198</td>
+                                    <td><span class="text-secondary text-sm" style="display:flex; align-items:center; gap:4px;"><i data-lucide="loader" style="width:14px;height:14px;"></i> Running</span></td>
+                                    <td style="text-align:right;"><button class="secondary-btn btn-sm">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">AgroMax Partners</td>
+                                    <td class="text-secondary text-sm">Today 9:30 AM</td>
+                                    <td><span class="badge badge-low">Failed</span></td>
+                                    <td>412</td>
+                                    <td><span class="text-red font-medium" style="display:flex; align-items:center; gap:4px;"><i data-lucide="alert-triangle" style="width:14px;height:14px;"></i> Format Error</span></td>
+                                    <td style="text-align:right;"><button class="secondary-btn btn-sm" style="color:var(--status-red); border-color:#FECACA;">Review</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Northern Agri-Supply</td>
+                                    <td class="text-secondary text-sm">Yesterday 4:05 PM</td>
+                                    <td><span class="badge badge-high">Processed</span></td>
+                                    <td>512</td>
+                                    <td><span class="text-green font-medium" style="display:flex; align-items:center; gap:4px;"><i data-lucide="check" style="width:14px;height:14px;"></i> Passed</span></td>
+                                    <td style="text-align:right;"><button class="secondary-btn btn-sm">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">Prairie Partners</td>
+                                    <td class="text-secondary text-sm">3 days ago</td>
+                                    <td><span class="badge badge-med">Overdue</span></td>
+                                    <td class="text-secondary">—</td>
+                                    <td class="text-secondary">—</td>
+                                    <td style="text-align:right;"><button class="secondary-btn btn-sm" style="color:#B45309; border-color:#FDE68A;">Send Reminder</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 4. Recent Upload Activity & Available Actions -->
+                    <div style="display: flex; flex-direction: column; gap: 24px;">
+                        <div class="dashboard-card widget">
+                            <h3 style="margin:0 0 16px 0; font-size:16px;">Recent Activity</h3>
+                            <div class="timeline" style="margin-left: 8px;">
+                                <div class="timeline-step">
+                                    <div class="step-indicator complete"></div>
+                                    <div class="step-content">
+                                        <h4 style="margin:0; font-size:14px;">ABC Seeds uploaded inventory</h4>
+                                        <p style="margin:4px 0 0 0; font-size:13px; color:var(--text-secondary);">Today, 10:42 AM</p>
+                                    </div>
                                 </div>
-                                <span class="text-xs text-secondary">Sep 23, 10:14 AM • 342 Records</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="dashboard-card upload-pipeline hidden" id="upload-pipeline">
-                    <h3>AI Processing Pipeline</h3>
-                    <div class="pipeline-steps" style="margin-bottom: 32px;">
-                        <div class="step active"><i data-lucide="upload-cloud"></i> Upload</div>
-                        <div class="step"><i data-lucide="shield-check"></i> Validate</div>
-                        <div class="step"><i data-lucide="refresh-cw"></i> Standardize</div>
-                        <div class="step"><i data-lucide="sparkles"></i> AI Matching</div>
-                        <div class="step"><i data-lucide="check-circle-2"></i> Ready</div>
-                    </div>
-                    
-                    <div id="processing-results" class="hidden">
-                        <!-- AI Processing Summary -->
-                        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; margin-bottom: 24px;">
-                            <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; text-align:center;">
-                                <span class="text-sm text-secondary block">Records Processed</span>
-                                <span class="font-bold text-lg text-dark">420</span>
-                            </div>
-                            <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; text-align:center;">
-                                <span class="text-sm text-secondary block">Auto-Matched</span>
-                                <span class="font-bold text-lg text-green">96%</span>
-                            </div>
-                            <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; text-align:center; background: #FEF3C7;">
-                                <span class="text-sm text-secondary block">Requires Review</span>
-                                <span class="font-bold text-lg text-yellow">12 Items</span>
+                                <div class="timeline-step">
+                                    <div class="step-indicator" style="background:#E0F2FE; border-color:#0284C7;"></div>
+                                    <div class="step-content">
+                                        <h4 style="margin:0; font-size:14px;">FarmPro processing completed</h4>
+                                        <p style="margin:4px 0 0 0; font-size:13px; color:var(--text-secondary);">Today, 10:15 AM</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-step">
+                                    <div class="step-indicator" style="background:#FEF3C7; border-color:#D97706;"></div>
+                                    <div class="step-content">
+                                        <h4 style="margin:0; font-size:14px;">Reminder sent to GreenCrop</h4>
+                                        <p style="margin:4px 0 0 0; font-size:13px; color:var(--text-secondary);">Yesterday, 3:00 PM</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-step">
+                                    <div class="step-indicator error"></div>
+                                    <div class="step-content">
+                                        <h4 style="margin:0; font-size:14px;">AgroMax upload failed validation</h4>
+                                        <p style="margin:4px 0 0 0; font-size:13px; color:var(--text-secondary);">2 days ago</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
-                        <!-- Outcome -->
-                        <div style="text-align:center; margin-bottom: 24px;">
-                            <h4 style="margin:0 0 8px 0; color:var(--status-green); display:flex; align-items:center; justify-content:center; gap:8px;">
-                                <i data-lucide="check-circle" style="width:20px;height:20px;"></i> Inventory successfully processed
-                            </h4>
-                            <p style="margin:0; color:var(--text-dark); font-size:14px;">96% of products were automatically matched. 12 products require Bayer review before synchronization.</p>
-                        </div>
-                        
-                        <!-- Next Step CTA -->
-                        <div style="display:flex; justify-content:center;">
-                            <button class="primary-btn" onclick="document.querySelector('[data-target=\'matching\']').click()" style="padding: 12px 24px; font-size: 15px;">
-                                Review Product Matches <i data-lucide="arrow-right" style="margin-left:8px;"></i>
-                            </button>
+                        <!-- 5. Available Actions -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin:0 0 16px 0; font-size:16px;">Quick Actions</h3>
+                            <div style="display:flex; flex-direction:column; gap:8px;">
+                                <button class="secondary-btn" style="width:100%; justify-content:flex-start; border:none; background:#F8FAFC; padding:12px;"><i data-lucide="eye" style="margin-right:8px; width:16px;height:16px;"></i> View Upload History</button>
+                                <button class="secondary-btn" style="width:100%; justify-content:flex-start; border:none; background:#F8FAFC; padding:12px;"><i data-lucide="alert-triangle" style="margin-right:8px; width:16px;height:16px; color:var(--status-red);"></i> Review Validation Errors</button>
+                                <button class="secondary-btn" style="width:100%; justify-content:flex-start; border:none; background:#F8FAFC; padding:12px;"><i data-lucide="mail" style="margin-right:8px; width:16px;height:16px;"></i> Send Bulk Reminders</button>
+                                <button class="secondary-btn" style="width:100%; justify-content:flex-start; border:none; background:#F8FAFC; padding:12px;"><i data-lucide="download" style="margin-right:8px; width:16px;height:16px;"></i> Download Submitted File</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </section>
 
-            <!-- Screen 3: AI Product Matching -->
             <section id="matching" class="screen active">
                 <div class="section-title-bar">
                     <div>
