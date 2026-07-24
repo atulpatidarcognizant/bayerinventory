@@ -127,12 +127,7 @@
             </ul>
 
             <div class="sidebar-section-label kam-only">INTEGRATIONS & ANALYTICS</div>
-            <div class="sidebar-section-label distributor-only">INTEGRATIONS</div>
             <ul class="nav-menu">
-                <li class="nav-item" data-target="erp-integration">
-                    <i data-lucide="server" class="nav-icon"></i>
-                    ERP Integration
-                </li>
                 <li class="nav-item kam-only" data-target="learning">
                     <i data-lucide="brain-circuit" class="nav-icon"></i>
                     AI Learning Center
@@ -2972,92 +2967,6 @@
             </section>
 
 
-            <section id="erp-integration" class="screen">
-                <div class="section-title-bar">
-                    <div>
-                        <span class="section-subtitle">Integrations & Analytics</span>
-                        <h2>ERP Connectivity & Sync</h2>
-                    </div>
-                    <div class="header-actions">
-                        <button class="secondary-btn" onclick="showToast('Force Sync Triggered')"><i data-lucide="refresh-cw"></i> Sync Now</button>
-                    </div>
-                </div>
-
-                <div class="dashboard-grid" style="margin-top: 16px; grid-template-columns: repeat(4, 1fr);">
-                    <div class="dashboard-card kpi-card" style="border-top: 4px solid var(--status-green);">
-                        <div class="kpi-icon"><i data-lucide="server" style="color:var(--status-green);"></i></div>
-                        <div class="kpi-details">
-                            <span class="kpi-label">ERP Connected Status</span>
-                            <span class="kpi-value text-green">Online</span>
-                            <span class="kpi-trend text-secondary">Last Sync: Today, 09:41 AM</span>
-                        </div>
-                    </div>
-                    <div class="dashboard-card kpi-card" style="border-top: 4px solid var(--primary-blue);">
-                        <div class="kpi-icon"><i data-lucide="activity" style="color:var(--primary-blue);"></i></div>
-                        <div class="kpi-details">
-                            <span class="kpi-label">Integration Health</span>
-                            <span class="kpi-value text-blue">99.8%</span>
-                            <span class="kpi-trend text-secondary">API/EDI Status: Stable</span>
-                        </div>
-                    </div>
-                    <div class="dashboard-card kpi-card" style="border-top: 4px solid var(--primary-blue);">
-                        <div class="kpi-icon"><i data-lucide="file-input" style="color:var(--primary-blue);"></i></div>
-                        <div class="kpi-details">
-                            <span class="kpi-label">Import from ERP</span>
-                            <span class="kpi-value">12</span>
-                            <span class="kpi-trend text-blue">Orders Today</span>
-                        </div>
-                    </div>
-                    <div class="dashboard-card kpi-card" style="border-top: 4px solid var(--status-red);">
-                        <div class="kpi-icon"><i data-lucide="shield-alert" style="color:var(--status-red);"></i></div>
-                        <div class="kpi-details">
-                            <span class="kpi-label">Validation Results</span>
-                            <span class="kpi-value">2 Errors</span>
-                            <span class="kpi-trend text-red">Action Required</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dashboard-grid" style="margin-top: 24px; grid-template-columns: 1fr;">
-                    <div class="dashboard-card widget">
-                        <h3>Synchronization History</h3>
-                        <table class="data-table" style="margin-top: 16px;">
-                            <thead>
-                                <tr>
-                                    <th>Source</th>
-                                    <th>Reference ID</th>
-                                    <th>Import Time</th>
-                                    <th>Validation Status</th>
-                                    <th style="text-align:right">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="font-medium">SAP ECC</td>
-                                    <td>PO-9942-B</td>
-                                    <td class="text-secondary text-sm">Today, 09:41 AM</td>
-                                    <td><span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green);">Passed</span></td>
-                                    <td style="text-align:right"><button class="btn btn-icon text-blue"><i data-lucide="external-link" style="width:16px;height:16px;"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td class="font-medium">SAP ECC</td>
-                                    <td>PO-9943-C</td>
-                                    <td class="text-secondary text-sm">Today, 11:15 AM</td>
-                                    <td><span class="badge badge-low">SKU Mismatch</span></td>
-                                    <td style="text-align:right"><button class="secondary-btn btn-sm text-red" onclick="showToast('Opening resolution wizard')">Resolve Error</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="font-medium">EDI 850</td>
-                                    <td>PO-9944-D</td>
-                                    <td class="text-secondary text-sm">Today, 12:30 PM</td>
-                                    <td><span class="badge badge-low">Price Discrepancy</span></td>
-                                    <td style="text-align:right"><button class="secondary-btn btn-sm text-red" onclick="showToast('Opening resolution wizard')">Resolve Error</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
         </main>
         
         <!-- Conversational AI Copilot matching Onboarding Reference -->
