@@ -666,6 +666,7 @@
             <!-- Screen 2: Distributor Upload Portal -->
             <!-- Screen 2: Distributor Upload Portal (AM View) -->
             <section id="upload" class="screen">
+                <div class="kam-only">
                 <div class="section-title-bar" style="margin-bottom: 24px;">
                     <div>
                         <span class="section-subtitle">Distributor Operations</span>
@@ -845,6 +846,297 @@
                     </div>
                 </div>
 
+                </div>
+                <!-- DISTRIBUTOR INVENTORY UPLOAD WORKSPACE -->
+                <div class="distributor-only">
+                    <!-- Workflow Progress visual -->
+                    <div style="margin-bottom: 24px; padding: 16px; background: white; border: 1px solid var(--border-color); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <div style="width:24px;height:24px;border-radius:50%;background:var(--primary-blue);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;">1</div>
+                            <span style="font-size:14px;font-weight:600;color:var(--text-dark);">Download Template</span>
+                        </div>
+                        <i data-lucide="chevron-right" style="color:var(--secondary-text);"></i>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <div style="width:24px;height:24px;border-radius:50%;background:var(--primary-blue);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;">2</div>
+                            <span style="font-size:14px;font-weight:600;color:var(--text-dark);">Upload File</span>
+                        </div>
+                        <i data-lucide="chevron-right" style="color:var(--secondary-text);"></i>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <div style="width:24px;height:24px;border-radius:50%;background:var(--primary-blue);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;">3</div>
+                            <span style="font-size:14px;font-weight:600;color:var(--text-dark);">File Validation</span>
+                        </div>
+                        <i data-lucide="chevron-right" style="color:var(--secondary-text);"></i>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <div style="width:24px;height:24px;border-radius:50%;background:var(--primary-blue);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;">4</div>
+                            <span style="font-size:14px;font-weight:600;color:var(--text-dark);">Processing</span>
+                        </div>
+                        <i data-lucide="chevron-right" style="color:var(--secondary-text);"></i>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <div style="width:24px;height:24px;border-radius:50%;background:var(--status-green);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;"><i data-lucide="check" style="width:14px;height:14px;"></i></div>
+                            <span style="font-size:14px;font-weight:600;color:var(--text-dark);">Updated</span>
+                        </div>
+                    </div>
+
+                    <div class="section-title-bar" style="margin-bottom: 24px;">
+                        <div>
+                            <span class="section-subtitle">Distributor Management</span>
+                            <h2>Inventory Upload Workspace</h2>
+                            <p style="margin: 4px 0 0 0; font-size: 14px; color: var(--secondary-text);">Submit your inventory file and monitor processing validation status.</p>
+                        </div>
+                    </div>
+
+                    <!-- 1. Executive Upload Summary KPIs -->
+                    <div class="dashboard-grid" style="margin-bottom: 24px;">
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon"><i data-lucide="clock" style="color:var(--primary-blue);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Last Successful Upload</span>
+                                <span class="kpi-value">Today – 10:42 AM</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon"><i data-lucide="database" style="color:var(--text-dark);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Records Uploaded</span>
+                                <span class="kpi-value text-dark">342 Products</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon"><i data-lucide="check-circle" style="color:var(--status-green);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Validation Status</span>
+                                <span class="kpi-value text-green">Passed</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon" style="background:#F3F4F6; color:var(--text-dark);"><i data-lucide="calendar"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Next Recommended Upload</span>
+                                <span class="kpi-value" style="color:var(--text-dark);">Due in 6 Days</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; gap:24px; margin-bottom: 24px;">
+                        <!-- Left Column: Core Upload Mechanics -->
+                        <div style="display: flex; flex-direction: column; gap: 24px;">
+                            
+                            <!-- 2. Upload Inventory -->
+                            <div class="dashboard-card widget">
+                                <h3 style="margin-bottom: 16px; font-size:16px;">Submit Inventory File</h3>
+                                
+                                <div style="border: 2px dashed #CBD5E1; border-radius: 8px; padding: 40px 24px; text-align: center; background: #F8FAFC; margin-bottom: 24px;">
+                                    <div style="width:48px;height:48px;border-radius:50%;background:#E0F2FE;color:#0284C7;display:flex;align-items:center;justify-content:center;margin:0 auto 16px auto;">
+                                        <i data-lucide="upload-cloud" style="width:24px;height:24px;"></i>
+                                    </div>
+                                    <div style="font-weight:600; font-size:16px; color:var(--text-dark); margin-bottom:8px;">Drag and drop your inventory file here</div>
+                                    <div style="font-size:14px; color:var(--secondary-text); margin-bottom:16px;">Support: Excel (.xlsx), CSV</div>
+                                    <div style="font-size:12px; color:var(--secondary-text); margin-bottom:24px;">Maximum File Size: 50MB</div>
+                                    
+                                    <div style="display:flex; justify-content:center; gap:16px;">
+                                        <button class="primary-btn" onclick="showToast('Uploading file...')">Browse Files</button>
+                                        <button class="secondary-btn" onclick="showToast('Downloading Template...')"><i data-lucide="download" style="width:14px;height:14px;"></i> Download Bayer Template</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- 3. Upload Progress Timeline -->
+                                <div style="border:1px solid var(--border-color); border-radius:8px; padding:16px;">
+                                    <h4 style="margin-bottom:16px; font-size:14px; color:var(--text-dark);">Current Upload Progress</h4>
+                                    
+                                    <div style="display:flex; align-items:center; justify-content:space-between; position:relative;">
+                                        <div style="position:absolute; top:12px; left:20px; right:20px; height:2px; background:#E2E8F0; z-index:1;"></div>
+                                        <div style="position:absolute; top:12px; left:20px; width:100%; height:2px; background:var(--status-green); z-index:2;"></div>
+                                        
+                                        <div style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
+                                            <div style="width:24px;height:24px;background:var(--status-green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
+                                            <span style="font-size:12px; font-weight:600;">File Uploaded</span>
+                                        </div>
+                                        
+                                        <div style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
+                                            <div style="width:24px;height:24px;background:var(--status-green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
+                                            <span style="font-size:12px; font-weight:600;">Processing File</span>
+                                        </div>
+                                        
+                                        <div style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
+                                            <div style="width:24px;height:24px;background:var(--status-green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
+                                            <span style="font-size:12px; font-weight:600;">Validating Data</span>
+                                        </div>
+                                        
+                                        <div style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
+                                            <div style="width:24px;height:24px;background:var(--status-green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
+                                            <span style="font-size:12px; font-weight:600;">Updating Inventory</span>
+                                        </div>
+                                        
+                                        <div style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
+                                            <div style="width:24px;height:24px;background:var(--status-green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
+                                            <span style="font-size:12px; font-weight:600; color:var(--status-green);">Completed</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 4. Validation Results -->
+                            <div class="dashboard-card widget">
+                                <h3 style="margin-bottom: 16px; font-size:16px; display:flex; align-items:center; gap:8px;">
+                                    <i data-lucide="file-check" style="color:var(--text-dark); width:18px;height:18px;"></i> File Validation Results
+                                </h3>
+                                
+                                <div style="display:flex; gap:24px;">
+                                    <div style="flex:1;">
+                                        <h4 style="font-size:13px; color:var(--status-green); margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i data-lucide="check-circle-2" style="width:14px;height:14px;"></i> Success</h4>
+                                        <ul style="margin:0; padding:0; list-style:none; font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:6px;">
+                                            <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);margin-top:2px;"></i> File uploaded successfully</li>
+                                            <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);margin-top:2px;"></i> 342 inventory records processed</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div style="flex:1;">
+                                        <h4 style="font-size:13px; color:#D97706; margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i data-lucide="alert-triangle" style="width:14px;height:14px;"></i> Warnings (Auto-resolved)</h4>
+                                        <ul style="margin:0; padding:0; list-style:none; font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:6px;">
+                                            <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="alert-triangle" style="width:14px;height:14px;color:#D97706;margin-top:2px;"></i> 5 duplicate rows removed</li>
+                                            <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="alert-triangle" style="width:14px;height:14px;color:#D97706;margin-top:2px;"></i> 3 inactive products identified</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div style="flex:1;">
+                                        <h4 style="font-size:13px; color:#DC2626; margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i data-lucide="alert-circle" style="width:14px;height:14px;"></i> Errors (Requires Review)</h4>
+                                        <ul style="margin:0; padding:0; list-style:none; font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:6px;">
+                                            <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="alert-circle" style="width:14px;height:14px;color:#DC2626;margin-top:2px;"></i> 2 missing quantities detected</li>
+                                            <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="alert-circle" style="width:14px;height:14px;color:#DC2626;margin-top:2px;"></i> 1 invalid SKU format</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div style="display:flex; gap:12px; margin-top:24px; padding-top:16px; border-top:1px solid var(--border-color);">
+                                    <button class="primary-btn btn-sm" onclick="showToast('Opening fix modal...')">Fix & Re-upload</button>
+                                    <button class="secondary-btn btn-sm" onclick="showToast('Downloading report...')">Download Validation Report</button>
+                                    <button class="text-link" style="font-size:13px; margin-left:auto;">View Processing Details</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: AI, Guidelines, Activity -->
+                        <div style="display: flex; flex-direction: column; gap: 24px;">
+                            
+                            <!-- 6. AI Upload Assistant -->
+                            <div class="dashboard-card widget ai-reasoning" style="background: #F8FAFC; border: 1px solid var(--border-color); border-top: 4px solid var(--primary-blue); box-shadow: none;">
+                                <h4 style="display:flex; align-items:center; gap:8px; color:var(--primary-blue); margin-bottom: 12px; font-size:15px;">
+                                    <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Upload Assistant
+                                </h4>
+                                <ul style="margin:0; padding:0; list-style:none; font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
+                                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="info" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Your inventory file successfully follows Bayer formatting standards.</li>
+                                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="alert-circle" style="width:14px;height:14px;color:#DC2626;margin-top:2px;"></i> Three products are missing quantity values in rows 45-47.</li>
+                                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="info" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Uploading inventory weekly improves Bayer's order recommendation accuracy.</li>
+                                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="info" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Inventory coverage has improved by 18% after this upload.</li>
+                                </ul>
+                                <div style="display:flex; flex-direction:column; gap:8px;">
+                                    <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0; width:100%; justify-content:center;" onclick="showToast('Reviewing missing data')">Review Missing Data</button>
+                                </div>
+                            </div>
+
+                            <!-- 7. Upload Best Practices -->
+                            <div class="dashboard-card widget" style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border: 1px solid var(--border-color); background: white;">
+                                <h4 style="margin-bottom: 12px; font-size:14px; display:flex; align-items:center; gap:6px;">
+                                    <i data-lucide="list-checks" style="width:16px;height:16px;color:var(--text-dark);"></i> Upload Best Practices
+                                </h4>
+                                <ul style="margin:0; padding:0; list-style:disc; padding-left:20px; font-size:13px; color:var(--secondary-text); display:flex; flex-direction:column; gap:6px;">
+                                    <li>Upload inventory at least once every week.</li>
+                                    <li>Always use the official Bayer inventory template.</li>
+                                    <li>Do not modify template column names.</li>
+                                    <li>Ensure all quantities are current before uploading.</li>
+                                    <li>Remove duplicate SKUs before submission.</li>
+                                </ul>
+                            </div>
+
+                            <!-- 8. Recent Upload Activity -->
+                            <div class="dashboard-card widget">
+                                <h4 style="margin-bottom: 16px; font-size:15px;">Recent Upload Activity</h4>
+                                <div style="display:flex; flex-direction:column; gap:16px;">
+                                    <div style="display:flex; gap:12px; align-items:flex-start;">
+                                        <div style="background:#DCFCE7; padding:6px; border-radius:50%;"><i data-lucide="check" style="width:14px;height:14px;color:#16A34A;"></i></div>
+                                        <div>
+                                            <div style="font-weight:600; font-size:13px; color:var(--text-dark);">Inventory synchronized with Bayer.</div>
+                                            <div style="font-size:12px; color:var(--secondary-text);">Today, 10:45 AM</div>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; gap:12px; align-items:flex-start;">
+                                        <div style="background:#E0F2FE; padding:6px; border-radius:50%;"><i data-lucide="settings" style="width:14px;height:14px;color:#0284C7;"></i></div>
+                                        <div>
+                                            <div style="font-weight:600; font-size:13px; color:var(--text-dark);">Validation completed.</div>
+                                            <div style="font-size:12px; color:var(--secondary-text);">Today, 10:44 AM</div>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; gap:12px; align-items:flex-start;">
+                                        <div style="background:#E0F2FE; padding:6px; border-radius:50%;"><i data-lucide="upload" style="width:14px;height:14px;color:#0284C7;"></i></div>
+                                        <div>
+                                            <div style="font-weight:600; font-size:13px; color:var(--text-dark);">Inventory uploaded successfully.</div>
+                                            <div style="font-size:12px; color:var(--secondary-text);">Today, 10:42 AM</div>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; gap:12px; align-items:flex-start;">
+                                        <div style="background:#F3F4F6; padding:6px; border-radius:50%;"><i data-lucide="bell" style="width:14px;height:14px;color:var(--text-dark);"></i></div>
+                                        <div>
+                                            <div style="font-weight:600; font-size:13px; color:var(--text-dark);">Reminder sent for weekly inventory upload.</div>
+                                            <div style="font-size:12px; color:var(--secondary-text);">Yesterday</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Upload History Table -->
+                    <div class="dashboard-card widget">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                            <h3 style="margin:0;">Previous Inventory Uploads</h3>
+                            <div style="display:flex; gap:8px;">
+                                <div class="search-bar" style="width: 250px;">
+                                    <i data-lucide="search" class="search-icon"></i>
+                                    <input type="text" placeholder="Search history..." class="search-input">
+                                </div>
+                                <button class="secondary-btn"><i data-lucide="filter"></i> Filter</button>
+                            </div>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Upload Date</th>
+                                    <th>File Name</th>
+                                    <th>Records</th>
+                                    <th>Status</th>
+                                    <th>Uploaded By</th>
+                                    <th style="text-align: right;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Today</td>
+                                    <td class="font-medium" style="display:flex;align-items:center;gap:6px;"><i data-lucide="file-spreadsheet" style="width:14px;height:14px;color:var(--primary-blue);"></i> Inventory_July.xlsx</td>
+                                    <td>342</td>
+                                    <td><span class="badge badge-high">Processed</span></td>
+                                    <td>John Smith</td>
+                                    <td style="text-align: right;"><button class="text-link text-blue">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Last Week</td>
+                                    <td class="font-medium" style="display:flex;align-items:center;gap:6px;"><i data-lucide="file-spreadsheet" style="width:14px;height:14px;color:var(--primary-blue);"></i> Inventory_Week28.xlsx</td>
+                                    <td>318</td>
+                                    <td><span class="badge" style="background:#FEF3C7; color:#D97706;">Warning</span></td>
+                                    <td>John Smith</td>
+                                    <td style="text-align: right;"><button class="text-link text-blue">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td>2 Weeks Ago</td>
+                                    <td class="font-medium" style="display:flex;align-items:center;gap:6px;"><i data-lucide="file-spreadsheet" style="width:14px;height:14px;color:var(--primary-blue);"></i> Inventory_Week27.xlsx</td>
+                                    <td>327</td>
+                                    <td><span class="badge badge-high">Processed</span></td>
+                                    <td>John Smith</td>
+                                    <td style="text-align: right;"><button class="text-link text-blue">View</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </section>
 
             <section id="matching" class="screen active">
