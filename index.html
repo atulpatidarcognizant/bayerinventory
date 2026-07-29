@@ -2784,16 +2784,16 @@
                         <span class="font-bold text-lg text-dark">2 Items</span>
                     </div>
                     <div class="dashboard-card" style="padding: 16px; text-align: center; border: 1px solid var(--border-color); box-shadow: none;">
-                        <span class="text-sm text-secondary block">Fulfillment Confidence</span>
-                        <span class="font-bold text-lg text-green" style="display:flex; align-items:center; justify-content:center; gap:4px;"><i data-lucide="check-circle-2" style="width:18px;height:18px;"></i> High</span>
+                        <span class="text-sm text-secondary block">Fulfillment Status</span>
+                        <span class="font-bold text-lg text-green" style="display:flex; align-items:center; justify-content:center; gap:4px;"><i data-lucide="check-circle-2" style="width:18px;height:18px;"></i> Inventory Confirmed</span>
                     </div>
                     <div class="dashboard-card" style="padding: 16px; text-align: center; border: 1px solid var(--border-color); box-shadow: none;">
                         <span class="text-sm text-secondary block">Estimated Savings</span>
                         <span class="font-bold text-lg text-green">$15,975</span>
                     </div>
                     <div class="dashboard-card" style="padding: 16px; text-align: center; border: 1px solid var(--border-color); box-shadow: none; background: #F8FAFC;">
-                        <span class="text-sm text-secondary block">AI Optimized</span>
-                        <span class="font-bold text-lg text-blue">Yes</span>
+                        <span class="text-sm text-secondary block">AI Validated</span>
+                        <span class="font-bold text-lg text-blue">Yes <i data-lucide="check" style="width:18px;height:18px;"></i></span>
                     </div>
                 </div>
 
@@ -2882,6 +2882,21 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div style="padding: 16px; background:#F8FAFC; border-top: 1px solid var(--border-color);">
+                            <h4 style="margin-bottom:12px; font-size:14px; display:flex; align-items:center; gap:6px;"><i data-lucide="plus-circle" style="width:16px;height:16px;color:var(--primary-blue);"></i> Frequently Bought Together</h4>
+                            <div style="display:flex; gap:16px; overflow-x:auto;">
+                                <div style="background:white; border:1px solid #E2E8F0; border-radius:6px; padding:12px; min-width:200px; flex-shrink:0;">
+                                    <div class="font-medium text-sm" style="margin-bottom:4px;">Decis Expert</div>
+                                    <div class="text-xs text-secondary mb-2">Often bundled with Prosaro Pro</div>
+                                    <button class="secondary-btn btn-sm" style="width:100%; justify-content:center;" onclick="showToast('Added Decis Expert')">Add +</button>
+                                </div>
+                                <div style="background:white; border:1px solid #E2E8F0; border-radius:6px; padding:12px; min-width:200px; flex-shrink:0;">
+                                    <div class="font-medium text-sm" style="margin-bottom:4px;">Stratego PRO</div>
+                                    <div class="text-xs text-secondary mb-2">Qualifies for 5% Rebate</div>
+                                    <button class="secondary-btn btn-sm" style="width:100%; justify-content:center;" onclick="showToast('Added Stratego PRO')">Add +</button>
+                                </div>
+                            </div>
+                        </div>
                         <div style="padding: 16px; border-top: 1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center; background:#F8FAFC;">
                             <button class="text-link" onclick="showToast('Opening catalog search')"><i data-lucide="plus" style="width:14px;height:14px;"></i> Add More Products</button>
                             <button class="secondary-btn btn-sm" onclick="showToast('Importing from ERP...')"><i data-lucide="download" style="width:14px;height:14px;"></i> Import from ERP</button>
@@ -2900,6 +2915,7 @@
                                 <li style="display:flex; align-items:center; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Inventory Available</li>
                                 <li style="display:flex; align-items:center; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Commercial Schemes Applied</li>
                                 <li style="display:flex; align-items:center; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Fulfillment Confirmed</li>
+                                <li style="display:flex; align-items:center; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> No Approval Exceptions Detected</li>
                             </ul>
                         </div>
 
@@ -2936,6 +2952,10 @@
                                 <span class="text-secondary text-sm">Early Booking (5%)</span>
                                 <span class="font-medium text-sm text-green">-$6,375</span>
                             </div>
+                            <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                                <span class="text-secondary text-sm">Estimated Savings</span>
+                                <span class="font-medium text-sm text-green">$15,975</span>
+                            </div>
                             <div style="display:flex; justify-content:space-between; border-top: 1px solid var(--border-color); padding-top: 16px; margin-top: 8px;">
                                 <strong style="font-size:16px;">Estimated Total</strong>
                                 <strong style="font-size:16px;">$231,525</strong>
@@ -2945,12 +2965,15 @@
                         <!-- AI Optimization Panel -->
                         <div class="dashboard-card widget ai-reasoning" style="background: #F8FAFC; border: none; border-left: 3px solid var(--primary-blue); box-shadow: none;">
                             <h5 style="margin:0 0 12px 0; color: var(--primary-blue); display:flex; align-items:center; gap:6px;">
-                                <i data-lucide="sparkles" style="width:16px;height:16px;"></i> AI Optimization Applied
+                                <i data-lucide="sparkles" style="width:16px;height:16px;"></i> AI Purchasing Assistant
                             </h5>
                             <ul style="margin:0; padding:0; list-style:none; font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:6px;">
-                                <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Fungicide Bundle unlocked</li>
-                                <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Est. commercial savings: $15,975</li>
-                                <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Fulfillment risk mitigated</li>
+                                <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Your order qualifies for the Early Booking Bonus.</li>
+                                <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Estimated savings for this order: $15,975.</li>
+                                <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Inventory has been reserved at the selected fulfillment center.</li>
+                                <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> This order meets the requirements for the Fungicide Bundle Program.</li>
+                                <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Estimated delivery: 2-4 days.</li>
+                                <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> No validation issues detected.</li>
                             </ul>
                         </div>
 
