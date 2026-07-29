@@ -150,6 +150,7 @@
         <main class="main-content">
             <!-- Screen 1: Landing Dashboard -->
             <section id="dashboard" class="screen">
+                <div class="kam-only">
                 <!-- 1. Strengthen Executive Hero Section -->
                 <div class="hero-section" style="margin-bottom: 24px;">
                     <div class="hero-left">
@@ -377,6 +378,287 @@
                             <span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green);"><i data-lucide="trending-up" style="width:12px;height:12px;"></i> +4% Last 30 Days</span>
                         </div>
                         <p class="text-sm text-secondary text-center mt-4">AI model accuracy improves continuously based on Account Manager feedback.</p>
+                    </div>
+                </div>
+                </div>
+                <!-- DISTRIBUTOR DASHBOARD -->
+                <div class="distributor-only">
+                    <div class="hero-section" style="margin-bottom: 24px;">
+                        <div class="hero-left">
+                            <span class="hero-tag">Distributor Workspace</span>
+                            <h1>My Dashboard</h1>
+                            <p class="hero-desc">Manage your inventory, process your orders, and review AI recommendations to ensure seamless operations.</p>
+                        </div>
+                    </div>
+
+                    <!-- 1. Executive KPI Cards -->
+                    <div class="dashboard-grid" style="margin-bottom: 24px;">
+                        <div class="dashboard-card kpi-card cursor-pointer" onclick="switchScreen('order-tracking')">
+                            <div class="kpi-icon"><i data-lucide="package"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Active Orders</span>
+                                <span class="kpi-value">18</span>
+                                <span style="font-size:11px;color:var(--text-secondary)">Currently processing or in-transit</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card cursor-pointer" onclick="switchScreen('inventory')">
+                            <div class="kpi-icon"><i data-lucide="check-circle" style="color:var(--status-green);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Inventory Health</span>
+                                <span class="kpi-value text-green">92%</span>
+                                <span class="kpi-trend text-green">Healthy Coverage</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card highlight" style="border-top-color: #D97706;">
+                            <div class="kpi-icon"><i data-lucide="alert-circle" style="color:#D97706;"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Pending Actions</span>
+                                <span class="kpi-value" style="color:#D97706;">4</span>
+                                <span class="kpi-trend" style="color:#D97706;">Requires Attention</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon"><i data-lucide="brain-circuit" style="color:var(--primary-blue);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">AI Automation Rate</span>
+                                <span class="kpi-value text-blue">96%</span>
+                                <span class="kpi-trend text-secondary">Processed Automatically</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Today's Priorities -->
+                    <div class="dashboard-card widget" style="margin-bottom: 32px; background: #F8FAFC; border-left: 4px solid var(--primary-blue);">
+                        <h3 style="margin-bottom: 16px; display:flex; align-items:center; gap:8px;"><i data-lucide="target" style="width:18px;height:18px;color:var(--primary-blue);"></i> Today's Priorities</h3>
+                        <div style="display:flex; flex-wrap:wrap; gap:16px;">
+                            <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="showToast('Navigating to Uploads')"><i data-lucide="upload-cloud" style="color:var(--primary-blue);"></i> Upload this week's inventory</button>
+                            <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="switchScreen('matching')"><i data-lucide="git-merge" style="color:var(--primary-blue);"></i> Review 3 AI product suggestions</button>
+                            <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="showToast('Opening Validation Wizard')"><i data-lucide="alert-triangle" style="color:var(--status-red);"></i> Resolve 2 inventory validation issues</button>
+                            <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="switchScreen('order-tracking')"><i data-lucide="file-question" style="color:#D97706;"></i> Order #10452 requires additional info</button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 32px;">
+                        <!-- 3. My Orders -->
+                        <div class="dashboard-card widget">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                                <h3>My Orders</h3>
+                                <button class="secondary-btn btn-sm" onclick="switchScreen('order-tracking')">View Orders</button>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding-top:8px;">
+                                <div style="text-align:center;">
+                                    <div style="font-size:24px; font-weight:700; color:var(--text-dark);">2</div>
+                                    <div style="font-size:12px; color:var(--text-secondary);">Pending</div>
+                                </div>
+                                <div style="text-align:center;">
+                                    <div style="font-size:24px; font-weight:700; color:var(--text-dark);">5</div>
+                                    <div style="font-size:12px; color:var(--text-secondary);">Approved</div>
+                                </div>
+                                <div style="text-align:center;">
+                                    <div style="font-size:24px; font-weight:700; color:var(--primary-blue);">11</div>
+                                    <div style="font-size:12px; color:var(--text-secondary);">In Transit</div>
+                                </div>
+                                <div style="text-align:center;">
+                                    <div style="font-size:24px; font-weight:700; color:var(--status-green);">42</div>
+                                    <div style="font-size:12px; color:var(--text-secondary);">Delivered</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Inventory Snapshot -->
+                        <div class="dashboard-card widget">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                                <h3>Inventory Snapshot</h3>
+                                <button class="secondary-btn btn-sm" onclick="switchScreen('inventory')">View Details</button>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding-top:8px;">
+                                <div style="text-align:center;">
+                                    <div style="font-size:24px; font-weight:700; color:var(--status-green);">91%</div>
+                                    <div style="font-size:12px; color:var(--text-secondary);">Coverage</div>
+                                </div>
+                                <div style="text-align:center;">
+                                    <div style="font-size:24px; font-weight:700; color:var(--text-dark);">342</div>
+                                    <div style="font-size:12px; color:var(--text-secondary);">In Stock</div>
+                                </div>
+                                <div style="text-align:center;">
+                                    <div style="font-size:24px; font-weight:700; color:#D97706;">12</div>
+                                    <div style="font-size:12px; color:var(--text-secondary);">Low Stock</div>
+                                </div>
+                                <div style="text-align:center;">
+                                    <div style="font-size:24px; font-weight:700; color:var(--status-red);">3</div>
+                                    <div style="font-size:12px; color:var(--text-secondary);">Stock-outs</div>
+                                </div>
+                            </div>
+                            <div style="font-size:11px; color:var(--text-secondary); text-align:right; margin-top:16px;">Last Upload: Today, 08:30 AM</div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; margin-bottom: 32px;">
+                        <!-- 6. Upcoming Deliveries -->
+                        <div class="dashboard-card widget">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                                <h3>Upcoming Deliveries</h3>
+                                <button class="secondary-btn btn-sm" onclick="switchScreen('order-tracking')">Track All</button>
+                            </div>
+                            <table class="data-table minimal" style="font-size:13px;">
+                                <thead>
+                                    <tr>
+                                        <th>Order Number</th>
+                                        <th>Current Status</th>
+                                        <th>Estimated Delivery</th>
+                                        <th>Delay Indicator</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-medium text-dark">ORD-9942-B</td>
+                                        <td><span class="badge badge-high" style="background:#DBEAFE; color:var(--primary-blue);">In Transit</span></td>
+                                        <td>Tomorrow, 10:00 AM</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark">ORD-9945-C</td>
+                                        <td><span class="badge badge-high" style="background:#DBEAFE; color:var(--primary-blue);">In Transit</span></td>
+                                        <td>Thursday</td>
+                                        <td><span class="text-red font-medium"><i data-lucide="alert-triangle" style="width:12px;height:12px;"></i> +1 Day</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark">ORD-9948-X</td>
+                                        <td><span class="badge badge-high" style="background:#F1F5F9; color:var(--text-dark);">Processing</span></td>
+                                        <td>Friday</td>
+                                        <td>-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- 5. AI Recommendations -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom: 16px;">AI Recommendations</h3>
+                            <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px;">
+                                <li style="display:flex; gap:12px; align-items:flex-start;">
+                                    <i data-lucide="alert-triangle" style="color:#D97706; width:16px; height:16px; margin-top:2px;"></i>
+                                    <div>
+                                        <div style="font-weight:600; font-size:13px; color:var(--text-dark);">Stock Shortage Predicted</div>
+                                        <div style="font-size:12px; color:var(--text-secondary);">AI predicts a shortage of Decis Expert next week.</div>
+                                    </div>
+                                </li>
+                                <li style="display:flex; gap:12px; align-items:flex-start;">
+                                    <i data-lucide="package-plus" style="color:var(--status-green); width:16px; height:16px; margin-top:2px;"></i>
+                                    <div>
+                                        <div style="font-weight:600; font-size:13px; color:var(--text-dark);">Replenishment Recommended</div>
+                                        <div style="font-size:12px; color:var(--text-secondary);">Recommend ordering 500L of Roundup PowerMAX.</div>
+                                    </div>
+                                </li>
+                                <li style="display:flex; gap:12px; align-items:flex-start;">
+                                    <i data-lucide="git-merge" style="color:var(--primary-blue); width:16px; height:16px; margin-top:2px;"></i>
+                                    <div>
+                                        <div style="font-weight:600; font-size:13px; color:var(--text-dark);">Mappings Awaiting Confirmation</div>
+                                        <div style="font-size:12px; color:var(--text-secondary);">2 new product mappings require your review.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <button class="primary-btn flex-align" style="width:100%; justify-content:center; margin-top:16px;" onclick="showToast('Opening recommendations')">Review Recommendations</button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid" style="grid-template-columns: repeat(3, 1fr);">
+                        <!-- 7. Recent Activity -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom:16px;">Recent Activity</h3>
+                            <div class="timeline" style="margin-left: 8px;">
+                                <div class="timeline-step">
+                                    <div class="step-indicator complete"></div>
+                                    <div class="step-content">
+                                        <h4 style="margin:0; font-size:13px;">Inventory Uploaded</h4>
+                                        <p style="margin:2px 0 0 0; font-size:12px; color:var(--text-secondary);">Today, 08:30 AM</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-step">
+                                    <div class="step-indicator complete"></div>
+                                    <div class="step-content">
+                                        <h4 style="margin:0; font-size:13px;">Order #10451 Approved</h4>
+                                        <p style="margin:2px 0 0 0; font-size:12px; color:var(--text-secondary);">Yesterday, 14:15 PM</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-step">
+                                    <div class="step-indicator complete"></div>
+                                    <div class="step-content">
+                                        <h4 style="margin:0; font-size:13px;">AI Mapping Completed</h4>
+                                        <p style="margin:2px 0 0 0; font-size:12px; color:var(--text-secondary);">Yesterday, 09:10 AM</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-step">
+                                    <div class="step-indicator complete"></div>
+                                    <div class="step-content">
+                                        <h4 style="margin:0; font-size:13px;">Shipment Dispatched</h4>
+                                        <p style="margin:2px 0 0 0; font-size:12px; color:var(--text-secondary);">Monday</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 8. Bayer Messages -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom:16px;">Bayer Messages</h3>
+                            <div style="display:flex; flex-direction:column; gap:12px;">
+                                <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:6px; padding:12px;">
+                                    <div style="font-weight:600; font-size:13px; color:var(--primary-blue); margin-bottom:4px;">Promotion Available</div>
+                                    <div style="font-size:12px; color:var(--text-secondary);">Earn 5% extra rebate on early bookings of Sivanto Prime.</div>
+                                </div>
+                                <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:6px; padding:12px;">
+                                    <div style="font-weight:600; font-size:13px; color:var(--text-dark); margin-bottom:4px;">Price Change Notification</div>
+                                    <div style="font-size:12px; color:var(--text-secondary);">Updated Q3 pricing effective next week.</div>
+                                </div>
+                                <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:6px; padding:12px;">
+                                    <div style="font-weight:600; font-size:13px; color:var(--text-dark); margin-bottom:4px;">From: Sarah (Account Manager)</div>
+                                    <div style="font-size:12px; color:var(--text-secondary);">Please ensure all low-stock items are uploaded by Friday.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 9. Monthly Performance -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom:16px;">Monthly Performance</h3>
+                            <div style="display:flex; flex-direction:column; gap:16px;">
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                                        <span style="font-size:13px; color:var(--text-dark);">Orders Fulfilled</span>
+                                        <span style="font-size:13px; font-weight:600;">142</span>
+                                    </div>
+                                    <div style="background:#E2E8F0; height:6px; border-radius:3px; overflow:hidden;">
+                                        <div style="background:var(--primary-blue); width:85%; height:100%;"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                                        <span style="font-size:13px; color:var(--text-dark);">On-Time Deliveries</span>
+                                        <span style="font-size:13px; font-weight:600;">94%</span>
+                                    </div>
+                                    <div style="background:#E2E8F0; height:6px; border-radius:3px; overflow:hidden;">
+                                        <div style="background:var(--status-green); width:94%; height:100%;"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                                        <span style="font-size:13px; color:var(--text-dark);">Inventory Accuracy</span>
+                                        <span style="font-size:13px; font-weight:600;">98%</span>
+                                    </div>
+                                    <div style="background:#E2E8F0; height:6px; border-radius:3px; overflow:hidden;">
+                                        <div style="background:var(--status-green); width:98%; height:100%;"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                                        <span style="font-size:13px; color:var(--text-dark);">AI Automation Rate</span>
+                                        <span style="font-size:13px; font-weight:600;">96%</span>
+                                    </div>
+                                    <div style="background:#E2E8F0; height:6px; border-radius:3px; overflow:hidden;">
+                                        <div style="background:var(--primary-blue); width:96%; height:100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
