@@ -2231,6 +2231,7 @@
 
             <!-- Screen 9: AI Recommendations (Order Trigger) -->
             <section id="ai-recommendations" class="screen">
+                <div class="kam-only">
                 <div class="section-title-bar">
                     <div>
                         <span class="section-subtitle">Ordering & Fulfillment</span>
@@ -2478,6 +2479,293 @@
                                     <span class="text-xs text-secondary">Bundle Completed</span>
                                     <span class="text-sm font-bold text-green">Est. Savings: $9,600</span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!-- DISTRIBUTOR DECISION WORKSPACE -->
+                <div class="distributor-only">
+                    <!-- 10. Recommendation Journey -->
+                    <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:var(--secondary-text); margin-bottom:12px;">
+                        <span style="color:var(--primary-blue); font-weight:600; background:#E0F2FE; padding:4px 8px; border-radius:4px;">AI Recommendation</span>
+                        <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                        <span>Review</span>
+                        <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                        <span>Customize Quantity</span>
+                        <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                        <span>Add to Draft Order</span>
+                        <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                        <span>Order Placement</span>
+                        <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                        <span>Track Delivery</span>
+                    </div>
+
+                    <div class="section-title-bar" style="margin-bottom: 24px;">
+                        <div>
+                            <span class="section-subtitle">Ordering & Fulfillment</span>
+                            <h2>Distributor Decision Workspace</h2>
+                        </div>
+                    </div>
+
+                    <!-- 1. Executive KPI Cards -->
+                    <div class="dashboard-grid" style="margin-bottom: 24px;">
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon"><i data-lucide="alert-circle" style="color:var(--status-red);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">High Priority Recommendations</span>
+                                <span class="kpi-value text-red">2</span>
+                                <span style="font-size:11px;color:var(--text-secondary)">Requires immediate review</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon"><i data-lucide="dollar-sign" style="color:var(--status-green);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Estimated Savings</span>
+                                <span class="kpi-value text-green">$15,975</span>
+                                <span class="kpi-trend text-green">Through optimized orders</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon"><i data-lucide="gift" style="color:var(--primary-blue);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Eligible Rebate Programs</span>
+                                <span class="kpi-value text-blue">2</span>
+                                <span class="kpi-trend text-blue">Available to claim</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon"><i data-lucide="sprout" style="color:var(--primary-blue);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Estimated Yield Impact</span>
+                                <span class="kpi-value text-blue">+4% Bu/Ac</span>
+                                <span class="kpi-trend text-secondary">Based on regional models</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. Recommendation Filters -->
+                    <div style="display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;">
+                        <button class="badge badge-high" style="background:var(--primary-blue); color:white; border:none; cursor:pointer;">All (4)</button>
+                        <button class="badge" style="background:#F8FAFC; color:var(--text-dark); border:1px solid #E2E8F0; cursor:pointer;">Urgent (1)</button>
+                        <button class="badge" style="background:#F8FAFC; color:var(--text-dark); border:1px solid #E2E8F0; cursor:pointer;">Savings (2)</button>
+                        <button class="badge" style="background:#F8FAFC; color:var(--text-dark); border:1px solid #E2E8F0; cursor:pointer;">Rebates (2)</button>
+                        <button class="badge" style="background:#F8FAFC; color:var(--text-dark); border:1px solid #E2E8F0; cursor:pointer;">Inventory Risk (1)</button>
+                        <button class="badge" style="background:#F8FAFC; color:var(--text-dark); border:1px solid #E2E8F0; cursor:pointer;">Accepted (2)</button>
+                    </div>
+
+                    <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; gap:24px;">
+                        <!-- Left Column: Recommendation Cards -->
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <!-- Rec 1: Roundup PowerMAX -->
+                            <div class="dashboard-card widget" style="padding: 20px; border-left: 4px solid var(--status-red);">
+                                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 16px;">
+                                    <div style="display:flex; gap: 16px; align-items: flex-start;">
+                                        <div style="background: #FEF2F2; color: #DC2626; padding: 14px; border-radius: 12px; margin-top:4px;">
+                                            <i data-lucide="alert-triangle" style="width:24px;height:24px;"></i>
+                                        </div>
+                                        <div>
+                                            <!-- 2. Recommendation Lifecycle Status -->
+                                            <span class="badge" style="background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; font-size:10px; margin-bottom:8px; display:inline-block;">New Recommendation</span>
+                                            
+                                            <h3 style="margin:0 0 4px 0; font-size:18px;">Roundup PowerMAX Replenishment</h3>
+                                            
+                                            <div style="display:flex; align-items:center; gap:8px;">
+                                                <span class="text-secondary" style="font-size:14px;">Optimal order: <strong style="color:var(--text-dark);">15,000 L</strong></span>
+                                                <span style="color:#CBD5E1;">|</span>
+                                                <!-- 3. Business Priority (Replaces AI Confidence) -->
+                                                <span class="font-medium text-red" style="font-size:13px; display:flex; align-items:center; gap:4px;"><i data-lucide="flame" style="width:14px;height:14px;"></i> Critical Priority</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span style="font-size:12px; color:var(--text-secondary);">Today, 08:30 AM</span>
+                                </div>
+
+                                <!-- 4. Business Impact if Ignored -->
+                                <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:6px; padding:12px; margin-bottom:16px;">
+                                    <div style="font-weight:600; font-size:13px; color:#991B1B; display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+                                        <i data-lucide="alert-circle" style="width:14px;height:14px;"></i> Risk if Ignored
+                                    </div>
+                                    <p style="margin:0; font-size:13px; color:#B91C1C;">Inventory expected to fall below safety stock within 5 days. Increased risk of delayed customer fulfillment and missed sales.</p>
+                                </div>
+
+                                <!-- 9. Integrated Commercial Schemes -->
+                                <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:6px; padding:12px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;">
+                                    <div>
+                                        <div style="font-weight:600; font-size:13px; color:#166534; display:flex; align-items:center; gap:6px; margin-bottom:2px;">
+                                            <i data-lucide="tag" style="width:14px;height:14px;"></i> Early Booking Bonus
+                                        </div>
+                                        <div style="font-size:12px; color:#166534;">5% margin rebate on herbicide orders over 10k L.</div>
+                                    </div>
+                                    <div style="text-align:right;">
+                                        <div style="font-weight:700; font-size:14px; color:#166534;">Save $4,200</div>
+                                        <div style="font-size:11px; color:#B91C1C; display:flex; align-items:center; gap:4px; justify-content:flex-end;"><i data-lucide="clock" style="width:10px;height:10px;"></i> Expires in 9 Days</div>
+                                    </div>
+                                </div>
+
+                                <!-- 5. Why AI Recommended This -->
+                                <div style="margin-bottom: 16px; border:1px solid #E2E8F0; border-radius:6px; overflow:hidden;">
+                                    <details style="background:#F8FAFC;">
+                                        <summary style="padding:12px; font-size:13px; font-weight:600; color:var(--text-dark); cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+                                            <div style="display:flex; align-items:center; gap:8px;"><i data-lucide="help-circle" style="width:14px;height:14px;color:var(--primary-blue);"></i> Why this recommendation?</div>
+                                            <i data-lucide="chevron-down" style="width:16px;height:16px;color:var(--secondary-text);"></i>
+                                        </summary>
+                                        <div style="padding:0 12px 12px 12px;">
+                                            <ul style="margin:0; padding-left:20px; font-size:13px; color:var(--secondary-text); line-height:1.6;">
+                                                <li>Current inventory (2,100 L) is significantly below the 5,000 L safety stock minimum.</li>
+                                                <li>Historical purchasing trends indicate a 35% spike in demand next week.</li>
+                                                <li>AI Confidence Score: 98% (High) based on weather and regional models.</li>
+                                            </ul>
+                                        </div>
+                                    </details>
+                                </div>
+
+                                <!-- Actions -->
+                                <div style="display:flex; justify-content:flex-end; align-items:center; border-top: 1px solid var(--border-color); padding-top: 16px; gap:12px;">
+                                    <button class="secondary-btn" onclick="showToast('Recommendation Dismissed')">Dismiss</button>
+                                    <button class="secondary-btn" onclick="showToast('Opening Customization Menu')">Customize Quantity</button>
+                                    <button class="primary-btn" onclick="showToast('Recommendation added to Draft Order.')">Accept & Add to Draft Order</button>
+                                </div>
+                            </div>
+
+                            <!-- Rec 2: Prosaro Pro -->
+                            <div class="dashboard-card widget" style="padding: 20px; border-left: 4px solid var(--primary-blue);">
+                                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 16px;">
+                                    <div style="display:flex; gap: 16px; align-items: flex-start;">
+                                        <div style="background: #E0F2FE; color: #0284C7; padding: 14px; border-radius: 12px; margin-top:4px;">
+                                            <i data-lucide="trending-up" style="width:24px;height:24px;"></i>
+                                        </div>
+                                        <div>
+                                            <span class="badge" style="background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; font-size:10px; margin-bottom:8px; display:inline-block;">New Recommendation</span>
+                                            
+                                            <h3 style="margin:0 0 4px 0; font-size:18px;">Cross-Sell: Prosaro Pro</h3>
+                                            
+                                            <div style="display:flex; align-items:center; gap:8px;">
+                                                <span class="text-secondary" style="font-size:14px;">Optimal order: <strong style="color:var(--text-dark);">5,000 L</strong></span>
+                                                <span style="color:#CBD5E1;">|</span>
+                                                <span class="font-medium text-blue" style="font-size:13px; display:flex; align-items:center; gap:4px;"><i data-lucide="zap" style="width:14px;height:14px;"></i> Growth Opportunity</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span style="font-size:12px; color:var(--text-secondary);">Yesterday, 14:20 PM</span>
+                                </div>
+
+                                <div style="background:#FEF3C7; border:1px solid #FDE68A; border-radius:6px; padding:12px; margin-bottom:16px;">
+                                    <div style="font-weight:600; font-size:13px; color:#92400E; display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+                                        <i data-lucide="alert-circle" style="width:14px;height:14px;"></i> Risk if Ignored
+                                    </div>
+                                    <p style="margin:0; font-size:13px; color:#92400E;">Potential missed margin opportunity and risk of regional fulfillment bottlenecks later in the season.</p>
+                                </div>
+
+                                <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:6px; padding:12px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;">
+                                    <div>
+                                        <div style="font-weight:600; font-size:13px; color:#166534; display:flex; align-items:center; gap:6px; margin-bottom:2px;">
+                                            <i data-lucide="tag" style="width:14px;height:14px;"></i> Fungicide Bundle Program
+                                        </div>
+                                        <div style="font-size:12px; color:#166534;">8% discount when bundling Prosaro Pro with Roundup.</div>
+                                    </div>
+                                    <div style="text-align:right;">
+                                        <div style="font-weight:700; font-size:14px; color:#166534;">Save $9,600</div>
+                                        <div style="font-size:11px; color:var(--text-secondary);">Valid till Apr 15</div>
+                                    </div>
+                                </div>
+
+                                <div style="margin-bottom: 16px; border:1px solid #E2E8F0; border-radius:6px; overflow:hidden;">
+                                    <details style="background:#F8FAFC;">
+                                        <summary style="padding:12px; font-size:13px; font-weight:600; color:var(--text-dark); cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+                                            <div style="display:flex; align-items:center; gap:8px;"><i data-lucide="help-circle" style="width:14px;height:14px;color:var(--primary-blue);"></i> Why this recommendation?</div>
+                                            <i data-lucide="chevron-down" style="width:16px;height:16px;color:var(--secondary-text);"></i>
+                                        </summary>
+                                        <div style="padding:0 12px 12px 12px;">
+                                            <ul style="margin:0; padding-left:20px; font-size:13px; color:var(--secondary-text); line-height:1.6;">
+                                                <li>Customers purchasing Roundup in this region historically bundle with Prosaro Pro.</li>
+                                                <li>Pre-positioning stock prevents upcoming regional fulfillment bottlenecks.</li>
+                                                <li>AI Confidence Score: 84% based on purchasing patterns.</li>
+                                            </ul>
+                                        </div>
+                                    </details>
+                                </div>
+
+                                <div style="display:flex; justify-content:flex-end; align-items:center; border-top: 1px solid var(--border-color); padding-top: 16px; gap:12px;">
+                                    <button class="secondary-btn" onclick="showToast('Recommendation Dismissed')">Dismiss</button>
+                                    <button class="secondary-btn" onclick="showToast('Opening Customization Menu')">Customize Quantity</button>
+                                    <button class="primary-btn" onclick="showToast('Recommendation added to Draft Order.')">Accept & Add to Draft Order</button>
+                                </div>
+                            </div>
+                            
+                            <!-- 11. Recommendation History -->
+                            <div class="dashboard-card widget" style="margin-top:16px; background:#F8FAFC; box-shadow:none; border:1px solid #E2E8F0;">
+                                <h4 style="margin:0 0 16px 0; font-size:15px; color:var(--text-dark);">Recommendation History</h4>
+                                <table class="data-table minimal" style="font-size:13px; margin:0;">
+                                    <thead>
+                                        <tr>
+                                            <th style="padding:8px; border-bottom:1px solid #E2E8F0;">Product</th>
+                                            <th style="padding:8px; border-bottom:1px solid #E2E8F0;">Status</th>
+                                            <th style="padding:8px; border-bottom:1px solid #E2E8F0;">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding:8px; border-bottom:1px solid #E2E8F0;">Nativo Fungicide (2,000L)</td>
+                                            <td style="padding:8px; border-bottom:1px solid #E2E8F0;"><span class="badge" style="background:#F0FDF4; color:#166534; border:1px solid #BBF7D0;">Ordered</span></td>
+                                            <td style="padding:8px; border-bottom:1px solid #E2E8F0; color:var(--text-secondary);">Oct 12, 2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding:8px; border-bottom:1px solid #E2E8F0;">Flint Extra (500L)</td>
+                                            <td style="padding:8px; border-bottom:1px solid #E2E8F0;"><span class="badge" style="background:#F8FAFC; color:var(--text-secondary); border:1px solid #E2E8F0;">Dismissed</span></td>
+                                            <td style="padding:8px; border-bottom:1px solid #E2E8F0; color:var(--text-secondary);">Oct 10, 2026</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Decision Workspace -->
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <!-- 7. Enhanced AI Copilot -->
+                            <div class="dashboard-card widget ai-reasoning" style="background: #F8FAFC; border: 1px solid var(--border-color); border-top: 4px solid var(--primary-blue); box-shadow: none;">
+                                <h4 style="display:flex; align-items:center; gap:8px; color:var(--primary-blue); margin-bottom: 12px; font-size:15px;">
+                                    <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Copilot Advisory
+                                </h4>
+                                <p style="font-size:13px; color:var(--text-dark); margin:0 0 16px 0; line-height: 1.6;">Based on your current inventory and active Bayer rebate programs, accepting both recommendations today will save you approximately <strong>$13,800</strong> and prevent critical shortages next week.</p>
+                                
+                                <div style="display:flex; flex-direction:column; gap:8px;">
+                                    <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0; width:100%; justify-content:flex-start;" onclick="showToast('Loading analysis')"><i data-lucide="bar-chart-2" style="color:var(--primary-blue);"></i> View detailed market analysis</button>
+                                    <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0; width:100%; justify-content:flex-start;" onclick="showToast('Accepting all')"><i data-lucide="check-square" style="color:var(--status-green);"></i> Accept both recommendations</button>
+                                </div>
+                            </div>
+
+                            <!-- 6. Decision Summary Panel -->
+                            <div class="dashboard-card widget" style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border: 1px solid var(--border-color);">
+                                <h4 style="margin-bottom: 16px; font-size:16px;">Decision Summary</h4>
+                                
+                                <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:20px;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                                        <span style="font-size:13px; color:var(--text-secondary);">Draft Order Status</span>
+                                        <span class="badge" style="background:#E0F2FE; color:#0369A1; border:none;">0 Items Ready</span>
+                                    </div>
+                                    
+                                    <hr style="border:none; border-top:1px dashed #E2E8F0; margin:0;">
+                                    
+                                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                                        <span style="font-size:13px; color:var(--text-dark);">Potential Savings</span>
+                                        <span style="font-size:14px; font-weight:600; color:var(--status-green);">$13,800</span>
+                                    </div>
+                                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                                        <span style="font-size:13px; color:var(--text-dark);">Expected Yield Impact</span>
+                                        <span style="font-size:14px; font-weight:600; color:var(--primary-blue);">+4% Bu/Ac</span>
+                                    </div>
+                                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                                        <span style="font-size:13px; color:var(--text-dark);">Eligible Rebates</span>
+                                        <span style="font-size:14px; font-weight:600; color:var(--text-dark);">2 Programs</span>
+                                    </div>
+                                </div>
+
+                                <div style="background:#F8FAFC; border-radius:6px; padding:12px; margin-bottom:20px; font-size:12px; color:var(--text-secondary); text-align:center;">
+                                    Recommendations accepted will be added to your draft workspace for final review.
+                                </div>
+
+                                <button class="primary-btn" style="width:100%; justify-content:center; padding: 12px; font-size:14px;" onclick="document.querySelector('.nav-item[data-target=\'order-placement\']').click();">Proceed to Draft Order <i data-lucide="arrow-right" style="width:16px;height:16px;"></i></button>
                             </div>
                         </div>
                     </div>
