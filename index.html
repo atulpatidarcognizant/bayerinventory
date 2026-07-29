@@ -3553,6 +3553,7 @@
             <!-- Screen 12: Order Tracking -->
             <!-- Screen 12: Order Tracking -->
             <section id="order-tracking" class="screen">
+                <div class="kam-only">
                 <div class="section-title-bar" style="margin-bottom: 24px;">
                     <div>
                         <span class="section-subtitle">Ordering & Fulfillment</span>
@@ -3785,6 +3786,295 @@
                     </div>
                 </div>
 
+                </div>
+                <!-- DISTRIBUTOR SHIPMENT TRACKING WORKSPACE -->
+                <div class="distributor-only">
+                    <div class="section-title-bar" style="margin-bottom: 24px;">
+                        <div>
+                            <span class="section-subtitle">Ordering & Fulfillment</span>
+                            <h2>Shipment Tracking Workspace</h2>
+                            <p style="margin: 4px 0 0 0; font-size: 14px; color: var(--secondary-text);">Track active shipments, receive delivery alerts, and access shipping documents.</p>
+                        </div>
+                    </div>
+
+                    <!-- 1. Executive Shipment Summary KPIs -->
+                    <div class="dashboard-grid" style="margin-bottom: 24px;">
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon"><i data-lucide="truck" style="color:var(--primary-blue);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Orders In Transit</span>
+                                <span class="kpi-value text-blue">5</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon"><i data-lucide="check-circle" style="color:var(--status-green);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Delivered This Week</span>
+                                <span class="kpi-value text-green">12</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon"><i data-lucide="alert-triangle" style="color:var(--status-red);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Delayed Shipments</span>
+                                <span class="kpi-value text-red">1</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card" style="cursor:pointer;" onclick="showToast('Viewing next delivery...')">
+                            <div class="kpi-icon" style="background:#F3F4F6; color:var(--text-dark);"><i data-lucide="calendar"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Next Delivery</span>
+                                <span class="kpi-value" style="color:var(--text-dark);">Tomorrow</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; gap:24px; margin-bottom: 24px;">
+                        <!-- Left Column: Active Shipments & Timeline -->
+                        <div style="display: flex; flex-direction: column; gap: 24px;">
+                            
+                            <!-- 4. Delivery Alerts -->
+                            <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:8px; padding:16px;">
+                                <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px; color:#991B1B; font-weight:600;">
+                                    <i data-lucide="alert-circle" style="width:18px;height:18px;"></i> Delivery Alert: Order #4890
+                                </div>
+                                <div style="font-size:13px; color:#B91C1C; margin-bottom:12px;">Weather delay affecting shipment route. New Estimated Delivery: Friday.</div>
+                                <button class="primary-btn btn-sm" style="background:#DC2626;" onclick="showToast('Viewing tracking details...')">View Carrier Updates</button>
+                            </div>
+
+                            <!-- 2. Active Shipments -->
+                            <div class="dashboard-card widget">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                                    <h3 style="margin:0; font-size:16px;">Active Shipments</h3>
+                                    <span class="badge" style="background:#E0F2FE; color:#0369A1;">5 In Transit</span>
+                                </div>
+                                
+                                <div style="display:flex; flex-direction:column; gap:16px;">
+                                    
+                                    <!-- Shipment Card 1 -->
+                                    <div style="border:1px solid var(--border-color); border-radius:8px; padding:16px; background:#F8FAFC;">
+                                        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+                                            <div>
+                                                <div style="font-weight:600; font-size:16px; color:var(--text-dark); margin-bottom:4px;">Roundup PowerMAX</div>
+                                                <div style="font-size:13px; color:var(--secondary-text);">Order #4901 • Montreal DC <i data-lucide="arrow-right" style="width:12px;height:12px;display:inline-block;vertical-align:middle;"></i> Toronto Warehouse</div>
+                                            </div>
+                                            <div style="text-align:right;">
+                                                <span class="badge" style="background:#E0F2FE; color:#0369A1; margin-bottom:4px;">In Transit</span>
+                                                <div style="font-size:12px; font-weight:600; color:var(--text-dark);">ETA: Tomorrow – 2:00 PM</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 3. Shipment Progress Timeline -->
+                                        <div style="position:relative; margin:24px 0 16px 0;">
+                                            <div style="position:absolute; top:8px; left:0; width:100%; height:2px; background:#E2E8F0; z-index:1;"></div>
+                                            <div style="position:absolute; top:8px; left:0; width:66%; height:2px; background:var(--primary-blue); z-index:2;"></div>
+                                            
+                                            <div style="display:flex; justify-content:space-between; position:relative; z-index:3;">
+                                                <div style="text-align:center;">
+                                                    <div style="width:18px;height:18px;background:var(--primary-blue);border-radius:50%;margin:0 auto 4px auto;display:flex;align-items:center;justify-content:center;"><i data-lucide="check" style="width:10px;height:10px;color:white;"></i></div>
+                                                    <div style="font-size:10px;color:var(--text-dark);font-weight:600;">Ordered</div>
+                                                </div>
+                                                <div style="text-align:center;">
+                                                    <div style="width:18px;height:18px;background:var(--primary-blue);border-radius:50%;margin:0 auto 4px auto;display:flex;align-items:center;justify-content:center;"><i data-lucide="check" style="width:10px;height:10px;color:white;"></i></div>
+                                                    <div style="font-size:10px;color:var(--text-dark);font-weight:600;">Approved</div>
+                                                </div>
+                                                <div style="text-align:center;">
+                                                    <div style="width:18px;height:18px;background:var(--primary-blue);border-radius:50%;margin:0 auto 4px auto;display:flex;align-items:center;justify-content:center;"><i data-lucide="check" style="width:10px;height:10px;color:white;"></i></div>
+                                                    <div style="font-size:10px;color:var(--text-dark);font-weight:600;">Packed</div>
+                                                </div>
+                                                <div style="text-align:center;">
+                                                    <div style="width:18px;height:18px;background:var(--primary-blue);border-radius:50%;margin:0 auto 4px auto;display:flex;align-items:center;justify-content:center;"><i data-lucide="check" style="width:10px;height:10px;color:white;"></i></div>
+                                                    <div style="font-size:10px;color:var(--text-dark);font-weight:600;">Shipped</div>
+                                                </div>
+                                                <div style="text-align:center;">
+                                                    <div style="width:18px;height:18px;background:white;border:2px solid #E2E8F0;border-radius:50%;margin:0 auto 4px auto;"></div>
+                                                    <div style="font-size:10px;color:var(--secondary-text);">Out for Delivery</div>
+                                                </div>
+                                                <div style="text-align:center;">
+                                                    <div style="width:18px;height:18px;background:white;border:2px solid #E2E8F0;border-radius:50%;margin:0 auto 4px auto;"></div>
+                                                    <div style="font-size:10px;color:var(--secondary-text);">Delivered</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="secondary-btn" style="width:100%; justify-content:center;" onclick="showToast('Tracking external carrier...')">Track with DHL</button>
+                                    </div>
+
+                                    <!-- Shipment Card 2 -->
+                                    <div style="border:1px solid var(--border-color); border-radius:8px; padding:16px; background:#F8FAFC;">
+                                        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+                                            <div>
+                                                <div style="font-weight:600; font-size:16px; color:var(--text-dark); margin-bottom:4px;">Prosaro Pro</div>
+                                                <div style="font-size:13px; color:var(--secondary-text);">Order #4895 • Regina DC <i data-lucide="arrow-right" style="width:12px;height:12px;display:inline-block;vertical-align:middle;"></i> Calgary Warehouse</div>
+                                            </div>
+                                            <div style="text-align:right;">
+                                                <span class="badge" style="background:#F0FDF4; color:#166534; margin-bottom:4px;">Out for Delivery</span>
+                                                <div style="font-size:12px; font-weight:600; color:var(--text-dark);">ETA: Today – 4:00 PM</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="position:relative; margin:24px 0 16px 0;">
+                                            <div style="position:absolute; top:8px; left:0; width:100%; height:2px; background:#E2E8F0; z-index:1;"></div>
+                                            <div style="position:absolute; top:8px; left:0; width:80%; height:2px; background:var(--status-green); z-index:2;"></div>
+                                            
+                                            <div style="display:flex; justify-content:space-between; position:relative; z-index:3;">
+                                                <div style="text-align:center;">
+                                                    <div style="width:18px;height:18px;background:var(--status-green);border-radius:50%;margin:0 auto 4px auto;display:flex;align-items:center;justify-content:center;"><i data-lucide="check" style="width:10px;height:10px;color:white;"></i></div>
+                                                </div>
+                                                <div style="text-align:center;">
+                                                    <div style="width:18px;height:18px;background:var(--status-green);border-radius:50%;margin:0 auto 4px auto;display:flex;align-items:center;justify-content:center;"><i data-lucide="check" style="width:10px;height:10px;color:white;"></i></div>
+                                                </div>
+                                                <div style="text-align:center;">
+                                                    <div style="width:18px;height:18px;background:var(--status-green);border-radius:50%;margin:0 auto 4px auto;display:flex;align-items:center;justify-content:center;"><i data-lucide="check" style="width:10px;height:10px;color:white;"></i></div>
+                                                </div>
+                                                <div style="text-align:center;">
+                                                    <div style="width:18px;height:18px;background:var(--status-green);border-radius:50%;margin:0 auto 4px auto;display:flex;align-items:center;justify-content:center;"><i data-lucide="check" style="width:10px;height:10px;color:white;"></i></div>
+                                                </div>
+                                                <div style="text-align:center;">
+                                                    <div style="width:18px;height:18px;background:var(--status-green);border-radius:50%;margin:0 auto 4px auto;display:flex;align-items:center;justify-content:center;"><i data-lucide="check" style="width:10px;height:10px;color:white;"></i></div>
+                                                    <div style="font-size:10px;color:var(--text-dark);font-weight:600;">Out for Delivery</div>
+                                                </div>
+                                                <div style="text-align:center;">
+                                                    <div style="width:18px;height:18px;background:white;border:2px solid #E2E8F0;border-radius:50%;margin:0 auto 4px auto;"></div>
+                                                    <div style="font-size:10px;color:var(--secondary-text);">Delivered</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="secondary-btn" style="width:100%; justify-content:center;" onclick="showToast('Tracking external carrier...')">Track with UPS</button>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: AI, Documents, Activity -->
+                        <div style="display: flex; flex-direction: column; gap: 24px;">
+                            
+                            <!-- 5. AI Shipment Assistant -->
+                            <div class="dashboard-card widget ai-reasoning" style="background: #F8FAFC; border: 1px solid var(--border-color); border-top: 4px solid var(--primary-blue); box-shadow: none;">
+                                <h4 style="display:flex; align-items:center; gap:8px; color:var(--primary-blue); margin-bottom: 12px; font-size:15px;">
+                                    <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Shipment Assistant
+                                </h4>
+                                <ul style="margin:0; padding:0; list-style:none; font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
+                                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="info" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Your shipment (Order #4901) remains on schedule.</li>
+                                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="info" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Receiving staff should be available tomorrow between 1 PM and 3 PM.</li>
+                                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="info" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Carrier reports no expected disruptions.</li>
+                                </ul>
+                                <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0; width:100%; justify-content:center;" onclick="showToast('Viewing Delivery Details')">View Delivery Details</button>
+                            </div>
+
+                            <!-- 7. Delivery Documents -->
+                            <div class="dashboard-card widget" style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border: 1px solid var(--border-color);">
+                                <h4 style="margin-bottom: 16px; font-size:15px; display:flex; align-items:center; gap:6px;">
+                                    <i data-lucide="file-text" style="width:18px;height:18px;"></i> Shipping Documents
+                                </h4>
+                                <div style="display:flex; flex-direction:column; gap:12px;">
+                                    <button class="secondary-btn flex-align" style="background:white; justify-content:space-between;" onclick="showToast('Downloading Invoice...')">
+                                        <div style="display:flex; align-items:center; gap:8px;"><i data-lucide="download" style="width:14px;height:14px;"></i> Invoice #4901</div>
+                                        <span style="font-size:11px; color:var(--secondary-text);">PDF</span>
+                                    </button>
+                                    <button class="secondary-btn flex-align" style="background:white; justify-content:space-between;" onclick="showToast('Downloading Packing List...')">
+                                        <div style="display:flex; align-items:center; gap:8px;"><i data-lucide="download" style="width:14px;height:14px;"></i> Packing List #4901</div>
+                                        <span style="font-size:11px; color:var(--secondary-text);">PDF</span>
+                                    </button>
+                                    <button class="secondary-btn flex-align" style="background:white; justify-content:space-between;" onclick="showToast('Downloading BOL...')">
+                                        <div style="display:flex; align-items:center; gap:8px;"><i data-lucide="download" style="width:14px;height:14px;"></i> Bill of Lading</div>
+                                        <span style="font-size:11px; color:var(--secondary-text);">PDF</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 8. Recent Shipment Activity -->
+                            <div class="dashboard-card widget">
+                                <h4 style="margin-bottom: 16px; font-size:15px;">Recent Shipment Activity</h4>
+                                <div style="display:flex; flex-direction:column; gap:16px;">
+                                    <div style="display:flex; gap:12px; align-items:flex-start;">
+                                        <div style="background:#E0F2FE; padding:6px; border-radius:50%;"><i data-lucide="truck" style="width:14px;height:14px;color:#0284C7;"></i></div>
+                                        <div>
+                                            <div style="font-weight:600; font-size:13px; color:var(--text-dark);">Shipment departed Montreal DC</div>
+                                            <div style="font-size:12px; color:var(--secondary-text);">Today, 06:30 AM</div>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; gap:12px; align-items:flex-start;">
+                                        <div style="background:#F3F4F6; padding:6px; border-radius:50%;"><i data-lucide="box" style="width:14px;height:14px;color:var(--text-dark);"></i></div>
+                                        <div>
+                                            <div style="font-weight:600; font-size:13px; color:var(--text-dark);">Carrier assigned (DHL)</div>
+                                            <div style="font-size:12px; color:var(--secondary-text);">Yesterday, 14:00 PM</div>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; gap:12px; align-items:flex-start;">
+                                        <div style="background:#F3F4F6; padding:6px; border-radius:50%;"><i data-lucide="package" style="width:14px;height:14px;color:var(--text-dark);"></i></div>
+                                        <div>
+                                            <div style="font-weight:600; font-size:13px; color:var(--text-dark);">Inventory allocated & packed</div>
+                                            <div style="font-size:12px; color:var(--secondary-text);">Yesterday, 09:15 AM</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Shipment Table -->
+                    <div class="dashboard-card widget">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                            <h3 style="margin:0;">All Active & Recent Shipments</h3>
+                            <div style="display:flex; gap:8px;">
+                                <div class="search-bar" style="width: 250px;">
+                                    <i data-lucide="search" class="search-icon"></i>
+                                    <input type="text" placeholder="Search shipments..." class="search-input">
+                                </div>
+                                <button class="secondary-btn"><i data-lucide="filter"></i> Filter</button>
+                            </div>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Order Number</th>
+                                    <th>Product</th>
+                                    <th>Shipment Status</th>
+                                    <th>Estimated Delivery</th>
+                                    <th>Carrier</th>
+                                    <th style="text-align: right;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-medium">#4901</td>
+                                    <td>Roundup PowerMAX</td>
+                                    <td><span class="badge" style="background:#E0F2FE; color:#0369A1;">In Transit</span></td>
+                                    <td>Tomorrow, 2:00 PM</td>
+                                    <td>DHL</td>
+                                    <td style="text-align: right;"><button class="text-link text-blue">Track</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">#4895</td>
+                                    <td>Prosaro Pro</td>
+                                    <td><span class="badge" style="background:#F0FDF4; color:#166534;">Out for Delivery</span></td>
+                                    <td>Today, 4:00 PM</td>
+                                    <td>UPS</td>
+                                    <td style="text-align: right;"><button class="text-link text-blue">Track</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-red">#4890</td>
+                                    <td>Decis Expert</td>
+                                    <td><span class="badge" style="background:#FEF2F2; color:#DC2626;">Delayed</span></td>
+                                    <td class="text-red">Friday (Revised)</td>
+                                    <td>FedEx</td>
+                                    <td style="text-align: right;"><button class="text-link text-blue">Track</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-green">#4887</td>
+                                    <td>Luna Experience</td>
+                                    <td><span class="badge badge-high">Delivered</span></td>
+                                    <td>Yesterday</td>
+                                    <td>FedEx</td>
+                                    <td style="text-align: right;"><button class="text-link text-secondary">View POD</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </section>
 
 
