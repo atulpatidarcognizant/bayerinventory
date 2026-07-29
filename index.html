@@ -2989,6 +2989,7 @@
 
             <!-- Screen 11: Order Management -->
             <section id="order-management" class="screen">
+                <div class="kam-only">
                 <div class="section-title-bar" style="margin-bottom: 24px;">
                     <div>
                         <span class="section-subtitle">Ordering & Fulfillment</span>
@@ -3302,6 +3303,248 @@
                             </div>
                             
                         </div>
+                    </div>
+                </div>
+                </div>
+                <!-- DISTRIBUTOR "MY ORDERS" WORKSPACE -->
+                <div class="distributor-only">
+                    <div class="section-title-bar" style="margin-bottom: 24px;">
+                        <div>
+                            <span class="section-subtitle">Ordering & Fulfillment</span>
+                            <h2>My Orders</h2>
+                            <p style="margin: 4px 0 0 0; font-size: 14px; color: var(--secondary-text);">Track your submitted orders, monitor approval progress, and respond to requests from Bayer.</p>
+                        </div>
+                    </div>
+
+                    <!-- 2. Distributor-Focused KPIs -->
+                    <div class="dashboard-grid" style="margin-bottom: 24px;">
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon"><i data-lucide="clock" style="color:var(--primary-blue);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Orders Awaiting Approval</span>
+                                <span class="kpi-value text-blue">6</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon"><i data-lucide="alert-circle" style="color:var(--status-red);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Orders Requiring My Action</span>
+                                <span class="kpi-value text-red">2</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon"><i data-lucide="check-circle-2" style="color:var(--status-green);"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Approved This Week</span>
+                                <span class="kpi-value text-green">14</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card kpi-card">
+                            <div class="kpi-icon" style="background:#F3F4F6; color:var(--text-dark);"><i data-lucide="bar-chart-2"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-label">Average Approval Time</span>
+                                <span class="kpi-value" style="color:var(--text-dark);">1.8 Days</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; gap:24px; margin-bottom: 24px;">
+                        <!-- Left Column: Status-Based Workflow -->
+                        <div style="display: flex; flex-direction: column; gap: 24px;">
+                            
+                            <!-- Action Required -->
+                            <div class="dashboard-card widget" style="border-top: 4px solid var(--status-red);">
+                                <h3 style="margin-bottom: 16px; display:flex; align-items:center; gap:8px;">
+                                    <i data-lucide="alert-circle" style="color:var(--status-red); width:20px;height:20px;"></i> Action Required
+                                </h3>
+                                
+                                <div style="display:flex; flex-direction:column; gap:12px;">
+                                    <div style="border:1px solid #FECACA; background:#FEF2F2; border-radius:8px; padding:16px;">
+                                        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                                            <div>
+                                                <div style="font-weight:600; font-size:15px; color:#991B1B;">Order #4902 - Missing Purchase Documentation</div>
+                                                <div style="font-size:13px; color:var(--secondary-text); margin-top:4px;">Submitted Yesterday • $84,000 Total</div>
+                                            </div>
+                                            <button class="primary-btn btn-sm" style="background:#DC2626;" onclick="showToast('Opening response form...')">Respond</button>
+                                        </div>
+                                        <div style="font-size:13px; color:#B91C1C; background:white; padding:8px; border-radius:4px; border:1px solid #FECACA;">
+                                            <strong>Bayer Note:</strong> Please attach the signed addendum for the bulk discount applied.
+                                        </div>
+                                    </div>
+
+                                    <div style="border:1px solid #FECACA; background:#FEF2F2; border-radius:8px; padding:16px;">
+                                        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+                                            <div>
+                                                <div style="font-weight:600; font-size:15px; color:#991B1B;">Order #4901 - Quantity Clarification Required</div>
+                                                <div style="font-size:13px; color:var(--secondary-text); margin-top:4px;">Submitted 2 Days Ago • $12,500 Total</div>
+                                            </div>
+                                            <button class="primary-btn btn-sm" style="background:#DC2626;" onclick="showToast('Opening response form...')">Respond</button>
+                                        </div>
+                                        <div style="font-size:13px; color:#B91C1C; background:white; padding:8px; border-radius:4px; border:1px solid #FECACA;">
+                                            <strong>Bayer Note:</strong> Requested quantity exceeds maximum regional allocation. Please review available allocation limits.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Awaiting Approval -->
+                            <div class="dashboard-card widget">
+                                <h3 style="margin-bottom: 16px; display:flex; align-items:center; gap:8px;">
+                                    <i data-lucide="clock" style="color:var(--primary-blue); width:20px;height:20px;"></i> Awaiting Approval
+                                </h3>
+                                
+                                <div style="display:flex; flex-direction:column; gap:12px;">
+                                    <div style="border:1px solid var(--border-color); border-radius:8px; padding:16px; display:flex; justify-content:space-between; align-items:center;">
+                                        <div>
+                                            <div style="font-weight:600; font-size:15px;">Order #4905</div>
+                                            <div style="font-size:13px; color:var(--secondary-text); margin-top:4px;">Submitted Today • $45,000 Total</div>
+                                        </div>
+                                        <div style="text-align:right;">
+                                            <span class="badge" style="background:#E0F2FE; color:#0369A1;">Under Review</span>
+                                            <div style="font-size:12px; color:var(--secondary-text); margin-top:4px;">Est. Approval: Today</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="border:1px solid var(--border-color); border-radius:8px; padding:16px; display:flex; justify-content:space-between; align-items:center;">
+                                        <div>
+                                            <div style="font-weight:600; font-size:15px;">Order #4904</div>
+                                            <div style="font-size:13px; color:var(--secondary-text); margin-top:4px;">Submitted Yesterday • $120,500 Total</div>
+                                        </div>
+                                        <div style="text-align:right;">
+                                            <span class="badge" style="background:#E0F2FE; color:#0369A1;">Under Review</span>
+                                            <div style="font-size:12px; color:var(--secondary-text); margin-top:4px;">Est. Approval: Tomorrow</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Approved -->
+                            <div class="dashboard-card widget">
+                                <h3 style="margin-bottom: 16px; display:flex; align-items:center; gap:8px;">
+                                    <i data-lucide="check-circle" style="color:var(--status-green); width:20px;height:20px;"></i> Recently Approved
+                                </h3>
+                                
+                                <div style="display:flex; flex-direction:column; gap:12px;">
+                                    <div style="border:1px solid #BBF7D0; background:#F0FDF4; border-radius:8px; padding:16px; display:flex; justify-content:space-between; align-items:center;">
+                                        <div>
+                                            <div style="font-weight:600; font-size:15px; color:#166534;">Order #4899</div>
+                                            <div style="font-size:13px; color:var(--secondary-text); margin-top:4px;">Approved Today • Ready for fulfillment</div>
+                                        </div>
+                                        <button class="secondary-btn btn-sm" onclick="document.querySelector('.nav-item[data-target=\'order-tracking\']').click();">Track Order</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Right Column: AI & Communications -->
+                        <div style="display: flex; flex-direction: column; gap: 24px;">
+                            <!-- 4. AI Order Assistant -->
+                            <div class="dashboard-card widget ai-reasoning" style="background: #F8FAFC; border: 1px solid var(--border-color); border-top: 4px solid var(--primary-blue); box-shadow: none;">
+                                <h4 style="display:flex; align-items:center; gap:8px; color:var(--primary-blue); margin-bottom: 12px; font-size:15px;">
+                                    <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Order Assistant
+                                </h4>
+                                <ul style="margin:0; padding:0; list-style:none; font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
+                                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="info" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Your Roundup order (#4905) is expected to be approved today.</li>
+                                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="info" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Two submitted orders qualify for additional rebate programs.</li>
+                                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="info" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Estimated average approval time: 18 hours.</li>
+                                </ul>
+                                <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0; width:100%; justify-content:center;" onclick="showToast('Viewing Actions')">View Suggested Actions</button>
+                            </div>
+
+                            <!-- 6. Bayer Communications Panel -->
+                            <div class="dashboard-card widget" style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border: 1px solid var(--border-color);">
+                                <h4 style="margin-bottom: 16px; font-size:15px;">Recent Bayer Communications</h4>
+                                
+                                <div style="display:flex; flex-direction:column; gap:16px;">
+                                    <div style="display:flex; gap:12px; align-items:flex-start;">
+                                        <div style="background:#FEE2E2; padding:6px; border-radius:50%;"><i data-lucide="message-square" style="width:14px;height:14px;color:#DC2626;"></i></div>
+                                        <div>
+                                            <div style="font-weight:600; font-size:13px; color:var(--text-dark);">Pricing justification requested</div>
+                                            <div style="font-size:12px; color:var(--secondary-text);">Order #4902 • 2 hours ago</div>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; gap:12px; align-items:flex-start;">
+                                        <div style="background:#DCFCE7; padding:6px; border-radius:50%;"><i data-lucide="check" style="width:14px;height:14px;color:#16A34A;"></i></div>
+                                        <div>
+                                            <div style="font-weight:600; font-size:13px; color:var(--text-dark);">Allocation approved</div>
+                                            <div style="font-size:12px; color:var(--secondary-text);">Order #4899 • Today, 09:15 AM</div>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; gap:12px; align-items:flex-start;">
+                                        <div style="background:#E0F2FE; padding:6px; border-radius:50%;"><i data-lucide="package" style="width:14px;height:14px;color:#0284C7;"></i></div>
+                                        <div>
+                                            <div style="font-weight:600; font-size:13px; color:var(--text-dark);">Inventory reserved</div>
+                                            <div style="font-size:12px; color:var(--secondary-text);">Order #4899 • Today, 09:20 AM</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="text-link" style="margin-top:16px; font-size:13px; width:100%; text-align:center;">View Message Inbox</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. "My Orders" Table -->
+                    <div class="dashboard-card widget">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                            <h3 style="margin:0;">All Submitted Orders</h3>
+                            <div style="display:flex; gap:8px;">
+                                <div class="search-bar" style="width: 250px;">
+                                    <i data-lucide="search" class="search-icon"></i>
+                                    <input type="text" placeholder="Search orders..." class="search-input">
+                                </div>
+                                <button class="secondary-btn"><i data-lucide="filter"></i> Filter</button>
+                            </div>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Order Number</th>
+                                    <th>Status</th>
+                                    <th>Submitted Date</th>
+                                    <th>Order Value</th>
+                                    <th style="text-align: right;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-medium">#4905</td>
+                                    <td><span class="badge" style="background:#E0F2FE; color:#0369A1;">Under Review</span></td>
+                                    <td>Oct 24, 2026</td>
+                                    <td>$45,000</td>
+                                    <td style="text-align: right;"><button class="text-link">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium">#4904</td>
+                                    <td><span class="badge" style="background:#E0F2FE; color:#0369A1;">Under Review</span></td>
+                                    <td>Oct 23, 2026</td>
+                                    <td>$120,500</td>
+                                    <td style="text-align: right;"><button class="text-link">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-red">#4902</td>
+                                    <td><span class="badge" style="background:#FEF2F2; color:#DC2626;">Action Required</span></td>
+                                    <td>Oct 23, 2026</td>
+                                    <td>$84,000</td>
+                                    <td style="text-align: right;"><button class="text-link text-red">Respond</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-red">#4901</td>
+                                    <td><span class="badge" style="background:#FEF2F2; color:#DC2626;">Action Required</span></td>
+                                    <td>Oct 22, 2026</td>
+                                    <td>$12,500</td>
+                                    <td style="text-align: right;"><button class="text-link text-red">Respond</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-green">#4899</td>
+                                    <td><span class="badge badge-high">Approved</span></td>
+                                    <td>Oct 22, 2026</td>
+                                    <td>$35,400</td>
+                                    <td style="text-align: right;"><button class="text-link text-green" onclick="document.querySelector('.nav-item[data-target=\'order-tracking\']').click();">Track</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
