@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             profileName.textContent = 'Sarah Jenkins';
             profileRole.textContent = 'Account Manager';
             if(window.showToast) window.showToast('Switched to Account Manager View.');
+            if(window.switchScreen) window.switchScreen('dashboard');
             if(window.lucide) window.lucide.createIcons();
         });
         
@@ -97,11 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
             profileName.textContent = 'Demo Distributor';
             profileRole.textContent = 'Distributor Partner';
             if(window.showToast) window.showToast('Switched to Distributor View.');
+            if(window.switchScreen) window.switchScreen('dashboard');
             if(window.lucide) window.lucide.createIcons();
         });
         
         // Initialize default persona
-        document.body.setAttribute('data-persona', 'distributor');
+        document.body.setAttribute('data-persona', 'account-manager');
     }
 
     // --- Upload Pipeline Simulation ---

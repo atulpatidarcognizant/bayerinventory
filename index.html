@@ -17,7 +17,7 @@
     <!-- Top Global Header -->
     <header class="global-header">
         <div class="header-left">
-            <div class="logo-container">
+            <div class="logo-container" onclick="switchScreen('dashboard')" style="cursor: pointer;">
                 <img src="Bayer-Logo.wine.png" alt="Bayer Logo" class="bayer-logo-img">
                 <div class="logo-text">
                     <span class="brand-title">Bayer</span>
@@ -37,11 +37,11 @@
 
         <div class="header-right">
             <div class="role-selector">
-                <button class="role-btn" id="btn-role-account-manager">
+                <button class="role-btn active" id="btn-role-account-manager">
                     <i data-lucide="shield"></i>
                     Account Manager View
                 </button>
-                <button class="role-btn active" id="btn-role-distributor">
+                <button class="role-btn" id="btn-role-distributor">
                     <i data-lucide="truck"></i>
                     Distributor View
                 </button>
@@ -53,10 +53,10 @@
                 </div>
             </div>
             <div class="user-profile-menu">
-                <div class="profile-avatar" id="profile-avatar">DV</div>
+                <div class="profile-avatar" id="profile-avatar">AM</div>
                 <div class="profile-info">
-                    <span class="profile-name" id="profile-name">Demo Distributor</span>
-                    <span class="profile-role" id="profile-role">Distributor Partner</span>
+                    <span class="profile-name" id="profile-name">Sarah Jenkins</span>
+                    <span class="profile-role" id="profile-role">Account Manager</span>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
         <!-- Sidebar Navigation -->
         <aside class="sidebar-nav">
             <ul class="nav-menu" style="margin-top: 16px;">
-                <li class="nav-item" data-target="dashboard">
+                <li class="nav-item active" data-target="dashboard">
                     <i data-lucide="layout-dashboard" class="nav-icon"></i>
                     Dashboard Overview
                 </li>
@@ -98,7 +98,7 @@
                     <i data-lucide="upload-cloud" class="nav-icon"></i>
                     Distributor Uploads
                 </li>
-                <li class="nav-item active" data-target="matching">
+                <li class="nav-item" data-target="matching">
                     <i data-lucide="git-merge" class="nav-icon"></i>
                     AI Product Matching
                     <span class="nav-badge pending">8</span>
@@ -144,7 +144,7 @@
         <!-- Main Content Area -->
         <main class="main-content">
             <!-- Screen 1: Landing Dashboard -->
-            <section id="dashboard" class="screen">
+            <section id="dashboard" class="screen active">
                 <div class="kam-only">
                 <!-- 1. Strengthen Executive Hero Section -->
                 <div class="hero-section" style="margin-bottom: 24px;">
@@ -1134,7 +1134,7 @@
                 </div>
             </section>
 
-            <section id="matching" class="screen active">
+            <section id="matching" class="screen">
                 <div class="section-title-bar">
                     <div>
                         <span class="section-subtitle">Review</span>
