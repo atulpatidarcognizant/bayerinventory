@@ -3708,6 +3708,9 @@
                                             </div>
                                             <button class="primary-btn btn-sm" style="background:#DC2626;" onclick="openOrderDetails('4902')">Respond</button>
                                         </div>
+                                        <div style="font-size:13px; color:#B91C1C; background:white; padding:8px; border-radius:4px; border:1px solid #FECACA;">
+                                            <strong>Bayer Note:</strong> Please attach the signed addendum for the bulk discount applied.
+                                        </div>
                                     </div>
                                     <div style="border:1px solid #FECACA; background:#FEF2F2; border-radius:8px; padding:16px;">
                                         <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
@@ -3716,6 +3719,9 @@
                                                 <div style="font-size:13px; color:var(--secondary-text); margin-top:4px;">Submitted 2 Days Ago • $12,500 Total</div>
                                             </div>
                                             <button class="primary-btn btn-sm" style="background:#DC2626;" onclick="openOrderDetails('4901')">Respond</button>
+                                        </div>
+                                        <div style="font-size:13px; color:#B91C1C; background:white; padding:8px; border-radius:4px; border:1px solid #FECACA;">
+                                            <strong>Bayer Note:</strong> Requested quantity exceeds maximum regional allocation. Please review available allocation limits.
                                         </div>
                                     </div>
                                 </div>
@@ -3735,6 +3741,7 @@
                                         </div>
                                         <div style="text-align:right; display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
                                             <span class="badge" style="background:#E0F2FE; color:#0369A1;">Under Review</span>
+                                            <div style="font-size:12px; color:var(--secondary-text);">Est. Approval: Today</div>
                                             <button class="secondary-btn btn-sm" onclick="openOrderDetails('4905')">View Details</button>
                                         </div>
                                     </div>
@@ -3770,6 +3777,19 @@
 
                         <!-- Right Column: AI & Communications -->
                         <div style="display: flex; flex-direction: column; gap: 24px;">
+                            <!-- 4. AI Order Assistant -->
+                            <div id="dist-ai-assistant" class="dashboard-card widget ai-reasoning" style="background: #F8FAFC; border: 1px solid var(--border-color); border-top: 4px solid var(--primary-blue); box-shadow: none;">
+                                <h4 style="display:flex; align-items:center; gap:8px; color:var(--primary-blue); margin-bottom: 12px; font-size:15px;">
+                                    <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Order Assistant
+                                </h4>
+                                <ul style="margin:0; padding:0; list-style:none; font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
+                                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="info" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Your Roundup order (#4905) is expected to be approved today.</li>
+                                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="info" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Two submitted orders qualify for additional rebate programs.</li>
+                                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="info" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Estimated average approval time: 18 hours.</li>
+                                </ul>
+                                <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0; width:100%; justify-content:center;" onclick="showToast('Viewing Actions')">View Suggested Actions</button>
+                            </div>
+
                             <!-- 6. Bayer Communications Panel -->
                             <div class="dashboard-card widget" style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
                                 <h4 style="margin-bottom: 16px; font-size:15px;">Recent Updates</h4>
