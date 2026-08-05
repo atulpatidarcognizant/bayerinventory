@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         // Initialize default persona
-        document.body.setAttribute('data-persona', 'account-manager');
+        document.body.setAttribute('data-persona', 'distributor');
     }
 
     // --- Upload Pipeline Simulation ---
