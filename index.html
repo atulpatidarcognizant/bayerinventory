@@ -3315,7 +3315,7 @@
                         <!-- Actions -->
                         <div style="display:flex; flex-direction:column; gap: 12px; margin-top: 8px;">
                             <div id="op-submit-helper" class="text-sm" style="color:#DC2626; text-align:center; display:none; margin-bottom:-4px;">Resolve duplicate products before submitting.</div>
-                            <button id="op-submit-btn" class="primary-btn" style="width:100%; justify-content:center; padding:12px; font-size:15px;" onclick="showToast('Order Submitted Successfully!')">Submit Order</button>
+                            <button id="op-submit-btn" class="primary-btn" style="width:100%; justify-content:center; padding:12px; font-size:15px;" onclick="simulateSubmitOrder()">Submit Order</button>
                             <button class="secondary-btn" style="width:100%; justify-content:center;" onclick="showToast('Reviewing Order')">Review Before Submit</button>
                             <button class="text-link text-sm text-secondary" style="margin:0 auto;" onclick="showToast('Draft Saved')">Save as Draft</button>
                         </div>
@@ -4566,6 +4566,50 @@
                     </div>
                     <button class="primary-btn btn-sm" onclick="addCatalogProduct(this, 'Bayer Advanced', 15.00)">Add to Order</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Submission Loading Overlay -->
+    <div id="submit-loading-overlay" class="modal-backdrop hidden" style="z-index: 1100; background:rgba(255,255,255,0.9); flex-direction:column; gap:16px;">
+        <div class="spinner" style="width:40px;height:40px;border:4px solid #E2E8F0; border-top:4px solid var(--primary-blue); border-radius:50%; animation:spin 1s linear infinite;"></div>
+        <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
+        <h3 style="color:var(--primary-blue); margin:0;">Processing Order Submission...</h3>
+    </div>
+
+    <!-- Order Success Modal -->
+    <div id="submit-success-modal" class="modal-backdrop hidden" style="z-index: 1200;">
+        <div class="modal-content" style="max-width: 500px; text-align:center; padding:40px 24px;">
+            <div style="width:64px;height:64px;border-radius:50%;background:var(--status-green);color:white;display:flex;align-items:center;justify-content:center;margin:0 auto 24px auto;">
+                <i data-lucide="check" style="width:32px;height:32px;"></i>
+            </div>
+            <h2 style="margin:0 0 8px 0; font-size:24px;">Order Submitted Successfully</h2>
+            <p style="color:var(--text-secondary); margin:0 0 32px 0;">Your order has been placed and inventory is reserved.</p>
+            
+            <div style="background:#F8FAFC; border:1px solid var(--border-color); border-radius:8px; padding:24px; text-align:left; margin-bottom:32px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                    <span class="text-secondary">Order Number:</span>
+                    <strong class="text-dark">BYR-948-22X</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                    <span class="text-secondary">Submission Time:</span>
+                    <strong class="text-dark">Just now</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                    <span class="text-secondary">Estimated Delivery:</span>
+                    <strong class="text-dark">2-4 Days</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                    <span class="text-secondary">Inventory Reserved:</span>
+                    <strong class="text-green flex-align" style="display:flex; align-items:center;"><i data-lucide="check-circle-2" style="width:14px;height:14px;margin-right:4px;"></i> Confirmed</strong>
+                </div>
+            </div>
+            
+            <div style="display:flex; flex-direction:column; gap:12px;">
+                <button class="primary-btn" style="justify-content:center; padding:12px;" onclick="document.getElementById('submit-success-modal').classList.add('hidden'); switchScreen('order-tracking');">Track Order</button>
+                <button class="secondary-btn" style="justify-content:center; padding:12px;" onclick="document.getElementById('submit-success-modal').classList.add('hidden'); switchScreen('dashboard');">Return to Dashboard</button>
+                <button class="text-link text-sm" style="margin:0 auto; padding-top:8px;" onclick="showToast('Downloading Confirmation PDF...')"><i data-lucide="download" style="width:14px;height:14px;"></i> Download Order Confirmation</button>
             </div>
         </div>
     </div>

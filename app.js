@@ -1115,3 +1115,19 @@ window.closeTrackingDrillDown = function() {
             }
         }, 600);
     };
+
+    // --- Order Submission Flow ---
+    window.simulateSubmitOrder = function() {
+        const loadingOverlay = document.getElementById('submit-loading-overlay');
+        const successModal = document.getElementById('submit-success-modal');
+        
+        if (loadingOverlay && successModal) {
+            loadingOverlay.classList.remove('hidden');
+            
+            setTimeout(() => {
+                loadingOverlay.classList.add('hidden');
+                successModal.classList.remove('hidden');
+                if(window.lucide) window.lucide.createIcons();
+            }, 1500);
+        }
+    };
