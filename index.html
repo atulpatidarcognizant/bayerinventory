@@ -1630,20 +1630,21 @@
                 <!-- Global Executive Summary -->
                 <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; margin-bottom: 24px;">
                     <div class="dashboard-card widget">
-                        <span class="text-sm text-secondary block" style="margin-bottom:4px;">Total Network Inventory</span>
-                        <span class="font-bold text-lg text-dark">5.62M L</span>
+                        <span class="text-sm text-secondary block" style="margin-bottom:4px;">Inventory On Hand</span>
+                        <span class="font-bold text-lg text-dark">2.48M L</span>
                     </div>
                     <div class="dashboard-card widget">
-                        <span class="text-sm text-secondary block" style="margin-bottom:4px;">Network Health Status</span>
-                        <span class="font-bold text-lg text-green">94% Healthy</span>
+                        <span class="text-sm text-secondary block" style="margin-bottom:4px;">Inventory Health Score</span>
+                        <span class="font-bold text-lg text-green">92% Healthy</span>
                     </div>
-                    <div class="dashboard-card widget">
-                        <span class="text-sm text-secondary block" style="margin-bottom:4px;">Active Distributors</span>
-                        <span class="font-bold text-lg text-dark">128 / 130</span>
+                    <div class="dashboard-card widget cursor-pointer" onclick="showToast('Filtering table for products below safety stock...')">
+                        <span class="text-sm text-secondary block" style="margin-bottom:4px;">Products Below Safety Stock</span>
+                        <span class="font-bold text-lg text-red">3 Products</span>
                     </div>
-                    <div class="dashboard-card widget">
-                        <span class="text-sm text-secondary block" style="margin-bottom:4px;">Last Data Sync</span>
-                        <span class="font-bold text-lg text-dark" style="display:flex;align-items:center;gap:6px;"><i data-lucide="refresh-cw" style="width:14px;height:14px;color:var(--status-green);"></i> 10 mins ago</span>
+                    <div class="dashboard-card widget cursor-pointer" onclick="switchScreen('upload')">
+                        <span class="text-sm text-secondary block" style="margin-bottom:4px;">Last Inventory Upload</span>
+                        <span class="font-bold text-lg text-dark">Today &bull; 9:15 AM</span>
+                        <span style="display:block; font-size:12px; color:var(--status-green); margin-top:4px;"><i data-lucide="check-circle" style="width:12px;height:12px;display:inline-block;vertical-align:middle;"></i> Validated Successfully</span>
                     </div>
                 </div>
 
