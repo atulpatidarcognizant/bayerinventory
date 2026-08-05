@@ -840,7 +840,9 @@ window.closeTrackingDrillDown = function() {
                     `;
                 }
                 
+
                 // Update UI Constraints
+                document.getElementById('erp-success-banner').style.display = 'block';
                 duplicateBanner.style.display = 'block';
                 submitBtn.style.opacity = '0.5';
                 submitBtn.style.cursor = 'not-allowed';
