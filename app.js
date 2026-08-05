@@ -1168,3 +1168,60 @@ window.closeTrackingDrillDown = function() {
             if(window.lucide) window.lucide.createIcons();
         }
     };
+
+function showProductDetails(productName) {
+    const modal = document.getElementById('product-inventory-modal');
+    if (!modal) return;
+    
+    document.getElementById('modal-product-name').innerText = productName;
+    
+    // Mock logic based on product name
+    const statusEl = document.getElementById('modal-product-status');
+    const replenishBtn = document.getElementById('modal-replenish-btn');
+    
+    if (productName === 'Roundup PowerMAX') {
+        statusEl.className = 'badge badge-low flex-align';
+        statusEl.innerHTML = 'Low Stock';
+        statusEl.style.background = '#FEF2F2';
+        statusEl.style.color = 'var(--status-red)';
+        
+        document.getElementById('modal-current-stock').innerText = '2,100 L';
+        document.getElementById('modal-safety-stock').innerText = '5,000 L';
+        document.getElementById('modal-daily-cons').innerText = '700 L';
+        document.getElementById('modal-monthly-cons').innerText = '21,000 L';
+        document.getElementById('modal-reorder-date').innerText = 'Immediate';
+        
+        replenishBtn.style.display = 'flex';
+    } else if (productName === 'Prosaro Pro') {
+        statusEl.className = 'badge badge-high flex-align';
+        statusEl.innerHTML = 'Healthy';
+        statusEl.style.background = '#DCFCE7';
+        statusEl.style.color = 'var(--status-green)';
+        
+        document.getElementById('modal-current-stock').innerText = '4,500 L';
+        document.getElementById('modal-safety-stock').innerText = '3,500 L';
+        document.getElementById('modal-daily-cons').innerText = '200 L';
+        document.getElementById('modal-monthly-cons').innerText = '6,000 L';
+        document.getElementById('modal-reorder-date').innerText = 'In 8 Days';
+        
+        replenishBtn.style.display = 'none';
+    } else {
+        // Defaults
+        statusEl.className = 'badge badge-high flex-align';
+        statusEl.innerHTML = 'Healthy';
+        statusEl.style.background = '#DCFCE7';
+        statusEl.style.color = 'var(--status-green)';
+        document.getElementById('modal-current-stock').innerText = '8,000 L';
+        document.getElementById('modal-safety-stock').innerText = '4,000 L';
+        document.getElementById('modal-daily-cons').innerText = '150 L';
+        document.getElementById('modal-monthly-cons').innerText = '4,500 L';
+        document.getElementById('modal-reorder-date').innerText = 'In 24 Days';
+        
+        replenishBtn.style.display = 'none';
+    }
+    
+    modal.classList.remove('hidden');
+    if (window.lucide) {
+        window.lucide.createIcons();
+    }
+}
