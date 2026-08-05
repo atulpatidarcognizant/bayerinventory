@@ -319,31 +319,46 @@
                     <div class="dashboard-card widget">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                             <h3>Overdue Distributor Uploads</h3>
-                            <button class="secondary-btn btn-sm" onclick="showToast('Viewing overdue partners')">View All</button>
+                            <div style="display:flex; gap:8px;">
+                                <select class="filter-select" style="padding:4px 8px; font-size:13px;">
+                                    <option>All Types</option>
+                                    <option>Inventory</option>
+                                    <option>Order</option>
+                                </select>
+                                <button class="secondary-btn btn-sm" onclick="showToast('Viewing overdue partners')">View All</button>
+                            </div>
                         </div>
                         <table class="data-table minimal" style="font-size:13px;">
                             <thead>
                                 <tr>
                                     <th>Distributor</th>
+                                    <th>Upload Type</th>
                                     <th>Last Upload</th>
                                     <th>Status</th>
+                                    <th style="text-align:right;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td class="font-medium text-dark">DEF Supplies</td>
+                                    <td><span class="badge" style="background:#F3F4F6; color:var(--text-dark);"><i data-lucide="package" style="width:12px;height:12px;margin-right:4px;"></i> Inventory</span></td>
                                     <td class="text-secondary">11 Days</td>
-                                    <td><span class="badge badge-med">Attention</span></td>
+                                    <td><span class="badge badge-med">Overdue</span></td>
+                                    <td style="text-align:right;"><button class="text-link text-blue">Send Reminder</button></td>
                                 </tr>
                                 <tr>
                                     <td class="font-medium text-dark">GHI Distributors</td>
+                                    <td><span class="badge" style="background:#E0E7FF; color:#4338CA;"><i data-lucide="file-text" style="width:12px;height:12px;margin-right:4px;"></i> Order</span></td>
                                     <td class="text-secondary">Never</td>
-                                    <td><span class="badge badge-low">Missing</span></td>
+                                    <td><span class="badge badge-low">Overdue</span></td>
+                                    <td style="text-align:right;"><button class="text-link text-blue">Send Reminder</button></td>
                                 </tr>
                                 <tr>
                                     <td class="font-medium text-dark">AgriCorp East</td>
+                                    <td><span class="badge" style="background:#F3F4F6; color:var(--text-dark);"><i data-lucide="package" style="width:12px;height:12px;margin-right:4px;"></i> Inventory</span></td>
                                     <td class="text-secondary">14 Days</td>
-                                    <td><span class="badge badge-low">Missing</span></td>
+                                    <td><span class="badge badge-low">Overdue</span></td>
+                                    <td style="text-align:right;"><button class="text-link text-blue">Send Reminder</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -685,7 +700,8 @@
                         <div class="kpi-icon" style="background:#FEF3C7; color:#D97706;"><i data-lucide="clock"></i></div>
                         <div class="kpi-details">
                             <span class="kpi-label">Overdue Uploads</span>
-                            <span class="kpi-value" style="color:#B45309;">4</span>
+                            <span style="font-size:11px;color:var(--text-secondary);display:block;margin-bottom:4px;">Orders & Inventory</span>
+                            <span class="kpi-value" style="color:#B45309;">3</span>
                         </div>
                     </div>
                     <div class="dashboard-card kpi-card">
@@ -705,10 +721,10 @@
                                 <i data-lucide="sparkles" style="width:18px;height:18px;"></i> AI Upload Insights
                             </h3>
                             <ul style="margin:0; padding-left:20px; font-size:14px; color:var(--text-dark); display:flex; flex-direction:column; gap:12px;">
-                                <li><strong style="color:#B45309;">4 distributors</strong> have not submitted inventory within the expected reporting window.</li>
+                                <li><strong style="color:#B45309;">2 distributors</strong> have overdue inventory uploads.</li>
+                                <li><strong style="color:#B45309;">1 distributor</strong> has an overdue order upload.</li>
                                 <li><strong style="color:var(--status-red);">2 distributors</strong> experienced file validation failures during the latest upload.</li>
-                                <li><strong>Inventory visibility</strong> will improve by 15% once overdue uploads are received.</li>
-                                <li><strong style="color:#D97706;">AgroMax Partners</strong> has uploaded multiple file versions today requiring review.</li>
+                                <li><strong>Following up on overdue submissions</strong> will improve inventory visibility and order processing readiness.</li>
                             </ul>
                         </div>
                         <div style="display:flex; flex-direction:column; align-items:flex-end; gap:16px;">
@@ -721,13 +737,21 @@
                 <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
                     <!-- 3. Distributor Upload Queue -->
                     <div class="dashboard-card widget" style="padding:0; overflow:hidden;">
-                        <div style="padding: 20px 24px; border-bottom: 1px solid var(--border-color);">
+                        <div style="padding: 20px 24px; border-bottom: 1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
                             <h3 style="margin:0; font-size: 16px;">Distributor Upload Queue</h3>
+                            <div style="display:flex; gap:8px;">
+                                <select class="filter-select" style="padding:4px 8px; font-size:13px;">
+                                    <option>All Types</option>
+                                    <option>Inventory</option>
+                                    <option>Order</option>
+                                </select>
+                            </div>
                         </div>
                         <table class="data-table" style="margin:0; width:100%;">
                             <thead>
                                 <tr>
                                     <th>Distributor</th>
+                                    <th>Upload Type</th>
                                     <th>Last Upload</th>
                                     <th>Upload Status</th>
                                     <th>Records</th>
@@ -738,6 +762,7 @@
                             <tbody>
                                 <tr>
                                     <td class="font-medium">ABC Seeds</td>
+                                    <td><span class="badge" style="background:#F3F4F6; color:var(--text-dark);"><i data-lucide="package" style="width:12px;height:12px;margin-right:4px;"></i> Inventory</span></td>
                                     <td class="text-secondary text-sm">Today 10:42 AM</td>
                                     <td><span class="badge badge-high">Processed</span></td>
                                     <td>342</td>
@@ -746,6 +771,7 @@
                                 </tr>
                                 <tr>
                                     <td class="font-medium">GreenCrop Distribution</td>
+                                    <td><span class="badge" style="background:#F3F4F6; color:var(--text-dark);"><i data-lucide="package" style="width:12px;height:12px;margin-right:4px;"></i> Inventory</span></td>
                                     <td class="text-secondary text-sm">8 days ago</td>
                                     <td><span class="badge badge-med">Overdue</span></td>
                                     <td class="text-secondary">—</td>
@@ -754,6 +780,7 @@
                                 </tr>
                                 <tr>
                                     <td class="font-medium">FarmPro Solutions</td>
+                                    <td><span class="badge" style="background:#E0E7FF; color:#4338CA;"><i data-lucide="file-text" style="width:12px;height:12px;margin-right:4px;"></i> Order</span></td>
                                     <td class="text-secondary text-sm">Today 12:15 PM</td>
                                     <td><span class="badge" style="background:#E0F2FE; color:#0284C7;">Processing</span></td>
                                     <td>198</td>
@@ -762,6 +789,7 @@
                                 </tr>
                                 <tr>
                                     <td class="font-medium">AgroMax Partners</td>
+                                    <td><span class="badge" style="background:#F3F4F6; color:var(--text-dark);"><i data-lucide="package" style="width:12px;height:12px;margin-right:4px;"></i> Inventory</span></td>
                                     <td class="text-secondary text-sm">Today 9:30 AM</td>
                                     <td><span class="badge badge-low">Failed</span></td>
                                     <td>412</td>
@@ -770,6 +798,7 @@
                                 </tr>
                                 <tr>
                                     <td class="font-medium">Northern Agri-Supply</td>
+                                    <td><span class="badge" style="background:#F3F4F6; color:var(--text-dark);"><i data-lucide="package" style="width:12px;height:12px;margin-right:4px;"></i> Inventory</span></td>
                                     <td class="text-secondary text-sm">Yesterday 4:05 PM</td>
                                     <td><span class="badge badge-high">Processed</span></td>
                                     <td>512</td>
@@ -778,6 +807,7 @@
                                 </tr>
                                 <tr>
                                     <td class="font-medium">Prairie Partners</td>
+                                    <td><span class="badge" style="background:#E0E7FF; color:#4338CA;"><i data-lucide="file-text" style="width:12px;height:12px;margin-right:4px;"></i> Order</span></td>
                                     <td class="text-secondary text-sm">3 days ago</td>
                                     <td><span class="badge badge-med">Overdue</span></td>
                                     <td class="text-secondary">—</td>
