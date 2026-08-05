@@ -831,9 +831,9 @@ window.closeTrackingDrillDown = function() {
                                     <i data-lucide="alert-circle" style="width:16px;height:16px;"></i> Conflict Detected
                                 </div>
                                 <div style="display:flex; gap:8px;">
-                                     <button class="primary-btn btn-sm" style="background:#DC2626; border-color:#DC2626;" onclick="resolveDuplicate(this, 'keep_ai')">Keep AI Recommended</button>
-                                     <button class="secondary-btn btn-sm" style="border-color:#DC2626; color:#DC2626;" onclick="resolveDuplicate(this, 'keep_imported')">Keep ERP Imported</button>
-                                     <button class="secondary-btn btn-sm" style="border-color:#DC2626; color:#DC2626;" onclick="resolveDuplicate(this, 'merge')">Merge Quantities</button>
+                                     <button class="primary-btn btn-sm" style="background:#DC2626; border-color:#DC2626;" onclick="resolveDuplicate(this, 'merge')">Merge Quantities (Recommended)</button>
+                                     <button class="secondary-btn btn-sm" style="border-color:#DC2626; color:#DC2626;" onclick="resolveDuplicate(this, 'replace')">Replace Existing Quantity</button>
+                                     <button class="secondary-btn btn-sm" style="border-color:#DC2626; color:#DC2626;" onclick="resolveDuplicate(this, 'keep_both')">Keep Both (Not Recommended)</button>
                                 </div>
                             </div>
                          </td>
@@ -891,12 +891,16 @@ window.closeTrackingDrillDown = function() {
             let badge = `<span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green); font-size:10px;">AI Recommended</span>
                          <span class="text-xs" style="color:#991B1B; background:#FEF2F2; padding:2px 6px; border-radius:4px; display:flex; align-items:center; gap:4px;"><i data-lucide="alert-triangle" style="width:10px;height:10px;"></i> High Risk (3 Days Left)</span>`;
                          
-            if (action === 'keep_imported') {
+            if (action === 'replace') {
                 badge = `<span class="badge" style="background:#0F172A; color:white; font-size:10px;"><i data-lucide="database" style="width:10px;height:10px;margin-right:4px;"></i> ERP Imported</span>`;
             } else if (action === 'merge') {
                 qty = 30000;
                 total = "$255,000";
                 badge = `<span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green); font-size:10px;">Merged Item</span>`;
+            } else if (action === 'keep_both') {
+                qty = 30000;
+                total = "$255,000";
+                badge = `<span class="badge" style="background:#E2E8F0; color:var(--text-dark); font-size:10px;">Multiple Sources (AI & ERP)</span>`;
             }
 
             conflictRow.innerHTML = `
