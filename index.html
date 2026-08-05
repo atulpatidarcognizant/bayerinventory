@@ -429,7 +429,7 @@
                     <div class="dashboard-card widget" style="margin-bottom: 32px; background: #F8FAFC; border-left: 4px solid var(--primary-blue);">
                         <h3 style="margin-bottom: 16px; display:flex; align-items:center; gap:8px;"><i data-lucide="target" style="width:18px;height:18px;color:var(--primary-blue);"></i> Today's Priorities</h3>
                         <div style="display:flex; flex-wrap:wrap; gap:16px;">
-                            <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="showToast('Navigating to Uploads')"><i data-lucide="upload-cloud" style="color:var(--primary-blue);"></i> Upload this week's inventory</button>
+                            <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="switchScreen('upload')"><i data-lucide="upload-cloud" style="color:var(--primary-blue);"></i> Upload this week's inventory</button>
                             <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="switchScreen('matching')"><i data-lucide="git-merge" style="color:var(--primary-blue);"></i> Review 3 AI product suggestions</button>
                             <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="showToast('Opening Validation Wizard')"><i data-lucide="alert-triangle" style="color:var(--status-red);"></i> Resolve 2 inventory validation issues</button>
                             <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="switchScreen('order-tracking')"><i data-lucide="file-question" style="color:#D97706;"></i> Order #10452 requires additional info</button>
@@ -938,7 +938,7 @@
                             <div class="dashboard-card widget">
                                 <h3 style="margin-bottom: 16px; font-size:16px;">Submit Inventory File</h3>
                                 
-                                <div style="border: 2px dashed #CBD5E1; border-radius: 8px; padding: 40px 24px; text-align: center; background: #F8FAFC; margin-bottom: 24px;">
+                                <div id="dist-drop-zone" style="border: 2px dashed #CBD5E1; border-radius: 8px; padding: 40px 24px; text-align: center; background: #F8FAFC; margin-bottom: 24px;">
                                     <div style="width:48px;height:48px;border-radius:50%;background:#E0F2FE;color:#0284C7;display:flex;align-items:center;justify-content:center;margin:0 auto 16px auto;">
                                         <i data-lucide="upload-cloud" style="width:24px;height:24px;"></i>
                                     </div>
@@ -947,49 +947,49 @@
                                     <div style="font-size:12px; color:var(--secondary-text); margin-bottom:24px;">Maximum File Size: 50MB</div>
                                     
                                     <div style="display:flex; justify-content:center; gap:16px;">
-                                        <button class="primary-btn" onclick="showToast('Uploading file...')">Browse Files</button>
+                                        <button id="dist-btn-upload" class="primary-btn">Browse Files</button>
                                         <button class="secondary-btn" onclick="showToast('Downloading Template...')"><i data-lucide="download" style="width:14px;height:14px;"></i> Download Bayer Template</button>
                                     </div>
                                 </div>
                                 
                                 <!-- 3. Upload Progress Timeline -->
-                                <div style="border:1px solid var(--border-color); border-radius:8px; padding:16px;">
+                                <div id="dist-upload-pipeline" style="display:none; border:1px solid var(--border-color); border-radius:8px; padding:16px;">
                                     <h4 style="margin-bottom:16px; font-size:14px; color:var(--text-dark);">Current Upload Progress</h4>
                                     
                                     <div style="display:flex; align-items:center; justify-content:space-between; position:relative;">
                                         <div style="position:absolute; top:12px; left:20px; right:20px; height:2px; background:#E2E8F0; z-index:1;"></div>
-                                        <div style="position:absolute; top:12px; left:20px; width:100%; height:2px; background:var(--status-green); z-index:2;"></div>
+                                        <div id="dist-progress-bar" style="position:absolute; top:12px; left:20px; width:0%; height:2px; background:var(--status-green); z-index:2; transition: width 0.3s;"></div>
                                         
-                                        <div style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
-                                            <div style="width:24px;height:24px;background:var(--status-green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
-                                            <span style="font-size:12px; font-weight:600;">File Uploaded</span>
+                                        <div class="dist-step" style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
+                                            <div style="width:24px;height:24px;background:#E2E8F0;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;transition: background 0.3s;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
+                                            <span style="font-size:12px; font-weight:600; color:var(--text-dark); transition: color 0.3s;">File Uploaded</span>
                                         </div>
                                         
-                                        <div style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
-                                            <div style="width:24px;height:24px;background:var(--status-green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
-                                            <span style="font-size:12px; font-weight:600;">Processing File</span>
+                                        <div class="dist-step" style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
+                                            <div style="width:24px;height:24px;background:#E2E8F0;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;transition: background 0.3s;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
+                                            <span style="font-size:12px; font-weight:600; color:var(--text-dark); transition: color 0.3s;">Processing File</span>
                                         </div>
                                         
-                                        <div style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
-                                            <div style="width:24px;height:24px;background:var(--status-green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
-                                            <span style="font-size:12px; font-weight:600;">Validating Data</span>
+                                        <div class="dist-step" style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
+                                            <div style="width:24px;height:24px;background:#E2E8F0;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;transition: background 0.3s;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
+                                            <span style="font-size:12px; font-weight:600; color:var(--text-dark); transition: color 0.3s;">Validating Data</span>
                                         </div>
                                         
-                                        <div style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
-                                            <div style="width:24px;height:24px;background:var(--status-green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
-                                            <span style="font-size:12px; font-weight:600;">Updating Inventory</span>
+                                        <div class="dist-step" style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
+                                            <div style="width:24px;height:24px;background:#E2E8F0;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;transition: background 0.3s;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
+                                            <span style="font-size:12px; font-weight:600; color:var(--text-dark); transition: color 0.3s;">Updating Inventory</span>
                                         </div>
                                         
-                                        <div style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
-                                            <div style="width:24px;height:24px;background:var(--status-green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
-                                            <span style="font-size:12px; font-weight:600; color:var(--status-green);">Completed</span>
+                                        <div class="dist-step" style="display:flex; flex-direction:column; align-items:center; position:relative; z-index:3;">
+                                            <div style="width:24px;height:24px;background:#E2E8F0;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:8px;transition: background 0.3s;"><i data-lucide="check" style="width:14px;height:14px;color:white;"></i></div>
+                                            <span style="font-size:12px; font-weight:600; color:var(--text-dark); transition: color 0.3s;">Completed</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- 4. Validation Results -->
-                            <div class="dashboard-card widget">
+                            <div id="dist-validation-results" class="dashboard-card widget" style="display:none;">
                                 <h3 style="margin-bottom: 16px; font-size:16px; display:flex; align-items:center; gap:8px;">
                                     <i data-lucide="file-check" style="color:var(--text-dark); width:18px;height:18px;"></i> File Validation Results
                                 </h3>
@@ -1008,6 +1008,7 @@
                                         <ul style="margin:0; padding:0; list-style:none; font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:6px;">
                                             <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="alert-triangle" style="width:14px;height:14px;color:#D97706;margin-top:2px;"></i> 5 duplicate rows removed</li>
                                             <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="alert-triangle" style="width:14px;height:14px;color:#D97706;margin-top:2px;"></i> 3 inactive products identified</li>
+                                            <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="alert-triangle" style="width:14px;height:14px;color:#D97706;margin-top:2px;"></i> 2 products not recognized (AI Matching required)</li>
                                         </ul>
                                     </div>
                                     
@@ -1021,7 +1022,7 @@
                                 </div>
                                 
                                 <div style="display:flex; gap:12px; margin-top:24px; padding-top:16px; border-top:1px solid var(--border-color);">
-                                    <button class="primary-btn btn-sm" onclick="showToast('Opening fix modal...')">Fix & Re-upload</button>
+                                    <button class="primary-btn btn-sm" onclick="simulateFixUpload()">Fix & Re-upload</button>
                                     <button class="secondary-btn btn-sm" onclick="showToast('Downloading report...')">Download Validation Report</button>
                                     <button class="text-link" style="font-size:13px; margin-left:auto;">View Processing Details</button>
                                 </div>
@@ -1032,7 +1033,7 @@
                         <div style="display: flex; flex-direction: column; gap: 24px;">
                             
                             <!-- 6. AI Upload Assistant -->
-                            <div class="dashboard-card widget ai-reasoning" style="background: #F8FAFC; border: 1px solid var(--border-color); border-top: 4px solid var(--primary-blue); box-shadow: none;">
+                            <div id="dist-ai-assistant" class="dashboard-card widget ai-reasoning" style="display:none; background: #F8FAFC; border: 1px solid var(--border-color); border-top: 4px solid var(--primary-blue); box-shadow: none;">
                                 <h4 style="display:flex; align-items:center; gap:8px; color:var(--primary-blue); margin-bottom: 12px; font-size:15px;">
                                     <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Upload Assistant
                                 </h4>
@@ -3016,7 +3017,7 @@
                         <!-- Right Column: Decision Workspace -->
                         <div style="display: flex; flex-direction: column; gap: 16px;">
                             <!-- 7. Enhanced AI Copilot -->
-                            <div class="dashboard-card widget ai-reasoning" style="background: #F8FAFC; border: 1px solid var(--border-color); border-top: 4px solid var(--primary-blue); box-shadow: none;">
+                            <div id="dist-ai-assistant" class="dashboard-card widget ai-reasoning" style="display:none; background: #F8FAFC; border: 1px solid var(--border-color); border-top: 4px solid var(--primary-blue); box-shadow: none;">
                                 <h4 style="display:flex; align-items:center; gap:8px; color:var(--primary-blue); margin-bottom: 12px; font-size:15px;">
                                     <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Copilot Advisory
                                 </h4>
@@ -3745,7 +3746,7 @@
                         <!-- Right Column: AI & Communications -->
                         <div style="display: flex; flex-direction: column; gap: 24px;">
                             <!-- 4. AI Order Assistant -->
-                            <div class="dashboard-card widget ai-reasoning" style="background: #F8FAFC; border: 1px solid var(--border-color); border-top: 4px solid var(--primary-blue); box-shadow: none;">
+                            <div id="dist-ai-assistant" class="dashboard-card widget ai-reasoning" style="display:none; background: #F8FAFC; border: 1px solid var(--border-color); border-top: 4px solid var(--primary-blue); box-shadow: none;">
                                 <h4 style="display:flex; align-items:center; gap:8px; color:var(--primary-blue); margin-bottom: 12px; font-size:15px;">
                                     <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Order Assistant
                                 </h4>
@@ -4257,7 +4258,7 @@
                         <div style="display: flex; flex-direction: column; gap: 24px;">
                             
                             <!-- 5. AI Shipment Assistant -->
-                            <div class="dashboard-card widget ai-reasoning" style="background: #F8FAFC; border: 1px solid var(--border-color); border-top: 4px solid var(--primary-blue); box-shadow: none;">
+                            <div id="dist-ai-assistant" class="dashboard-card widget ai-reasoning" style="display:none; background: #F8FAFC; border: 1px solid var(--border-color); border-top: 4px solid var(--primary-blue); box-shadow: none;">
                                 <h4 style="display:flex; align-items:center; gap:8px; color:var(--primary-blue); margin-bottom: 12px; font-size:15px;">
                                     <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> AI Shipment Assistant
                                 </h4>

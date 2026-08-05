@@ -668,3 +668,85 @@ window.closeTrackingDrillDown = function() {
         queueView.style.display = 'block';
     }
 };
+
+    // --- Distributor Upload Simulation ---
+    const distBtnUpload = document.getElementById('dist-btn-upload');
+    const distDropZone = document.getElementById('dist-drop-zone');
+    const distPipeline = document.getElementById('dist-upload-pipeline');
+    const distValidation = document.getElementById('dist-validation-results');
+    const distAi = document.getElementById('dist-ai-assistant');
+    const distProgressBar = document.getElementById('dist-progress-bar');
+
+    if (distBtnUpload && distPipeline) {
+        distBtnUpload.addEventListener('click', () => {
+            if(window.showToast) window.showToast('Uploading file...');
+            
+            distDropZone.style.display = 'none';
+            distPipeline.style.display = 'block';
+            distValidation.style.display = 'none';
+            distAi.style.display = 'none';
+            
+            const steps = distPipeline.querySelectorAll('.dist-step');
+            let currentStep = 0;
+            
+            const interval = setInterval(() => {
+                if (currentStep < steps.length) {
+                    const stepIcon = steps[currentStep].querySelector('div');
+                    stepIcon.style.background = 'var(--status-green)';
+                    steps[currentStep].querySelector('span').style.color = 'var(--status-green)';
+                    
+                    if (currentStep > 0) {
+                        distProgressBar.style.width = (currentStep / (steps.length - 1) * 100) + '%';
+                    }
+                    
+                    currentStep++;
+                } else {
+                    clearInterval(interval);
+                    if(window.showToast) window.showToast('Validation Complete');
+                    distValidation.style.display = 'block';
+                    distAi.style.display = 'block';
+                }
+            }, 800);
+        });
+        
+        window.simulateFixUpload = function() {
+            if(window.showToast) window.showToast('Fixing issues and re-uploading...');
+            distValidation.style.display = 'none';
+            distAi.style.display = 'none';
+            distPipeline.style.display = 'block';
+            
+            const steps = distPipeline.querySelectorAll('.dist-step');
+            steps.forEach(step => {
+                step.querySelector('div').style.background = '#E2E8F0';
+                step.querySelector('span').style.color = 'var(--text-dark)';
+            });
+            distProgressBar.style.width = '0%';
+
+            let currentStep = 0;
+            const interval = setInterval(() => {
+                if (currentStep < steps.length) {
+                    const stepIcon = steps[currentStep].querySelector('div');
+                    stepIcon.style.background = 'var(--status-green)';
+                    steps[currentStep].querySelector('span').style.color = 'var(--status-green)';
+                    
+                    if (currentStep > 0) {
+                        distProgressBar.style.width = (currentStep / (steps.length - 1) * 100) + '%';
+                    }
+                    
+                    currentStep++;
+                } else {
+                    clearInterval(interval);
+                    if(window.showToast) window.showToast('Upload Successfully Processed!');
+                    distValidation.innerHTML = `
+                        <h3 style="margin-bottom: 16px; font-size:16px; display:flex; align-items:center; gap:8px;">
+                            <i data-lucide="file-check" style="color:var(--status-green); width:18px;height:18px;"></i> Upload Successful
+                        </h3>
+                        <p style="font-size:14px; color:var(--text-dark);">Your inventory file has been fully processed and all issues are resolved. Product matching issues have been logged for Account Manager review.</p>
+                        <button class="primary-btn btn-sm" style="margin-top:16px;" onclick="switchScreen('dashboard')">Return to Dashboard</button>
+                    `;
+                    distValidation.style.display = 'block';
+                    if(window.lucide) window.lucide.createIcons();
+                }
+            }, 500);
+        };
+    }
