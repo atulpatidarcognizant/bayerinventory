@@ -1682,54 +1682,50 @@
                     <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap:24px; margin-bottom:24px;">
                         <!-- Primary Visualization (Horizontal Bar Chart) -->
                         <div class="dashboard-card widget">
-                            <h3 style="margin-bottom: 16px;">Regional Distributor Inventory</h3>
+                            <h3 style="margin-bottom: 16px;">My Inventory by Product</h3>
                             <div style="display:flex; flex-direction:column; gap:12px;">
                                 <!-- Bar 1 -->
                                 <div>
-                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Ontario</span><span class="font-medium">850K L</span></div>
-                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 85%; background:var(--primary-blue); height:100%;"></div></div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Roundup PowerMAX</span><span class="font-medium">1.2M L (Healthy)</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 85%; background:var(--status-green); height:100%;"></div></div>
                                 </div>
                                 <!-- Bar 2 -->
                                 <div>
-                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Prairies</span><span class="font-medium">620K L</span></div>
-                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 62%; background:var(--primary-blue); height:100%;"></div></div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Prosaro Pro</span><span class="font-medium">500K L (Low Stock)</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 25%; background:var(--status-red); height:100%;"></div></div>
                                 </div>
                                 <!-- Bar 3 -->
                                 <div>
-                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Quebec</span><span class="font-medium">410K L</span></div>
-                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 41%; background:var(--primary-blue); height:100%;"></div></div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>XtendiMax</span><span class="font-medium">450K L (Healthy)</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 65%; background:var(--status-green); height:100%;"></div></div>
                                 </div>
                                 <!-- Bar 4 -->
                                 <div>
-                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Western Canada</span><span class="font-medium">380K L</span></div>
-                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 38%; background:var(--primary-blue); height:100%;"></div></div>
-                                </div>
-                                <!-- Bar 5 -->
-                                <div>
-                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Atlantic</span><span class="font-medium">220K L</span></div>
-                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 22%; background:var(--primary-blue); height:100%;"></div></div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Luna Experience</span><span class="font-medium">330K L (Healthy)</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 55%; background:var(--status-green); height:100%;"></div></div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Data Table -->
                         <div class="dashboard-card widget">
-                            <h3 style="margin-bottom: 16px;">Top Distributor Holdings</h3>
+                            <h3 style="margin-bottom: 16px;">My Inventory Table</h3>
                             <table class="data-table minimal" style="font-size:13px;">
                                 <thead>
                                     <tr>
-                                        <th>Distributor</th>
-                                        <th>Region</th>
-                                        <th>Inventory</th>
-                                        <th>Coverage</th>
-                                        <th>Health</th>
+                                        <th>Product</th>
+                                        <th>Current Stock</th>
+                                        <th>Safety Stock</th>
+                                        <th>Days Remaining</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td class="font-medium">Omega Distribution</td><td>Ontario</td><td>180K L</td><td>24 Days</td><td><span class="badge badge-high flex-align" style="background:#DCFCE7; color:var(--status-green);">Healthy</span></td></tr>
-                                    <tr><td class="font-medium">AgriSupplies Inc.</td><td>Prairies</td><td>145K L</td><td>32 Days</td><td><span class="badge badge-high flex-align" style="background:#DCFCE7; color:var(--status-green);">Healthy</span></td></tr>
-                                    <tr><td class="font-medium">FarmServe Quebec</td><td>Quebec</td><td>110K L</td><td>12 Days</td><td><span class="badge badge-low flex-align">Low Stock</span></td></tr>
-                                    <tr><td class="font-medium">Pacific Ag</td><td>Western</td><td>95K L</td><td>45 Days</td><td><span class="badge badge-med flex-align">Overstock</span></td></tr>
+                                    <tr class="cursor-pointer" onclick="showToast('Opening product details...')"><td class="font-medium">Roundup PowerMAX</td><td>1.2M L</td><td>400K L</td><td>45 Days</td><td><span class="badge badge-high flex-align" style="background:#DCFCE7; color:var(--status-green);">Healthy</span></td><td><button class="text-link text-sm">View</button></td></tr>
+                                    <tr class="cursor-pointer" onclick="showToast('Opening product details...')"><td class="font-medium">Prosaro Pro</td><td>500K L</td><td>700K L</td><td>12 Days</td><td><span class="badge badge-low flex-align" style="background:#FEF2F2; color:var(--status-red);">Low Stock</span></td><td><button class="text-link text-sm" onclick="event.stopPropagation(); document.querySelector('.nav-item[data-target=\'ai-recommendations\']').click();">Replenish</button></td></tr>
+                                    <tr class="cursor-pointer" onclick="showToast('Opening product details...')"><td class="font-medium">XtendiMax</td><td>450K L</td><td>150K L</td><td>32 Days</td><td><span class="badge badge-high flex-align" style="background:#DCFCE7; color:var(--status-green);">Healthy</span></td><td><button class="text-link text-sm">View</button></td></tr>
+                                    <tr class="cursor-pointer" onclick="showToast('Opening product details...')"><td class="font-medium">Luna Experience</td><td>330K L</td><td>100K L</td><td>28 Days</td><td><span class="badge badge-high flex-align" style="background:#DCFCE7; color:var(--status-green);">Healthy</span></td><td><button class="text-link text-sm">View</button></td></tr>
                                 </tbody>
                             </table>
                         </div>
