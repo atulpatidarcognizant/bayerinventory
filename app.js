@@ -1,4 +1,62 @@
 
+window.openUploadReview = function(btn) {
+    const tr = btn.closest('tr');
+    if (!tr) return;
+    const distName = tr.cells[0].innerText;
+    const type = tr.cells[1].innerText;
+    const titleEl = document.getElementById('ur-distributor-name');
+    if (titleEl) {
+        titleEl.textContent = `${distName} - ${type} Upload`;
+    }
+    if (window.switchScreen) window.switchScreen('upload-review');
+};
+
+// AI Matching Logic
+window.approveMapping = function(btn) {
+    const tr = btn.closest('tr');
+    if (tr) {
+        tr.style.opacity = '0.5';
+        setTimeout(() => tr.remove(), 300);
+        if (window.showToast) window.showToast('Mapping Approved');
+        
+        // update top badge counts
+        const badges = document.querySelectorAll('.tab-badge');
+        if (badges.length > 0) {
+            let count = parseInt(badges[0].textContent) || 0;
+            if (count > 0) badges[0].textContent = count - 1;
+        }
+    }
+};
+
+window.markNoEquivalent = function(btn) {
+    const tr = btn.closest('tr');
+    if (tr) {
+        tr.style.opacity = '0.5';
+        setTimeout(() => tr.remove(), 300);
+        if (window.showToast) window.showToast('Marked as No Equivalent');
+        
+        const badges = document.querySelectorAll('.tab-badge');
+        if (badges.length > 0) {
+            let count = parseInt(badges[0].textContent) || 0;
+            if (count > 0) badges[0].textContent = count - 1;
+        }
+    }
+};
+
+window.openProductModal = function(btn) {
+    if (window.showToast) window.showToast('Opening Product Selection Dialog...');
+};
+
+window.openDistributorDetails = function(distributorName) {
+    const titleEl = document.getElementById('dd-distributor-name');
+    if (titleEl) {
+        titleEl.textContent = distributorName;
+    }
+    if (window.switchScreen) {
+        window.switchScreen('distributor-details');
+    }
+};
+
 // --- Distributor Global State ---
 window.distributorState = {
     draftItems: [
@@ -643,6 +701,7 @@ document.addEventListener('DOMContentLoaded', () => {
         region.distributors.forEach(dist => {
             const tr = document.createElement('tr');
             tr.setAttribute('data-dist-id', dist.id);
+            tr.setAttribute('onclick', `openDistributorDetails('${dist.name}')`);
             tr.style.cursor = 'pointer';
             tr.style.transition = 'background 0.2s';
             tr.innerHTML = `
@@ -1426,3 +1485,35 @@ function showProductDetails(productName) {
         window.lucide.createIcons();
     }
 }
+
+
+window.filterInventoryTable = function(status) {
+    if (window.switchScreen) window.switchScreen('inventory');
+    if (window.switchInventoryTab) window.switchInventoryTab('network'); // make sure we are on the table tab
+    
+    // Quick delay to allow tab switch rendering
+    setTimeout(() => {
+        // We look for table rows in the KAM inventory table
+        const tbody = document.querySelector('#inventory .kam-only table.data-table tbody');
+        if (!tbody) return;
+        
+        const rows = tbody.querySelectorAll('tr');
+        rows.forEach(row => {
+            if (status === 'all') {
+                row.style.display = '';
+                return;
+            }
+            
+            const html = row.innerHTML.toLowerCase();
+            if (status === 'risk' && (html.includes('critical') || html.includes('warning') || html.includes('low stock'))) {
+                row.style.display = '';
+            } else if (status === 'healthy' && html.includes('healthy')) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+        
+        if (window.showToast) window.showToast(`Filtered inventory by: ${status}`);
+    }, 100);
+};

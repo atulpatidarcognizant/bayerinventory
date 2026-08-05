@@ -156,7 +156,7 @@
                 </div>
 
                 <div class="dashboard-grid" style="margin-bottom: 24px;">
-                    <div class="dashboard-card kpi-card">
+                    <div class="dashboard-card kpi-card cursor-pointer" onclick="switchScreen('order-management')">
                         <div class="kpi-icon"><i data-lucide="file-text"></i></div>
                         <div class="kpi-details">
                             <span class="kpi-label">Pending Distributor Orders</span>
@@ -164,7 +164,7 @@
                             <span style="font-size:11px;color:var(--text-secondary)">Across Assigned Distributors</span>
                         </div>
                     </div>
-                    <div class="dashboard-card kpi-card highlight" style="border-top-color: #D97706;">
+                    <div class="dashboard-card kpi-card highlight cursor-pointer" style="border-top-color: #D97706;" onclick="switchScreen('order-management')">
                         <div class="kpi-icon"><i data-lucide="clipboard-check" style="color:#D97706;"></i></div>
                         <div class="kpi-details">
                             <span class="kpi-label">Orders Requiring Approval</span>
@@ -172,7 +172,7 @@
                             <span class="kpi-trend" style="color:#D97706;">Awaiting Approval</span>
                         </div>
                     </div>
-                    <div class="dashboard-card kpi-card">
+                    <div class="dashboard-card kpi-card cursor-pointer" onclick="switchScreen('inventory')">
                         <div class="kpi-icon"><i data-lucide="package"></i></div>
                         <div class="kpi-details">
                             <span class="kpi-label">Inventory Coverage</span>
@@ -180,7 +180,7 @@
                             <span class="kpi-trend text-green"><i data-lucide="check-circle" style="width:12px;height:12px;"></i> Healthy</span>
                         </div>
                     </div>
-                    <div class="dashboard-card kpi-card highlight" style="border-top-color: var(--status-red);">
+                    <div class="dashboard-card kpi-card highlight cursor-pointer" style="border-top-color: var(--status-red);" onclick="filterInventoryTable('risk')">
                         <div class="kpi-icon"><i data-lucide="alert-triangle" style="color:var(--status-red);"></i></div>
                         <div class="kpi-details">
                             <span class="kpi-label">Inventory Reconciliation Issues</span>
@@ -665,6 +665,54 @@
                 </div>
             </section>
 
+            
+            <section id="distributor-details" class="screen">
+                <div class="section-title-bar" style="margin-bottom: 24px;">
+                    <div>
+                        <span class="section-subtitle">Distributor Profile</span>
+                        <h2 id="dd-distributor-name">Distributor Name</h2>
+                    </div>
+                    <div class="header-actions">
+                        <button class="secondary-btn" onclick="switchScreen('dashboard')"><i data-lucide="arrow-left"></i> Back to Dashboard</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid" style="grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 24px;">
+                    <div class="dashboard-card kpi-card cursor-pointer" onclick="switchScreen('order-management')">
+                        <div class="kpi-icon" style="background:#E0E7FF; color:#4F46E5;"><i data-lucide="package"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Current Orders</span>
+                            <span class="kpi-value" style="color:#4338CA;">3 Active</span>
+                            <span style="font-size:11px;color:var(--text-secondary); margin-top:8px; font-weight:600; display:flex; align-items:center; gap:4px;" class="text-blue">View Orders <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card cursor-pointer" onclick="switchScreen('inventory')">
+                        <div class="kpi-icon" style="background:#DCFCE7; color:#10B981;"><i data-lucide="check-circle"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Inventory Health</span>
+                            <span class="kpi-value text-green">94%</span>
+                            <span style="font-size:11px;color:var(--text-secondary); margin-top:8px; font-weight:600; display:flex; align-items:center; gap:4px;" class="text-blue">View Inventory <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card cursor-pointer" onclick="switchScreen('upload')">
+                        <div class="kpi-icon" style="background:#FEF3C7; color:#D97706;"><i data-lucide="upload-cloud"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Recent Uploads</span>
+                            <span class="kpi-value" style="color:#B45309;">Today</span>
+                            <span style="font-size:11px;color:var(--text-secondary); margin-top:8px; font-weight:600; display:flex; align-items:center; gap:4px;" class="text-blue">Review Uploads <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card cursor-pointer" onclick="switchScreen('matching')">
+                        <div class="kpi-icon" style="background:#F0F9FF; color:#0284C7;"><i data-lucide="git-merge"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">AI Matching</span>
+                            <span class="kpi-value" style="color:#0369A1;">2 Pending</span>
+                            <span style="font-size:11px;color:var(--text-secondary); margin-top:8px; font-weight:600; display:flex; align-items:center; gap:4px;" class="text-blue">Review Matching <i data-lucide="arrow-right" style="width:12px;height:12px;"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Screen 2: Distributor Upload Portal -->
             <!-- Screen 2: Distributor Upload Portal (AM View) -->
             <section id="upload" class="screen">
@@ -725,7 +773,7 @@
                         </div>
                         <div style="display:flex; flex-direction:column; align-items:flex-end; gap:16px;">
                             <span style="font-size:13px; color:var(--primary-blue); font-weight:500; background:#E0F2FE; padding:4px 12px; border-radius:12px;">Est. review time: 8 mins</span>
-                            <button class="primary-btn btn-sm">Review Upload Queue</button>
+                            <button class="primary-btn btn-sm" onclick="showToast('Scroll down to queue')">Review Upload Queue</button>
                         </div>
                     </div>
                 </div>
@@ -763,7 +811,7 @@
                                     <td><span class="badge badge-high">Processed</span></td>
                                     <td>342</td>
                                     <td><span class="text-green font-medium" style="display:flex; align-items:center; gap:4px;"><i data-lucide="check" style="width:14px;height:14px;"></i> Passed</span></td>
-                                    <td style="text-align:right;"><button class="secondary-btn btn-sm">View</button></td>
+                                    <td style="text-align:right;"><button class="secondary-btn btn-sm" onclick="openUploadReview(this)">Review</button></td>
                                 </tr>
                                 <tr>
                                     <td class="font-medium">GreenCrop Distribution</td>
@@ -781,7 +829,7 @@
                                     <td><span class="badge" style="background:#E0F2FE; color:#0284C7;">Processing</span></td>
                                     <td>198</td>
                                     <td><span class="text-secondary text-sm" style="display:flex; align-items:center; gap:4px;"><i data-lucide="loader" style="width:14px;height:14px;"></i> Running</span></td>
-                                    <td style="text-align:right;"><button class="secondary-btn btn-sm">View</button></td>
+                                    <td style="text-align:right;"><button class="secondary-btn btn-sm" onclick="openUploadReview(this)">Review</button></td>
                                 </tr>
                                 <tr>
                                     <td class="font-medium">AgroMax Partners</td>
@@ -799,7 +847,7 @@
                                     <td><span class="badge badge-high">Processed</span></td>
                                     <td>512</td>
                                     <td><span class="text-green font-medium" style="display:flex; align-items:center; gap:4px;"><i data-lucide="check" style="width:14px;height:14px;"></i> Passed</span></td>
-                                    <td style="text-align:right;"><button class="secondary-btn btn-sm">View</button></td>
+                                    <td style="text-align:right;"><button class="secondary-btn btn-sm" onclick="openUploadReview(this)">Review</button></td>
                                 </tr>
                                 <tr>
                                     <td class="font-medium">Prairie Partners</td>
@@ -3637,7 +3685,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr style="background:#F0F4F8; border-left:3px solid var(--primary-blue); cursor:pointer;">
+                                    <tr style="background:#F0F4F8; border-left:3px solid var(--primary-blue); cursor:pointer;" onclick="openOrderDetails('#4091-C')">
                                         <td>
                                             <span class="font-medium" style="color:var(--primary-blue);">#4091-C</span><br>
                                             <span style="font-size:11px; color:var(--text-secondary);">Oct 12, 2026</span>
@@ -3645,7 +3693,7 @@
                                         <td class="font-medium">$84,200</td>
                                         <td><span class="badge badge-med">Pricing Exception</span></td>
                                     </tr>
-                                    <tr style="cursor:pointer;">
+                                    <tr style="cursor:pointer;" onclick="openOrderDetails('#4102-A')">
                                         <td>
                                             <span class="font-medium">#4102-A</span><br>
                                             <span style="font-size:11px; color:var(--text-secondary);">Oct 13, 2026</span>
