@@ -3090,7 +3090,7 @@
                 <div class="dashboard-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
                     <div class="dashboard-card" style="padding: 16px; text-align: center; border: 1px solid var(--border-color); box-shadow: none;">
                         <span class="text-sm text-secondary block">Products in Draft</span>
-                        <span class="font-bold text-lg text-dark">2 Items</span>
+                        <span id="op-products-count" class="font-bold text-lg text-dark">2 Items</span>
                     </div>
                     <div class="dashboard-card" style="padding: 16px; text-align: center; border: 1px solid var(--border-color); box-shadow: none;">
                         <span class="text-sm text-secondary block">Fulfillment Status</span>
@@ -3100,10 +3100,7 @@
                         <span class="text-sm text-secondary block">Estimated Savings</span>
                         <span class="font-bold text-lg text-green">$15,975</span>
                     </div>
-                    <div class="dashboard-card" style="padding: 16px; text-align: center; border: 1px solid var(--border-color); box-shadow: none; background: #F8FAFC;">
-                        <span class="text-sm text-secondary block">AI Validated</span>
-                        <span class="font-bold text-lg text-blue">Yes <i data-lucide="check" style="width:18px;height:18px;"></i></span>
-                    </div>
+
                 </div>
 
                 <div class="dashboard-grid" style="grid-template-columns: 3fr 1fr;">
@@ -3197,7 +3194,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div style="padding: 16px; background:#F8FAFC; border-top: 1px solid var(--border-color);">
+                        <div id="op-fbt-section" style="padding: 16px; background:#F8FAFC; border-top: 1px solid var(--border-color);">
                             <h4 style="margin-bottom:12px; font-size:14px; display:flex; align-items:center; gap:6px;"><i data-lucide="plus-circle" style="width:16px;height:16px;color:var(--primary-blue);"></i> Frequently Bought Together</h4>
                             <div style="display:flex; gap:16px; overflow-x:auto;">
                                 <div style="background:white; border:1px solid #E2E8F0; border-radius:6px; padding:12px; min-width:200px; flex-shrink:0;">
@@ -3212,9 +3209,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="padding: 16px; border-top: 1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center; background:#F8FAFC;">
+                        <div style="padding: 16px; border-top: 1px solid var(--border-color); display:flex; justify-content:flex-start; align-items:center; background:#F8FAFC;">
                             <button class="text-link" onclick="showToast('Opening catalog search')"><i data-lucide="plus" style="width:14px;height:14px;"></i> Add More Products</button>
-                            <button class="secondary-btn btn-sm" onclick="simulateErpImport()"><i data-lucide="download" style="width:14px;height:14px;"></i> Import from ERP</button>
                         </div>
                     </div>
 
@@ -3226,7 +3222,7 @@
                             <h4 style="margin-bottom: 12px; display:flex; align-items:center; gap:6px;">
                                 <i data-lucide="check-circle" style="width:18px;height:18px;color:var(--status-green);"></i> Ready for Submission
                             </h4>
-                            <ul style="margin:0; padding:0; list-style:none; font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:8px;">
+                            <ul id="op-checklist" style="margin:0; padding:0; list-style:none; font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:8px;">
                                 <li style="display:flex; align-items:center; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Inventory Available</li>
                                 <li style="display:flex; align-items:center; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Commercial Schemes Applied</li>
                                 <li style="display:flex; align-items:center; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Fulfillment Confirmed</li>
@@ -3271,7 +3267,7 @@
                                 <span class="text-secondary text-sm">Estimated Savings</span>
                                 <span class="font-medium text-sm text-green">$15,975</span>
                             </div>
-                            <div style="display:flex; justify-content:space-between; border-top: 1px solid var(--border-color); padding-top: 16px; margin-top: 8px;">
+                            <div id="op-order-summary-total" style="display:flex; justify-content:space-between; border-top: 1px solid var(--border-color); padding-top: 16px; margin-top: 8px;">
                                 <strong style="font-size:16px;">Estimated Total</strong>
                                 <strong style="font-size:16px;">$231,525</strong>
                             </div>
@@ -3294,7 +3290,8 @@
 
                         <!-- Actions -->
                         <div style="display:flex; flex-direction:column; gap: 12px; margin-top: 8px;">
-                            <button class="primary-btn" style="width:100%; justify-content:center; padding:12px; font-size:15px;" onclick="showToast('Order Submitted Successfully!')">Submit Order</button>
+                            <div id="op-submit-helper" class="text-sm" style="color:#DC2626; text-align:center; display:none; margin-bottom:-4px;">Resolve duplicate products before submitting.</div>
+                            <button id="op-submit-btn" class="primary-btn" style="width:100%; justify-content:center; padding:12px; font-size:15px;" onclick="showToast('Order Submitted Successfully!')">Submit Order</button>
                             <button class="secondary-btn" style="width:100%; justify-content:center;" onclick="showToast('Reviewing Order')">Review Before Submit</button>
                             <button class="text-link text-sm text-secondary" style="margin:0 auto;" onclick="showToast('Draft Saved')">Save as Draft</button>
                         </div>

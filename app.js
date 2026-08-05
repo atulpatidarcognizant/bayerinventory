@@ -751,7 +751,8 @@ window.closeTrackingDrillDown = function() {
         };
     }
 
-    // --- ERP Import Simulation ---
+    
+    // --- ERP Import Simulation (Refined) ---
     window.simulateErpImport = function() {
         if(window.showToast) window.showToast('Importing order from ERP...', 2000);
         
@@ -759,16 +760,21 @@ window.closeTrackingDrillDown = function() {
             const tbody = document.querySelector('#draft-order-table tbody');
             const duplicateBanner = document.getElementById('duplicate-warning-banner');
             const aiInsights = document.getElementById('op-ai-insights');
+            const submitBtn = document.getElementById('op-submit-btn');
+            const submitHelper = document.getElementById('op-submit-helper');
+            const fbtSection = document.getElementById('op-fbt-section');
+            const checklist = document.getElementById('op-checklist');
+            const orderSummaryTotal = document.getElementById('op-order-summary-total');
+            const productsCount = document.getElementById('op-products-count');
             
-            // Check if already imported to prevent infinite adding
-            if (tbody && !document.getElementById('erp-imported-row')) {
+            if (tbody && !document.getElementById('erp-conflict-row')) {
                 // Add non-duplicate row (New Product)
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
                     <td style="padding: 16px;">
                         <div class="font-medium" style="font-size: 15px; margin-bottom: 4px;">XtendiMax</div>
                         <div style="display:flex; align-items:center; gap:8px;">
-                            <span class="badge" style="background:#E2E8F0; color:var(--text-dark); font-size:10px;"><i data-lucide="database" style="width:10px;height:10px;margin-right:4px;"></i> ERP Imported</span>
+                            <span class="badge" style="background:#0F172A; color:white; font-size:10px;"><i data-lucide="database" style="width:10px;height:10px;margin-right:4px;"></i> ERP Imported</span>
                         </div>
                     </td>
                     <td style="padding: 16px;">
@@ -793,64 +799,76 @@ window.closeTrackingDrillDown = function() {
                     </td>
                 `;
                 
-                // Add duplicate row (Roundup PowerMAX)
-                const dupRow = document.createElement('tr');
-                dupRow.id = 'erp-imported-row';
-                dupRow.style.backgroundColor = '#FEF2F2';
-                dupRow.innerHTML = `
-                    <td style="padding: 16px;">
-                        <div class="font-medium" style="font-size: 15px; margin-bottom: 4px;">Roundup PowerMAX</div>
-                        <div style="display:flex; align-items:center; gap:8px;">
-                            <span class="badge" style="background:#E2E8F0; color:var(--text-dark); font-size:10px;"><i data-lucide="database" style="width:10px;height:10px;margin-right:4px;"></i> ERP Imported</span>
-                        </div>
-                    </td>
-                    <td style="padding: 16px;">
-                        <div style="display:flex; flex-direction:column; gap:4px;">
-                            <div style="display:flex; align-items:center; gap:6px;">
-                                <span class="font-medium text-sm">Montreal DC</span>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="padding: 16px;">
-                        <div style="display:flex; align-items:center; background:white; border: 1px solid #FECACA; border-radius: 6px; width:fit-content; padding: 2px;">
-                            <input type="number" value="15000" style="width: 70px; padding: 4px; border:none; background:none; text-align:center; font-weight:500; font-family:inherit; outline:none;" readonly>
-                        </div>
-                    </td>
-                    <td style="padding: 16px;">$8.50</td>
-                    <td class="font-medium" style="padding: 16px;">$127,500</td>
-                    <td style="text-align: right; padding: 16px;">
-                        <div style="display:flex; flex-direction:column; gap:6px; align-items:flex-end;">
-                            <button class="primary-btn btn-sm" style="background:#DC2626; font-size:11px; padding:4px 8px; width:100%; justify-content:center;" onclick="resolveDuplicate(this, 'keep_imported')">Keep Imported</button>
-                            <button class="secondary-btn btn-sm" style="font-size:11px; padding:4px 8px; width:100%; justify-content:center; border-color:#DC2626; color:#DC2626;" onclick="resolveDuplicate(this, 'merge')">Merge Quantities</button>
-                        </div>
-                    </td>
-                `;
-                
-                // Insert after the first row (so the two duplicates are together)
-                tbody.insertBefore(dupRow, tbody.children[1]);
                 tbody.appendChild(newRow);
                 
-                // Highlight the original AI recommended duplicate
+                // Consolidate duplicate into a conflict row
                 const originalRow = tbody.children[0];
                 if (originalRow) {
+                    originalRow.id = 'erp-conflict-row';
                     originalRow.style.backgroundColor = '#FEF2F2';
-                    originalRow.style.borderTop = '2px solid #DC2626';
-                    originalRow.style.borderBottom = '1px solid #DC2626';
-                    dupRow.style.borderBottom = '2px solid #DC2626';
-                    
-                    const actionsCell = originalRow.querySelector('td:last-child');
-                    if (actionsCell) {
-                        actionsCell.innerHTML = `<button class="primary-btn btn-sm" style="background:#DC2626; font-size:11px; padding:4px 8px; width:100%; justify-content:center;" onclick="resolveDuplicate(this, 'keep_ai')">Keep AI Item</button>`;
-                    }
+                    originalRow.innerHTML = `
+                         <td style="padding: 16px; border-left: 4px solid #DC2626;">
+                            <div class="font-medium" style="font-size: 15px; margin-bottom: 8px;">Roundup PowerMAX</div>
+                            <div style="display:flex; flex-direction:column; gap:8px;">
+                                <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:white; border:1px solid #E2E8F0; border-radius:4px;">
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green); font-size:10px;">AI Recommended</span>
+                                        <span class="text-xs" style="color:#991B1B; background:#FEF2F2; padding:2px 6px; border-radius:4px; display:flex; align-items:center; gap:4px;"><i data-lucide="alert-triangle" style="width:10px;height:10px;"></i> High Risk (3 Days Left)</span>
+                                    </div>
+                                    <span class="font-medium text-sm">Qty: 15,000 L</span>
+                                </div>
+                                <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:white; border:1px solid #E2E8F0; border-radius:4px;">
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <span class="badge" style="background:#0F172A; color:white; font-size:10px;"><i data-lucide="database" style="width:10px;height:10px;margin-right:4px;"></i> ERP Imported</span>
+                                    </div>
+                                    <span class="font-medium text-sm">Qty: 15,000 L</span>
+                                </div>
+                            </div>
+                         </td>
+                         <td colspan="5" style="padding: 16px;">
+                            <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100%; gap:12px;">
+                                <div style="color:#991B1B; font-size:14px; font-weight:500; display:flex; align-items:center; gap:6px;">
+                                    <i data-lucide="alert-circle" style="width:16px;height:16px;"></i> Conflict Detected
+                                </div>
+                                <div style="display:flex; gap:8px;">
+                                     <button class="primary-btn btn-sm" style="background:#DC2626; border-color:#DC2626;" onclick="resolveDuplicate(this, 'keep_ai')">Keep AI Recommended</button>
+                                     <button class="secondary-btn btn-sm" style="border-color:#DC2626; color:#DC2626;" onclick="resolveDuplicate(this, 'keep_imported')">Keep ERP Imported</button>
+                                     <button class="secondary-btn btn-sm" style="border-color:#DC2626; color:#DC2626;" onclick="resolveDuplicate(this, 'merge')">Merge Quantities</button>
+                                </div>
+                            </div>
+                         </td>
+                    `;
                 }
                 
+                // Update UI Constraints
                 duplicateBanner.style.display = 'block';
+                submitBtn.style.opacity = '0.5';
+                submitBtn.style.cursor = 'not-allowed';
+                submitBtn.disabled = true;
+                submitHelper.style.display = 'block';
+                fbtSection.style.display = 'none';
+                productsCount.textContent = '3 Items'; // 2 original + 1 new (duplicate counts as 1)
                 
+                // Update Checklist
+                checklist.innerHTML = `
+                    <li style="display:flex; align-items:center; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Inventory Available</li>
+                    <li style="display:flex; align-items:center; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Commercial Schemes Applied</li>
+                    <li style="display:flex; align-items:center; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Fulfillment Confirmed</li>
+                    <li style="display:flex; align-items:center; gap:6px; color:#DC2626; font-weight:500;"><i data-lucide="alert-triangle" style="width:14px;height:14px;color:#DC2626;"></i> Duplicate Review Required</li>
+                `;
+                
+                // Update Order Summary Message
+                orderSummaryTotal.innerHTML = `
+                    <div style="width:100%; text-align:center; padding: 8px; background:#FEF2F2; color:#991B1B; font-size:13px; border-radius:4px; font-weight:500;">
+                        Estimated total will be finalized after duplicate resolution.
+                    </div>
+                `;
+                
+                // Update AI Insights
                 aiInsights.innerHTML = `
-                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);margin-top:2px;"></i> Your ERP order has been imported successfully.</li>
-                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="alert-triangle" style="width:14px;height:14px;color:#DC2626;margin-top:2px;"></i> One imported product duplicates an item already added through AI Recommendations.</li>
-                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="info" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Please review the highlighted items before submitting your order.</li>
-                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);margin-top:2px;"></i> No other order conflicts were detected.</li>
+                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);margin-top:2px;"></i> ERP order imported successfully.</li>
+                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="alert-triangle" style="width:14px;height:14px;color:#DC2626;margin-top:2px;"></i> One imported product duplicates an AI recommended item.</li>
+                    <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="info" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Review highlighted products before submitting.</li>
                 `;
                 
                 if(window.lucide) window.lucide.createIcons();
@@ -861,37 +879,91 @@ window.closeTrackingDrillDown = function() {
 
     window.resolveDuplicate = function(btn, action) {
         if(window.showToast) window.showToast('Duplicate resolved.');
-        const tbody = document.querySelector('#draft-order-table tbody');
-        const originalRow = tbody.children[0];
-        const dupRow = document.getElementById('erp-imported-row');
+        const conflictRow = document.getElementById('erp-conflict-row');
         
-        if (originalRow && dupRow) {
-            if (action === 'keep_ai') {
-                dupRow.remove();
-                originalRow.style.backgroundColor = 'transparent';
-                originalRow.style.borderTop = 'none';
-                originalRow.style.borderBottom = '1px solid var(--border-color)';
-                originalRow.querySelector('td:last-child').innerHTML = `<button class="btn btn-icon text-secondary" onclick="showToast('Removed item')"><i data-lucide="trash-2" style="width:16px;height:16px;"></i></button>`;
-                if(window.lucide) window.lucide.createIcons();
-            } else if (action === 'keep_imported') {
-                originalRow.remove();
-                dupRow.style.backgroundColor = 'transparent';
-                dupRow.style.borderBottom = '1px solid var(--border-color)';
-                dupRow.querySelector('td:last-child').innerHTML = `<button class="btn btn-icon text-secondary" onclick="showToast('Removed item')"><i data-lucide="trash-2" style="width:16px;height:16px;"></i></button>`;
-                if(window.lucide) window.lucide.createIcons();
+        if (conflictRow) {
+            conflictRow.style.backgroundColor = 'transparent';
+            conflictRow.style.borderLeft = 'none';
+            conflictRow.id = '';
+            
+            let qty = 15000;
+            let total = "$127,500";
+            let badge = `<span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green); font-size:10px;">AI Recommended</span>
+                         <span class="text-xs" style="color:#991B1B; background:#FEF2F2; padding:2px 6px; border-radius:4px; display:flex; align-items:center; gap:4px;"><i data-lucide="alert-triangle" style="width:10px;height:10px;"></i> High Risk (3 Days Left)</span>`;
+                         
+            if (action === 'keep_imported') {
+                badge = `<span class="badge" style="background:#0F172A; color:white; font-size:10px;"><i data-lucide="database" style="width:10px;height:10px;margin-right:4px;"></i> ERP Imported</span>`;
             } else if (action === 'merge') {
-                dupRow.remove();
-                originalRow.style.backgroundColor = 'transparent';
-                originalRow.style.borderTop = 'none';
-                originalRow.style.borderBottom = '1px solid var(--border-color)';
-                originalRow.querySelector('input').value = "30000";
-                originalRow.querySelectorAll('td')[4].textContent = "$255,000";
-                originalRow.querySelector('td:last-child').innerHTML = `<button class="btn btn-icon text-secondary" onclick="showToast('Removed item')"><i data-lucide="trash-2" style="width:16px;height:16px;"></i></button>`;
-                if(window.lucide) window.lucide.createIcons();
+                qty = 30000;
+                total = "$255,000";
+                badge = `<span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green); font-size:10px;">Merged Item</span>`;
             }
+
+            conflictRow.innerHTML = `
+                <td style="padding: 16px;">
+                    <div class="font-medium" style="font-size: 15px; margin-bottom: 4px;">Roundup PowerMAX</div>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        ${badge}
+                    </div>
+                </td>
+                <td style="padding: 16px;">
+                    <div style="display:flex; flex-direction:column; gap:4px;">
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <span class="font-medium text-sm">Montreal DC</span>
+                            <span class="text-xs text-green" style="background:#F0FDF4; border:1px solid #BBF7D0; padding:2px 6px; border-radius:12px; display:flex; align-items:center; gap:2px;"><i data-lucide="check" style="width:10px;height:10px;"></i> Available</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--secondary-text);">
+                            <span>ATP: <strong>15K L</strong></span>
+                            <span>|</span>
+                            <span>ETA: <strong>2 Days</strong></span>
+                        </div>
+                    </div>
+                </td>
+                <td style="padding: 16px;">
+                    <div style="display:flex; align-items:center; background:#F8FAFC; border: 1px solid var(--border-color); border-radius: 6px; width:fit-content; padding: 2px;">
+                        <button style="border:none; background:none; cursor:pointer; padding:4px; color:var(--secondary-text);"><i data-lucide="minus" style="width:14px;height:14px;"></i></button>
+                        <input type="number" value="${qty}" style="width: 70px; padding: 4px; border:none; background:none; text-align:center; font-weight:500; font-family:inherit; outline:none;" onchange="showToast('Updating totals...')">
+                        <button style="border:none; background:none; cursor:pointer; padding:4px; color:var(--secondary-text);"><i data-lucide="plus" style="width:14px;height:14px;"></i></button>
+                    </div>
+                </td>
+                <td style="padding: 16px;">$8.50</td>
+                <td class="font-medium" style="padding: 16px;">${total}</td>
+                <td style="text-align: right; padding: 16px;">
+                    <button class="btn btn-icon text-secondary" onclick="showToast('Removed item')"><i data-lucide="trash-2" style="width:16px;height:16px;"></i></button>
+                </td>
+            `;
+            if(window.lucide) window.lucide.createIcons();
         }
         
+        // Restore UI state
         document.getElementById('duplicate-warning-banner').style.display = 'none';
+        document.getElementById('op-fbt-section').style.display = 'block';
+        
+        const submitBtn = document.getElementById('op-submit-btn');
+        submitBtn.style.opacity = '1';
+        submitBtn.style.cursor = 'pointer';
+        submitBtn.disabled = false;
+        document.getElementById('op-submit-helper').style.display = 'none';
+        
+        const checklist = document.getElementById('op-checklist');
+        if (checklist) {
+            checklist.innerHTML = `
+                <li style="display:flex; align-items:center; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Inventory Available</li>
+                <li style="display:flex; align-items:center; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Commercial Schemes Applied</li>
+                <li style="display:flex; align-items:center; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> Fulfillment Confirmed</li>
+                <li style="display:flex; align-items:center; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--status-green);"></i> No Approval Exceptions Detected</li>
+            `;
+        }
+        
+        const orderSummaryTotal = document.getElementById('op-order-summary-total');
+        if (orderSummaryTotal) {
+            let finalTotal = action === 'merge' ? "$359,025" : "$231,525"; // Fake calculation update
+            orderSummaryTotal.innerHTML = `
+                <strong style="font-size:16px;">Estimated Total</strong>
+                <strong style="font-size:16px;">${finalTotal}</strong>
+            `;
+        }
+
         const aiInsights = document.getElementById('op-ai-insights');
         if (aiInsights) {
              aiInsights.innerHTML = `
@@ -902,3 +974,4 @@ window.closeTrackingDrillDown = function() {
              if(window.lucide) window.lucide.createIcons();
         }
     };
+
