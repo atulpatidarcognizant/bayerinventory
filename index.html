@@ -1608,6 +1608,693 @@
                 </div>
             </section>            <!-- Screen 6: Inventory Visibility -->
             <section id="inventory" class="screen">
+                <div class="kam-only">
+
+                <div class="section-title-bar">
+                    <div>
+                        <span class="section-subtitle">Analytics</span>
+                        <h2>Inventory Visibility</h2>
+                    </div>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <select style="padding: 8px 32px 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: white url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%2364748B\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m6 9 6 6 6-6\"/></svg>') no-repeat right 8px center; appearance: none; font-size: 14px; color: var(--text-dark); min-width: 180px; cursor: pointer; outline: none;">
+                            <option value="all">All Regions (Canada)</option>
+                            <option value="on">Ontario</option>
+                            <option value="prairies">Prairies (AB, SK, MB)</option>
+                            <option value="qc">Quebec</option>
+                            <option value="bc">British Columbia</option>
+                            <option value="atlantic">Atlantic</option>
+                        </select>
+                        <button class="secondary-btn"><i data-lucide="download"></i> Export Report</button>
+                    </div>
+                </div>
+
+                <!-- Global Executive Summary -->
+                <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; margin-bottom: 24px;">
+                    <div class="dashboard-card widget">
+                        <span class="text-sm text-secondary block" style="margin-bottom:4px;">Total Network Inventory</span>
+                        <span class="font-bold text-lg text-dark">5.62M L</span>
+                    </div>
+                    <div class="dashboard-card widget">
+                        <span class="text-sm text-secondary block" style="margin-bottom:4px;">Network Health Status</span>
+                        <span class="font-bold text-lg text-green">94% Healthy</span>
+                    </div>
+                    <div class="dashboard-card widget">
+                        <span class="text-sm text-secondary block" style="margin-bottom:4px;">Active Distributors</span>
+                        <span class="font-bold text-lg text-dark">128 / 130</span>
+                    </div>
+                    <div class="dashboard-card widget">
+                        <span class="text-sm text-secondary block" style="margin-bottom:4px;">Last Data Sync</span>
+                        <span class="font-bold text-lg text-dark" style="display:flex;align-items:center;gap:6px;"><i data-lucide="refresh-cw" style="width:14px;height:14px;color:var(--status-green);"></i> 10 mins ago</span>
+                    </div>
+                </div>
+
+                <div class="workflow-tabs" style="margin-bottom: 24px;">
+                    <div class="workflow-tab active" onclick="window.switchInventoryTab('distributor')">Distributor Inventory</div>
+                    <div class="workflow-tab" onclick="window.switchInventoryTab('retail')">Retail Inventory</div>
+                    <div class="workflow-tab" onclick="window.switchInventoryTab('bayer')">Bayer Inventory</div>
+                    <div class="workflow-tab" onclick="window.switchInventoryTab('warehouse')">Warehouse Inventory</div>
+                    <div class="workflow-tab" onclick="window.switchInventoryTab('health')">Inventory Health</div>
+                    <div class="workflow-tab" onclick="window.switchInventoryTab('timeline')">Inventory Timeline</div>
+                    <div class="workflow-tab" onclick="window.switchInventoryTab('insights')">AI Insights</div>
+                </div>
+
+                <div id="inv-tab-distributor" class="inv-tab-content">
+                    <!-- KPI Cards -->
+                    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; margin-bottom: 24px;">
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Total Distributor Inventory</span>
+                            <span class="font-bold text-lg text-dark">2.48M L</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Active Distributors</span>
+                            <span class="font-bold text-lg text-dark">128</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Avg Inventory Coverage</span>
+                            <span class="font-bold text-lg text-dark">26 Days</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Inventory Health Score</span>
+                            <span class="font-bold text-lg text-green">92% Healthy</span>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap:24px; margin-bottom:24px;">
+                        <!-- Primary Visualization (Horizontal Bar Chart) -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom: 16px;">Regional Distributor Inventory</h3>
+                            <div style="display:flex; flex-direction:column; gap:12px;">
+                                <!-- Bar 1 -->
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Ontario</span><span class="font-medium">850K L</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 85%; background:var(--primary-blue); height:100%;"></div></div>
+                                </div>
+                                <!-- Bar 2 -->
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Prairies</span><span class="font-medium">620K L</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 62%; background:var(--primary-blue); height:100%;"></div></div>
+                                </div>
+                                <!-- Bar 3 -->
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Quebec</span><span class="font-medium">410K L</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 41%; background:var(--primary-blue); height:100%;"></div></div>
+                                </div>
+                                <!-- Bar 4 -->
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Western Canada</span><span class="font-medium">380K L</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 38%; background:var(--primary-blue); height:100%;"></div></div>
+                                </div>
+                                <!-- Bar 5 -->
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Atlantic</span><span class="font-medium">220K L</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 22%; background:var(--primary-blue); height:100%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data Table -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom: 16px;">Top Distributor Holdings</h3>
+                            <table class="data-table minimal" style="font-size:13px;">
+                                <thead>
+                                    <tr>
+                                        <th>Distributor</th>
+                                        <th>Region</th>
+                                        <th>Inventory</th>
+                                        <th>Coverage</th>
+                                        <th>Health</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="font-medium">Omega Distribution</td><td>Ontario</td><td>180K L</td><td>24 Days</td><td><span class="badge badge-high flex-align" style="background:#DCFCE7; color:var(--status-green);">Healthy</span></td></tr>
+                                    <tr><td class="font-medium">AgriSupplies Inc.</td><td>Prairies</td><td>145K L</td><td>32 Days</td><td><span class="badge badge-high flex-align" style="background:#DCFCE7; color:var(--status-green);">Healthy</span></td></tr>
+                                    <tr><td class="font-medium">FarmServe Quebec</td><td>Quebec</td><td>110K L</td><td>12 Days</td><td><span class="badge badge-low flex-align">Low Stock</span></td></tr>
+                                    <tr><td class="font-medium">Pacific Ag</td><td>Western</td><td>95K L</td><td>45 Days</td><td><span class="badge badge-med flex-align">Overstock</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Contextual AI Insight -->
+                    <div class="dashboard-card widget" style="background: #F0F9FF; border: 1px solid #BAE6FD; padding: 16px; display:flex; gap:16px; align-items:start;">
+                        <i data-lucide="sparkles" style="width:20px;height:20px;color:var(--primary-blue);margin-top:2px;"></i>
+                        <div>
+                            <h4 style="margin:0 0 4px 0; color:var(--primary-blue);">AI Insight</h4>
+                            <p style="margin:0; font-size:14px; color:var(--text-dark); line-height:1.5;">
+                                Ontario distributor inventory is projected to fall below safety stock within 5 days due to seasonal demand. <strong>Recommendation:</strong> Replenish from Montreal DC.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="inv-tab-retail" class="inv-tab-content hidden">
+                    <!-- KPI Cards -->
+                    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; margin-bottom: 24px;">
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Active Retailers</span>
+                            <span class="font-bold text-lg text-dark">412</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Retail Inventory</span>
+                            <span class="font-bold text-lg text-dark">1.12M L</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Low Stock Retailers</span>
+                            <span class="font-bold text-lg text-red">42</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Sell-through Rate</span>
+                            <span class="font-bold text-lg text-green">14% WoW</span>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap:24px; margin-bottom:24px;">
+                        <!-- Primary Visualization -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom: 16px;">Retail Inventory by Province</h3>
+                            <div style="display:flex; flex-direction:column; gap:12px;">
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Ontario</span><span class="font-medium">420K L</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 75%; background:#38BDF8; height:100%;"></div></div>
+                                </div>
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Alberta</span><span class="font-medium">310K L</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 55%; background:#38BDF8; height:100%;"></div></div>
+                                </div>
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Saskatchewan</span><span class="font-medium">210K L</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 38%; background:#38BDF8; height:100%;"></div></div>
+                                </div>
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Manitoba</span><span class="font-medium">120K L</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 21%; background:#38BDF8; height:100%;"></div></div>
+                                </div>
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Quebec</span><span class="font-medium">60K L</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 10%; background:#38BDF8; height:100%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data Table -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom: 16px;">Retailer Stock Levels</h3>
+                            <table class="data-table minimal" style="font-size:13px;">
+                                <thead>
+                                    <tr>
+                                        <th>Retailer</th>
+                                        <th>Region</th>
+                                        <th>Inventory</th>
+                                        <th>Sell-through</th>
+                                        <th>Reorder Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="font-medium">Growers Coop</td><td>Ontario</td><td>45K L</td><td>18%</td><td><span class="badge badge-low flex-align">Required</span></td></tr>
+                                    <tr><td class="font-medium">AgriMart</td><td>Alberta</td><td>38K L</td><td>12%</td><td><span class="badge badge-high flex-align" style="background:#DCFCE7; color:var(--status-green);">Healthy</span></td></tr>
+                                    <tr><td class="font-medium">Valley Supply</td><td>Sask.</td><td>12K L</td><td>24%</td><td><span class="badge badge-low flex-align">Critical</span></td></tr>
+                                    <tr><td class="font-medium">CropCare Plus</td><td>Manitoba</td><td>28K L</td><td>8%</td><td><span class="badge badge-high flex-align" style="background:#DCFCE7; color:var(--status-green);">Healthy</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Contextual AI Insight -->
+                    <div class="dashboard-card widget" style="background: #F0F9FF; border: 1px solid #BAE6FD; padding: 16px; display:flex; gap:16px; align-items:start;">
+                        <i data-lucide="sparkles" style="width:20px;height:20px;color:var(--primary-blue);margin-top:2px;"></i>
+                        <div>
+                            <h4 style="margin:0 0 4px 0; color:var(--primary-blue);">AI Insight</h4>
+                            <p style="margin:0; font-size:14px; color:var(--text-dark); line-height:1.5;">
+                                42 retailers require replenishment this week. Retail demand is increasing in Southern Ontario. <strong>Recommendation:</strong> Notify regional KAMs to secure reorders.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="inv-tab-bayer" class="inv-tab-content hidden">
+                    <!-- KPI Cards -->
+                    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; margin-bottom: 24px;">
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Available-to-Promise</span>
+                            <span class="font-bold text-lg text-dark">1.48M L</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Reserved Inventory</span>
+                            <span class="font-bold text-lg text-dark">450K L</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Allocated Inventory</span>
+                            <span class="font-bold text-lg text-dark">620K L</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Distribution Centers</span>
+                            <span class="font-bold text-lg text-dark">4 Active</span>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap:24px; margin-bottom:24px;">
+                        <!-- Primary Visualization -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom: 16px;">Inventory Available by DC</h3>
+                            <div style="display:flex; flex-direction:column; gap:12px;">
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Toronto DC</span><span class="font-medium">580K L</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 85%; background:var(--primary-blue); height:100%;"></div></div>
+                                </div>
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Montreal DC</span><span class="font-medium">420K L</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 60%; background:var(--primary-blue); height:100%;"></div></div>
+                                </div>
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Regina DC</span><span class="font-medium">310K L</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 45%; background:var(--primary-blue); height:100%;"></div></div>
+                                </div>
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Vancouver DC</span><span class="font-medium">170K L</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 25%; background:var(--primary-blue); height:100%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data Table -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom: 16px;">Warehouse Holding Details</h3>
+                            <table class="data-table minimal" style="font-size:13px;">
+                                <thead>
+                                    <tr>
+                                        <th>Warehouse</th>
+                                        <th>Available</th>
+                                        <th>ATP</th>
+                                        <th>Allocation</th>
+                                        <th>ETA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="font-medium">Toronto DC</td><td>620K L</td><td>580K L</td><td>94%</td><td><span class="badge badge-med flex-align">In-transit</span></td></tr>
+                                    <tr><td class="font-medium">Montreal DC</td><td>450K L</td><td>420K L</td><td>65%</td><td><span class="badge badge-high flex-align" style="background:#DCFCE7; color:var(--status-green);">On Site</span></td></tr>
+                                    <tr><td class="font-medium">Regina DC</td><td>350K L</td><td>310K L</td><td>40%</td><td><span class="badge badge-high flex-align" style="background:#DCFCE7; color:var(--status-green);">On Site</span></td></tr>
+                                    <tr><td class="font-medium">Vancouver DC</td><td>200K L</td><td>170K L</td><td>85%</td><td><span class="badge badge-med flex-align">In-transit</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Contextual AI Insight -->
+                    <div class="dashboard-card widget" style="background: #F0F9FF; border: 1px solid #BAE6FD; padding: 16px; display:flex; gap:16px; align-items:start;">
+                        <i data-lucide="sparkles" style="width:20px;height:20px;color:var(--primary-blue);margin-top:2px;"></i>
+                        <div>
+                            <h4 style="margin:0 0 4px 0; color:var(--primary-blue);">AI Insight</h4>
+                            <p style="margin:0; font-size:14px; color:var(--text-dark); line-height:1.5;">
+                                Toronto DC inventory allocation is approaching capacity (94%). <strong>Recommendation:</strong> Route fulfillment of future Ontario orders from Montreal DC.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="inv-tab-warehouse" class="inv-tab-content hidden">
+                    <!-- KPI Cards -->
+                    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; margin-bottom: 24px;">
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Capacity Utilization</span>
+                            <span class="font-bold text-lg text-dark">78%</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Inventory Turns</span>
+                            <span class="font-bold text-lg text-dark">14.2x / yr</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Aging Inventory</span>
+                            <span class="font-bold text-lg text-red">4.5%</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Inbound Shipments</span>
+                            <span class="font-bold text-lg text-dark">12 Scheduled</span>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap:24px; margin-bottom:24px;">
+                        <!-- Primary Visualization -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom: 16px;">Warehouse Utilization</h3>
+                            <div style="display:flex; flex-direction:column; gap:16px;">
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Toronto DC</span><span class="font-medium text-red">94%</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 94%; background:var(--status-red); height:100%;"></div></div>
+                                </div>
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Vancouver DC</span><span class="font-medium text-yellow">85%</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 85%; background:var(--status-yellow); height:100%;"></div></div>
+                                </div>
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Montreal DC</span><span class="font-medium text-green">65%</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 65%; background:var(--status-green); height:100%;"></div></div>
+                                </div>
+                                <div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:13px;"><span>Regina DC</span><span class="font-medium text-green">40%</span></div>
+                                    <div style="width:100%; background:#E2E8F0; border-radius:4px; height:8px; overflow:hidden;"><div style="width: 40%; background:var(--status-green); height:100%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data Table -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom: 16px;">Operations Summary</h3>
+                            <table class="data-table minimal" style="font-size:13px;">
+                                <thead>
+                                    <tr>
+                                        <th>Warehouse</th>
+                                        <th>Capacity</th>
+                                        <th>Inbound</th>
+                                        <th>Outbound</th>
+                                        <th>Inventory</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="font-medium">Toronto DC</td><td>1.2M L</td><td>45K L</td><td>82K L</td><td>1.12M L</td></tr>
+                                    <tr><td class="font-medium">Vancouver DC</td><td>800K L</td><td>12K L</td><td>45K L</td><td>680K L</td></tr>
+                                    <tr><td class="font-medium">Montreal DC</td><td>1.5M L</td><td>120K L</td><td>90K L</td><td>975K L</td></tr>
+                                    <tr><td class="font-medium">Regina DC</td><td>1.0M L</td><td>0 L</td><td>15K L</td><td>400K L</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Contextual AI Insight -->
+                    <div class="dashboard-card widget" style="background: #F0F9FF; border: 1px solid #BAE6FD; padding: 16px; display:flex; gap:16px; align-items:start;">
+                        <i data-lucide="sparkles" style="width:20px;height:20px;color:var(--primary-blue);margin-top:2px;"></i>
+                        <div>
+                            <h4 style="margin:0 0 4px 0; color:var(--primary-blue);">AI Insight</h4>
+                            <p style="margin:0; font-size:14px; color:var(--text-dark); line-height:1.5;">
+                                Regina warehouse contains excess fungicide inventory suitable for redistribution, operating at only 40% capacity. <strong>Recommendation:</strong> Transfer stock to Toronto DC once capacity clears next week.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="inv-tab-health" class="inv-tab-content hidden">
+                    <!-- 3. Improve KPI Cards -->
+                    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; margin-bottom: 24px;">
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Healthy Products</span>
+                            <span class="font-bold text-xl text-green" style="display:block; margin-bottom:4px;">1,420</span>
+                            <span class="text-xs text-secondary">89% of Portfolio</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Low Inventory</span>
+                            <span class="font-bold text-xl text-yellow" style="display:block; margin-bottom:4px;">114</span>
+                            <span class="text-xs text-secondary flex-align gap-1"><i data-lucide="trending-up" style="width:12px;height:12px;color:var(--status-red);"></i> +8 since last week</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Overstock</span>
+                            <span class="font-bold text-xl" style="color:#F59E0B; display:block; margin-bottom:4px;">52</span>
+                            <span class="text-xs text-secondary flex-align gap-1"><i data-lucide="trending-down" style="width:12px;height:12px;color:var(--status-green);"></i> -4 since last week</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Critical Shortages</span>
+                            <span class="font-bold text-xl text-red" style="display:block; margin-bottom:4px;">6</span>
+                            <span class="text-xs font-medium text-red">Requires Immediate Action</span>
+                        </div>
+                    </div>
+
+                    <!-- 7. Executive Summary -->
+                    <div class="dashboard-card widget" style="margin-bottom: 24px; padding: 16px 20px; background: #F8FAFC; border-left: 4px solid var(--primary-blue);">
+                        <p style="margin:0; font-size:14px; color:var(--text-dark); line-height:1.5;">
+                            Overall inventory health remains strong at <strong>94%</strong>. Six products require immediate replenishment while three products remain significantly overstocked. Recommended actions include targeted inventory transfers and commercial promotions to reduce business risk.
+                        </p>
+                    </div>
+
+                    <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap:24px; margin-bottom:24px;">
+                        <!-- 2. Donut Chart + 5. Regional Summary + 9. Panel Balance Highlights -->
+                        <div class="dashboard-card widget" style="display:flex; flex-direction:column;">
+                            <h3 style="margin-bottom: 16px;">Inventory Health Distribution</h3>
+                            
+                            <div style="display:flex; gap: 32px; align-items: center; justify-content: flex-start; padding-bottom: 20px; border-bottom: 1px solid #E2E8F0; margin-bottom: 20px;">
+                                <!-- Donut -->
+                                <div style="position:relative; width:130px; height:130px; border-radius:50%; background: conic-gradient(var(--status-green) 0% 89%, var(--status-yellow) 89% 96%, var(--status-red) 96% 97%, #F59E0B 97% 100%); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                                    <div style="width:90px; height:90px; border-radius:50%; background:white; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                                        <span class="font-bold text-2xl text-dark" style="line-height:1;">94%</span>
+                                        <span class="text-xs text-secondary mt-1">Health</span>
+                                    </div>
+                                </div>
+                                <!-- Legend -->
+                                <div style="display:flex; flex-direction:column; gap: 10px; flex:1;">
+                                    <div style="display:flex; align-items:center; gap: 8px; font-size:13px;">
+                                        <div style="width:12px; height:12px; border-radius:3px; background:var(--status-green);"></div>
+                                        <span style="flex:1; color:var(--text-secondary);">Healthy</span> <span class="font-medium">89% (1,420)</span>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap: 8px; font-size:13px;">
+                                        <div style="width:12px; height:12px; border-radius:3px; background:var(--status-yellow);"></div>
+                                        <span style="flex:1; color:var(--text-secondary);">Warning</span> <span class="font-medium">7% (114)</span>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap: 8px; font-size:13px;">
+                                        <div style="width:12px; height:12px; border-radius:3px; background:var(--status-red);"></div>
+                                        <span style="flex:1; color:var(--text-secondary);">Critical</span> <span class="font-medium">0.4% (6)</span>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap: 8px; font-size:13px;">
+                                        <div style="width:12px; height:12px; border-radius:3px; background:#F59E0B;"></div>
+                                        <span style="flex:1; color:var(--text-secondary);">Overstock</span> <span class="font-medium">3% (52)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Regional Risk & Highlights Split -->
+                            <div style="display:flex; gap:24px; flex:1;">
+                                <!-- 5. Regional Summary -->
+                                <div style="flex:1;">
+                                    <h4 style="font-size:12px; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px;">Regional Risk</h4>
+                                    <div style="display:flex; flex-direction:column; gap:8px;">
+                                        <div style="display:flex; justify-content:space-between; font-size:13px; align-items:center;">
+                                            <span>Ontario</span><span class="badge badge-low flex-align" style="padding:2px 6px;">Critical</span>
+                                        </div>
+                                        <div style="display:flex; justify-content:space-between; font-size:13px; align-items:center;">
+                                            <span>Prairies</span><span class="badge badge-med flex-align" style="padding:2px 6px;">Warning</span>
+                                        </div>
+                                        <div style="display:flex; justify-content:space-between; font-size:13px; align-items:center;">
+                                            <span>Quebec</span><span class="badge flex-align" style="padding:2px 6px; background:#DCFCE7; color:var(--status-green);">Healthy</span>
+                                        </div>
+                                        <div style="display:flex; justify-content:space-between; font-size:13px; align-items:center;">
+                                            <span>Western</span><span class="badge flex-align" style="padding:2px 6px; background:#DCFCE7; color:var(--status-green);">Healthy</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 9. Panel Balance Highlights -->
+                                <div style="flex:1; border-left:1px solid #E2E8F0; padding-left:24px;">
+                                    <h4 style="font-size:12px; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px;">Network Highlights</h4>
+                                    <div style="display:flex; flex-direction:column; gap:12px;">
+                                        <div>
+                                            <span class="text-xs text-secondary block">Largest Inventory Risk</span>
+                                            <span class="font-medium text-sm text-dark">Nativo (3 days to stockout)</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-xs text-secondary block">Largest Overstock</span>
+                                            <span class="font-medium text-sm text-dark">Sivanto Prime (+40%)</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-xs text-secondary block">Fastest Growing Demand</span>
+                                            <span class="font-medium text-sm text-dark">Southern Ontario (+14%)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Data Table -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom: 16px;">Critical Exceptions</h3>
+                            <table class="data-table minimal" style="font-size:13px;">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Health</th>
+                                        <th>Business Risk</th>
+                                        <th>Recommended Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background-color: #FEF2F2;"><td class="font-medium text-dark">Nativo Fungicide</td><td><span class="badge badge-low flex-align" style="background:none; padding:0;"><i data-lucide="alert-circle" style="width:14px;height:14px;margin-right:4px;"></i> Critical</span></td><td>Stockout in 3 days</td><td><span class="badge" style="background:var(--primary-blue); color:white; font-weight:500;">Expedite Transfer</span></td></tr>
+                                    <tr style="background-color: #FEF2F2;"><td class="font-medium text-dark">Roundup Transorb</td><td><span class="badge badge-low flex-align" style="background:none; padding:0;"><i data-lucide="alert-circle" style="width:14px;height:14px;margin-right:4px;"></i> Critical</span></td><td>Missed Sales</td><td><span class="badge" style="background:var(--primary-blue); color:white; font-weight:500;">Supplier Drop-Ship</span></td></tr>
+                                    <tr><td class="font-medium">Sivanto Prime</td><td><span class="badge flex-align" style="background:none; padding:0; color:#F59E0B;"><i data-lucide="package-plus" style="width:14px;height:14px;margin-right:4px;"></i> Overstock</span></td><td>Spoilage Risk</td><td><span class="badge" style="background:#F1F5F9; color:var(--text-dark); border:1px solid #CBD5E1;">Commercial Promo</span></td></tr>
+                                    <tr><td class="font-medium">Velum Prime</td><td><span class="badge flex-align" style="background:none; padding:0; color:#F59E0B;"><i data-lucide="package-plus" style="width:14px;height:14px;margin-right:4px;"></i> Overstock</span></td><td>Capital Tied</td><td><span class="badge" style="background:#F1F5F9; color:var(--text-dark); border:1px solid #CBD5E1;">Bundle Discount</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 6. Improve AI Insight -->
+                    <div class="dashboard-card widget" style="background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%); border: 1px solid #BAE6FD; padding: 16px; display:flex; gap:16px; align-items:start;">
+                        <i data-lucide="sparkles" style="width:24px;height:24px;color:var(--primary-blue);margin-top:2px; flex-shrink:0;"></i>
+                        <div style="flex:1;">
+                            <h4 style="margin:0 0 8px 0; color:var(--primary-blue); font-size:15px;">AI Recommendation</h4>
+                            <div style="display:flex; gap:24px; flex-wrap:wrap;">
+                                <div style="flex:1; min-width:280px; border-right:1px solid #BAE6FD; padding-right:24px;">
+                                    <ul style="margin:0; padding-left:16px; font-size:14px; color:var(--text-dark); line-height:1.6;">
+                                        <li style="margin-bottom:8px;"><strong>Transfer Nativo Fungicide</strong> inventory from Regina to Toronto to avoid projected stockout within three days.</li>
+                                        <li><strong>Launch a commercial promotion</strong> for Sivanto Prime to reduce excess inventory at EuroAgri.</li>
+                                    </ul>
+                                </div>
+                                <div style="flex:1; min-width:200px;">
+                                    <span class="text-xs font-bold text-secondary block" style="text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">Expected Outcome</span>
+                                    <ul style="margin:0; padding-left:16px; font-size:13px; color:var(--text-dark); line-height:1.6; list-style-type:circle;">
+                                        <li>Prevent imminent stockout</li>
+                                        <li>Reduce excess inventory</li>
+                                        <li>Improve overall network health</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="inv-tab-timeline" class="inv-tab-content hidden">
+                    <!-- KPI Cards -->
+                    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; margin-bottom: 24px;">
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Beginning Inventory</span>
+                            <span class="font-bold text-lg text-dark">6.12M L</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Ending Inventory</span>
+                            <span class="font-bold text-lg text-dark">5.62M L</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Net Change</span>
+                            <span class="font-bold text-lg text-red">-8.1%</span>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <span class="text-sm text-secondary block" style="margin-bottom:4px;">Avg Weekly Consumption</span>
+                            <span class="font-bold text-lg text-dark">120K L</span>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; gap:24px; margin-bottom:24px;">
+                        <!-- Primary Visualization (90-Day Trend) -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom: 16px;">90-Day Inventory Trend</h3>
+                            <div style="position:relative; height:120px; border-bottom:1px solid #E2E8F0; border-left:1px solid #E2E8F0; margin-bottom:16px;">
+                                <!-- Simulated SVG Line Chart -->
+                                <svg viewBox="0 0 400 100" style="width:100%; height:100%; overflow:visible;">
+                                    <polyline fill="none" stroke="var(--primary-blue)" stroke-width="3" points="0,20 80,40 160,80 240,30 320,60 400,90" />
+                                    <!-- Replenishment markers -->
+                                    <circle cx="240" cy="30" r="5" fill="var(--status-green)" />
+                                    <text x="230" y="15" font-size="10" fill="var(--status-green)">Replenishment</text>
+                                </svg>
+                                <!-- X-axis labels -->
+                                <div style="display:flex; justify-content:space-between; position:absolute; bottom:-20px; width:100%; font-size:11px; color:var(--secondary-text);">
+                                    <span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data Table -->
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom: 16px;">Trend Log</h3>
+                            <table class="data-table minimal" style="font-size:13px;">
+                                <thead>
+                                    <tr>
+                                        <th>Month</th>
+                                        <th>Inventory</th>
+                                        <th>Consumption</th>
+                                        <th>Orders</th>
+                                        <th>Replenishment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="font-medium">Aug (MTD)</td><td>5.62M L</td><td>210K L</td><td>112</td><td>0 L</td></tr>
+                                    <tr><td class="font-medium">July</td><td>6.05M L</td><td>480K L</td><td>340</td><td>800K L</td></tr>
+                                    <tr><td class="font-medium">June</td><td>5.80M L</td><td>310K L</td><td>215</td><td>0 L</td></tr>
+                                    <tr><td class="font-medium">May</td><td>6.12M L</td><td>180K L</td><td>95</td><td>1.2M L</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Contextual AI Insight -->
+                    <div class="dashboard-card widget" style="background: #F0F9FF; border: 1px solid #BAE6FD; padding: 16px; display:flex; gap:16px; align-items:start;">
+                        <i data-lucide="sparkles" style="width:20px;height:20px;color:var(--primary-blue);margin-top:2px;"></i>
+                        <div>
+                            <h4 style="margin:0 0 4px 0; color:var(--primary-blue);">AI Insight</h4>
+                            <p style="margin:0; font-size:14px; color:var(--text-dark); line-height:1.5;">
+                                Herbicide inventory declined 18% over the past 30 days due to accelerating seasonal demand. <strong>Recommendation:</strong> Increase safety stock thresholds by 10% for the next 45 days.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="inv-tab-insights" class="inv-tab-content hidden">
+                    <h3 style="margin-bottom:16px;">AI Recommendations</h3>
+                    <!-- Recommendation Cards Grid -->
+                    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:24px; margin-bottom:32px;">
+                        <!-- Rec 1 -->
+                        <div class="dashboard-card widget" style="border-top: 4px solid var(--primary-blue); padding:20px;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                                <i data-lucide="trending-up" style="color:var(--primary-blue);"></i>
+                                <span class="badge badge-high" style="background:#DBEAFE; color:var(--primary-blue);">97% Confidence</span>
+                            </div>
+                            <h4 style="margin:0 0 8px 0;">Increase Roundup allocation to Ontario.</h4>
+                            <p class="text-sm text-secondary" style="margin:0 0 16px 0;">Based on weather patterns and distributor draw-down rates.</p>
+                            <div style="background:#F8FAFC; padding:12px; border-radius:6px;">
+                                <span class="text-xs text-secondary block">Expected Revenue Impact</span>
+                                <span class="font-bold text-lg text-green">+$420K</span>
+                            </div>
+                            <button class="primary-btn btn-sm mt-3" style="width:100%; justify-content:center;">Approve Allocation</button>
+                        </div>
+                        
+                        <!-- Rec 2 -->
+                        <div class="dashboard-card widget" style="border-top: 4px solid var(--primary-blue); padding:20px;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                                <i data-lucide="truck" style="color:var(--primary-blue);"></i>
+                                <span class="badge badge-high" style="background:#DBEAFE; color:var(--primary-blue);">High Priority</span>
+                            </div>
+                            <h4 style="margin:0 0 8px 0;">Transfer inventory from Regina to Toronto.</h4>
+                            <p class="text-sm text-secondary" style="margin:0 0 16px 0;">Rebalance excess Fungicide to mitigate Toronto stockouts.</p>
+                            <div style="background:#F8FAFC; padding:12px; border-radius:6px;">
+                                <span class="text-xs text-secondary block">Estimated Logistics Savings</span>
+                                <span class="font-bold text-lg text-dark">$58K</span>
+                            </div>
+                            <button class="primary-btn btn-sm mt-3" style="width:100%; justify-content:center;">Initiate Transfer</button>
+                        </div>
+
+                        <!-- Rec 3 -->
+                        <div class="dashboard-card widget" style="border-top: 4px solid var(--primary-blue); padding:20px;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                                <i data-lucide="tag" style="color:var(--primary-blue);"></i>
+                                <span class="badge badge-high" style="background:#DBEAFE; color:var(--primary-blue);">Opportunity</span>
+                            </div>
+                            <h4 style="margin:0 0 8px 0;">Launch Fungicide promotion.</h4>
+                            <p class="text-sm text-secondary" style="margin:0 0 16px 0;">Address overstock at EuroAgri GmbH before season end.</p>
+                            <div style="background:#F8FAFC; padding:12px; border-radius:6px;">
+                                <span class="text-xs text-secondary block">Expected Sell-through Increase</span>
+                                <span class="font-bold text-lg text-dark">14%</span>
+                            </div>
+                            <button class="primary-btn btn-sm mt-3" style="width:100%; justify-content:center;">Create Promotion</button>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Section -->
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px;">
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom: 16px;">Top Risks</h3>
+                            <ul style="margin:0; padding-left:16px; font-size:14px; color:var(--text-dark); line-height:1.6;">
+                                <li style="margin-bottom:8px;"><span class="text-red font-medium">Stockout Imminent:</span> Distributor Omega will run out of Luna Experience in 3 days.</li>
+                                <li style="margin-bottom:8px;"><span class="text-yellow font-medium">Capacity Warning:</span> Toronto DC is operating at 94% capacity.</li>
+                                <li><span class="text-yellow font-medium">Aging Inventory:</span> $1.2M locked in slow-moving stock across 3 distributors.</li>
+                            </ul>
+                        </div>
+                        <div class="dashboard-card widget">
+                            <h3 style="margin-bottom: 16px;">Top Opportunities</h3>
+                            <ul style="margin:0; padding-left:16px; font-size:14px; color:var(--text-dark); line-height:1.6;">
+                                <li style="margin-bottom:8px;"><span class="text-green font-medium">Revenue Growth:</span> Retail demand increasing in Southern Ontario.</li>
+                                <li style="margin-bottom:8px;"><span class="text-green font-medium">Cost Optimization:</span> Redirect inbound shipments to Montreal DC to reduce handling fees.</li>
+                                <li><span class="text-green font-medium">Sell-through:</span> Promote Sivanto Prime bundles to clear 52 units of overstock.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            
+                </div>
+                <div class="distributor-only">
+
                 <div class="section-title-bar" style="align-items: flex-start;">
                     <div>
                         <span class="section-subtitle">Analytics</span>
@@ -2286,6 +2973,8 @@
                             </ul>
                         </div>
                     </div>
+                </div>
+            
                 </div>
             </section>
 
