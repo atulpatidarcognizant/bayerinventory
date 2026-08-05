@@ -3088,19 +3088,33 @@
 
                 <!-- Draft Order Score Banner -->
                 <div class="dashboard-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
-                    <div class="dashboard-card" style="padding: 16px; text-align: center; border: 1px solid var(--border-color); box-shadow: none;">
-                        <span class="text-sm text-secondary block">Products in Draft</span>
-                        <span id="op-products-count" class="font-bold text-lg text-dark">2 Items</span>
+                    <div class="dashboard-card" style="padding: 16px; border: 1px solid var(--border-color); box-shadow: none;">
+                        <span class="font-bold text-lg text-dark" style="margin-bottom:8px; display:block;"><span id="op-products-count">2</span> Products</span>
+                        <div style="font-size:13px; color:var(--text-dark); display:flex; justify-content:space-between; margin-bottom:4px;">
+                            <span class="text-secondary">Draft Value:</span> <strong id="op-kpi-value">$247,500</strong>
+                        </div>
+                        <div style="font-size:13px; color:var(--text-dark); display:flex; justify-content:space-between;">
+                            <span class="text-secondary">Total Quantity:</span> <strong id="op-kpi-qty">23,000 L</strong>
+                        </div>
                     </div>
-                    <div class="dashboard-card" style="padding: 16px; text-align: center; border: 1px solid var(--border-color); box-shadow: none;">
-                        <span class="text-sm text-secondary block">Fulfillment Status</span>
-                        <span class="font-bold text-lg text-green" style="display:flex; align-items:center; justify-content:center; gap:4px;"><i data-lucide="check-circle-2" style="width:18px;height:18px;"></i> Inventory Confirmed</span>
+                    <div class="dashboard-card" style="padding: 16px; border: 1px solid var(--border-color); box-shadow: none;">
+                        <span class="font-bold text-lg text-green" style="display:flex; align-items:center; gap:6px; margin-bottom:8px;"><i data-lucide="check-circle-2" style="width:18px;height:18px;"></i> Inventory Reserved</span>
+                        <div style="font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:4px;">
+                            <div style="display:flex; justify-content:space-between;">
+                                <span class="text-secondary">Fulfillment Centers:</span> <strong>Montreal, Regina</strong>
+                            </div>
+                            <div style="display:flex; justify-content:space-between;">
+                                <span class="text-secondary">Estimated Delivery:</span> <strong>2-4 Days</strong>
+                            </div>
+                        </div>
                     </div>
-                    <div class="dashboard-card" style="padding: 16px; text-align: center; border: 1px solid var(--border-color); box-shadow: none;">
-                        <span class="text-sm text-secondary block">Estimated Savings</span>
-                        <span class="font-bold text-lg text-green">$15,975</span>
+                    <div class="dashboard-card" style="padding: 16px; border: 1px solid var(--border-color); box-shadow: none;">
+                        <span class="font-bold text-lg text-green" style="margin-bottom:8px; display:block;" id="op-kpi-savings">$15,975</span>
+                        <ul style="margin:0; padding:0 0 0 16px; font-size:12px; color:var(--text-dark);">
+                            <li>Bundle Discounts: <strong id="op-kpi-savings-bundle">$9,600</strong></li>
+                            <li>Commercial Rebates: <strong id="op-kpi-savings-rebate">$6,375</strong></li>
+                        </ul>
                     </div>
-
                 </div>
 
                 <div class="dashboard-grid" style="grid-template-columns: 3fr 1fr;">
