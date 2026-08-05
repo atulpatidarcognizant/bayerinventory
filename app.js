@@ -981,3 +981,137 @@ window.closeTrackingDrillDown = function() {
         }
     };
 
+
+    // --- Product Catalog & FBT Interactions ---
+    window.addCatalogProduct = function(btn, name, price) {
+        if(window.showToast) window.showToast(`Adding ${name} to order...`);
+        document.getElementById('catalog-modal').classList.add('hidden');
+        
+        setTimeout(() => {
+            const tbody = document.querySelector('#draft-order-table tbody');
+            if (tbody) {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td style="padding: 16px;">
+                        <div class="font-medium" style="font-size: 15px; margin-bottom: 4px;">${name}</div>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span class="badge" style="background:#F1F5F9; color:var(--text-dark); font-size:10px;">Catalog Item</span>
+                        </div>
+                    </td>
+                    <td style="padding: 16px;">
+                        <div style="display:flex; flex-direction:column; gap:4px;">
+                            <div style="display:flex; align-items:center; gap:6px;">
+                                <span class="font-medium text-sm">Montreal DC</span>
+                                <span class="text-xs text-green" style="background:#F0FDF4; border:1px solid #BBF7D0; padding:2px 6px; border-radius:12px; display:flex; align-items:center; gap:2px;"><i data-lucide="check" style="width:10px;height:10px;"></i> Available</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 16px;">
+                        <div style="display:flex; align-items:center; background:#F8FAFC; border: 1px solid var(--border-color); border-radius: 6px; width:fit-content; padding: 2px;">
+                            <button style="border:none; background:none; cursor:pointer; padding:4px; color:var(--secondary-text);"><i data-lucide="minus" style="width:14px;height:14px;"></i></button>
+                            <input type="number" value="1000" style="width: 70px; padding: 4px; border:none; background:none; text-align:center; font-weight:500; font-family:inherit; outline:none;" onchange="showToast('Updating totals...')">
+                            <button style="border:none; background:none; cursor:pointer; padding:4px; color:var(--secondary-text);"><i data-lucide="plus" style="width:14px;height:14px;"></i></button>
+                        </div>
+                    </td>
+                    <td style="padding: 16px;">$${price.toFixed(2)}</td>
+                    <td class="font-medium" style="padding: 16px;">$${(price * 1000).toLocaleString()}</td>
+                    <td style="text-align: right; padding: 16px;">
+                        <button class="btn btn-icon text-secondary" onclick="showToast('Removed item')"><i data-lucide="trash-2" style="width:16px;height:16px;"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(newRow);
+                if(window.lucide) window.lucide.createIcons();
+                
+                // Update Order Summary
+                const summaryTotal = document.getElementById('op-order-summary-total');
+                if (summaryTotal && !document.getElementById('erp-conflict-row')) {
+                    summaryTotal.innerHTML = `
+                        <strong style="font-size:16px;">Estimated Total</strong>
+                        <strong style="font-size:16px;">$259,425</strong>
+                    `;
+                }
+                
+                // Update top KPI
+                const countElem = document.getElementById('op-products-count');
+                if (countElem) countElem.textContent = '3 Items';
+                
+                if(window.showToast) window.showToast(`${name} added to draft.`, 2000);
+            }
+        }, 500);
+    };
+
+    window.addFbtProduct = function(btn, name, price) {
+        btn.disabled = true;
+        btn.textContent = 'Adding...';
+        
+        setTimeout(() => {
+            const tbody = document.querySelector('#draft-order-table tbody');
+            if (tbody) {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td style="padding: 16px;">
+                        <div class="font-medium" style="font-size: 15px; margin-bottom: 4px;">${name}</div>
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span class="badge" style="background:#E0E7FF; color:#4338CA; font-size:10px;"><i data-lucide="sparkles" style="width:10px;height:10px;margin-right:4px;"></i> Bundle Optimization</span>
+                        </div>
+                    </td>
+                    <td style="padding: 16px;">
+                        <div style="display:flex; flex-direction:column; gap:4px;">
+                            <div style="display:flex; align-items:center; gap:6px;">
+                                <span class="font-medium text-sm">Montreal DC</span>
+                                <span class="text-xs text-green" style="background:#F0FDF4; border:1px solid #BBF7D0; padding:2px 6px; border-radius:12px; display:flex; align-items:center; gap:2px;"><i data-lucide="check" style="width:10px;height:10px;"></i> Available</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 16px;">
+                        <div style="display:flex; align-items:center; background:#F8FAFC; border: 1px solid var(--border-color); border-radius: 6px; width:fit-content; padding: 2px;">
+                            <button style="border:none; background:none; cursor:pointer; padding:4px; color:var(--secondary-text);"><i data-lucide="minus" style="width:14px;height:14px;"></i></button>
+                            <input type="number" value="2000" style="width: 70px; padding: 4px; border:none; background:none; text-align:center; font-weight:500; font-family:inherit; outline:none;" onchange="showToast('Updating totals...')">
+                            <button style="border:none; background:none; cursor:pointer; padding:4px; color:var(--secondary-text);"><i data-lucide="plus" style="width:14px;height:14px;"></i></button>
+                        </div>
+                    </td>
+                    <td style="padding: 16px;">$${price.toFixed(2)}</td>
+                    <td class="font-medium" style="padding: 16px;">$${(price * 2000).toLocaleString()}</td>
+                    <td style="text-align: right; padding: 16px;">
+                        <button class="btn btn-icon text-secondary" onclick="showToast('Removed item')"><i data-lucide="trash-2" style="width:16px;height:16px;"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(newRow);
+                
+                // Update Order Summary
+                const summaryTotal = document.getElementById('op-order-summary-total');
+                if (summaryTotal && !document.getElementById('erp-conflict-row')) {
+                    summaryTotal.innerHTML = `
+                        <strong style="font-size:16px;">Estimated Total</strong>
+                        <strong style="font-size:16px;">$249,000</strong>
+                    `;
+                }
+                
+                // Update top KPI
+                const countElem = document.getElementById('op-products-count');
+                if (countElem) countElem.textContent = '3 Items';
+                
+                // Update Estimated Savings
+                const savingsEl = document.getElementById('op-kpi-savings');
+                if (savingsEl) {
+                    savingsEl.innerHTML = `$22,500 <i data-lucide="trending-up" style="width:16px;height:16px;display:inline-block;margin-left:4px;"></i>`;
+                }
+                
+                // Add AI Insight
+                const aiInsights = document.getElementById('op-ai-insights');
+                if (aiInsights) {
+                    const insight = document.createElement('li');
+                    insight.style = "display:flex; align-items:start; gap:6px; animation: fadeIn 0.5s;";
+                    insight.innerHTML = `<i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Adding ${name} qualifies this order for an additional rebate.`;
+                    aiInsights.appendChild(insight);
+                }
+                
+                btn.textContent = 'Added';
+                btn.style.background = 'var(--status-green)';
+                btn.style.color = 'white';
+                
+                if(window.lucide) window.lucide.createIcons();
+                if(window.showToast) window.showToast(`${name} bundle added to order!`, 2000);
+            }
+        }, 600);
+    };

@@ -3210,17 +3210,17 @@
                                 <div style="background:white; border:1px solid #E2E8F0; border-radius:6px; padding:12px; min-width:200px; flex-shrink:0;">
                                     <div class="font-medium text-sm" style="margin-bottom:4px;">Decis Expert</div>
                                     <div class="text-xs text-secondary mb-2">Often bundled with Prosaro Pro</div>
-                                    <button class="secondary-btn btn-sm" style="width:100%; justify-content:center;" onclick="showToast('Added Decis Expert')">Add +</button>
+                                    <button class="secondary-btn btn-sm" style="width:100%; justify-content:center;" onclick="addFbtProduct(this, 'Decis Expert', 20.50)">Add +</button>
                                 </div>
                                 <div style="background:white; border:1px solid #E2E8F0; border-radius:6px; padding:12px; min-width:200px; flex-shrink:0;">
                                     <div class="font-medium text-sm" style="margin-bottom:4px;">Stratego PRO</div>
                                     <div class="text-xs text-secondary mb-2">Qualifies for 5% Rebate</div>
-                                    <button class="secondary-btn btn-sm" style="width:100%; justify-content:center;" onclick="showToast('Added Stratego PRO')">Add +</button>
+                                    <button class="secondary-btn btn-sm" style="width:100%; justify-content:center;" onclick="addFbtProduct(this, 'Stratego PRO', 10.50)">Add +</button>
                                 </div>
                             </div>
                         </div>
                         <div style="padding: 16px; border-top: 1px solid var(--border-color); display:flex; justify-content:flex-start; align-items:center; background:#F8FAFC;">
-                            <button class="text-link" onclick="showToast('Opening catalog search')"><i data-lucide="plus" style="width:14px;height:14px;"></i> Add More Products</button>
+                            <button class="text-link" onclick="document.getElementById('catalog-modal').classList.remove('hidden')"><i data-lucide="plus" style="width:14px;height:14px;"></i> Add More Products</button>
                         </div>
                     </div>
 
@@ -4521,5 +4521,40 @@
             </div>
         </div>
     </div>
+
+    <!-- Product Catalog Modal -->
+    <div id="catalog-modal" class="modal-backdrop hidden" style="z-index: 1000;">
+        <div class="modal-content" style="max-width: 600px; padding:0;">
+            <div style="padding:24px; border-bottom:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
+                <h2 style="margin:0; font-size:18px;">Add More Products</h2>
+                <button class="btn btn-icon text-secondary" onclick="document.getElementById('catalog-modal').classList.add('hidden')"><i data-lucide="x" style="width:20px;height:20px;"></i></button>
+            </div>
+            <div style="padding:16px 24px; background:#F8FAFC; border-bottom:1px solid var(--border-color);">
+                <div class="search-bar-container" style="background:white; border:1px solid var(--border-color); width:100%;">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" placeholder="Search Bayer catalog...">
+                </div>
+            </div>
+            <div style="padding:24px; max-height:400px; overflow-y:auto; display:flex; flex-direction:column; gap:16px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:16px; border:1px solid var(--border-color); border-radius:8px;">
+                    <div>
+                        <div class="font-medium text-md" style="margin-bottom:4px;">Proline 480 SC</div>
+                        <div class="text-sm text-secondary" style="margin-bottom:8px;">Fungicide • $28.50/L</div>
+                        <span class="text-xs text-green" style="background:#F0FDF4; border:1px solid #BBF7D0; padding:2px 6px; border-radius:12px; display:inline-flex; align-items:center; gap:2px;"><i data-lucide="check" style="width:10px;height:10px;"></i> 12K L Available in Montreal</span>
+                    </div>
+                    <button class="primary-btn btn-sm" onclick="addCatalogProduct(this, 'Proline 480 SC', 28.50)">Add to Order</button>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:16px; border:1px solid var(--border-color); border-radius:8px;">
+                    <div>
+                        <div class="font-medium text-md" style="margin-bottom:4px;">Bayer Advanced</div>
+                        <div class="text-sm text-secondary" style="margin-bottom:8px;">Insecticide • $15.00/L</div>
+                        <span class="text-xs text-green" style="background:#F0FDF4; border:1px solid #BBF7D0; padding:2px 6px; border-radius:12px; display:inline-flex; align-items:center; gap:2px;"><i data-lucide="check" style="width:10px;height:10px;"></i> 8K L Available in Regina</span>
+                    </div>
+                    <button class="primary-btn btn-sm" onclick="addCatalogProduct(this, 'Bayer Advanced', 15.00)">Add to Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
