@@ -3076,10 +3076,13 @@
                     <span>Submitted</span>
                 </div>
 
-                <div class="section-title-bar" style="margin-bottom: 24px;">
+                <div class="section-title-bar" style="margin-bottom: 24px; display:flex; justify-content:space-between; align-items:center;">
                     <div>
                         <span class="section-subtitle">Ordering & Fulfillment</span>
                         <h2>Order Placement Workspace</h2>
+                    </div>
+                    <div>
+                        <button class="primary-btn" onclick="simulateErpImport()"><i data-lucide="download" style="width:16px;height:16px;margin-right:8px;"></i> Import from ERP</button>
                     </div>
                 </div>
 
@@ -3106,7 +3109,13 @@
                 <div class="dashboard-grid" style="grid-template-columns: 3fr 1fr;">
                     <!-- Cart Items -->
                     <div class="dashboard-card widget" style="padding: 0;">
-                        <table class="data-table">
+                        <div id="duplicate-warning-banner" style="display:none; background:#FEF2F2; border-bottom:1px solid #FECACA; border-left:4px solid #DC2626; padding:16px; border-radius:4px 4px 0 0;">
+                            <h4 style="color:#991B1B; margin:0 0 8px 0; display:flex; align-items:center; gap:6px; font-size:15px;">
+                                <i data-lucide="alert-triangle" style="width:16px;height:16px;"></i> Possible Duplicate Order Detected
+                            </h4>
+                            <p style="margin:0; font-size:13px; color:#7F1D1D;">Some imported products already exist in your current draft order. Please review the highlighted items below and resolve the duplication before submitting.</p>
+                        </div>
+                        <table id="draft-order-table" class="data-table">
                             <thead>
                                 <tr>
                                     <th>Product</th>
@@ -3205,7 +3214,7 @@
                         </div>
                         <div style="padding: 16px; border-top: 1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center; background:#F8FAFC;">
                             <button class="text-link" onclick="showToast('Opening catalog search')"><i data-lucide="plus" style="width:14px;height:14px;"></i> Add More Products</button>
-                            <button class="secondary-btn btn-sm" onclick="showToast('Importing from ERP...')"><i data-lucide="download" style="width:14px;height:14px;"></i> Import from ERP</button>
+                            <button class="secondary-btn btn-sm" onclick="simulateErpImport()"><i data-lucide="download" style="width:14px;height:14px;"></i> Import from ERP</button>
                         </div>
                     </div>
 
@@ -3273,7 +3282,7 @@
                             <h5 style="margin:0 0 12px 0; color: var(--primary-blue); display:flex; align-items:center; gap:6px;">
                                 <i data-lucide="sparkles" style="width:16px;height:16px;"></i> AI Purchasing Assistant
                             </h5>
-                            <ul style="margin:0; padding:0; list-style:none; font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:6px;">
+                            <ul id="op-ai-insights" style="margin:0; padding:0; list-style:none; font-size:13px; color:var(--text-dark); display:flex; flex-direction:column; gap:6px;">
                                 <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Your order qualifies for the Early Booking Bonus.</li>
                                 <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Estimated savings for this order: $15,975.</li>
                                 <li style="display:flex; align-items:start; gap:6px;"><i data-lucide="check" style="width:14px;height:14px;color:var(--primary-blue);margin-top:2px;"></i> Inventory has been reserved at the selected fulfillment center.</li>
