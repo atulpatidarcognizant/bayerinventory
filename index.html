@@ -1205,6 +1205,59 @@
                 </div>
             </section>
 
+            
+            <section id="upload-review" class="screen">
+                <div class="section-title-bar" style="margin-bottom: 24px;">
+                    <div>
+                        <span class="section-subtitle">Distributor Operations</span>
+                        <h2 id="ur-distributor-name">ABC Seeds - Inventory Upload</h2>
+                    </div>
+                    <div class="header-actions">
+                        <button class="secondary-btn" onclick="switchScreen('upload')"><i data-lucide="arrow-left"></i> Back to Queue</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid" style="grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 24px;">
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon" style="background:#F3F4F6; color:var(--text-dark);"><i data-lucide="calendar"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Upload Date</span>
+                            <span class="kpi-value text-dark" style="font-size:18px;">Today, 10:42 AM</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon" style="background:#E0E7FF; color:#4F46E5;"><i data-lucide="package"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Upload Type</span>
+                            <span class="kpi-value text-dark" style="font-size:18px;">Inventory (342 Records)</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon" style="background:#DCFCE7; color:#10B981;"><i data-lucide="check-circle"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Validation Status</span>
+                            <span class="kpi-value text-green" style="font-size:18px;">Passed</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card kpi-card">
+                        <div class="kpi-icon" style="background:#FEF3C7; color:#D97706;"><i data-lucide="clock"></i></div>
+                        <div class="kpi-details">
+                            <span class="kpi-label">Processing Status</span>
+                            <span class="kpi-value" style="color:#B45309; font-size:18px;">Pending Review</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card widget">
+                    <h3 style="margin-bottom: 16px;">Review Actions</h3>
+                    <div style="display:flex; gap:16px;">
+                        <button class="primary-btn flex-align" onclick="showToast('Upload Approved'); switchScreen('upload');"><i data-lucide="check-circle"></i> Approve Upload</button>
+                        <button class="secondary-btn flex-align" onclick="showToast('Re-upload Requested'); switchScreen('upload');"><i data-lucide="refresh-cw"></i> Request Re-upload</button>
+                        <button class="secondary-btn flex-align" onclick="switchScreen('matching')"><i data-lucide="git-merge" style="color:var(--primary-blue);"></i> AI Product Matching (8 Pending)</button>
+                    </div>
+                </div>
+            </section>
+
             <section id="matching" class="screen">
                 <div class="section-title-bar">
                     <div>
@@ -3544,97 +3597,61 @@
                         </div>
                     </div>
 
-                    <!-- 3. Enhanced Distributor Cards -->
-                    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:16px;">
-                        <div>
-                            <h3 style="margin:0 0 4px 0; font-size:18px;">Top Distributors Requiring Approval</h3>
-                            <p style="margin:0; font-size:14px; color:var(--text-secondary);">Showing the 3 highest-priority distributors out of 8 awaiting review.</p>
+                    <!-- 3. Pending Orders Queue Table -->
+                    <div class="dashboard-card widget" style="margin-bottom: 24px; padding:0; overflow:hidden;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 24px; border-bottom:1px solid #E2E8F0;">
+                            <div>
+                                <h3 style="margin:0 0 4px 0; font-size:18px;">Pending Orders Queue</h3>
+                                <p style="margin:0; font-size:14px; color:var(--text-secondary);">Reviewing 18 orders waiting for your action.</p>
+                            </div>
+                            <div class="search-bar" style="width: 250px;">
+                                <i data-lucide="search" class="search-icon"></i>
+                                <input type="text" placeholder="Search orders..." class="search-input">
+                            </div>
                         </div>
-                        <button class="secondary-btn btn-sm">View All Distributors (8)</button>
+                        <table class="data-table" style="margin:0; font-size:13px;" id="kam-pending-orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Distributor</th>
+                                    <th>Order #</th>
+                                    <th>Value</th>
+                                    <th>Submission Date</th>
+                                    <th>Priority</th>
+                                    <th>Validation Status</th>
+                                    <th style="text-align:right;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-order-id="4091-C">
+                                    <td class="font-medium">ABC Seeds</td>
+                                    <td class="font-medium text-blue">#4091-C</td>
+                                    <td class="font-medium">$84,200</td>
+                                    <td>Oct 12, 10:30 AM</td>
+                                    <td><span class="badge" style="background:#FEE2E2; color:#DC2626;">High</span></td>
+                                    <td><span class="badge badge-med">Pricing Exception</span></td>
+                                    <td style="text-align:right;"><button class="secondary-btn btn-sm" onclick="openKamOrderReview('4091-C', this, 'ABC Seeds')">Review</button></td>
+                                </tr>
+                                <tr data-order-id="4102-A">
+                                    <td class="font-medium">GreenCrop Distribution</td>
+                                    <td class="font-medium text-blue">#4102-A</td>
+                                    <td class="font-medium">$124,500</td>
+                                    <td>Oct 13, 08:15 AM</td>
+                                    <td><span class="badge" style="background:#FEF3C7; color:#D97706;">Normal</span></td>
+                                    <td><span class="badge badge-high">Volume Alert</span></td>
+                                    <td style="text-align:right;"><button class="secondary-btn btn-sm" onclick="openKamOrderReview('4102-A', this, 'GreenCrop Distribution')">Review</button></td>
+                                </tr>
+                                <tr data-order-id="4115-B">
+                                    <td class="font-medium">FarmPro Solutions</td>
+                                    <td class="font-medium text-blue">#4115-B</td>
+                                    <td class="font-medium">$42,100</td>
+                                    <td>Oct 13, 11:42 AM</td>
+                                    <td><span class="badge" style="background:#E0F2FE; color:#0284C7;">Normal</span></td>
+                                    <td><span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green);">Clean</span></td>
+                                    <td style="text-align:right;"><button class="secondary-btn btn-sm" onclick="openKamOrderReview('4115-B', this, 'FarmPro Solutions')">Review</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 24px;">
-                        <!-- Distributor Card 1 -->
-                        <div class="dashboard-card widget cursor-pointer" onclick="openOrderDrillDown('ABC Seeds', 5)" style="transition: transform 0.2s, box-shadow 0.2s; padding: 20px;">
-                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 16px;">
-                                <h3 style="margin:0; font-size: 16px;">ABC Seeds</h3>
-                                <span class="badge badge-med">Normal Priority</span>
-                            </div>
-                            <div style="display:flex; flex-direction:column; gap:8px;">
-                                <div style="display:flex; justify-content:space-between; font-size: 14px;">
-                                    <span style="color:var(--text-secondary);">Orders Pending</span>
-                                    <span class="font-bold">5</span>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size: 14px;">
-                                    <span style="color:var(--status-red);">Validation Exceptions</span>
-                                    <span class="font-bold text-red">1</span>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size: 14px; margin-top:8px; padding-top:8px; border-top:1px solid var(--border-color);">
-                                    <span style="color:var(--text-secondary);">Total Value</span>
-                                    <span class="font-bold">$312,000</span>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size: 14px; margin-bottom:8px;">
-                                    <span style="color:var(--text-secondary);">Oldest Pending</span>
-                                    <span class="font-medium text-dark">18 hrs</span>
-                                </div>
-                                <button class="secondary-btn btn-sm" style="width:100%; justify-content:center;">Review</button>
-                            </div>
-                        </div>
-
-                        <!-- Distributor Card 2 -->
-                        <div class="dashboard-card widget cursor-pointer" onclick="openOrderDrillDown('GreenCrop Distribution', 3)" style="transition: transform 0.2s, box-shadow 0.2s; padding: 20px; border-left: 4px solid var(--status-red);">
-                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 16px;">
-                                <h3 style="margin:0; font-size: 16px;">GreenCrop Distribution</h3>
-                                <span class="badge badge-low">Critical Priority</span>
-                            </div>
-                            <div style="display:flex; flex-direction:column; gap:8px;">
-                                <div style="display:flex; justify-content:space-between; font-size: 14px;">
-                                    <span style="color:var(--text-secondary);">Orders Pending</span>
-                                    <span class="font-bold">3</span>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size: 14px;">
-                                    <span style="color:var(--status-red);">Validation Exceptions</span>
-                                    <span class="font-bold text-red">2</span>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size: 14px; margin-top:8px; padding-top:8px; border-top:1px solid var(--border-color);">
-                                    <span style="color:var(--text-secondary);">Total Value</span>
-                                    <span class="font-bold">$250,400</span>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size: 14px; margin-bottom:8px;">
-                                    <span style="color:var(--text-secondary);">Oldest Pending</span>
-                                    <span class="font-medium text-red">36 hrs</span>
-                                </div>
-                                <button class="secondary-btn btn-sm" style="width:100%; justify-content:center;">Review</button>
-                            </div>
-                        </div>
-
-                        <!-- Distributor Card 3 -->
-                        <div class="dashboard-card widget cursor-pointer" onclick="openOrderDrillDown('FarmPro Solutions', 2)" style="transition: transform 0.2s, box-shadow 0.2s; padding: 20px;">
-                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 16px;">
-                                <h3 style="margin:0; font-size: 16px;">FarmPro Solutions</h3>
-                                <span class="badge" style="background:#E0F2FE; color:var(--primary-blue);">High Priority</span>
-                            </div>
-                            <div style="display:flex; flex-direction:column; gap:8px;">
-                                <div style="display:flex; justify-content:space-between; font-size: 14px;">
-                                    <span style="color:var(--text-secondary);">Orders Pending</span>
-                                    <span class="font-bold">2</span>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size: 14px;">
-                                    <span style="color:var(--status-red);">Validation Exceptions</span>
-                                    <span class="font-bold text-red">1</span>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size: 14px; margin-top:8px; padding-top:8px; border-top:1px solid var(--border-color);">
-                                    <span style="color:var(--text-secondary);">Total Value</span>
-                                    <span class="font-bold">$84,200</span>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size: 14px; margin-bottom:8px;">
-                                    <span style="color:var(--text-secondary);">Oldest Pending</span>
-                                    <span class="font-medium text-dark">4 hrs</span>
-                                </div>
-                                <button class="secondary-btn btn-sm" style="width:100%; justify-content:center;">Review</button>
-                            </div>
-                        </div>
-                    </div>
-
 
                     <!-- 5. Operational Metrics -->
                     <div style="display:flex; justify-content:space-between; align-items:center; background:#F8FAFC; border:1px solid var(--border-color); padding:16px 24px; border-radius:8px;">
@@ -4695,6 +4712,156 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- KAM Order Review Modal -->
+    <div id="kam-order-review-modal" class="modal-overlay hidden" style="z-index: 200;">
+        <div class="modal-content" style="max-width: 900px;">
+            <div class="modal-header" style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div>
+                    <h2 id="kor-title" style="margin: 0 0 8px 0; display:flex; align-items:center; gap:12px;">Order Review <span class="badge" style="background:#FEE2E2; color:#DC2626; font-size:14px; padding:4px 12px;">High Priority</span></h2>
+                    <p style="margin:0; color:var(--text-secondary);" id="kor-subtitle">ABC Seeds • Region: Southwestern Ontario • Account Manager: Sarah Jenkins</p>
+                </div>
+                <button class="icon-btn" onclick="document.getElementById('kam-order-review-modal').classList.add('hidden')"><i data-lucide="x"></i></button>
+            </div>
+            
+            <div class="modal-body" style="padding: 24px;">
+                <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; gap: 24px;">
+                    
+                    <!-- Left: Order Details & Validation -->
+                    <div style="display:flex; flex-direction:column; gap:24px;">
+                        
+                        <div class="dashboard-card widget">
+                            <h3 style="margin: 0 0 16px 0;">Order Summary</h3>
+                            <table class="data-table minimal" style="margin:0; font-size:13px;">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th style="text-align:right;">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Roundup PowerMAX</td>
+                                        <td>4,500 L</td>
+                                        <td style="text-align:right;">$45,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Prosaro Pro</td>
+                                        <td>1,200 L</td>
+                                        <td style="text-align:right;">$28,500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Decis</td>
+                                        <td>500 L</td>
+                                        <td style="text-align:right;">$10,700</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr style="border-top: 2px solid var(--border-color); font-weight:600;">
+                                        <td colspan="2">Total Value (incl. Commercial Programs)</td>
+                                        <td style="text-align:right;">$84,200</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <div style="margin-top:16px; padding:12px; background:#F8FAFC; border-radius:8px; font-size:13px;">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                                    <span class="text-secondary">Requested Delivery:</span>
+                                    <span class="font-medium">Oct 18, 2026</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between;">
+                                    <span class="text-secondary">Commercial Programs Applied:</span>
+                                    <span class="font-medium text-green">Fungicide Bundle (8%), Early Booking (5%)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card widget" style="border-left: 4px solid #D97706;">
+                            <h3 style="margin: 0 0 12px 0; color:#B45309; display:flex; align-items:center; gap:8px;">
+                                <i data-lucide="alert-triangle"></i> Validation Summary
+                            </h3>
+                            <ul style="margin:0; padding-left:20px; font-size:14px; color:var(--text-dark);">
+                                <li><strong>Pricing Exception:</strong> Order value exceeds standard tier limits by 15% without a pre-approved bulk discount agreement.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right: Docs & Actions -->
+                    <div style="display:flex; flex-direction:column; gap:24px;">
+                        
+                        <div class="dashboard-card widget">
+                            <h3 style="margin: 0 0 16px 0;">Supporting Documents</h3>
+                            <div style="display:flex; flex-direction:column; gap:12px;">
+                                <div class="file-card cursor-pointer" onclick="showToast('Opening PO PDF')" style="display:flex; align-items:center; gap:12px; padding:12px; border:1px solid var(--border-color); border-radius:8px;">
+                                    <div style="background:#FEE2E2; color:#DC2626; padding:8px; border-radius:4px;"><i data-lucide="file-text" style="width:20px;height:20px;"></i></div>
+                                    <div style="display:flex; flex-direction:column;">
+                                        <span class="font-medium" style="font-size:13px;">Purchase Order (PO-4091)</span>
+                                        <span class="text-secondary" style="font-size:11px;">PDF • 1.2 MB</span>
+                                    </div>
+                                </div>
+                                <div class="file-card cursor-pointer" onclick="showToast('Opening Document')" style="display:flex; align-items:center; gap:12px; padding:12px; border:1px solid var(--border-color); border-radius:8px;">
+                                    <div style="background:#E0F2FE; color:#0284C7; padding:8px; border-radius:4px;"><i data-lucide="file-text" style="width:20px;height:20px;"></i></div>
+                                    <div style="display:flex; flex-direction:column;">
+                                        <span class="font-medium" style="font-size:13px;">Volume Exemption Req</span>
+                                        <span class="text-secondary" style="font-size:11px;">PDF • 450 KB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="display:flex; justify-content:space-between; align-items:center;">
+                <button class="secondary-btn" style="color:var(--status-red); border-color:var(--status-red);" onclick="requestKamInfo()">Request Additional Info</button>
+                <div style="display:flex; gap:12px;">
+                    <button class="secondary-btn" onclick="rejectKamOrder()">Reject Order</button>
+                    <button class="primary-btn" onclick="approveKamOrder()"><i data-lucide="check-circle"></i> Approve Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KAM Request Info Modal -->
+    <div id="kam-request-info-modal" class="modal-overlay hidden" style="z-index: 250;">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3 style="margin:0;">Request Additional Information</h3>
+                <button class="icon-btn" onclick="document.getElementById('kam-request-info-modal').classList.add('hidden')"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 24px;">
+                <label style="display:block; margin-bottom:8px; font-weight:500;">Comments to Distributor</label>
+                <textarea id="kam-request-comments" class="form-input" style="width:100%; height:120px;" placeholder="E.g., Please attach the approved bulk discount agreement for the Fungicide Bundle..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" onclick="document.getElementById('kam-request-info-modal').classList.add('hidden')">Cancel</button>
+                <button class="primary-btn" onclick="submitKamRequestInfo()">Send Request</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- KAM Approval Success Modal -->
+    <div id="kam-approval-success-modal" class="modal-overlay hidden" style="z-index: 250;">
+        <div class="modal-content" style="max-width: 400px; text-align:center;">
+            <div class="modal-body" style="padding: 40px 24px;">
+                <div style="width: 64px; height: 64px; border-radius: 50%; background: #DCFCE7; color: var(--status-green); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px auto;">
+                    <i data-lucide="check" style="width: 32px; height: 32px;"></i>
+                </div>
+                <h2 id="kas-title" style="margin: 0 0 12px 0;">Order Approved Successfully</h2>
+                <p id="kas-message" style="color: var(--text-secondary); margin: 0 0 24px 0; font-size:15px;">
+                    Order #4091-C for ABC Seeds has been approved and moved to fulfillment.
+                </p>
+                <div style="font-size:13px; color:var(--text-secondary); margin-bottom:32px;">
+                    Approval Timestamp: <span id="kas-timestamp">Just now</span>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <button class="primary-btn" style="width:100%; justify-content:center;" onclick="closeKamApprovalSuccess()">Review Next Order</button>
+                    <button class="secondary-btn" style="width:100%; justify-content:center;" onclick="closeKamApprovalSuccess(true)">Return to Queue</button>
                 </div>
             </div>
         </div>

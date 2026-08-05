@@ -1517,3 +1517,118 @@ window.filterInventoryTable = function(status) {
         if (window.showToast) window.showToast(`Filtered inventory by: ${status}`);
     }, 100);
 };
+
+
+// KAM Order Approval Flow Logic
+let currentKamOrderId = null;
+let currentKamOrderDistributor = null;
+let currentKamOrderBtn = null;
+
+window.openKamOrderReview = function(orderId, btn, distName) {
+    currentKamOrderId = orderId;
+    currentKamOrderDistributor = distName;
+    currentKamOrderBtn = btn;
+    
+    const modal = document.getElementById('kam-order-review-modal');
+    if (!modal) return;
+    
+    // Update Title
+    const titleEl = document.getElementById('kor-title');
+    if (titleEl) {
+        titleEl.innerHTML = `Order Review #${orderId} <span class="badge" style="background:#FEE2E2; color:#DC2626; font-size:14px; padding:4px 12px; margin-left:12px;">High Priority</span>`;
+    }
+    
+    const subtitleEl = document.getElementById('kor-subtitle');
+    if (subtitleEl) {
+        subtitleEl.textContent = `${distName} • Region: Southwestern Ontario • Account Manager: Sarah Jenkins`;
+    }
+    
+    modal.classList.remove('hidden');
+    if (window.lucide) window.lucide.createIcons();
+};
+
+window.requestKamInfo = function() {
+    const infoModal = document.getElementById('kam-request-info-modal');
+    const commentsArea = document.getElementById('kam-request-comments');
+    if (infoModal && commentsArea) {
+        commentsArea.value = '';
+        infoModal.classList.remove('hidden');
+    }
+};
+
+window.submitKamRequestInfo = function() {
+    document.getElementById('kam-request-info-modal').classList.add('hidden');
+    document.getElementById('kam-order-review-modal').classList.add('hidden');
+    if (window.showToast) window.showToast('Request sent to distributor');
+};
+
+window.rejectKamOrder = function() {
+    document.getElementById('kam-order-review-modal').classList.add('hidden');
+    showKamApprovalSuccess(false);
+};
+
+window.approveKamOrder = function() {
+    document.getElementById('kam-order-review-modal').classList.add('hidden');
+    showKamApprovalSuccess(true);
+};
+
+function showKamApprovalSuccess(isApprove) {
+    const successModal = document.getElementById('kam-approval-success-modal');
+    if (!successModal) return;
+    
+    const titleEl = document.getElementById('kas-title');
+    const msgEl = document.getElementById('kas-message');
+    const timeEl = document.getElementById('kas-timestamp');
+    
+    if (isApprove) {
+        titleEl.textContent = 'Order Approved Successfully';
+        msgEl.textContent = `Order #${currentKamOrderId} for ${currentKamOrderDistributor} has been approved and moved to fulfillment.`;
+    } else {
+        titleEl.textContent = 'Order Rejected';
+        msgEl.textContent = `Order #${currentKamOrderId} for ${currentKamOrderDistributor} has been rejected. Notification sent.`;
+    }
+    
+    const now = new Date();
+    timeEl.textContent = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    
+    successModal.classList.remove('hidden');
+    
+    // Remove the row from the table
+    if (currentKamOrderBtn) {
+        const tr = currentKamOrderBtn.closest('tr');
+        if (tr) {
+            tr.style.opacity = '0.5';
+            setTimeout(() => tr.remove(), 300);
+        }
+    }
+    
+    // Update KPI counts (e.g. Dashboard "Orders Requiring Approval" and OM "Orders Awaiting")
+    updateKamKpis();
+}
+
+function updateKamKpis() {
+    // Find KPI cards containing '18' or '8' and decrement them
+    const kpiValues = document.querySelectorAll('.kpi-value');
+    kpiValues.forEach(el => {
+        const val = parseInt(el.textContent);
+        if (val === 18 || val === 8 || val === 42) {
+            el.textContent = val - 1;
+        }
+    });
+}
+
+window.closeKamApprovalSuccess = function(returnToQueue) {
+    document.getElementById('kam-approval-success-modal').classList.add('hidden');
+    // If we wanted to "Review Next Order", we could programmatically click the next Review button
+    if (!returnToQueue) {
+        const tbody = document.querySelector('#kam-pending-orders-table tbody');
+        if (tbody) {
+            const nextRowBtn = tbody.querySelector('tr button');
+            if (nextRowBtn) {
+                setTimeout(() => nextRowBtn.click(), 100);
+            } else {
+                if (window.showToast) window.showToast('No more orders to review');
+            }
+        }
+    }
+};
