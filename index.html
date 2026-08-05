@@ -403,7 +403,7 @@
 
                     <!-- 1. Executive KPI Cards -->
                     <div class="dashboard-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
-                        <div class="dashboard-card kpi-card cursor-pointer" onclick="switchScreen('order-tracking')">
+                        <div class="dashboard-card kpi-card cursor-pointer" onclick="switchScreen('order-management')">
                             <div class="kpi-icon"><i data-lucide="package"></i></div>
                             <div class="kpi-details">
                                 <span class="kpi-label">Active Orders</span>
@@ -434,9 +434,9 @@
                         <h3 style="margin-bottom: 16px; display:flex; align-items:center; gap:8px;"><i data-lucide="target" style="width:18px;height:18px;color:var(--primary-blue);"></i> Today's Priorities</h3>
                         <div style="display:flex; flex-wrap:wrap; gap:16px;">
                             <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="switchScreen('upload')"><i data-lucide="upload-cloud" style="color:var(--primary-blue);"></i> Upload this week's inventory</button>
-                            <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="switchScreen('matching')"><i data-lucide="git-merge" style="color:var(--primary-blue);"></i> Review 3 AI product suggestions</button>
-                            <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="showToast('Opening Validation Wizard')"><i data-lucide="alert-triangle" style="color:var(--status-red);"></i> Resolve 2 inventory validation issues</button>
-                            <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="switchScreen('order-tracking')"><i data-lucide="file-question" style="color:#D97706;"></i> Order #10452 requires additional info</button>
+                            <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="switchScreen('ai-recommendations')"><i data-lucide="zap" style="color:var(--primary-blue);"></i> Review AI Recommendations</button>
+                            <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="switchScreen('upload')"><i data-lucide="alert-triangle" style="color:var(--status-red);"></i> Resolve inventory validation issues</button>
+                            <button class="secondary-btn flex-align" style="background:white; border-color:#E2E8F0;" onclick="switchScreen('order-management')"><i data-lucide="file-question" style="color:#D97706;"></i> Order #10452 requires additional info</button>
                         </div>
                     </div>
 
@@ -445,7 +445,7 @@
                         <div class="dashboard-card widget">
                             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                                 <h3>My Orders</h3>
-                                <button class="secondary-btn btn-sm" onclick="switchScreen('order-tracking')">View Orders</button>
+                                <button class="secondary-btn btn-sm" onclick="switchScreen('order-management')">View Orders</button>
                             </div>
                             <div style="display:flex; justify-content:space-between; padding-top:8px;">
                                 <div style="text-align:center;">
@@ -491,7 +491,7 @@
                                     <div style="font-size:12px; color:var(--text-secondary);">Stock-outs</div>
                                 </div>
                             </div>
-                            <div style="font-size:11px; color:var(--text-secondary); text-align:right; margin-top:16px;">Last Upload: Today, 08:30 AM</div>
+                            <div style="font-size:11px; color:var(--text-secondary); text-align:right; margin-top:16px;">Last Upload: <span class="upload-time-indicator">Today, 08:30 AM</span></div>
                         </div>
                     </div>
 
@@ -500,7 +500,7 @@
                         <div class="dashboard-card widget">
                             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                                 <h3>Upcoming Deliveries</h3>
-                                <button class="secondary-btn btn-sm" onclick="switchScreen('order-tracking')">Track All</button>
+                                <button class="secondary-btn btn-sm" onclick="switchScreen('order-management')">Track All</button>
                             </div>
                             <table class="data-table minimal" style="font-size:13px;">
                                 <thead>
@@ -2323,7 +2323,7 @@
                         </div>
                         <div class="dashboard-card widget cursor-pointer" onclick="switchScreen('upload')">
                             <span class="text-sm text-secondary block" style="margin-bottom:4px;">Last Inventory Upload</span>
-                            <span class="font-bold text-lg text-dark">Today &bull; 9:15 AM</span>
+                            <span class="font-bold text-lg text-dark upload-time-indicator">Today &bull; 9:15 AM</span>
                             <span style="display:block; font-size:12px; color:var(--status-green); margin-top:4px;"><i data-lucide="check-circle" style="width:12px;height:12px;display:inline-block;vertical-align:middle;"></i> Validated Successfully</span>
                         </div>
                     </div>
@@ -2382,7 +2382,7 @@
                                         <div style="display:flex; gap:12px;">
                                             <button class="text-link text-sm" onclick="showProductDetails('Roundup PowerMAX')">View</button>
                                             <span style="color:#CBD5E1;">&bull;</span>
-                                            <button class="text-link text-sm" style="color:var(--primary-blue); font-weight:600;" onclick="document.querySelector('.nav-item[data-target=\'order-placement\']').click(); showToast('Roundup PowerMAX added to draft.');">Replenish</button>
+                                            <button class="text-link text-sm" style="color:var(--primary-blue); font-weight:600;" onclick="addToDraftOrder('Roundup PowerMAX', 5000)">Replenish</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -2721,15 +2721,15 @@
                 <div class="dashboard-grid" style="margin-top: 16px; grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
                     <div class="dashboard-card" style="padding: 16px; text-align: center;">
                         <span class="text-sm text-secondary block">High Priority</span>
-                        <span class="font-bold text-lg text-dark">2 Recommendations</span>
+                        <span class="font-bold text-lg text-dark"><span id="ai-ds-accepted">0</span> / 2 Accepted</span>
                     </div>
                     <div class="dashboard-card" style="padding: 16px; text-align: center;">
                         <span class="text-sm text-secondary block">Est. Savings</span>
-                        <span class="font-bold text-lg text-green">$15,975</span>
+                        <span id="ai-ds-savings" class="font-bold text-lg text-green">$15,975</span>
                     </div>
                     <div class="dashboard-card" style="padding: 16px; text-align: center;">
                         <span class="text-sm text-secondary block">Eligible Rebates</span>
-                        <span class="font-bold text-lg text-blue">2 Programs</span>
+                        <span id="ai-ds-rebates" class="font-bold text-lg text-blue">2 Programs</span>
                     </div>
 
                 </div>
@@ -2737,7 +2737,7 @@
                 <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr;">
                     <!-- Recommendation List -->
                     <div style="display: flex; flex-direction: column; gap: 16px;">
-                        <div class="dashboard-card widget" style="padding: 20px;">
+                        <div id="rec-card-1" class="dashboard-card widget" style="padding: 20px;">
                             <!-- Header -->
                             <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 16px;">
                                 <div style="display:flex; gap: 16px; align-items: center;">
@@ -2816,15 +2816,15 @@
                                     <span class="badge" style="background:#F0FDF4; color:#166534; border:1px solid #BBF7D0;">Rebate Eligible</span>
                                     <span class="badge" style="background:#F8FAFC; color:var(--text-dark); border:1px solid #E2E8F0;">Low Risk</span>
                                 </div>
-                                <div style="display:flex; gap:16px; align-items:center;">
+                                <div class="rec-actions-row" style="display:flex; gap:16px; align-items:center;">
                                     <button class="text-link text-sm text-secondary" onclick="document.getElementById('alt-products-1').classList.toggle('hidden')">Alternatives</button>
-                                    <button class="text-link text-sm text-secondary" onclick="showToast('Opening Customization Menu')">Customize</button>
-                                    <button class="primary-btn" onclick="showToast('Recommendation added to Draft Order.')">Accept & Add to Draft Order</button>
+                                    <button class="text-link text-sm text-secondary" onclick="dismissRecommendation('rec-card-1')">Dismiss</button>
+                                    <button class="primary-btn" onclick="acceptRecommendation('rec-card-1', 'Roundup PowerMAX', 15000, 4200, '+$4,200')">Accept & Add to Draft</button>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="dashboard-card widget" style="padding: 20px;">
+                        <div id="rec-card-2" class="dashboard-card widget" style="padding: 20px;">
                             <!-- Header -->
                             <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 16px;">
                                 <div style="display:flex; gap: 16px; align-items: center;">
@@ -2908,7 +2908,7 @@
                         <div class="dashboard-card widget" style="text-align:center; padding: 24px 16px; border-top: 4px solid var(--primary-blue);">
                             <h4 style="margin-bottom: 8px;">Ready to Place Order?</h4>
                             <p class="text-sm text-secondary" style="margin-bottom: 16px;">Recommendations accepted will be added to your draft workspace for final review.</p>
-                            <button class="primary-btn" style="width:100%; justify-content:center; padding: 12px;" onclick="document.querySelector('.nav-item[data-target=\'order-placement\']').click();">Proceed to Order Placement <i data-lucide="arrow-right" style="width:16px;height:16px;"></i></button>
+                            <button id="ai-ds-cta" class="secondary-btn" style="width:100%; justify-content:center; padding: 12px;" onclick="switchScreen('order-placement')" disabled>Proceed to Order Placement <i data-lucide="arrow-right" style="width:16px;height:16px;"></i></button>
                         </div>
 
                         <!-- AI Copilot Insights -->
@@ -3320,76 +3320,7 @@
                                     <th style="text-align: right;">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="padding: 16px;">
-                                        <div class="font-medium" style="font-size: 15px; margin-bottom: 4px;">Roundup PowerMAX</div>
-                                        <div style="display:flex; align-items:center; gap:8px;">
-                                            <span class="badge badge-high" style="background:#DCFCE7; color:var(--status-green); font-size:10px;">AI Recommended</span>
-                                            <span class="text-xs" style="color:#991B1B; background:#FEF2F2; padding:2px 6px; border-radius:4px; display:flex; align-items:center; gap:4px;"><i data-lucide="alert-triangle" style="width:10px;height:10px;"></i> High Risk (3 Days Left)</span>
-                                        </div>
-                                    </td>
-                                    <td style="padding: 16px;">
-                                        <div style="display:flex; flex-direction:column; gap:4px;">
-                                            <div style="display:flex; align-items:center; gap:6px;">
-                                                <span class="font-medium text-sm">Montreal DC</span>
-                                                <span class="text-xs text-green" style="background:#F0FDF4; border:1px solid #BBF7D0; padding:2px 6px; border-radius:12px; display:flex; align-items:center; gap:2px;"><i data-lucide="check" style="width:10px;height:10px;"></i> Available</span>
-                                            </div>
-                                            <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--secondary-text);">
-                                                <span>ATP: <strong>15K L</strong></span>
-                                                <span>|</span>
-                                                <span>ETA: <strong>2 Days</strong></span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="padding: 16px;">
-                                        <div style="display:flex; align-items:center; background:#F8FAFC; border: 1px solid var(--border-color); border-radius: 6px; width:fit-content; padding: 2px;">
-                                            <button style="border:none; background:none; cursor:pointer; padding:4px; color:var(--secondary-text);"><i data-lucide="minus" style="width:14px;height:14px;"></i></button>
-                                            <input type="number" value="15000" style="width: 70px; padding: 4px; border:none; background:none; text-align:center; font-weight:500; font-family:inherit; outline:none;" onchange="showToast('Updating totals...')">
-                                            <button style="border:none; background:none; cursor:pointer; padding:4px; color:var(--secondary-text);"><i data-lucide="plus" style="width:14px;height:14px;"></i></button>
-                                        </div>
-                                    </td>
-                                    <td style="padding: 16px;">$8.50</td>
-                                    <td class="font-medium" style="padding: 16px;">$127,500</td>
-                                    <td style="text-align: right; padding: 16px;">
-                                        <button class="btn btn-icon text-secondary" onclick="showToast('Removed item')"><i data-lucide="trash-2" style="width:16px;height:16px;"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 16px;">
-                                        <div class="font-medium" style="font-size: 15px; margin-bottom: 4px;">Prosaro Pro</div>
-                                        <div style="display:flex; align-items:center; gap:8px;">
-                                            <span class="badge badge-high" style="background:#FEF3C7; color:#D97706; font-size:10px;">Cross-Sell Bundle</span>
-                                            <span class="text-xs" style="color:#92400E; background:#FEF3C7; padding:2px 6px; border-radius:4px; display:flex; align-items:center; gap:4px;"><i data-lucide="check-circle" style="width:10px;height:10px;"></i> Healthy (14 Days Left)</span>
-                                        </div>
-                                    </td>
-                                    <td style="padding: 16px;">
-                                        <div style="display:flex; flex-direction:column; gap:4px;">
-                                            <div style="display:flex; align-items:center; gap:6px;">
-                                                <span class="font-medium text-sm">Regina DC</span>
-                                                <span class="text-xs text-yellow" style="background:#FEF3C7; border:1px solid #FDE68A; padding:2px 6px; border-radius:12px; display:flex; align-items:center; gap:2px;"><i data-lucide="check" style="width:10px;height:10px;"></i> Available</span>
-                                            </div>
-                                            <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--secondary-text);">
-                                                <span>ATP: <strong>6K L</strong></span>
-                                                <span>|</span>
-                                                <span>ETA: <strong>4 Days</strong></span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td style="padding: 16px;">
-                                        <div style="display:flex; align-items:center; background:#F8FAFC; border: 1px solid var(--border-color); border-radius: 6px; width:fit-content; padding: 2px;">
-                                            <button style="border:none; background:none; cursor:pointer; padding:4px; color:var(--secondary-text);"><i data-lucide="minus" style="width:14px;height:14px;"></i></button>
-                                            <input type="number" value="5000" style="width: 70px; padding: 4px; border:none; background:none; text-align:center; font-weight:500; font-family:inherit; outline:none;" onchange="showToast('Updating totals...')">
-                                            <button style="border:none; background:none; cursor:pointer; padding:4px; color:var(--secondary-text);"><i data-lucide="plus" style="width:14px;height:14px;"></i></button>
-                                        </div>
-                                    </td>
-                                    <td style="padding: 16px;">$24.00</td>
-                                    <td class="font-medium" style="padding: 16px;">$120,000</td>
-                                    <td style="text-align: right; padding: 16px;">
-                                        <button class="btn btn-icon text-secondary" onclick="showToast('Removed item')"><i data-lucide="trash-2" style="width:16px;height:16px;"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tbody id="draft-order-tbody"></tbody>
                         </table>
                         <div id="op-fbt-section" style="padding: 16px; background:#F8FAFC; border-top: 1px solid var(--border-color);">
                             <h4 style="margin-bottom:12px; font-size:14px; display:flex; align-items:center; gap:6px;"><i data-lucide="plus-circle" style="width:16px;height:16px;color:var(--primary-blue);"></i> Frequently Bought Together</h4>
@@ -4496,7 +4427,7 @@
             </div>
             
             <div style="display:flex; flex-direction:column; gap:12px;">
-                <button class="primary-btn" style="justify-content:center; padding:12px;" onclick="document.getElementById('submit-success-modal').classList.add('hidden'); switchScreen('order-tracking');">Track Order</button>
+                <button class="primary-btn" style="justify-content:center; padding:12px;" onclick="document.getElementById('submit-success-modal').classList.add('hidden'); switchScreen('order-management');">Track Order</button>
                 <button class="secondary-btn" style="justify-content:center; padding:12px;" onclick="document.getElementById('submit-success-modal').classList.add('hidden'); switchScreen('dashboard');">Return to Dashboard</button>
                 <button class="text-link text-sm" style="margin:0 auto; padding-top:8px;" onclick="showToast('Downloading Confirmation PDF...')"><i data-lucide="download" style="width:14px;height:14px;"></i> Download Order Confirmation</button>
             </div>
@@ -4554,7 +4485,7 @@
             </div>
             <div class="modal-footer" style="display:flex; justify-content:space-between; align-items:center;">
                 <button class="secondary-btn" onclick="closeModal('product-inventory-modal')">Close</button>
-                <button id="modal-replenish-btn" class="primary-btn" onclick="document.querySelector('.nav-item[data-target=\'order-placement\']').click(); closeModal('product-inventory-modal'); showToast('Added to draft order.');">Replenish Now</button>
+                <button id="modal-replenish-btn" class="primary-btn" onclick="closeModal('product-inventory-modal'); addToDraftOrder(document.getElementById('modal-product-name').innerText, 5000);">Replenish Now</button>
             </div>
         </div>
     </div>

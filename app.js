@@ -1,3 +1,190 @@
+
+// --- Distributor Global State ---
+window.distributorState = {
+    draftItems: [
+        // Initial static items that were hardcoded
+        {
+            id: 'item-1',
+            name: 'XtendiMax',
+            type: 'erp',
+            location: 'Montreal DC',
+            qty: 8000,
+            price: 12.00
+        },
+        {
+            id: 'item-2',
+            name: 'Prosaro Pro',
+            type: 'ai',
+            location: 'Toronto DC',
+            qty: 4500,
+            price: 18.50
+        }
+    ],
+    totalSavings: 0,
+    eligibleRebates: 0,
+    inventoryUploaded: false,
+    acceptedRecs: 0,
+    dismissedRecs: 0
+};
+
+window.addToDraftOrder = function(productName, defaultQty) {
+    // Check if already in draft
+    const exists = window.distributorState.draftItems.find(i => i.name === productName);
+    if (!exists) {
+        window.distributorState.draftItems.push({
+            id: 'item-' + Date.now(),
+            name: productName,
+            type: 'manual',
+            location: 'Auto-Assigned DC',
+            qty: parseInt(defaultQty.toString().replace(/,/g, '')) || 1000,
+            price: 15.00 // mock price
+        });
+    }
+    if (window.showToast) window.showToast(`${productName} added to Draft Order.`);
+    if (window.renderDraftOrderTable) window.renderDraftOrderTable();
+    if (window.switchScreen) window.switchScreen('order-placement');
+};
+
+window.acceptRecommendation = function(cardId, productName, qty, savings, marginStr) {
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    
+    // Add to state
+    window.distributorState.acceptedRecs++;
+    const exists = window.distributorState.draftItems.find(i => i.name === productName);
+    if (!exists) {
+        window.distributorState.draftItems.push({
+            id: 'item-rec-' + Date.now(),
+            name: productName,
+            type: 'ai',
+            location: 'Optimal DC',
+            qty: qty,
+            price: 20.00
+        });
+    }
+    window.distributorState.totalSavings += savings;
+    window.distributorState.eligibleRebates += 1;
+    
+    // Update Card UI
+    card.style.opacity = '0.6';
+    card.style.pointerEvents = 'none';
+    const actionRow = card.querySelector('.rec-actions-row');
+    if (actionRow) {
+        actionRow.innerHTML = `<div style="display:flex; align-items:center; gap:8px; color:var(--status-green); font-weight:600;"><i data-lucide="check-circle" style="width:18px;height:18px;"></i> Accepted & Added to Draft</div>`;
+    }
+    
+    if (window.showToast) window.showToast('Recommendation Accepted.');
+    if (window.renderDecisionSummary) window.renderDecisionSummary();
+    if (window.renderDraftOrderTable) window.renderDraftOrderTable();
+    if (window.lucide) window.lucide.createIcons();
+};
+
+window.dismissRecommendation = function(cardId) {
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    
+    window.distributorState.dismissedRecs++;
+    card.style.display = 'none';
+    
+    if (window.showToast) window.showToast('Recommendation Dismissed.');
+    if (window.renderDecisionSummary) window.renderDecisionSummary();
+};
+
+window.renderDecisionSummary = function() {
+    const acceptedEl = document.getElementById('ai-ds-accepted');
+    const savingsEl = document.getElementById('ai-ds-savings');
+    const rebatesEl = document.getElementById('ai-ds-rebates');
+    const ctaBtn = document.getElementById('ai-ds-cta');
+    
+    if (acceptedEl) acceptedEl.textContent = window.distributorState.acceptedRecs;
+    if (savingsEl) savingsEl.textContent = '$' + (15975 + window.distributorState.totalSavings).toLocaleString();
+    if (rebatesEl) rebatesEl.textContent = (2 + window.distributorState.eligibleRebates) + ' Programs';
+    
+    if (ctaBtn) {
+        if (window.distributorState.acceptedRecs > 0) {
+            ctaBtn.classList.remove('secondary-btn');
+            ctaBtn.classList.add('primary-btn');
+            ctaBtn.disabled = false;
+        }
+    }
+};
+
+window.renderDraftOrderTable = function() {
+    const tbody = document.getElementById('draft-order-tbody');
+    const totalEl = document.getElementById('op-order-summary-total');
+    if (!tbody) return;
+    
+    tbody.innerHTML = '';
+    let totalValue = 0;
+    
+    if (window.distributorState.draftItems.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:24px; color:var(--text-secondary);">No items in draft order.</td></tr>';
+        if (totalEl) totalEl.textContent = '$0';
+        return;
+    }
+    
+    window.distributorState.draftItems.forEach(item => {
+        const itemTotal = item.qty * item.price;
+        totalValue += itemTotal;
+        
+        let typeBadge = '';
+        if (item.type === 'erp') {
+            typeBadge = `<span class="badge" style="background:#0F172A; color:white; font-size:10px;"><i data-lucide="database" style="width:10px;height:10px;margin-right:4px;"></i> ERP Imported</span>`;
+        } else if (item.type === 'ai') {
+            typeBadge = `<span class="badge" style="background:var(--primary-blue); color:white; font-size:10px;"><i data-lucide="sparkles" style="width:10px;height:10px;margin-right:4px;"></i> AI Recommended</span>`;
+        } else {
+            typeBadge = `<span class="badge" style="background:#E2E8F0; color:var(--text-dark); font-size:10px;">Manual Entry</span>`;
+        }
+        
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td style="padding: 16px;">
+                <div class="font-medium" style="font-size: 15px; margin-bottom: 4px;">${item.name}</div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    ${typeBadge}
+                </div>
+            </td>
+            <td style="padding: 16px;">
+                <div style="display:flex; flex-direction:column; gap:4px;">
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <span class="font-medium text-sm">${item.location}</span>
+                        <span class="text-xs text-green" style="background:#F0FDF4; border:1px solid #BBF7D0; padding:2px 6px; border-radius:12px; display:flex; align-items:center; gap:2px;"><i data-lucide="check" style="width:10px;height:10px;"></i> Available</span>
+                    </div>
+                </div>
+            </td>
+            <td style="padding: 16px;">
+                <div style="display:flex; align-items:center; background:#F8FAFC; border: 1px solid var(--border-color); border-radius: 6px; width:fit-content; padding: 2px;">
+                    <button style="border:none; background:none; cursor:pointer; padding:4px; color:var(--secondary-text);" onclick="updateDraftQty('${item.id}', -100)"><i data-lucide="minus" style="width:14px;height:14px;"></i></button>
+                    <input type="number" value="${item.qty}" style="width: 70px; padding: 4px; border:none; background:none; text-align:center; font-weight:500; font-family:inherit; outline:none;" readonly>
+                    <button style="border:none; background:none; cursor:pointer; padding:4px; color:var(--secondary-text);" onclick="updateDraftQty('${item.id}', 100)"><i data-lucide="plus" style="width:14px;height:14px;"></i></button>
+                </div>
+            </td>
+            <td style="padding: 16px;">$${item.price.toFixed(2)}</td>
+            <td class="font-medium" style="padding: 16px;">$${itemTotal.toLocaleString()}</td>
+            <td style="text-align: right; padding: 16px;">
+                <button class="btn btn-icon text-secondary" onclick="removeDraftItem('${item.id}')"><i data-lucide="trash-2" style="width:16px;height:16px;"></i></button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+    
+    if (totalEl) totalEl.textContent = '$' + totalValue.toLocaleString();
+    if (window.lucide) window.lucide.createIcons();
+};
+
+window.updateDraftQty = function(id, delta) {
+    const item = window.distributorState.draftItems.find(i => i.id === id);
+    if (item) {
+        item.qty = Math.max(0, item.qty + delta);
+        window.renderDraftOrderTable();
+    }
+};
+
+window.removeDraftItem = function(id) {
+    window.distributorState.draftItems = window.distributorState.draftItems.filter(i => i.id !== id);
+    window.renderDraftOrderTable();
+};
+
 // Initialize Lucide icons
 lucide.createIcons();
 
@@ -48,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Helper to switch screens programmatically ---
+    // --- Helper to switch screens programmatically ---
     window.switchScreen = function(targetId) {
         navItems.forEach(nav => nav.classList.remove('active'));
         screens.forEach(screen => screen.classList.remove('active'));
@@ -66,7 +254,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 copilotPanel.style.display = 'flex';
             }
         }
-        lucide.createIcons();
+        
+        // Dynamic re-rendering
+        if (targetId === 'order-placement' && window.renderDraftOrderTable) {
+            window.renderDraftOrderTable();
+        }
+        if ((targetId === 'dashboard' || targetId === 'inventory') && window.distributorState && window.distributorState.inventoryUploaded) {
+            const timeEls = document.querySelectorAll('.upload-time-indicator');
+            timeEls.forEach(el => el.innerHTML = 'Just Now <span style="color:var(--status-green);"><i data-lucide="check-circle" style="width:12px;height:12px;display:inline-block;vertical-align:middle;"></i> Validated</span>');
+        }
+
+        if(window.lucide) window.lucide.createIcons();
         window.scrollTo(0,0);
     };
 
@@ -735,8 +933,11 @@ window.closeTrackingDrillDown = function() {
                     
                     currentStep++;
                 } else {
+                    
                     clearInterval(interval);
+                    if(window.distributorState) window.distributorState.inventoryUploaded = true;
                     if(window.showToast) window.showToast('Upload Successfully Processed!');
+
                     distValidation.innerHTML = `
                         <h3 style="margin-bottom: 16px; font-size:16px; display:flex; align-items:center; gap:8px;">
                             <i data-lucide="file-check" style="color:var(--status-green); width:18px;height:18px;"></i> Upload Successful
