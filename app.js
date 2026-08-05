@@ -1131,3 +1131,40 @@ window.closeTrackingDrillDown = function() {
             }, 1500);
         }
     };
+
+    // --- Order Details Modal (My Orders) ---
+    window.openOrderDetails = function(orderId) {
+        const modal = document.getElementById('order-details-modal');
+        const title = document.getElementById('od-title');
+        const statusBadge = document.getElementById('od-status');
+        
+        if (modal && title && statusBadge) {
+            title.textContent = `Order Details #${orderId}`;
+            
+            // Simple logic to mock different states based on order ID
+            if (orderId === '4905') {
+                statusBadge.textContent = 'Awaiting Approval - Under Review';
+                statusBadge.style.background = '#E0F2FE';
+                statusBadge.style.color = '#0369A1';
+            } else if (orderId === '4902') {
+                statusBadge.textContent = 'Action Required - Missing document';
+                statusBadge.style.background = '#FEF2F2';
+                statusBadge.style.color = '#DC2626';
+            } else if (orderId === '4899') {
+                statusBadge.textContent = 'Approved - Inventory Reserved';
+                statusBadge.style.background = '#DCFCE7';
+                statusBadge.style.color = '#16A34A';
+            } else if (orderId === '4895') {
+                statusBadge.textContent = 'In Transit - Out for Delivery';
+                statusBadge.style.background = '#E0F2FE';
+                statusBadge.style.color = '#0369A1';
+            } else if (orderId === '4880') {
+                statusBadge.textContent = 'Delivered - Completed';
+                statusBadge.style.background = '#F1F5F9';
+                statusBadge.style.color = '#475569';
+            }
+
+            modal.classList.remove('hidden');
+            if(window.lucide) window.lucide.createIcons();
+        }
+    };
