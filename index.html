@@ -4719,95 +4719,112 @@
 
     <!-- KAM Order Review Modal -->
     <div id="kam-order-review-modal" class="modal-overlay hidden" style="z-index: 200;">
-        <div class="modal-content" style="max-width: 900px;">
+        <div class="modal-content" style="max-width: 900px; display: flex; flex-direction: column; gap: 24px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
             <div class="modal-header" style="display:flex; justify-content:space-between; align-items:flex-start;">
-                <div>
-                    <h2 id="kor-title" style="margin: 0 0 8px 0; display:flex; align-items:center; gap:12px;">Order Review <span class="badge" style="background:#FEE2E2; color:#DC2626; font-size:14px; padding:4px 12px;">High Priority</span></h2>
-                    <p style="margin:0; color:var(--text-secondary);" id="kor-subtitle">ABC Seeds • Region: Southwestern Ontario • Account Manager: Sarah Jenkins</p>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <h2 id="kor-title" style="margin: 0; display:flex; align-items:center; gap:12px; font-size: 24px; font-weight: 600; color: var(--text-dark);">
+                        Order Review 
+                        <span class="badge" style="background:#FEE2E2; color:#DC2626; font-size:13px; font-weight: 600; padding:6px 14px; border-radius: 9999px;">High Priority</span>
+                    </h2>
+                    <p style="margin:0; color:var(--text-secondary); font-size: 15px; font-weight: 500;" id="kor-subtitle">
+                        ABC Seeds • Region: Southwestern Ontario • Account Manager: Sarah Jenkins
+                    </p>
                 </div>
-                <button class="icon-btn" onclick="document.getElementById('kam-order-review-modal').classList.add('hidden')"><i data-lucide="x"></i></button>
+                <button class="icon-btn" style="margin-top: -4px; margin-right: -4px; color: var(--text-secondary);" onclick="document.getElementById('kam-order-review-modal').classList.add('hidden')">
+                    <i data-lucide="x" style="width: 24px; height: 24px;"></i>
+                </button>
             </div>
             
-            <div class="modal-body" style="padding: 24px;">
-                <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; gap: 24px;">
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 0;">
+            
+            <div class="modal-body" style="padding: 0;">
+                <div class="dashboard-grid" style="display: grid; grid-template-columns: 1.6fr 1fr; gap: 32px; align-items: start;">
                     
                     <!-- Left: Order Details & Validation -->
-                    <div style="display:flex; flex-direction:column; gap:24px;">
+                    <div style="display:flex; flex-direction:column; gap:32px;">
                         
-                        <div class="dashboard-card widget">
-                            <h3 style="margin: 0 0 16px 0;">Order Summary</h3>
-                            <table class="data-table minimal" style="margin:0; font-size:13px;">
-                                <thead>
-                                    <tr>
-                                        <th>Product</th>
-                                        <th>Quantity</th>
-                                        <th style="text-align:right;">Subtotal</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Roundup PowerMAX</td>
-                                        <td>4,500 L</td>
-                                        <td style="text-align:right;">$45,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Prosaro Pro</td>
-                                        <td>1,200 L</td>
-                                        <td style="text-align:right;">$28,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Decis</td>
-                                        <td>500 L</td>
-                                        <td style="text-align:right;">$10,700</td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr style="border-top: 2px solid var(--border-color); font-weight:600;">
-                                        <td colspan="2">Total Value (incl. Commercial Programs)</td>
-                                        <td style="text-align:right;">$84,200</td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                            <div style="margin-top:16px; padding:12px; background:#F8FAFC; border-radius:8px; font-size:13px;">
-                                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                                    <span class="text-secondary">Requested Delivery:</span>
-                                    <span class="font-medium">Oct 18, 2026</span>
+                        <div class="dashboard-card widget" style="padding: 0; border: none; box-shadow: none; background: transparent;">
+                            <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600; color: var(--text-dark);">Order Summary</h3>
+                            
+                            <div style="border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background: #ffffff;">
+                                <table class="data-table minimal" style="margin: 0; width: 100%; border-collapse: collapse; font-size: 15px;">
+                                    <thead style="background: #F8FAFC; border-bottom: 1px solid var(--border-color);">
+                                        <tr>
+                                            <th style="padding: 16px 20px; text-align: left; font-weight: 600; color: var(--text-secondary);">Product</th>
+                                            <th style="padding: 16px 20px; text-align: left; font-weight: 600; color: var(--text-secondary);">Quantity</th>
+                                            <th style="padding: 16px 20px; text-align: right; font-weight: 600; color: var(--text-secondary);">Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 16px 20px; color: var(--text-dark); font-weight: 500;">Roundup PowerMAX</td>
+                                            <td style="padding: 16px 20px; color: var(--text-secondary);">4,500 L</td>
+                                            <td style="padding: 16px 20px; text-align: right; color: var(--text-dark); font-weight: 500;">$45,000</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 16px 20px; color: var(--text-dark); font-weight: 500;">Prosaro Pro</td>
+                                            <td style="padding: 16px 20px; color: var(--text-secondary);">1,200 L</td>
+                                            <td style="padding: 16px 20px; text-align: right; color: var(--text-dark); font-weight: 500;">$28,500</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid var(--border-color);">
+                                            <td style="padding: 16px 20px; color: var(--text-dark); font-weight: 500;">Decis</td>
+                                            <td style="padding: 16px 20px; color: var(--text-secondary);">500 L</td>
+                                            <td style="padding: 16px 20px; text-align: right; color: var(--text-dark); font-weight: 500;">$10,700</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr style="background: #F8FAFC;">
+                                            <td colspan="2" style="padding: 16px 20px; color: var(--text-dark); font-weight: 600;">Total Value (incl. Commercial Programs)</td>
+                                            <td style="padding: 16px 20px; text-align: right; color: var(--text-dark); font-weight: 600; font-size: 16px;">$84,200</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            
+                            <div style="margin-top: 16px; padding: 16px 20px; background: #F8FAFC; border: 1px solid var(--border-color); border-radius: 12px; font-size: 15px; display: flex; flex-direction: column; gap: 12px;">
+                                <div style="display:flex; justify-content:space-between; align-items: center;">
+                                    <span style="color: var(--text-secondary); font-weight: 500;">Requested Delivery:</span>
+                                    <span style="font-weight: 600; color: var(--text-dark);">Oct 18, 2026</span>
                                 </div>
-                                <div style="display:flex; justify-content:space-between;">
-                                    <span class="text-secondary">Commercial Programs Applied:</span>
-                                    <span class="font-medium text-green">Fungicide Bundle (8%), Early Booking (5%)</span>
+                                <div style="display:flex; justify-content:space-between; align-items: center;">
+                                    <span style="color: var(--text-secondary); font-weight: 500;">Commercial Programs Applied:</span>
+                                    <span style="font-weight: 600; color: var(--status-green);">Fungicide Bundle (8%), Early Booking (5%)</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="dashboard-card widget" style="border-left: 4px solid #D97706;">
-                            <h3 style="margin: 0 0 12px 0; color:#B45309; display:flex; align-items:center; gap:8px;">
-                                <i data-lucide="alert-triangle"></i> Validation Summary
+                        <div class="dashboard-card widget" style="border-left: 4px solid #D97706; padding: 20px 24px; border-radius: 12px; background: #ffffff;">
+                            <h3 style="margin: 0 0 12px 0; color:#B45309; display:flex; align-items:center; gap:12px; font-size: 16px; font-weight: 600;">
+                                <i data-lucide="alert-triangle" style="width: 20px; height: 20px;"></i> Validation Summary
                             </h3>
-                            <ul style="margin:0; padding-left:20px; font-size:14px; color:var(--text-dark);">
+                            <ul style="margin:0; padding-left:24px; font-size:15px; color:var(--text-dark); line-height: 1.6;">
                                 <li><strong>Pricing Exception:</strong> Order value exceeds standard tier limits by 15% without a pre-approved bulk discount agreement.</li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Right: Docs & Actions -->
-                    <div style="display:flex; flex-direction:column; gap:24px;">
+                    <div style="display:flex; flex-direction:column; gap:32px;">
                         
-                        <div class="dashboard-card widget">
-                            <h3 style="margin: 0 0 16px 0;">Supporting Documents</h3>
-                            <div style="display:flex; flex-direction:column; gap:12px;">
-                                <div class="file-card cursor-pointer" onclick="showToast('Opening PO PDF')" style="display:flex; align-items:center; gap:12px; padding:12px; border:1px solid var(--border-color); border-radius:8px;">
-                                    <div style="background:#FEE2E2; color:#DC2626; padding:8px; border-radius:4px;"><i data-lucide="file-text" style="width:20px;height:20px;"></i></div>
-                                    <div style="display:flex; flex-direction:column;">
-                                        <span class="font-medium" style="font-size:13px;">Purchase Order (PO-4091)</span>
-                                        <span class="text-secondary" style="font-size:11px;">PDF • 1.2 MB</span>
+                        <div class="dashboard-card widget" style="padding: 0; border: none; box-shadow: none; background: transparent;">
+                            <h3 style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600; color: var(--text-dark);">Supporting Documents</h3>
+                            <div style="display:flex; flex-direction:column; gap:16px;">
+                                <div class="file-card cursor-pointer" onclick="showToast('Opening PO PDF')" style="display:flex; align-items:center; gap:16px; padding:16px 20px; border:1px solid var(--border-color); border-radius:12px; background: #ffffff; transition: all 0.2s ease;">
+                                    <div style="background:#FEE2E2; color:#DC2626; padding:12px; border-radius:8px; display: flex; align-items: center; justify-content: center;">
+                                        <i data-lucide="file-text" style="width:24px;height:24px;"></i>
+                                    </div>
+                                    <div style="display:flex; flex-direction:column; gap: 4px;">
+                                        <span style="font-size: 15px; font-weight: 600; color: var(--text-dark);">Purchase Order (PO-4091)</span>
+                                        <span style="font-size: 13px; font-weight: 500; color: var(--text-secondary);">PDF • 1.2 MB</span>
                                     </div>
                                 </div>
-                                <div class="file-card cursor-pointer" onclick="showToast('Opening Document')" style="display:flex; align-items:center; gap:12px; padding:12px; border:1px solid var(--border-color); border-radius:8px;">
-                                    <div style="background:#E0F2FE; color:#0284C7; padding:8px; border-radius:4px;"><i data-lucide="file-text" style="width:20px;height:20px;"></i></div>
-                                    <div style="display:flex; flex-direction:column;">
-                                        <span class="font-medium" style="font-size:13px;">Volume Exemption Req</span>
-                                        <span class="text-secondary" style="font-size:11px;">PDF • 450 KB</span>
+                                <div class="file-card cursor-pointer" onclick="showToast('Opening Document')" style="display:flex; align-items:center; gap:16px; padding:16px 20px; border:1px solid var(--border-color); border-radius:12px; background: #ffffff; transition: all 0.2s ease;">
+                                    <div style="background:#E0F2FE; color:#0284C7; padding:12px; border-radius:8px; display: flex; align-items: center; justify-content: center;">
+                                        <i data-lucide="file-text" style="width:24px;height:24px;"></i>
+                                    </div>
+                                    <div style="display:flex; flex-direction:column; gap: 4px;">
+                                        <span style="font-size: 15px; font-weight: 600; color: var(--text-dark);">Volume Exemption Req</span>
+                                        <span style="font-size: 13px; font-weight: 500; color: var(--text-secondary);">PDF • 450 KB</span>
                                     </div>
                                 </div>
                             </div>
@@ -4816,11 +4833,14 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer" style="display:flex; justify-content:space-between; align-items:center;">
-                <button class="secondary-btn" style="color:var(--status-red); border-color:var(--status-red);" onclick="requestKamInfo()">Request Additional Info</button>
-                <div style="display:flex; gap:12px;">
-                    <button class="secondary-btn" onclick="rejectKamOrder()">Reject Order</button>
-                    <button class="primary-btn" onclick="approveKamOrder()"><i data-lucide="check-circle"></i> Approve Order</button>
+            
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 0;">
+            
+            <div class="modal-footer" style="display:flex; justify-content:space-between; align-items:center; padding: 0;">
+                <button class="secondary-btn" style="color:var(--status-red); border-color:var(--status-red); padding: 12px 24px; font-size: 15px; font-weight: 600;" onclick="requestKamInfo()">Request Additional Info</button>
+                <div style="display:flex; gap:16px;">
+                    <button class="secondary-btn" style="padding: 12px 24px; font-size: 15px; font-weight: 600;" onclick="rejectKamOrder()">Reject Order</button>
+                    <button class="primary-btn" style="padding: 12px 28px; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 10px;" onclick="approveKamOrder()"><i data-lucide="check-circle" style="width: 20px; height: 20px;"></i> Approve Order</button>
                 </div>
             </div>
         </div>
