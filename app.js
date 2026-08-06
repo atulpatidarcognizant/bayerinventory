@@ -400,15 +400,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- AI Product Matching Interactions ---
     let currentRowContext = null;
 
+    function updateMatchingCounters() {
+        const badgeNew = document.getElementById('badge-new');
+        const badgeCompleted = document.getElementById('badge-completed');
+        if(badgeNew && badgeCompleted) {
+            let currentNew = parseInt(badgeNew.textContent) || 0;
+            let currentComp = parseInt(badgeCompleted.textContent) || 0;
+            if(currentNew > 0) {
+                badgeNew.textContent = currentNew - 1;
+                badgeCompleted.textContent = currentComp + 1;
+            }
+        }
+    }
+
     window.approveMapping = function(btn) {
         const row = btn.closest('tr');
         const reasonCell = row.querySelector('.ai-reason-cell');
+        
         // If it wasn't manually overridden, we just mark it approved
-        if(!reasonCell.querySelector('.badge').textContent.includes('Account Manager Approved')) {
+        const badge = reasonCell.querySelector('.badge');
+        if(!badge || !badge.textContent.includes('Account Manager Approved')) {
             showToast('Mapping saved. Future uploads from this distributor will automatically use this Bayer product.');
             const actionsCell = row.querySelector('.actions');
             actionsCell.innerHTML = '<span class="text-sm text-green flex-align"><i data-lucide="check" class="mr-1"></i> Approved</span>';
             lucide.createIcons();
+            updateMatchingCounters();
+            setTimeout(() => { row.style.opacity = '0.5'; row.style.transition = 'opacity 0.3s'; }, 1500);
         }
     };
 
@@ -420,6 +437,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const actionsCell = row.querySelector('.actions');
         actionsCell.innerHTML = '<span class="text-sm text-red flex-align"><i data-lucide="slash" class="mr-1"></i> No Equivalent</span>';
         lucide.createIcons();
+        updateMatchingCounters();
+        setTimeout(() => { row.style.opacity = '0.5'; row.style.transition = 'opacity 0.3s'; }, 1500);
     };
 
     window.openProductModal = function(btn) {
@@ -435,13 +454,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // Update the confidence badge to "Account Manager Approved" and add "Manual Selection by Account Manager"
             const reasonCell = currentRowContext.querySelector('.ai-reason-cell');
             const badge = reasonCell.querySelector('.badge');
-            badge.className = 'badge badge-med mb-1';
-            badge.innerHTML = '<i data-lucide="user" class="inline-icon"></i> Account Manager Approved';
+            if (badge) {
+                badge.className = 'badge badge-med mb-1';
+                badge.innerHTML = '<i data-lucide="user" class="inline-icon"></i> Account Manager Approved';
+            }
             
-            const manualNote = document.createElement('div');
-            manualNote.className = 'text-xs text-blue mt-1 font-medium';
-            manualNote.textContent = 'Manual Selection by Account Manager';
-            reasonCell.insertBefore(manualNote, reasonCell.children[1]);
+            if (!reasonCell.querySelector('.text-blue')) {
+                const manualNote = document.createElement('div');
+                manualNote.className = 'text-xs text-blue mt-1 font-medium';
+                manualNote.textContent = 'Manual Selection by Account Manager';
+                reasonCell.insertBefore(manualNote, reasonCell.children[1]);
+            }
 
             // Show override note
             const overrideNote = reasonCell.querySelector('.override-note');
@@ -456,6 +479,31 @@ document.addEventListener('DOMContentLoaded', () => {
             
             document.getElementById('product-search-modal').classList.add('hidden');
             lucide.createIcons();
+            updateMatchingCounters();
+            setTimeout(() => { currentRowContext.style.opacity = '0.5'; currentRowContext.style.transition = 'opacity 0.3s'; }, 1500);
+        }
+    };
+
+    window.acceptAllHighConfidence = function() {
+        const rows = document.querySelectorAll('#tbody-new tr');
+        let count = 0;
+        rows.forEach(row => {
+            const badge = row.querySelector('.badge-high');
+            if (badge && (badge.textContent.includes('98%') || badge.textContent.includes('96%') || badge.textContent.includes('95%'))) {
+                const actionsCell = row.querySelector('.actions');
+                if(actionsCell && !actionsCell.textContent.includes('Approved')) {
+                    actionsCell.innerHTML = '<span class="text-sm text-green flex-align"><i data-lucide="check" class="mr-1"></i> Approved</span>';
+                    updateMatchingCounters();
+                    setTimeout(() => { row.style.opacity = '0.5'; row.style.transition = 'opacity 0.3s'; }, 1500);
+                    count++;
+                }
+            }
+        });
+        if (count > 0) {
+            showToast(`Accepted ${count} high-confidence mappings.`);
+            lucide.createIcons();
+        } else {
+            showToast('No high-confidence mappings left to accept.');
         }
     };
 

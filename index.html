@@ -1264,14 +1264,14 @@
                         <h2>AI Product Matching</h2>
                     </div>
                     <div class="header-actions">
-                        <button class="primary-btn" onclick="showToast('Accepted 420 mappings with >95% confidence.')"><i data-lucide="check-double"></i> Accept All > 95%</button>
+                        <button class="primary-btn" onclick="acceptAllHighConfidence()"><i data-lucide="check-double"></i> Accept All > 95%</button>
                     </div>
                 </div>
                 
                 <div class="workflow-tabs">
-                    <button class="workflow-tab active" onclick="switchMatchingTab('new')">New AI Suggestions <span class="tab-badge">8</span></button>
-                    <button class="workflow-tab" onclick="switchMatchingTab('awaiting')">Awaiting Distributor Confirmation <span class="tab-badge">2</span></button>
-                    <button class="workflow-tab" onclick="switchMatchingTab('completed')">Completed <span class="tab-badge">14</span></button>
+                    <button class="workflow-tab active" onclick="switchMatchingTab('new')">New AI Suggestions <span class="tab-badge" id="badge-new">8</span></button>
+                    <button class="workflow-tab" onclick="switchMatchingTab('awaiting')">Awaiting Distributor Confirmation <span class="tab-badge" id="badge-awaiting">2</span></button>
+                    <button class="workflow-tab" onclick="switchMatchingTab('completed')">Completed <span class="tab-badge" id="badge-completed">14</span></button>
                 </div>
                 
                 <div class="dashboard-card table-container">
