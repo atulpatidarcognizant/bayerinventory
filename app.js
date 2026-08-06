@@ -397,6 +397,42 @@ document.addEventListener('DOMContentLoaded', () => {
         // dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); triggerUpload(); });
     }
 
+    // --- Distributor Uploads Account Manager Interactions ---
+    window.sendReminder = function(btn) {
+        const row = btn.closest('tr');
+        const distName = row.cells[0].textContent;
+        btn.textContent = 'Sent';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+        btn.classList.add('text-green');
+        btn.classList.remove('text-secondary');
+        
+        // Decrease the Overdue counter
+        const kpiCards = document.querySelectorAll('#upload .kpi-card');
+        kpiCards.forEach(card => {
+            if(card.textContent.includes('Overdue Uploads')) {
+                const valEl = card.querySelector('.kpi-value');
+                if(valEl) {
+                    let current = parseInt(valEl.textContent) || 0;
+                    if(current > 0) valEl.textContent = current - 1;
+                }
+            }
+        });
+        
+        if (window.showToast) window.showToast('Reminder sent to ' + distName);
+    };
+
+    window.reviewFailedUpload = function(btn) {
+        const row = btn.closest('tr');
+        const distName = row.cells[0].textContent;
+        
+        // Use the existing request modal for failed upload review
+        const distLabel = document.getElementById('request-distributor-name');
+        if(distLabel) distLabel.textContent = distName;
+        
+        document.getElementById('request-modal').classList.remove('hidden');
+    };
+
     // --- AI Product Matching Interactions ---
     let currentRowContext = null;
 
